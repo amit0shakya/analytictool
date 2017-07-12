@@ -1,0 +1,476 @@
+<div ng-controller="AdTrackerCtrl">
+<div class="pageheader main-nav navbar-fixed-top" >
+<div class="media">
+<div class="pageicon pull-left"><i class="fa fa-cog"></i></div>
+<div class="media-body">
+<ul class="breadcrumb">
+<li>Campaigns</li>
+</ul>
+<h4>Campaigns</h4>
+</div>
+</div>
+ <div class="pull-right fourth-nav">
+			<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+			<span class="glyphicon glyphicon-calendar calendar-icon"></span>
+		</div>
+</div>
+
+<div class="body-content">
+
+<!-- <qrcode data="string"></qrcode> -->
+<div class="panel">
+<div class="panel-body no-padding">
+<!-- <a class="preview-black" id="showcminfo" href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> -->
+
+<div class="form form-cminfo" ng-show="appurl.showeditor">
+<a class="preview-black" id="hidecminfo" href="#" style="display:none;"  ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
+
+<div id="urlform">
+<div class="col-lg-3"><label class="text-left" ng-show='app.ostype=="Android"'>Paste your Google Play Store URL</label>
+<label class="text-left" ng-show='app.ostype=="iOS"'>Paste your Itunes App Store URL</label></div>
+<div class="col-lg-6" ng-show='app.ostype=="Android"'>
+<textarea cols="" rows="" ng-click="addcampaignvalidation.psurlnil=false;addcampaignvalidation.psurlinvalid=false" ng-model="campaigninfo.dr" placeholder="https://play.google.com/store/apps/details?id=com.example"></textarea>
+<span class="alert-rtext"  ng-show="addcampaignvalidation.psurlnil">Please Enter Google Play Store URL of your Application</span>
+<span class="alert-rtext"   ng-show="addcampaignvalidation.psurlinvalid">Please Enter Google Play Store URL <br/>
+<span >eg: https://play.google.com/store?id=com.exapmle</span>
+ </span>
+</div>
+
+<div class="col-lg-6" ng-show='app.ostype=="iOS"'>
+<textarea cols="" rows="" ng-click="addcampaignvalidation.psurlnil=false;addcampaignvalidation.psurlinvalid=false" ng-model="campaigninfo.dr" placeholder="https://itunes.apple.com/in/app/example/id123456789"></textarea>
+<span class="alert-rtext"  ng-show="addcampaignvalidation.psurlnil">Please Enter Apple App Store URL of your Application</span>
+<span class="alert-rtext"   ng-show="addcampaignvalidation.psurlinvalid">Please Enter Apple App Store URL <br/>
+<span>eg: https://itunes.apple.com/in/app/example/id123456789</span>
+ </span>
+</div>
+<div class="col-lg-3">
+<button type="button"  class="btn button-orange-border no-radius " ng-click="submitURL()">Save </button>
+
+</div>
+</div>
+
+
+<!-- <div class="haveurlform"   style="display:none;">
+<div class="col-lg-3">
+<label ng-show='app.ostype=="Android"'>Your Google Play URL is</label>
+<label ng-show='app.ostype=="iOS"'>Your App Store URL is</label>
+</div>
+<div class="col-lg-7  tp20">
+<a  ng-href="{{campaigninfo.dr}}" target="_blank"><span>{{campaigninfo.dr}}</span></a>  
+
+</div>
+<div class="col-lg-1  tp10"><button type="button"  class="btn button-blue-border no-radius " id="editgurl" >EDIT </button></div>
+
+
+</div> -->
+</div>
+
+
+
+					
+
+
+<div>
+<div class="form-header cmp-header" ng-hide="appurl.showeditor">
+						
+					 <span> Your App Store URL -</span>
+						{{campaigninfo.dr}}
+						<a href="" ng-click="appurl.showeditor=true" class="fs11" ><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> Edit </a>
+						
+					 </div>
+<!-- 
+<script type="text/javascript">
+$(document).ready(function(){
+// $('#addedgurl').click(function() {
+// $('#urlform').css("display", "none");  
+// $('#haveurlform').css("display", "block");   
+// }); 
+$('#editgurl').click(function() {
+$('#urlform').css("display", "block");  
+$('.haveurlform').css("display", "none");   
+}); 
+
+});
+</script>
+ -->
+
+					
+<div class="common-list" id="cm-list">
+
+<div class="task-progress  task-progress-noborder  ">
+<div class="btn-group pull-right fifth-nav">
+<button ng-hide="listIsEmpty" type="button"  class="btn btn-active no-radius "  id="showcmform1" >+ New </button>
+</div>
+
+<h2 class="tp10">campaign</h2>
+
+</div>
+
+<div ng-show="listIsEmpty" class="default-message">
+	
+
+<p>Create a new campaign</p>
+<button type="button"  class="btn btn-active no-radius btn-lg"  id="showcmform2" >+ ADD </button>
+
+</div>
+
+<div class="rocq-list">
+<ul class="media-list " ng-hide="listIsEmpty">
+<li ng-hide="table2loaded">
+<p class="text-center"><img src="images/ajax-loader.gif"></p>
+</li>
+
+<li  class="media border-top " ng-show="table2loaded" ng-repeat="campaign in filteredcampaignslist" id="{{ 'listitem' + $index }}">
+<div class="pull-right mr20"><span ng-hide="app.accesstype=='Viewer'" class="fs11 more">&nbsp; <a ng-click="deleteCampaign(campaign.o,campaign.ds,$index)" ><span class="glyphicon glyphicon-trash"></span></a></span></div>
+<div class="media-body">
+<h3 class="media-heading">{{campaign.do}}</h3>
+<p class="dvc fs12"><span  ng-hide="showqr"><a ng-href = "{{campaign.dv}}" target="_blank">{{campaign.dv}}</a></span> </p>
+
+<div ng-show="showqr" style="text-align:center"><a ng-href = "{{campaign.dv}}" target="_blank">{{campaign.dv}}</a><br><br><qrcode  version="10" data="{{qr_reader}}" size="250" ></qrcode></div>
+<p ng-click="showqr=!showqr; qr_reader=campaign.dv"  class="more fs11 tp5"><a href=""><span ng-hide="showqr">Show</span><span ng-show="showqr">Hide</span> QR code</a></p>
+ 
+</div>
+
+</li>
+</ul>
+</div>
+
+<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab2" ng-model="currentPage_tab2" items-per-page="5" max-size="maxSize_tab2" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
+</div>
+
+<div  id="cmform" style="display:none;">
+<div class="form-header  " ng-hide="CampaignSuccess">
+<h2>CREATE A NEW CAMPAIGN</h2>
+</div>
+
+<div class="col-lg-6">
+<div class="form "  ng-hide="CampaignSuccess">
+<div class="form-body">
+																										
+<div class="form-group has-warning" ng-click="addcampaignvalidation.cnnil=false">
+<input type="text" class="form-control"  placeholder="Enter Campaign Name" ng-model="campaigninfo.do">
+<span class="alert-rtext " ng-show="addcampaignvalidation.cnnil"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Please Enter a Campaign Name</span>
+</div>
+<div class="form-group has-warning" ng-click="addcampaignvalidation.pnnil=false">
+<input type="text" class="form-control"  placeholder="Enter Publisher Name" ng-model="campaigninfo.dp" >
+<span class="alert-rtext" ng-show="addcampaignvalidation.pnnil"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Please Enter a Publisher Name</span>
+</div>
+
+<div class="form-group ">
+
+
+ 
+<input type="text" class="form-control"  placeholder="Enter Post Back URL" ng-model="campaigninfo.dq"  >
+<span class="alert-rtext" ng-show="addcampaignvalidation.pburlnil"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Please Enter Post back URL</span>
+<span class="alert-rtext" ng-show="addcampaignvalidation.pburlinvalid"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Please keep this field empty or include transaction_id macro in the URL <br/>eg: http://www.example.com/tracking?click_id={transaction_id}</span>
+ 
+</div>
+
+
+<div class="form-group"><a style="cursor:pointer" ng-click="ShowAdvancedfilter=!ShowAdvancedfilter" class="fs12"><span ng-show="ShowAdvancedfilter">- Hide </span><span ng-hide="ShowAdvancedfilter">+ Advanced </span>Filter</a></div>
+
+<div ng-show="ShowAdvancedfilter">
+<div class="form-group" >
+<div class="checkbox form-radio  " style="margin-top:0; margin-bottom:0;">
+<label><input type="checkbox" ng-checked="ShowEventPostback" ng-click="ShowEventPostback=!ShowEventPostback" class="checkbox-style">
+&nbsp; 
+ Event post back  
+</label>
+
+</div>
+</div>
+<div ng-show="ShowEventPostback">
+<div class="form-group has-warning"  >
+<div class="row bm20" ng-repeat="elem in eventarray">
+<div class="col-lg-3 pr0">
+<div class="btn-group dd-md">
+<button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown"><i class="fa fa-angle-down pull-right tm5"></i>
+{{eventarray[$index]['event'] || 'Select Event'}} 
+</button>
+
+
+<ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu">
+	<li>
+		<div class="input-group input-group-sm search-control"> 
+				<span class="input-group-addon ">
+					<span class="glyphicon glyphicon-search"></span>
+				</span>
+				<input type="text" class="form-control" placeholder="Search Event Name" ng-model="eventquery"></input>
+		</div>
+</li>
+<li ng-repeat="Eventelem in EventsNameList | filter:eventquery"><a href="" ng-click="eventarray[$parent.$index]['event']=Eventelem.x;getOtherParamEventsName(Eventelem.x,$parent.$index)">{{ Eventelem.x }}</a></li>
+</ul>
+</div>
+	<!-- <input type="text" class="form-control" ng-model="eventarray[$index]['event']" placeholder="Event Name"> -->
+</div>
+<div class="col-lg-4 pr0">
+<div     
+		isteven-multi-select
+		input-model="eventarray[$index]['proplist']"
+		output-model="eventarray[$index]['prop']"
+		button-label="x"
+		item-label="x"
+		tick-property="ticked"
+		max-labels="2"
+		max-height="210px"
+		translation="selectproperty"
+>
+</div>
+</div>
+
+<div class="col-lg-4 pr0"><input type="text" class="form-control" ng-model="eventarray[$index]['url']" placeholder="Post back url">
+
+<!-- <div class="alert-rtext" ng-show="validateeventURLs(eventarray[$index]['url'])"><span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true"></span> Invalid event URL<br/> <span >eg: http://www.example.com/tracking?clickid={transaction_id}</span></div> -->
+
+</div>
+<div class="col-lg-1"><p class="rq-close tm10"><a href="#" ng-click="deleteevent($index)"><i class="fa fa-close"></i></a></p></div>
+
+</div>
+
+<div class="rsfs-labels" >
+ <button type="button" class="add" ng-click="addevent()"><i class="fa fa-plus"></i></button>
+</div>
+
+</div>
+
+</div>
+
+<div class="form-group" >
+<div class="checkbox form-radio  " style="margin-top:0; margin-bottom:0;">
+<label><input type="checkbox" ng-checked="ShowCustomUrl" ng-click="ShowCustomUrl=!ShowCustomUrl" class="checkbox-style">
+&nbsp; 
+Additional URL Parameters
+</label>
+</div>
+</div>
+
+<div ng-show="ShowCustomUrl">
+<div class="form-group fs12 "  >
+<div class="row">
+<div class="col-lg-6"><div class="checkbox">
+	<label class="bfont"><input type="checkbox" ng-checked="param.ad_subpub" ng-click="param.ad_subpub=!param.ad_subpub" name="optradio">Sub Publisher   </label>
+</div></div>
+<div class="col-lg-6"><div class="checkbox">
+	<label class="bfont"><input type="checkbox" ng-checked="param.ad_subsite" ng-click="param.ad_subsite=!param.ad_subsite" name="optradio">Advertiser Sub Site</label>
+</div></div>
+<div class="col-lg-6"><div class="checkbox">
+	<label class="bfont"><input type="checkbox" ng-checked="param.ad_subcmpgn" ng-click="param.ad_subcmpgn=!param.ad_subcmpgn" name="optradio">Advertiser Sub Campaign</label>
+</div></div>
+
+<div class="col-lg-6"><div class="checkbox">
+	<label class="bfont"><input type="checkbox" ng-checked="param.ad_subadgrp" ng-click="param.ad_subadgrp=!param.ad_subadgrp" name="optradio">Advertiser Sub Adgroup</label>
+</div></div>
+<div class="col-lg-6"><div class="checkbox">
+	<label class="bfont"><input type="checkbox" ng-checked="param.ad_subad" ng-click="param.ad_subad=!param.ad_subad" name="optradio">Advertiser Sub_ad</label>
+</div></div>
+<div class="col-lg-6"><div class="checkbox">
+	<label class="bfont"><input type="checkbox" ng-checked="param.ad_subkeywrd" ng-click="param.ad_subkeywrd=!param.ad_subkeywrd" name="optradio">Advertiser Sub Keyword</label>
+</div>
+</div>
+<div class="col-lg-6">
+<div class="checkbox "><label class="bfont pl0" >Custom URL Parameter</label></div>
+<div class="form-group ">
+<input type="text" class="form-control " ng-model="param.ref_id" maxlength="15" placeholder="Enter Parameter Name" >
+</div>
+</div>
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="form-group text-right" ng-hide="app.accesstype=='Viewer'">
+<span class="mr10"><a  href="#" id="showcmlist"> Cancel </a></span>
+
+<button type="button"  class="btn button-orange-border btn-lg" ng-click="generateCampaign()">
+GENERATE
+</button>
+
+</div> 
+<div ng-show="app.accesstype=='Viewer'">
+			<button class="next btn-grey btn-lg tm20" ng-disabled="true">GENERATE</button> 
+	<p class="rtext"> Your Account doesn't have enough permissions to generate the campaign</p>
+</div>
+
+
+<!--    <span style="color:green; display:none" id="addCampaignSuccessfull">Success!</span>
+<span style="color:red; display:none" id="addCampaignFailed">An error occured!</span>-->
+</div>
+</div>
+
+
+
+<div class="alert alert-danger alert-dismissible" style="display:none" role="alert" id="addCampaignFailed" >
+<button type="button" class="close" onclick="$('#addCampaignFailed').hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+An error occured!
+</div>
+
+<!-- <div class="alert alert-success alert-dismissible" style="display:none" role="alert" id="addCampaignSuccessfull">
+<button type="button" class="close" onclick="$('#addCampaignSuccessfull').hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+Success!
+</div > -->
+
+
+
+
+</div>
+<div ng-show="CampaignSuccess" class="text-center pw40 rq-block">
+<p id="addCampaignSuccessfull_msg" class="gtext">Campaign Created SucessFully. Your Click URL is:- </p><a target="_blank" ng-href="{{qr_reader}}">{{qr_reader}}</a>
+<br><br>
+<div>
+<qrcode  version="10" data="{{qr_reader}}" size="250" ></qrcode>
+</div>
+
+<button type="button" class="btn button-orange-border no-radius tm20" ng-click="CampaignSuccess=false" id="showcmlistback"> Back </button>
+
+</div>
+
+<div class="col-lg-6">
+<div class="preview-box  border box-shadow" ng-hide="CampaignSuccess">
+ 
+<div class="pr-action"><p class="pr-label">PREVIEW</p></div>
+<div class="pw20">
+<ul class="media-list tm45">
+	<li class="media">
+ <div class="pull-right">
+				<img class="media-object" src="../images/icon-campaign.png">
+		</div>
+			 
+		<div class="media-body">
+		<p class="caption">{{campaigninfo.dp || 'Publisher Name'}}</p>
+	 <h2>{{campaigninfo.do || 'Campaign Name'}}</h2>
+		</div>
+ 
+ 
+		
+	</li>
+	
+	<li><div class="code-block bg-lblue tm10" ng-show="campaigninfo.dq"><div class="text-center">{{campaigninfo.dq || 'Postback URL'}}</div> </div>
+	</li>
+	
+	<li ng-repeat="elem in eventarray" ng-show="ShowEventPostback">
+	<h3>{{elem.event || 'Please select an Event'}}</h3>
+	<p class="tm20" >
+<span class="label label-border mr10" ng-repeat="propelem in elem.prop">{{propelem.x || 'Properties'}}</span>
+</p>
+<div class="code-block bg-lgray tm20" ng-show="elem.url">
+<div class="text-center">{{elem.url || 'Event Postback URL'}}</div>
+</div>
+	</li>
+</ul>
+
+
+</div>
+		 
+ 
+		 
+		 
+		 
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+<div class="row">
+<div class="col-lg-12 ">
+<div class="panel">
+<div class="panel-body progress-panel">
+<div class="task-progress task-progress-noborder">
+<div class="pull-right btn-group fifth-nav">
+	<a ng-show="campaign_loading=='false'" href="" ng-click="listCampaignStats();campaign_loading='true'" class="bltext"><span class="glyphicon glyphicon-refresh fs12" aria-hidden="true"> Refresh</span></a>
+	<img ng-hide="campaign_loading=='false'" id="uploading_image" src="images/squares.gif" width="32px" height="32px" class="mmt5" />
+
+	<a href="#" class="fsize-bl pull-right"><i class="fa-trends fa-fsize ">&nbsp;</i></a>
+	 <button type="button" ng-csv="VisitorsDayWiseListCSV" csv-header="['Date', 'New Users','Change in %','Organic','Inorganic','Uninstalls',GoalUsers ]" filename="New_Users_Day_Wise_List.csv" class="btn-nobg pull-right ng-isolate-scope"><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+</div>
+<h2>Table</h2>
+
+</div>
+
+<div class="text-center panel-content">
+<div class="table-component">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<thead>
+<tr>
+<th width="6%">S.N.</th>
+<th width="25%">campaign Name</th>
+<th width="25%">Publisher Name</th>
+<th width="16%">Click</th>
+<th width="22%">Installs</th>
+<th width="22%">Click Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-hide="table1loaded">
+																<td colspan="6" >
+																	<p class="text-center"><img src="images/ajax-loader.gif"></p>
+																</td>
+															</tr>
+<tr ng-show="table1loaded" ng-repeat="item in filteredcampaignsliststats">
+<td>{{$index+1}}</td>
+<td>{{item.do}}</td>
+<td>{{item.dp}}</td>
+<td>{{item.dt}}</td>
+<td>{{item.du}}</td>
+<td>{{item.rate||'-'}}</td>
+</tr>
+<!-- <tr>
+<td>2</td>
+<td>Event 2</td>
+<td>2349</td>
+<td>7862</td>
+
+</tr>
+<tr>
+<td>3</td>
+<td>Event 3</td>
+<td>2349</td>
+<td>7862</td>
+
+</tr>
+<tr>
+<td>4</td>
+<td>Event 4</td>
+<td>2349</td>
+<td>7862</td>
+
+</tr> -->
+
+</tbody>
+</table>
+</div>
+</div>
+
+<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+<script src="lib/sweetalert/sweetalert.min.js"></script> 
+
+<link rel="stylesheet" type="text/css" href="lib/sweetalert/sweetalert.css"/>

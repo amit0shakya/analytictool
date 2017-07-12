@@ -1,0 +1,148 @@
+<div  ng-controller="PushConfctrl">
+  <div class="pageheader main-nav navbar-fix ed-top">
+        <div class="media">
+            <div class="pageicon pull-left">
+                <i class="fa fa-cog"></i>
+            </div>
+            <div class="media-body">
+                <ul class="breadcrumb">
+                    <li>Settings</li>
+                </ul>
+                <h4>Settings</h4>
+            </div>
+        </div>
+          
+    </div>
+    
+    
+<div class="body-content">
+  <div class="alert alert-danger alert-dismissible" role="alert" id="upload_error" style="display:none; margin-bottom:0; margin-top:8px; ">
+   <button type="button" class="close" onclick="$('#upload_error').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="error-message"> An error occured!</span>
+</div>
+
+  <div class="alert alert-success alert-dismissible" role="alert" id="upload_success" style="display:none; margin-bottom:0; margin-top:8px;">
+<button type="button" class="close" onclick="$('#upload_success').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="success-message"> Success!</span>
+</div>
+
+<div class="panel" ng-show="app.ostype=='Android'">
+<div class="panel-body">
+<div ng-show="error401" class="bg-warning pw40 bm20">
+<button type="button" class="btn btn-xs btn-default pull-right" ng-click="error401=false">Hide</button>
+
+ 
+<p class="fs12"><strong>We are getting Unauthorised Error from GCM. Please check for the following:</strong></p>
+<ul class="tm20 fs13 pl15">
+<li>Check if your API is enabled.
+  <ul>
+    <li>Open the Google Developers Console. </li>
+    <li>Under "Use Google APIs" heading, click on Enable and Manage API's.</li>
+    <li>Click Mobile APIs > Cloud Messaging for Android in the page.</li>
+    <li>Check if the API is enabled. If not, click 'enable' button.</li>
+  </ul>
+</li>
+<li class="tm10">Check if you have whitelisted our server's IP addresses.
+  <ul>
+    <li>Open the Google Developers Console. </li>
+    <li>Under "Use Google APIs" heading, click on Enable and Manage API's.</li>
+    <li>In the sidebar on the left, select Credentials.</li>
+    <li>If you haven't created an API key, click Add Credentials and create one ServerKey</li>
+    <li>Under the heading "Accept requests from these server IP addresses", add our servers IP.
+      <div>144.76.122.130, 148.251.153.98, 148.251.42.157</div>
+    </li>
+  </ul>
+</li>
+</ul>
+</div>
+
+
+<div class="form sm-form">
+<div class="form-header bm0">
+<h2>Google Cloud Messaging(GCM)</h2>
+</div>
+
+ <div class="form-body pw20">
+ <div class="form-group">
+ <label>API Key</label>
+<input type="text" class="form-control" placeholder="Enter API Key" ng-model="apikey"  />
+</div>
+ <div class="form-group">
+ <label>Package Name</label>
+<input type="text" class="form-control" placeholder="Enter Package Name" ng-model="packagename"   />
+</div>
+<!-- <input type="text" class="form-control" ng-model="os" placeholder="enter os name" /> -->
+<div class="form-group">
+<button type="button" class="btn button-orange-border no-radius " ng-click="gcm();error401=false">SAVE</button>
+</div>
+
+</div>
+
+
+
+</div>
+</div>
+</div>
+
+<div class="panel" ng-show="app.ostype=='iOS'">
+<div class="panel-body">
+<div class="form sm-form">
+<div class="form-header ">
+<h2>Apple Push Notification Service(APNS)</h2>
+</div>
+ 
+  <div class="form-body pw20">
+  <div class="form-group">
+<!-- <form class="form" data-ng-submit="apns()"   > -->
+<label>Development Certificate</label>
+
+<input type="password" class="form-control" ng-model="password_development" placeholder="Enter Development Password"  ng-hide="devfilename"/>
+</div>
+<div class="form-group" ng-hide="devfilename">
+<div class="fileUpload btn btn-default no-radius ml0" style="margin-top:0; ">
+    <span>UPLOAD</span>
+<input type="file" id="file_dev" file="devfile" class="upload btn-dblue " accept=".p12" />
+</div>
+ <label>{{devfile}}</label>
+
+
+</div>
+<div class="form-group" ng-show="devfilename">
+<label>{{devfilename}}</label>
+<button type="button"  ng-click="devfilename=''" class="btn button-orange-border no-radius ">Change Certificate</button>
+</div>
+<div class="form-group">
+<label>Production Certificate</label>
+<input type="password" class="form-control" ng-model="password_production"  placeholder="Enter Production Password"   ng-hide="prodfilename"/>
+</div>
+<div class="form-group" ng-hide="prodfilename">
+<div class="fileUpload btn btn-default no-radius ml0" style="margin-top:0; ">
+    <span>UPLOAD</span>
+    <input type="file" id="file_pro" file="profile" accept=".p12" class=" upload btn-dblue "/>
+</div>
+<label>{{profile}}</label>
+</div>
+<div class="form-group" ng-show="prodfilename">
+<label>{{prodfilename}}</label>
+<button type="button"  ng-click="prodfilename=''" class="btn button-orange-border no-radius ">Change Certificate</button>
+</div>
+<div class="form-group">
+<button type="button"   ng-click="apns()" class="btn button-orange-border no-radius ">SAVE</button>
+</div>
+<!-- </form> -->
+
+
+<!-- <d<!-- iv class="alert alert-success alert-dismissible" role="alert" id="upload_success" style="display:none; margin-bottom:0; margin-top:8px;">
+<button type="button" class="close" onclick="$('#upload_success').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="success-message"> Success!</span>
+</div> --> 
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>

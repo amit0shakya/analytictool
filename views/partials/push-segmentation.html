@@ -1,0 +1,902 @@
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	var $banner = $('.banner'), $window = $(window);
+	var $topDefault = parseFloat( $banner.css('top'), 1 );
+	$window.on('scroll', function() {
+		var $top = $(this).scrollTop();
+		$banner.stop().animate( { top: $top + $topDefault }, 1000, 'easeOutCirc' );
+	});
+
+	var $wiBanner = $banner.outerWidth() * 2;
+	zindex( $('#wrapper').outerWidth() );
+	$window.on('resize', function() {
+		zindex( $('#wrapper').outerWidth() );
+	});
+	function zindex(maxWidth){
+		if( $window.width() <= maxWidth + $wiBanner ) {
+			$banner.addClass('zindex');
+		} else {
+			$banner.removeClass('zindex');
+		}
+	}
+  // $(".tf-wrapper").undelegate();
+  // $(".tf-wrapper").delegate("li","click",function(){
+  //   $(this).parent().find('li').removeClass('active')
+  //   $(this).addClass('active')
+  //   })
+});
+
+$('.collapse').on('shown.bs.collapse', function(){
+  //  if ($(this).is('#collapseEvent')) {
+  //   $('#event-preview-holder').slideUp();
+  // }
+  // else if ($(this).is('#collapseOne')) {
+  //   $('#source-preview-holder').slideUp();
+  // }
+  // else if ($(this).is('#collapseTwo')) {
+  //   $('#network-preview-holder').slideUp();
+  // }
+  //  else if ($(this).is('#collapseThree')) {
+  //   $('#location-preview-holder').slideUp();
+  // }
+  //  else if ($(this).is('#collapseFour')) {
+  //   $('#version-preview-holder').slideUp();
+  // }
+  //  else if ($(this).is('#collapseFive')) {
+  //   $('#session-preview-holder').slideUp();
+  // }
+  //  else if ($(this).is('#collapseSix')) {
+  //   $('#manufacture-preview-holder').slideUp();
+  // }
+   
+  
+$(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+// $(this).closest('.panel').find('.rsf-wrapper').show();
+}).on('hidden.bs.collapse', function(){
+$(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+ // if ($(this).is('#collapseEvent')) {
+ //    $('#event-preview-holder').slideDown();
+ //  }
+  // else if ($(this).is('#collapseOne')) {
+  //   $('#source-preview-holder').slideDown();
+  // }
+  // else if ($(this).is('#collapseTwo')) {
+  //   $('#network-preview-holder').slideDown();
+  // }
+  //  else if ($(this).is('#collapseThree')) {
+  //   $('#location-preview-holder').slideDown();
+  // }
+  //  else if ($(this).is('#collapseFour')) {
+  //   $('#version-preview-holder').slideDown();
+  // }
+  //  else if ($(this).is('#collapseFive')) {
+  //   $('#session-preview-holder').slideDown();
+  // }
+  //  else if ($(this).is('#collapseSix')) {
+  //   $('#manufacture-preview-holder').slideDown();
+  // }
+// $(this).closest('.panel').find('.rsf-wrapper').hide();
+});
+</script>
+
+<div ng-controller="PushSegmentationCtrl as ps">
+   <!--  <div class="pageheader main-nav navbar-fixed-top" >
+        <div class="media">
+            <div class="pageicon pull-left">
+                <i class="fa fa-cog"></i>
+            </div>
+            <div class="media-body">
+                <ul class="breadcrumb">
+                    <li>Send Push Segmentation</li>
+                </ul>
+                <h4>Send Push Segmentation</h4>
+            </div>
+        </div>
+        <div class="pull-right fifth-nav">
+      <input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+      <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+    </div>
+
+    </div> -->
+
+
+    <div class="body-content" ng-hide="showoverview">
+       <div class="alert alert-danger alert-dismissible" role="alert" id="upload_error" style="display:none; margin-bottom:0; margin-top:8px; ">
+   <button type="button" class="close" onclick="$('#upload_error').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="error-message"> An error occured!</span>
+</div>
+
+  <div class="alert alert-success alert-dismissible" role="alert" id="upload_success" style="display:none; margin-bottom:0; margin-top:8px;">
+<button type="button" class="close" onclick="$('#upload_success').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="success-message"> Success!</span>
+</div>
+
+<div class="panel">
+
+<div class="panel-content" id="wrapper">
+<form action="" method="get" class="form normal-form" >
+ 
+
+
+<div class="form-body ">    
+<div class="row ">
+<div class="col-lg-8">
+<div class="form-header pl0 tm0 tp0 mb0" >
+<h2 class="tm0 ">Custom Segmentation</h2> 
+</div>
+
+<div class="row">
+<div class="col-lg-4">
+<div class="btn-group ">
+<button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+<i class="fa fa-angle-down"></i>
+
+{{segmentFilter || 'Select Segment'}} 
+</button>
+ 
+<ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu"   >
+<li ng-repeat="elem in segmentlist"><a href="" ng-click="selectSegment($index)">{{elem.segmentname}}</a></li>
+</ul>
+</div></div>
+<div class="col-lg-4 pr0 pl0">
+<div class="sf-date">
+      <input date-range-picker="" id="datepicker2" class="form-control date-picker" type="text" ng-model="daterange.date" >
+      <label for="datepicker2"><span class="glyphicon glyphicon-calendar calendar-icon" ></span></label>
+    </div>
+ 
+</div>
+<div class="col-lg-4">
+<div     
+    isteven-multi-select
+    input-model="Input['State']"
+    output-model="selectedState_List"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="2"
+    max-height="210px"
+    translation="localLang"
+>
+</div>
+
+</div>
+</div>
+
+<div class="panel border" id="rf-accordion">
+<div class="task-progress mb0">
+<div class=" pull-right action-link">
+        <a role="button" data-toggle="collapse" data-parent="#rf-accordion" data-target="#collapseEvent" href="" aria-expanded="true" aria-controls="collapseEvent" class="fs16">   <i class="glyphicon glyphicon-minus"></i></a>
+            </div>
+<h2>Filter Event</h2>
+</div>
+
+
+<div  id="collapseEvent" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" >
+
+
+
+<div class="rsf-wrapper tm20" ng-hide="showeventpreview">
+<div class="rsfp-rows" ng-repeat="elem in EName.SelectedEName">
+<div class="rsfp-labels">
+
+<div class="horz-line"></div>
+<div class="opt-bool ">
+<div class="toggle togglee" >
+<div class="toggle_side and_toggle " ng-class="{true:'active'}[andIsActive]">AND</div><div class="toggle_side or_toggle" ng-class="{false:'active'}[andIsActive]">OR</div>
+</div>
+
+</div>
+</div>
+<div class="rsfs-rows">
+<div class="row">
+<div class="col-lg-10">
+  <div class="btn-group">
+<button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown"><i class="fa fa-angle-down"></i>
+{{EName.SelectedEName[$index]['name'] || 'Select Event'}} 
+</button>
+
+
+<ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu">
+  <li>
+    <div class="input-group input-group-sm search-control"> 
+        <span class="input-group-addon ">
+          <span class="glyphicon glyphicon-search"></span>
+        </span>
+        <input type="text" class="form-control" placeholder="Search" ng-model="eventquery"></input>
+    </div>
+</li>
+<li ng-repeat="Eventelem in Input['Event'] | filter:eventquery"><a href="" ng-click="EName.SelectedEName[$parent.$index]={'name':Eventelem.x,'prop':[undefined],'value':[undefined]}; getPropertiesData(Eventelem.x)">{{ Eventelem.x }}</a></li>
+</ul>
+</div>
+</div>
+<!-- <div class="col-lg-6"><input type="text"  class="form-control" b="How many time click on event"></div> -->
+<div class="col-lg-2" ><p class="rq-close"><a href="" ng-show="EName.SelectedEName[$index]" ng-click="eventssdeletestep($index)"><i class="fa fa-close"></i></a></p></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  
+ <label class="tm20 col-lg-12 pl0 rsfl" ng-show="EName.SelectedEName[$index]">Properties
+
+ </label>
+
+<div class="rsfp-wrapper" ng-repeat="proplen in EName.SelectedEName[$index]['prop'] track by $index">
+<div class="rsfp-labels">
+<div class="horz-line"></div>
+<div class="opt-bool ">
+<div class="toggle togglep" id="{{$parent.$index}}">
+<div class="toggle_side and_togglep" id="andp{{$parent.$index}}" ng-class="{true:'active'}[andIsActivep[$parent.$index]]">AND</div><div class="toggle_side or_togglep" id="orp{{$parent.$index}}" ng-class="{false:'active'}[andIsActivep[$parent.$index]]">OR</div>
+</div>
+
+</div>
+</div>
+
+<div class="row  rsft-rows" >
+<div class="col-lg-5"><div class="btn-group">
+<button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown"><i class="fa fa-angle-down"></i>
+{{EName.SelectedEName[$parent.$index]['prop'][$index] || 'Select Property' }} 
+</button>
+<ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu">
+  <li>
+    <div class="input-group input-group-sm search-control"> 
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-search"></span>
+        </span>
+        <input type="text" class="form-control" placeholder="Search" ng-model="propertyquery"></input>
+    </div>
+</li>
+<li ng-repeat="propelem in Properties_List[EName.SelectedEName[$parent.$index]['name']] | filter:propertyquery"><a href="" ng-click="EName.SelectedEName[$parent.$parent.$index]['prop'][$parent.$index]=propelem; getValueData(EName.SelectedEName[$parent.$parent.$index]['name'],propelem); 
+EName.SelectedEName[$parent.$parent.$index]['value'][$parent.$index]=undefined">{{ propelem }}</a></li>
+</ul>
+</div></div>
+<!-- <div class="col-lg-6"><input type="text"  class="form-control" placeholder="Value"></div> -->
+<div class="col-lg-5"><div class="btn-group">
+<button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown"> <i class="fa fa-angle-down"></i>
+{{EName.SelectedEName[$parent.$index]['value'][$index] || 'Select Value' }}
+</button>
+<ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu">
+  <li>
+    <div class="input-group input-group-sm search-control"> 
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-search"></span>
+        </span>
+        <input type="text" class="form-control" placeholder="Search" ng-model="valuequery"></input>
+    </div>
+</li>
+<li ng-repeat="valelem in Value_List[EName.SelectedEName[$parent.$index]['name']][EName.SelectedEName[$parent.$index]['prop'][$index]]| filter:valuequery"><a href="" ng-click="EName.SelectedEName[$parent.$parent.$index]['value'][$parent.$index]=valelem ">{{ valelem }}</a></li>
+</ul>
+</div></div>
+<div class="col-lg-2" ><p class="rq-close"><a href="" ng-show="EName.SelectedEName[$parent.$index]['prop'][$index]" ng-click="propertiesdeletestep(EName.SelectedEName[$parent.$index],$index)"><i class="fa fa-close"></i></a></p></div>
+
+</div>
+
+
+
+</div>
+
+<div class="rsftl-wrapper">
+<div class="rsfs-labels " ng-show="EName.SelectedEName[$index]" >
+ 
+
+
+<button type="button" class="add" ng-click="propertiesaddstep(EName.SelectedEName[$index])" ><i class="fa fa-plus" ></i></button>
+</div>
+</div>
+
+
+
+ 
+</div>
+
+
+
+</div>
+
+<p id="eventnotselected" style="display:none" class="text-center "><span class=" label label-warning">Please select an event first!</span></p>
+
+
+<div class="rsf-footer" >
+<button type="button" class="btn btn-blue no-radius btn-md" ng-click="eventssaddstep()" >+ ADD NEW EVENT </button>
+<p class="text-right" style="display:none;"><a href="" ng-show="EName.SelectedEName[0]" ng-click="showeventpreview=true">Save  &amp; Preview</a></p>
+
+</div>
+
+
+
+
+</div>
+
+<div class="rfr-preview-holder pw20 " ng-show="showeventpreview" id="event-preview-holder">
+<div class="rfr-preview" ng-repeat="elem in EName.SelectedEName" ng-show="elem">
+<div class="rfr-header mb0">
+<div class="pull-right fifth-nav action-link">
+<a href="" ng-click="$parent.showeventpreview=false" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;
+<a href="" ng-click="eventssdeletestep($index)" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+<h2>{{elem.name}}</h2>
+</div>
+
+<div class="rfr-content" ng-repeat="el in elem.prop">
+<h2>{{el}}</h2>
+<p>{{elem.value[$index]}}</p>
+<p ng-hide="$last"><span class="or" ng-hide="andIsActivep[$parent.$index]">OR</span><span class="or" ng-show="andIsActivep[$parent.$index]">AND</span></p>
+</div>
+
+</div>
+
+<div class="rfr-preview rfr-default">
+<p><a href="" ng-click="showeventpreview=false;eventssaddstep()">+ New</a></p>
+</div>
+</div>
+
+
+</div>
+
+
+
+                    
+
+</div>
+
+
+<div class="rfr-preview-holder" id="preview-holder" style="display:none" >
+<div class="rfr-preview" ng-show="Filter[FilterNames[0]][0] || Filter[FilterNames[1]][0]" id="source-preview-holder">
+<div class="rfr-header mb0">
+<div class="pull-right fifth-nav action-link">
+<a href="" ng-click="hidepreview('source')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;
+<a href="" ng-click="removetickproperty(Input[FilterNames[0]]);removetickproperty(Input[FilterNames[1]])"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+<h2>Source</h2>
+</div>
+
+<div class="rfr-content">
+<h2 ng-show="Filter[FilterNames[0]]">Keywords</h2>
+<p ng-repeat="elem in Filter[FilterNames[0]] | limitTo:3">{{elem.x}}</p>
+<p ng-show="Filter[FilterNames[0]][3]" class="text-right fs11"><em>{{Filter[FilterNames[0]].length-3 }} More</em></p>
+ 
+<h2 ng-show="Filter[FilterNames[1]]">Sources</h2>
+<p ng-repeat="elem in Filter[FilterNames[1]] | limitTo:3">{{elem.x}}</p>
+<p ng-show="Filter[FilterNames[1]][3]" class="text-right fs11"><em>{{Filter[FilterNames[1]].length-3 }} More</em></p>
+
+</div>
+
+</div>
+
+
+<div class="rfr-preview"  ng-show="Filter[FilterNames[2]][0] || Filter[FilterNames[3]][0]" id="network-preview-holder">
+<div class="rfr-header mb0">
+<div class="pull-right fifth-nav action-link">
+<a href="" ng-click="hidepreview('network')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;
+<a href="" ng-click="removetickproperty(Input[FilterNames[2]]);removetickproperty(Input[FilterNames[3]])"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+<h2>Network</h2>
+</div>
+
+<div class="rfr-content">
+<h2 ng-show="Filter[FilterNames[2]]">Network Operator</h2>
+<p ng-repeat="elem in Filter[FilterNames[2]] | limitTo:3">{{elem.x}}</p>
+ <p ng-show="Filter[FilterNames[0]][3]" class="text-right fs11"><em>{{Filter[FilterNames[0]].length-3 }} More</em></p>
+
+<h2 ng-show="Filter[FilterNames[3]]">Network Type</h2>
+<p ng-repeat="elem in Filter[FilterNames[3]] | limitTo:3">{{elem.x}}</p>
+<p ng-show="Filter[FilterNames[0]][3]" class="text-right fs11"><em>{{Filter[FilterNames[0]].length-3 }} More</em></p>
+
+</div>
+
+</div>
+
+
+
+<div class="rfr-preview" ng-show="selectedState_List[0] || selectedCity_List[0] || selectedLanguage_List[0]" id="location-preview-holder">
+<div class="rfr-header mb0">
+<div class="pull-right fifth-nav action-link">
+<a href="" ng-click="hidepreview('location')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;
+<a href="" ng-click="removetickproperty(Input['State']);removetickproperty(Input['City']);removetickproperty(Input['Language'])"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+<h2>Location</h2>
+</div>
+
+<div class="rfr-content">
+<h2 ng-show="selectedState_List">State</h2>
+<p ng-repeat="elem in selectedState_List | limitTo:3">{{elem.x}}</p>
+<p ng-show="selectedState_List[3]" class="text-right fs11"><em>{{selectedState_List.length-3 }} More</em></p>
+
+ 
+<h2 ng-show="selectedCity_List">City</h2>
+<p ng-repeat="elem in selectedCity_List | limitTo:3">{{elem.x}}</p>
+<p ng-show="selectedCity_List[3]" class="text-right fs11"><em>{{selectedCity_List.length-3 }} More</em></p>
+
+
+<h2 ng-show="selectedLanguage_List">Language</h2>
+<p ng-repeat="elem in selectedLanguage_List | limitTo:3">{{elem.x}}</p>
+<p ng-show="selectedLanguage_List[3]" class="text-right fs11"><em>{{selectedLanguage_List.length-3 }} More</em></p>
+
+
+</div>
+
+</div>
+
+
+<div class="rfr-preview" ng-show="Filter[FilterNames[4]][0] || Filter[FilterNames[5]][0]" id="version-preview-holder">
+<div class="rfr-header mb0">
+<div class="pull-right fifth-nav action-link">
+<a href="" ng-click="hidepreview('version')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;
+<a href="" ng-click="removetickproperty(Input[FilterNames[4]]);removetickproperty(Input[FilterNames[5]])" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+<h2>Version</h2>
+</div>
+
+<div class="rfr-content">
+<h2 ng-show="Filter[FilterNames[4]]">App Version</h2>
+<p ng-repeat="elem in Filter[FilterNames[4]] | limitTo:3">{{elem.x}}</p>
+<p ng-show="Filter[FilterNames[4]][3]" class="text-right fs11"><em>{{Filter[FilterNames[4]].length-3 }} More</em></p>
+
+ 
+<h2 ng-show="Filter[FilterNames[5]]">Android Version</h2>
+<p ng-repeat="elem in Filter[FilterNames[5]] | limitTo:3">{{elem.x}}</p>
+<p ng-show="Filter[FilterNames[5]][3]" class="text-right fs11"><em>{{Filter[FilterNames[5]].length-3 }} More</em></p>
+
+
+
+</div>
+
+</div>
+
+<div class="rfr-preview" ng-show="Filter[FilterNames[7]][0]" id="session-preview-holder">
+<div class="rfr-header mb0">
+<div class="pull-right fifth-nav action-link">
+<a href="" ng-click="hidepreview('session')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;
+<a href="" ng-click="removetickproperty(Input[FilterNames[7]])" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+<h2>Session</h2>
+</div>
+
+<div class="rfr-content">
+<h2 ng-show="Filter[FilterNames[7]]">Session</h2>
+<p ng-repeat="elem in Filter[FilterNames[7]] | limitTo:3">{{elem.x}}</p>
+<p ng-show="Filter[FilterNames[7]][3]" class="text-right fs11"><em>{{Filter[FilterNames[7]].length-3 }} More</em></p>
+ 
+
+
+</div>
+
+</div>
+
+
+<div class="rfr-preview" ng-show="Filter[FilterNames[6]][0]" id="manufacture-preview-holder">
+<div class="rfr-header mb0">
+<div class="pull-right fifth-nav action-link">
+<a href="" ng-click="hidepreview('manufacturer')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;
+<a href="" ng-click="removetickproperty(Input[FilterNames[6]])"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+</div>
+<h2>Manufacture</h2>
+</div>
+
+<div class="rfr-content">
+<h2 ng-show="Filter[FilterNames[6]]">Device Manufacturer</h2>
+<p ng-repeat="elem in Filter[FilterNames[6]] | limitTo:3">{{elem.x}}</p>
+ <p ng-show="Filter[FilterNames[6]][3]" class="text-right fs11"><em>{{Filter[FilterNames[6]].length-3 }} More</em></p>
+
+
+
+</div>
+
+</div>
+
+
+
+</div>
+
+<div class="panel panel-default">
+<div class="tf-wrapper">
+<ul class="list-inline ml0">
+<!-- <li class="col-lg-2" ng-class="{true:'active'}[selectedfilter=='source']"><a href="" data-toggle="qcollapse" data-parent="#accordion" data-target="#collapseOne"  aria-expanded="true" aria-controls="collapseOne" ng-click="hidepreview('source')" >Source</a ></li> 
+<li class="col-lg-2 " ng-class="{true:'active'}[selectedfilter=='network']"><a  href=""  data-toggle="qcollapse" data-parent="#accordion" data-target="#collapseTwo"     aria-expanded="false" aria-controls="collapseTwo" ng-click="hidepreview('network')" >Network</a></li>  --> 
+
+<li class="col-lg-3" ng-class="{true:'active'}[selectedfilter=='location']"><a href=""  data-toggle="qcollapse" data-parent="#accordion" data-target="#collapseThree"  aria-expanded="false" aria-controls="collapseThree" ng-click="hidepreview('location')">Location</a></li>
+
+
+<li class="col-lg-3" ng-class="{true:'active'}[selectedfilter=='version']"><a href="" data-toggle="qcollapse" data-parent="#accordion" data-target="#collapseFour"  aria-expanded="false" aria-controls="collapseFour" ng-click="hidepreview('version')">Version</a></li>
+
+
+<li class="col-lg-3" ng-class="{true:'active'}[selectedfilter=='session']"><a  href="" data-toggle="qcollapse" data-parent="#accordion" data-target="#collapseFive"  aria-expanded="false" aria-controls="collapseFive" ng-click="hidepreview('session')">Session</a></li>
+
+
+<li class="col-lg-3" ng-class="{true:'active'}[selectedfilter=='manufacturer']"><a  href="" data-toggle="qcollapse" data-parent="#accordion" data-target="#collapseSix"  aria-expanded="false" aria-controls="collapseSix" ng-click="hidepreview('manufacturer')">Manufacture</a></li>
+
+</ul>
+</div>
+
+
+<div  aria-multiselectable="true">
+  <div  ng-show="selectedfilter=='source'">
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+       <div class=" md-form  pw40 form-center">
+      <div class="form-group ">
+      <div class="label-sm">{{FilterNames[0]}}</div>
+     <div  class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[0]]"
+    output-model="Filter[FilterNames[0]]"
+    button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+
+ <div class="form-group ">
+<div class="label-sm">{{FilterNames[1]}}</div>
+<div class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[1]]"
+    output-model="Filter[FilterNames[1]]"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+      </div>
+       <div class="rsf-footer" style="display:none;">
+
+<p class="text-right"><a href="" ng-click="showpreview('collapseOne')">Save  &amp; Preview</a></p>
+
+</div>
+        
+      </div>
+    </div>
+  </div>
+  <div  ng-show="selectedfilter=='network'">
+  
+    
+    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+       <div class=" md-form   pw40 form-center">
+      <div class="form-group ">
+      <div class="label-sm">{{FilterNames[2]}}</div>
+     <div  class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[2]]"
+    output-model="Filter[FilterNames[2]]"
+    button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+<div class="form-group ">
+<div class="label-sm">{{FilterNames[3]}}</div>
+<div class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[3]]"
+    output-model="Filter[FilterNames[3]]"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+      </div>
+       <div class="rsf-footer" style="display:none;">
+
+<p class="text-right"><a href="" ng-click="showpreview('collapseTwo')">Save  &amp; Preview</a></p>
+
+</div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div  ng-show="selectedfilter=='location'">
+  
+    
+    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+       <div class=" md-form  pw40 form-center">
+      <div class="form-group ">
+      <!-- <div class="label-lg">State</div>
+     <div  class="btn-group" 
+    isteven-multi-select
+    input-model="Input['State']"
+    output-model="selectedState_List"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div> -->
+<div class="label-sm">City</div>
+<div class="btn-group" 
+    isteven-multi-select
+    input-model="Input['City']"
+    output-model="selectedCity_List"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+<div class="form-group ">
+<div class="label-sm">Language</div>
+<div class="btn-group" 
+    isteven-multi-select
+    input-model="Input['Language']"
+    output-model="selectedLanguage_List"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+      </div>
+       <div class="rsf-footer" style="display:none;">
+
+<p class="text-right"><a href="" ng-click="showpreview('collapseThree')">Save  &amp; Preview</a></p>
+
+</div>
+        
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  <div  ng-show="selectedfilter=='version'">
+  
+  
+    
+    <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+       <div class=" md-form  pw40 form-center">
+      <div class="form-group ">
+      <div class="label-sm">{{FilterNames[4]}}</div>
+     <div  class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[4]]"
+    output-model="Filter[FilterNames[4]]"
+    button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+  <div class="form-group ">
+<div class="label-sm">{{FilterNames[5]}}</div>
+<div class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[5]]"
+    output-model="Filter[FilterNames[5]]"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+      </div>
+       <div class="rsf-footer" style="display:none;">
+
+<p class="text-right"><a href="" ng-click="showpreview('collapseFour')">Save  &amp; Preview</a></p>
+
+</div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <div  ng-show="selectedfilter=='session'">
+  
+    
+    <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+      <div class="panel-body">
+       <div class=" md-form  pw40 form-center">
+      <div class="form-group ">
+      <div class="label-sm">{{FilterNames[7]}}</div>
+     <div  class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[7]]"
+    output-model="Filter[FilterNames[7]]"
+    button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
+
+ 
+      </div>
+       <div class="rsf-footer" style="display:none;">
+
+<p class="text-right"><a href="" ng-click="showpreview('collapseFive')">Save  &amp; Preview</a></p>
+
+</div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div  ng-show="selectedfilter=='manufacturer'">
+  
+    
+    <div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">
+      <div class="panel-body">
+       <div class=" md-form  pw40 form-center">
+      <div class="form-group ">
+      <div class="label-sm">{{FilterNames[6]}}</div>
+     <div  class="btn-group" 
+    isteven-multi-select
+    input-model="Input[FilterNames[6]]"
+    output-model="Filter[FilterNames[6]]"
+    button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+
+</div>
+      </div>
+       <div class="rsf-footer" style="display:none;">
+
+<p class="text-right"><a href="" ng-click="showpreview('collapseSix')">Save  &amp; Preview</a></p>
+
+</div>
+        
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+</div>
+
+
+
+
+
+</div>
+<div class="col-lg-4">
+ 
+<div class="panel" >
+<div class="preview-cloud banner" >
+<div class="border box-shadow">
+<div class="pr-action"><p class="pr-label">PREVIEW</p></div>
+<div class="pw20 scrolling">
+<p class="default-message fs12" ng-hide="EName.SelectedEName[0]||Filter[FilterNames[0]][0]||Filter[FilterNames[1]][0]||Filter[FilterNames[2]][0]||Filter[FilterNames[3]][0]||Filter[FilterNames[4]][0]||Filter[FilterNames[5]][0]||Filter[FilterNames[6]][0]||Filter[FilterNames[7]][0]||selectedCity_List[0]||selectedState_List[0]||selectedLanguage_List[0]">Please Select Filters</p>
+<p ng-show="EName.SelectedEName[0]||Filter[FilterNames[0]][0]||Filter[FilterNames[1]][0]||Filter[FilterNames[2]][0]||Filter[FilterNames[3]][0]||Filter[FilterNames[4]][0]||Filter[FilterNames[5]][0]||Filter[FilterNames[6]][0]||Filter[FilterNames[7]][0]||selectedCity_List[0]||selectedState_List[0]||selectedLanguage_List[0]" class="bm0 fs12">Users <span ng-show="EName.SelectedEName[0]">who have done the</span></p> <span class="ct-fs20" ng-show="EName.SelectedEName[0]">Event</span> <span class="ct-fs26"><span class="ct-fs28" ng-repeat="elem in EName.SelectedEName ">{{elem['name']}} 
+
+
+  <span class="ct-fs28 " > <span class="ct-fs20" ng-show="elem['prop'][0]">With</span> <span ng-repeat="e in elem['prop'] track by $index"><span ng-show="elem['value'][$index] "><span class="ct-fs20">{{e}}</span> <span class="ct-fs28 " >{{elem['value'][$index]}}</span> </span> <span class="ct-fs30"><span ng-hide="$last"><span ng-show="andIsActivep[$parent.$index]" class="ct-fs20" >AND</span> <span class="ct-fs20" ng-hide="andIsActivep[$parent.$index]" >OR </span>
+ </span></span></span><span ng-hide="$last"  class="ct-fs20"> <span ng-show="andIsActive" >AND</span> <span ng-hide="andIsActive" >OR </span></span>
+
+
+</span></span> 
+
+     <span ng-show="Filter['Keywords']"> <span class="ct-fs20"> having keyword </span>  </span><span class="ct-fs26" ng-repeat="elem in Filter['Keywords']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+     <span ng-show="Filter['Sources']"> <span class="ct-fs20"> from sources </span>  </span><span class="ct-fs26" ng-repeat="elem in Filter['Sources']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+     <span ng-show="Filter['Operator']"> <span class="ct-fs20"> with operator  </span></span> <span class="ct-fs28" ng-repeat="elem in Filter['Operator']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span> 
+      <span ng-show="Filter['Network Type']"><span class="ct-fs20">  having network type </span></span> <span class="ct-fs32"  ng-repeat="elem in Filter['Network Type']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20">or </span></span>
+      <span ng-show="Filter['App Version']"><span class="ct-fs20">  using app version </span> </span><span class="ct-fs26" ng-repeat="elem in Filter['App Version']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+      <span ng-show="Filter['Android']"><span class="ct-fs20">   having android version </span></span><span class="ct-fs26" ng-repeat="elem in Filter['Android']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+      <span ng-show="Filter['Device manufacturer']"><span class="ct-fs20"> whose device manufacturer </span></span><span class="ct-fs26" ng-repeat="elem in Filter['Device manufacturer']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span> 
+     <span ng-show="Filter['Session']"><span class="ct-fs20"> for session </span> </span><span class="ct-fs26" ng-repeat="elem in Filter['Session']"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+   <span ng-show="selectedCity_List"><span class="ct-fs20"> from city </span> </span><span class="ct-fs28" ng-repeat="elem in selectedCity_List"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+  <span ng-show="selectedState_List"><span class="ct-fs20"> from state </span></span><span class="ct-fs28" ng-repeat="elem in selectedState_List"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+  <span ng-show="selectedLanguage_List"><span class="ct-fs20">using language </span></span><span class="ct-fs28" ng-repeat="elem in selectedLanguage_List"> <span class="ct-fs28 " >{{elem.x}}</span> <span ng-hide="$last" class="ct-fs20"> or </span></span>
+     </span>
+     </div>
+     
+     </div>
+     
+     <div class="preview-nmuser">
+   <nav class="float-nav closed">
+   <div class="uv-holder">
+      <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+     <h2 ng-show="noUsers">{{noUsers}}</h2>
+     <p ng-hide="noUsers">Calculating</p>
+     <p> Users </p>
+      </div>
+ 
+<a class="toggle-sm" href="" ng-click="noUsers=null;getUsers()">+ <span>Calculate Users</span></a></nav>
+  </div>
+     
+</div>
+
+</div>
+ 
+
+  
+  <script>
+var floatNav = $('.float-nav'),
+    mainContent = $('.main-content');
+
+floatNav.on('click', function(e) {
+  $(this).toggleClass('closed');
+  e.stopPropagation();
+  e.preventDefault();
+});
+
+mainContent.on('click', function() {
+  if (!floatNav.hasClass('closed')) floatNav.addClass('closed');
+});
+</script>
+
+</div>
+</div>
+
+
+
+
+
+</div>
+
+  <div class="clearfix border-top "></div>
+  
+  
+  <ul class="pager row tm20">
+    <li class="col-lg-10">
+    <div class="submit-fl">
+  <div class="row">
+  <div class="col-lg-7 no-padding" ng-show="segmentFilter=='New Segment'">
+    <div class="col-lg-7 no-padding"><input type="text" class="form-control" ng-model="segmentname" placeholder="Enter Name"> </div>
+    <div class="col-lg-5 text-left"><button type="submit" class="btn button-orange-border no-radius" ng-click="savepushsegment()">SAVE FILTER</button>
+    <button type="submit" class="btn button-orange-border no-radius" ng-show="old_segmentFilter" ng-click="segmentFilter=old_segmentFilter">Cancel</button></div>
+   
+  </div>
+  <div class="col-lg-5 " ng-hide="segmentFilter=='New Segment'"><button type="button" class="btn button-orange-border no-radius mr10" ng-click="editpushsegment()" >Update</button> 
+  <button type="button" class="btn button-blue-border no-radius " ng-click="old_segmentFilter=segmentFilter;segmentFilter='New Segment'">Save as New</button>
+  </div>
+</div>
+ 
+  </div>
+    
+    </li>
+    
+   <!--  <li class="col-lg-2 pl0" >
+    <a href=""  class="previous btn-black previous " ng-click="segmentation.show_segmentation=false">Previous </a>
+    </li> -->
+    <li class="visible col-lg-2 pr0" >
+      <a href=""  class="next btn-blue" ng-click="segmentation.show_segmentation=false">&#8249; Go Back</a>
+    </li>
+  </ul>
+  <div class="clearfix"></div>  
+   
+</form>
+
+ 
+   
+
+</div>
+</div>
+
+        
+</div>
+  <ng-include src = "'partials/custom-segmentation.html'" ng-show="showoverview"> </ng-include>
+
+</div>
+      
+
+</div>

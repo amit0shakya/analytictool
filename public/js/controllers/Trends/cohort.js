@@ -1,29 +1,82 @@
+/*  Controller for Cohort Page */
+
 var cohort = angular.module('Controllers')
-cohort.controller('CohortCtrl',['$scope','JettyService','UtilitiesService','JSONService',function($scope, JettyService, UtilitiesService, JSONService) { 
-    $scope.date = {startDate: new Date(2014,10,17), endDate: new Date(2014,10,23)};
+cohort.controller('CohortCtrl',['$scope','$rootScope','JettyService','UtilitiesService','JSONService',function($scope, $rootScope, JettyService, UtilitiesService, JSONService) { 
+
+    /* global variables which we use inside functions */
     var today =  new Date();
-    $scope.currentdate = new Date(today.getFullYear(),today.getMonth()+1,today.getDate());
-    var endgap = Math.abs($scope.currentdate.getTime() - $scope.date.endDate.getTime())/(1000*60*60*24);
-    var range = Math.abs($scope.date.endDate.getTime() - $scope.date.startDate.getTime())/(1000*60*60*24);
-    JettyService.timewise('Cohort',"2665c38c69",endgap,range,2,3,function(data) {
-        console.log(data);
-        for(i=0; i<data.length; i++) {
-            var codeWise = [];
-            for(j=0; j<=10; j++) 
-                codeWise = codeWise.concat({"x":j,"y":0})
-            data[i].a = JSON.parse(data[i].a);
-            var map = {};
-            for(j=0; j<data[i].a.length; j++) 
-                map[data[i].a[j].x]=data[i].a[j].y;
-            for(j=0; j<codeWise.length; j++) {
-                if(map[codeWise[j].x])
-                    codeWise[j].y=map[codeWise[j].x];
+    var currentdate = new Date(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate()); 
+    var app = $rootScope.app.app_secret;
+    var timeZone = "IST";
+    
+    /*  if the user uses the date picker and changes the date, inner function gets called
+        Trigger function sets the endGap and noDays based on the new date and loads the page again
+    */
+    var WatchDate = function(){
+        $scope.$watch('daterange.date',function(nv,ov) {
+            $rootScope.daterange.date.startDate = new Date(nv.startDate.getFullYear(),nv.startDate.getMonth(),nv.startDate.getDate());
+            $rootScope.daterange.date.endDate = new Date(nv.endDate.getFullYear(),nv.endDate.getMonth(),nv.endDate.getDate());
+            $rootScope.daterange.endGap = Math.floor((currentdate.getTime() - $rootScope.daterange.date.endDate.getTime())/(1000*60*60*24));
+            $rootScope.daterange.noDays = Math.floor(($rootScope.daterange.date.endDate.getTime() - $rootScope.daterange.date.startDate.getTime())/(1000*60*60*24) + 1);
+            $scope.endGap = $rootScope.daterange.endGap;
+            $scope.noDays = $rootScope.daterange.noDays;
+            run();
+        })
+    };
+
+    /* Initialized the default date range and sets the endGap and noDays */
+    var Start = function() {
+        $scope.date = {startDate: new Date(Date.UTC(2015,0,1)), endDate: new Date(Date.UTC(2015,0,8))};
+        $scope.endGap = Math.abs(currentdate.getTime() - $scope.date.endDate.getTime())/(1000*60*60*24);
+        $scope.noDays = Math.abs($scope.date.endDate.getTime() - $scope.date.startDate.getTime())/(1000*60*60*24) + 1;
+    };
+
+    /* Cohort List Table in the Cohort page*/
+    var cohort = function(){
+        JettyService.granwise('Cohort',app,$scope.endGap,$scope.noDays,2,3,"long",timeZone).then(function(data) {
+              // $scope.table1loaded=true;
+            $scope.itemsPerPage = 10
+            $scope.currentPage_tab1 = 1;
+            $scope.maxSize_tab1 = 5;
+            
+            for(i=0; i<data.length; i++) {
+                var codeWise = [];
+                for(j=0; j<=10; j++) 
+                    codeWise = codeWise.concat({"x":j,"y":0})
+                data[i].a = JSON.parse(data[i].a);
+                var map = {};
+                for(j=0; j<data[i].a.length; j++) 
+                    map[data[i].a[j].x]=data[i].a[j].y;
+                for(j=0; j<codeWise.length; j++) {
+                    if(map[codeWise[j].x])
+                        codeWise[j].y=map[codeWise[j].x];
+                }
+                for(j=1; j<codeWise.length; j++)
+                    codeWise[j].y = ((codeWise[j].y*100)/codeWise[0].y).toFixed(2);
+                data[i].a = codeWise;
             }
-            for(j=1; j<codeWise.length; j++)
-                codeWise[j].y = ((codeWise[j].y*100)/codeWise[0].y).toFixed(2);
-            data[i].a = codeWise;
-        }
-        $scope.cohort = data;
-        console.log($scope.cohort);
-    });
-}])
+            $scope.CohortCSV = jQuery.extend(true,[], data);
+            for (var i = 0; i < $scope.CohortCSV.length; i++) {
+                for (var j = 0; j < $scope.CohortCSV[i].a.length; j++) {
+                    $scope.CohortCSV[i].a[j]=$scope.CohortCSV[i].a[j].y;
+                };
+            };
+                    $scope.totalItems_tab1 = data.length;
+                    $scope.$watch('currentPage_tab1 + itemsPerPage', function() {
+                        var begin = (($scope.currentPage_tab1 - 1) * $scope.itemsPerPage),
+                        end = begin + $scope.itemsPerPage;
+                        $scope.filteredcohortlist =  data.slice(begin, end);
+                      
+                    });
+            //$scope.cohort = data;
+        });
+    };
+
+    var run = function(){
+        cohort();
+    };
+
+    //Start();
+    WatchDate();
+
+}]);

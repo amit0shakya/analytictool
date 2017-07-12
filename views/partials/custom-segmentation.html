@@ -1,0 +1,126 @@
+
+<div class="body-content">
+  
+<div class="panel">
+<div class="panel-content pw20" >
+<div class="task-progress">
+<div class="btn-group pull-right ">
+
+<button type="button" class="btn button-blue-border no-radius pull-right " ng-click="$root.showoverview=false;selectSegment()">+ NEW</button>
+<form id="advance-search" class="pull-left">
+<i class="fa fa-search fa-1 fa-search-right"></i>
+<input type="search" class="btn btn-transparent">
+</form>
+
+
+<button type="button" class="btn btn-transparent selected" id="grid">
+<i class="fa fa-th"></i>
+</button>
+<button type="button" class="btn btn-transparent mr10" id="list">
+<i class="fa fa-th-list"></i>
+</button>
+</div>
+
+<h1 class="bp10">Custom Segmentation </h1>
+
+</div>
+
+<div  class="wall" id="wall"  >
+
+
+
+<div class="wall-column">
+<div class="wall-item" ng-repeat="elem in segmentlist" ng-if="$index!=0">
+
+<div id="wall-content-preview" >
+<div >
+<div ng-show="users[$index]">
+ <div class="header-row">
+ <div class="pull-right action"><a  href="#" ng-click="selectSegment($index);$root.showoverview=false"><span class="glyphicon glyphicon-edit" ></span></a> <a  href="#" ng-click="deletesegment(elem)"><span class="glyphicon glyphicon-trash"></span></a></div>
+ <p class="date">{{elem.date | date:'dd MMM'}}</p>
+ </div>
+ <div class="wall-item-content">
+  <h2>{{elem.segmentname}}</h2>
+
+<h3 class="text-center">{{users[$index]}}</h3>
+<p class="note text-center">Users</p>
+
+</div>
+<div class="footer-row  ">
+<div class="col-lg-4"><p class="calc-user tp5"><a href="" ng-click="users[$index]=undefined">BACK</a></p>
+</div>
+<div class="col-lg-4">&nbsp;</div>
+<div class="col-lg-4"><button type="button" ng-click="showSaveAs='true'" class="btn button-blue-border no-radius pull-right" ng-click="segmentation.show_segmentation=false;$root.targetdynamicsegment=elem.campaign_id">Choose</button></div>
+</div>
+</div>
+<div ng-hide="users[$index]">
+ <div class="header-row">
+ <div class="pull-right action"><a  href="#" ng-click="selectSegment($index);$root.showoverview=false"><span class="glyphicon glyphicon-edit" ></span></a> <a  href="#" ng-click="deletesegment(elem)"><span class="glyphicon glyphicon-trash"></span></a></div>
+ <p class="date">{{elem.date | date:'dd MMM'}}</p>
+ </div>
+ <div class="wall-item-content">
+  <h2>{{elem.segmentname}}</h2>
+  <p ng-show="ps.more">{{elem.readableString}}</p>
+  <p ng-hide="ps.more">{{elem.readableStringshort}}</p>
+<p class="more" ng-hide="ps.more"><a href="#" ng-click="ps.more=true">MORE</a></p>
+<p class="more" ng-show="ps.more"><a href="#" ng-click="ps.more=false">LESS</a></p>
+</div>
+<div class="footer-row ">
+<div class="col-lg-4 pl0"><div class="otext fs16">12.5%</div>
+<span class="note fs9"><em>Average Ratio</em></span>
+</div>
+<div class="col-lg-4 pr0"><p class="calc-user tp5"><a href="" ng-click="selectSegment($index);">GET USERS</a></p>
+<!-- <span ><em>{{users[$index]}}</em></span> -->
+</div>
+<div class="col-lg-4 pr0"><button type="button" class="btn button-blue-border no-radius pull-right" ng-click="segmentation.show_segmentation=false;$root.targetdynamicsegment=elem.campaign_id">Select</button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>  
+  
+
+  
+ 
+</div>
+
+
+    
+ 
+
+<script>
+ 
+
+$(document).ready(function() {
+    $('#list').click(function(event){
+   event.preventDefault();
+   $('#wall .wall-item').addClass('list-group-item');
+   $('#wall .wall-column').addClass('wall-column-full');
+   $('#list').addClass('selected');
+    $('#grid').removeClass('selected');
+	$('#wall .wall-item').removeClass('grid-group-item');
+   });
+	
+    $('#grid').click(function(event){
+		event.preventDefault();
+		$('#wall .wall-item').removeClass('list-group-item');
+		$('#wall .wall-column').removeClass('wall-column-full');
+		 $('#list').removeClass('selected');
+		 $('#grid').addClass('selected');
+		$('#wall .wall-item').addClass('grid-group-item');});
+		 
+});
+
+</script>
+
+ 
+   
+
+</div>
+</div>
+
+        
+</div>
+      
+

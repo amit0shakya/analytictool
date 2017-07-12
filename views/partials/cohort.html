@@ -1,78 +1,88 @@
-<div class="pageheader">
+<div ng-controller="CohortCtrl">
+<div class="pageheader main-nav navbar-fixed-top">
   <div class="media">
     <div class="pageicon pull-left">
       <i class="fa fa-cog"></i>
     </div>
     <div class="media-body">
       <ul class="breadcrumb">
-        <li><a href=""><i class="glyphicon  fa fa-cog"></i></a></li>
+        <li>Trends</li>
         <li>Cohort</li>
       </ul>
       <h4>Cohort</h4>
     </div>
   </div>
-  <div class="panel default-blue pull-right  date-time" >
-    <div class="symbol ">
-     <span class="day">Monday</span>
-     <span class="date">10</span> <span class="month">Feb</span>
-   </div>
-   <div class="value">
-    <p class="time-zone">PM</p>
-    <p class="time">03:27</p>
-  </div>
+  <div class="pull-right fifth-nav  ">
+              <div class="pull-right fourth-nav">
+             
+               <input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" /> 
+               <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+              </div>
+            </div>
 </div>
-</div>
-<div class="body-content" ng-controller="CohortCtrl">
+<div class="body-content" >
   <div class="row">
     <div class="col-lg-12" >
       <div class="panel">
         <div class="panel-body progress-panel">
           <div class="task-progress task-progress-noborder">
-            <div class="pull-right fifth-nav mti10">
-              <div id="widget">
-                <div id="widgetField">
-                  <span class="selected-date"></span>
-                  <a href="#"><span class="fa-rounded bg-orange"><i class="fa fa-calendar"></i></span></a>
-                </div>
-                <div id="widgetCalendar">
-                </div>
-              </div>
-            </div>
+            
+                    <div class="btn-group pull-right fifth-nav">
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
 
-            <h1>Cohort List</h1>
-
+                        <button type="button" ng-csv="CohortCSV" csv-header="['Date','New Users','Day 1','Day 2','Day 3',' Day 4','Day 5','Day 6','Day 7 ','Day 8 ','Day 9','Day 10']" filename="Cohort.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                    </div>
+                    <h2>Cohort</h2>
           </div>
 
           <div class="text-center panel-content">
-           <div class="table-component">
+           <div class="table-component table-cohort">
              <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <thead>
                 <tr>
-                  <th>Date</th>
+                  <th class="12%">Date</th>
                     <th>New Users</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
+                    <th>Day 1</th>
+                    <th>Day 2</th>
+                    <th>Day 3</th>
+                    <th>Day 4</th>
+                    <th>Day 5</th>
+                    <th>Day 6</th>
+                    <th>Day 7</th>
+                    <th>Day 8</th>
+                    <th>Day 9</th>
+                    <th>Day 10</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="elem in cohort">
-                  <td>{{ elem.z }}</td>
-                  <td ng-repeat=" code in elem.a">{{ code.y }}</td>
+              <!--   <tr ng-hide="table1loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr>
+ -->
+                <tr  ng-repeat="elem in filteredcohortlist">
+                  <td class="active text-center ">
+                    <strong class="fs18">{{ elem.z }}</strong>
+                  </td>
+                  <td ng-repeat=" code in elem.a" ng-style="$index>0 && {'background-color': 'rgba(65,165,126,'+code.y/filteredcohortlist[0].a[1].y*.8+')'} || {'background-color': 'rgb(230,230,230)','border-bottom': '1px solid #fff'}">
+                    <div ng-if = "$index == 0" class="wtxt"> 
+                        {{ code.y }}
+                    </div>
+                    <div ng-if = "$index > 0" >
+                        {{ code.y }}%
+                    </div>  
+                  </td>
                 </tr>
               </tbody>
             </table>
+            <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 

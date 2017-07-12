@@ -1,89 +1,140 @@
-<div class="pageheader">
+<!-- <div ng-controller="DateCtrl"> -->
+<div class="pageheader main-nav navbar-fixed-top">
     <div class="media">
         <div class="pageicon pull-left">
             <i class="fa fa-cog"></i>
         </div>
         <div class="media-body">
             <ul class="breadcrumb">
-                <li><a href=""><i class="glyphicon  fa fa-cog"></i></a></li>
+               
                 <li>Trends</li>
             </ul>
             <h4>TRENDS</h4>
         </div>
     </div>
-    <div class="panel default-blue pull-right  date-time" >
-        <div class="symbol ">
-            <span class="day">Tuesday</span>
-            <span class="date">28</span> <span class="month">Oct</span>
-        </div>
-        <div class="value">
-            <p class="time-zone">PM</p>
-            <p class="time">06:28</p>
-        </div>
-    </div>
+    
+    <div class="pull-right fourth-nav">
+		 	<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+            <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+		</div>
+    
 </div>
-<div class="body-content" ng-controller="ToverviewCtrl">
+
+
+
+<div ng-controller="ToverviewCtrl">
+
+<div class="body-content">
     <div class="state-overview row">
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel panel-block p-blue text-center">
-                <div class="symbol ">
-                    <i class="fa-trends fa-session">&nbsp;</i>
-                </div>
-                <div class="value">
-                    <p>Average Session Length (minutes)</p>
-                    <h1 class="count"> {{ avg_session_length}}</h1>
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel panel-block p-red text-center">
-                <div class="symbol ">
-                    <i class="fa-trends fa-nruser">&nbsp;</i>
-                </div>
-                <div class="value">
-                    <h1 class="count"> 
-                        <span class="first">{{ new_users}}</span> /
-                        <span class="second"> {{ returning_users }}</span>
-                    </h1>
-                    <p class="count-type"> <span class="first">New</span>  <span class="second">Returning</span> </p>
-                </div>
-            </section>
-        </div>
         <div class="col-lg-4 col-sm-6">
             <section class="panel panel-block p-yellow text-center">
                 <div class="symbol ">
                     <i class="fa-trends fa-muser">&nbsp;</i>
                 </div>
                 <div class="value">
-                    <p>Average Monthly Users</p>
-                    <h1 class="count">{{ avg_monthly_users | number:0 }}</h1>
+                    <p>Active Users</p>
+                    <h1 class="count">{{ active_users }}</h1>
+                    <p class="count-type">&nbsp; </p>
                 </div>
             </section>
         </div>
+        
+        
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-red text-center">
+                <div class="symbol ">
+                    <i class="fa-trends fa-nruser">&nbsp;</i>
+                </div>
+                <div class="value">
+                     <p>New Vs Returning Users</p>
+                    <h1 class="count"> 
+                        <span class="first">{{ new_users}}</span> <span class="gray-text">/</span>
+                        <span class="second"> {{ returning_users }}</span>
+                    </h1>
+                    <p class="count-type"> <span class="first">New</span>  <span class="second">Returning</span> </p>
+                </div>
+            </section>
+        </div>
+        
+        
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-blue text-center">
+                <div class="symbol ">
+                    <i class="fa-trends fa-session">&nbsp;</i>
+                </div>
+                <div class="value">
+                    <p>Average Session Length</p>
+                    <h1 class="count"> {{ avg_session_length}} <span class="note"> MINUTES</span></h1>
+                    <p class="count-type">&nbsp; </p>
+                </div>
+            </section>
+        </div>
+        
     </div>
-    <!-- <div class="row ">
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel  panel-transparent text-center">
-                <img src="images/img-gp1.png" > 
-            </section>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <div class="btn-group pull-right fifth-nav">
+                            <button id='newusers_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                                <i class="fa-trends fa-pdf ">&nbsp;</i>
+                            </button>
+                            <button id='newusers_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                                <i class="fa-trends fa-img ">&nbsp;</i>
+                            </button>
+                            <a href="#" class="fsize-block" ><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+                        </div>
+                        <h2>New Users Trend </h2>
+                    </div>
+                    <div id="newusers" class="text-center panel-content">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel  panel-transparent text-center">
-                <img src="images/img-gp2.png" > 
-            </section>
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <div class="btn-group pull-right fifth-nav">
+                        <button id='activeusers_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-pdf ">&nbsp;</i>
+                        </button>
+                        <button id='activeusers_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-img ">&nbsp;</i>
+                        </button>
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+                        </div>
+                        
+                        
+                        
+                        <h2>Active Users Trend</h2>
+                        
+                    </div>
+                    <div id="activeusers" class="text-center panel-content">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel panel-transparent text-center">
-                <img src="images/img-gp3.png" > 
-            </section>
-        </div>
-    </div> -->
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel">
                 <div class="panel-body progress-panel">
                     <div class="task-progress">
-                        <h1>Session Time</h1>
+                      <div class="btn-group pull-right fifth-nav">
+                        <button id='avgSessionLengthTrend_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-pdf pull-right">&nbsp;</i>
+                        </button>
+                        <button id='avgSessionLengthTrend_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-img pull-right">&nbsp;</i>
+                        </button>
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+                        </div>
+                        
+                        <h2>Session Time</h2>
+                      
                     </div>
                     <div id="avgSessionLengthTrend" class="text-center panel-content">
                         <!-- <img src="images/img1.png" width="853" height="325">  -->
@@ -96,39 +147,68 @@
         <div class="col-lg-12" >
             <div class="panel">
                 <div class="panel-body progress-panel">
+            
                     <div class="task-progress task-progress-noborder">
-                        <h1>Cohort</h1>
+
+                    <div class="btn-group pull-right fifth-nav">
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+
+                       <button type="button" ng-csv="CohortCSV" csv-header="['Date','New Users','Day 1','Day 2','Day 3',' Day 4','Day 5','Day 6','Day 7 ','Day 8 ','Day 9','Day 10']" filename="Cohort.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                    </div>
+                    <h2>Cohort</h2>
                     </div>
                     <div class="text-center panel-content">
-                        <div class="table-component">
+                        <div class="table-component table-cohort">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <thead>
                                     <tr>
-                                        <th>Date</th>
-                                        <th>New Users</th>
-                                        <th>1</th>
-                                        <th>2</th>
-                                        <th>3</th>
-                                        <th>4</th>
-                                        <th>5</th>
-                                        <th>6</th>
-                                        <th>7</th>
-                                        <th>8</th>
-                                        <th>9</th>
-                                        <th>10</th>
+                                        <th >Date</th>
+                                        <th >New Users</th>
+                                        <th >Day 1</th>
+                                        <th >Day 2</th>
+                                        <th >Day 3</th>
+                                        <th >Day 4</th>
+                                        <th >Day 5</th>
+                                        <th >Day 6</th>
+                                        <th >Day 7</th>
+                                        <th >Day 8</th>
+                                        <th >Day 9</th>
+                                        <th >Day 10</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr ng-repeat="elem in cohort">
-                                        <td>{{ elem.z }}</td>
-                                        <td ng-repeat=" code in elem.a">{{ code.y }}</td>
+                                 <tbody>
+
+                                   <!--  <tr ng-hide="table1loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr> -->
+                                    <tr ng-repeat="elem in filteredcohortlist">
+                                      <td class="active text-center ">
+                                        <strong class="fs18">{{ elem.z }}</strong>
+                                      </td>
+                                      <td ng-repeat=" code in elem.a" ng-style="$index>0 && {'background-color': 'rgba(65,165,126,'+code.y/filteredcohortlist[0].a[1].y*.8+')'} || {'background-color': 'rgb(230,230,230)','border-bottom': '1px solid #fff'}">
+                                        <div ng-if = "$index == 0" class="wtxt"> 
+                                            {{ code.y }}
+                                        </div>
+                                        <div ng-if = "$index > 0" > 
+                                            {{ code.y }}%
+                                        </div>  
+                                      </td>
                                     </tr>
-                                </tbody>
+                                  </tbody>
                             </table>
+                           
+
                         </div>
+                        
+                         <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
+                        
                     </div>
-                </div>
+                 
             </div>
         </div>
     </div> 
+</div>
+</div>
 </div>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<title>Features | rocQ </title>
+
+<link rel="stylesheet"  href="home/css/style.css" type="text/css" media="all">
+<link rel="stylesheet"  href="home/css/font-awesome.min.css?ver=1.0.0" type="text/css" media="all">
+<link rel="stylesheet" id="himalayas-google-fonts-css" href="//fonts.googleapis.com/css?family=Crimson+Text%3A700%7CRoboto%3A400%2C700%2C900%2C300&amp;ver=4.4.1" type="text/css" media="all">
+<link rel="stylesheet" href="home/css/magnific-popup.css?ver=1.0.0" type="text/css" media="all">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css?ver=4.5.0" type="text/css" media="all">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js" ></script>
+<script>
+	 $(document).ready(function(e){
+           $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
+           var formMiddle=(($(window).height())/2)-($(".form-div").height()/2)
+           $(".form-div").css({"top":formMiddle+"px"})
+           
+           $(".fixed-aside-nav").click(function(){
+                    showform();
+           })
+           
+           $(".closebtn").click(function(){
+                    hideform();
+           })
+           
+          function showform(){
+                    $(".form-container").css({"display":"block"})
+                    $(".form-div").animate({"opacity":"1"},{"duration":1000})
+                    $(".closebtn").animate({"opacity":"1"},{"duration":500})
+                    $(".lightboxbg").animate({"opacity":".95"});
+                    
+                    
+                    setTimeout(function(){
+                              $(".form-div").css({"opacity":"1"});
+                            //  $("body,html").css({'overflow':'hidden'});
+                    },900)
+                    
+                   $(".fixed-aside-nav").animate({"right":"-80px","opacity":"0"})
+                    
+          }
+           
+           
+           function hideform(){
+                    
+                     $(".form-div").animate({"opacity":"0"},{"duration":1000})
+                     $(".closebtn").animate({"opacity":"0"},{"duration":500})
+                     $(".lightboxbg").animate({"opacity":"0"});
+                     
+                     setTimeout(function(){
+                              $(".form-div").css({"opacity":"1"});
+                             // $("body,html").css({'overflow':'auto'});
+                               $(".form-container").css({"display":"none"})
+                    },1000)
+                     
+                     $(".fixed-aside-nav").animate({"right":"5px","opacity":"1"})
+           }
+           /*
+           $(".contactbtn").click(function(e){
+              e.preventDefault();
+              showform();
+           })*/
+           
+ });
+
+          
+          
+$(window).resize(function(e){
+          $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
+           $(".form-div").css({"top":(($(window).height()-500)/2)+"px"})
+})	
+</script>
+
+</head>
+<body class="home page "> 
+
+<!-- FORM CONTAINER STARTS -->
+<div id="page" class="hfeed site">
+<div class="form-container">
+<div class="closebtn">x</div>
+<div class="form-div">
+<div class="form-head"><span>CONTACT</span><span>US</span> </div>
+<form action="/contactus" method="post" class="wpcf7-form" onsubmit="return false;">
+<div style="display: none;">
+          <input type="hidden" name="_wpcf7" value="55">
+          <input type="hidden" name="_wpcf7_version" value="4.3.1">
+          <input type="hidden" name="_wpcf7_locale" value="en_US">
+          <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f55-o1">
+          <input type="hidden" name="_wpnonce" value="649fcebd00" required>
+</div>
+<!--<p>Your Name (required)<br>-->
+          <span class="wpcf7-form-control-wrap your-name">
+          <input type="text" id="your-name" value="" placeholder="Your Name (required)" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false">
+          </span> 
+</p>
+<!--<p>Your Email (required)<br>-->
+          <span class="wpcf7-form-control-wrap your-email">
+                    <input type="email" id="your-email" placeholder="Your Email (required)" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" required>
+          </span> </p>
+<!--<p>Subject<br>-->
+          <span class="wpcf7-form-control-wrap your-subject">
+                    <input type="text" id="your-subject" value=""  placeholder="Subject" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false">
+          </span> 
+</p>
+<!--<p>Your Message<br>-->
+          <span class="wpcf7-form-control-wrap your-message">
+                    <textarea id="your-message" cols="40" rows="10" placeholder="Your Message" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false"></textarea>
+          </span> </p>
+<p>
+          <input type="submit" value="Send" id="form-button-submit"class="wpcf7-form-control wpcf7-submit">
+          <img src='home/images/ajax-loader.gif' style="display:none" id = "ajax-loader">
+          <div class="wpcf7-response-output wpcf7-display-none" id="response-messages"></div>
+          </p>
+</form>
+                              
+                    </div>
+                    <div class="lightboxbg"></div>
+          </div>   <!-- LIGHT BOX ENDS  -->
+
+<!--   FORM CONTAINER ENDS   -->
+		<header id="masthead" class="site-header clearfix" role="banner">
+        <div class="header-wrapper clearfix stick non-transparent">
+			<div class="tg-container">
+			
+					<div class="logo">
+
+
+						<a href="/" title="rocQ" ><img src="home/images/logo-rocq.png" alt="rocQ"></a>
+ 
+					</div> <!-- logo-end -->
+				
+				<div class="menu-search-wrapper">
+
+ 
+					
+					<nav id="site-navigation" class="main-navigation" role="navigation">
+                    <h4 class="menu-toggle hide"></h4>
+						<div class="menu-primary-container"><ul id="menu-menu" class="menu"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-6"><a href="/">Home</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-19"><a href="#">Features</a></li>
+<li id="menu-item-150" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-150"><a href="https://docs.rocq.io/">Documentation</a></li>
+<!--<li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-7"><a href="/#about">About</a></li>-->
+<li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="pricing.html">Pricing</a></li>
+<li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-27"><a href="/#blog">blog</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-26"><a href="contact.html">contact</a></li>
+<li id="menu-item-219" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-219"><a href="/login">Sign In</a></li>
+</ul></div>					</nav>
+</div>  
+					 
+			</div><!-- tg-container -->
+		</div><!-- header-wrapepr end -->
+
+			</header><div id="content" class="site-content">
+	   <main id="main" class="clearfix no-sidebar-full-width"><div>
+
+				<div id="primary">
+					<div id="content-2">
+						
+<article id="post-109" class="post-109 page type-page status-publish has-post-thumbnail hentry"><h2 class="entry-title">Features</h2>
+   <div class="entry-content">
+      <p class="feature-text"><a href="/rocq.io/features.html/">CAMPAIGN MANAGEMENT</a>,<br><a href="/rocq.io/features.html">POST INSTALL BEHAVIOR</a>,<br><a href="/rocq.io/features.html">CUSTOM SEGMENTATION</a>,<br><a href="/rocq.io/features.html">PUSH NOTIFICATION</a>,<br><a href="/rocq.io/features.html">IN-APP MESSAGING</a>,<br><a href="/rocq.io/features.html/#uninstall">UNINSTALL TRACKING</a></p>
+<p><span id="more-109"></span></p>
+<div class=" tg-container">
+
+<ul class="feature-nav"><li><a href="#cm" ><span class="image-wrap"><i class="fa fa-bar-chart fa- "></i></span> <span class="service-title">CAMPAIGN MANAGEMENT</span></a></li>
+<li><a href="#pib" ><span class="image-wrap"><i class="fa fa-download fa- "></i></span> <span class="service-title">POST INSTALL BEHAVIOR</span></a></li>
+<li><a href="#revenue"><span class="image-wrap"><i class="fa fa-money fa- "></i></span> <span class="service-title">REVENUE </span></a></li>
+<li><a href="#seg"><span class="image-wrap"><i class="fa fa-sitemap fa- "></i> </span><span class="service-title">SEGMENTATION </span></a></li>
+<li><a href="#pn"><span class="image-wrap"><i class="fa fa-comments-o fa- "></i></span><span class="service-title">PUSH NOTIFICATION</span></a></li>
+<li><a href="#inapp" ><span class="image-wrap"><i class="fa fa-envelope-o fa- "></i> </span><span class="service-title">IN-APP MESSAGING </span></a></li>
+<li><a href="#uninstall" ><span class="image-wrap"><i class="fa fa-sign-out fa- "></i> </span> <span class="service-title">UNINSTALL TRACKING</span></a></li>
+</ul></div>
+<div>
+<div class="section-wrapper" id="cm">
+<div class="tg-container">
+<div class="tg-column-wrapper clearfix">
+<div class="tg-column-2">
+<h3><b>CAMPAIGN MANAGEMENT</b></h3>
+<p><span style="font-weight: 400;">Like any other app owner, you want to attain maximum installs. However, how do you know if the advertisers you are employing are getting you real or authentic users?</span></p>
+<p><span style="font-weight: 400;">Every time a user installs your app, rocQ informs you and your referrer about the conversion. This transparency helps to create a better relationship between you and your advertisers. By considering an event as a benchmark, rocQ enables you to know if the users you just acquired are humans and not bots.</span></p>
+<h4><b>Benefits</b></h4>
+<ul><li style="font-weight: 400;"><span style="font-weight: 400;">Track fraudulent installs</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Attribute credit to sources through post-back mechanism</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Check users&rsquo; quality by setting an event as a benchmark</span></li>
+</ul></div>
+<div class="tg-column-2">
+<p><img title="" class="attachment-full wp-post-image aligncenter" src="home/images/campaign.jpg" alt="feature"></p>
+</div>
+<div class="tg-column-1" style="display: none;">
+<h5><b>Example</b></h5>
+<p><span style="font-weight: 400;">You have a couple of sources who send you an audience. But when that audience becomes your user, how would you know if the user is authentic?</span></p>
+<p><span style="font-weight: 400;">Set an event as when you generate a campaign. This way, when a user installs your app and performs that event, you&rsquo;ll be notified about his/her legitimacy.</span> <span style="font-weight: 400;">It also enables you to know about your most dependable medium by keeping a track of the exact score of such quality installs.</span></p>
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<hr><div>
+<div class="section-wrapper" id="pib">
+<div class="tg-container">
+<div class="tg-column-wrapper clearfix">
+<div class="tg-column-2">
+<h3><b>Post Install Behavior</b></h3>
+<p><b></b><span style="font-weight: 400;">Wouldn&rsquo;t it be awesome to have a tool to track your users&rsquo; journey across the app? You must be curious to know their most preferred actions. </span></p>
+<p><span style="font-weight: 400;">As soon as a person downloads or opens your app, rocQ creates a real-time user profile for you. rocQ helps you track the events triggered across the app &amp; analyze your users&rsquo; interaction with each screen individually. This way you can understand your users&rsquo; behavior throughout their lifetime &amp; make the relevant changes for delivering a better service.</span></p>
+<h4><b>Benefits</b></h4>
+<ul><li style="font-weight: 400;"><span style="font-weight: 400;">Investigate which users spend most time on your app</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Study the events that lead to drop-offs &amp; conversions</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Get highlights of most engaged and valuable users overtime</span></li>
+</ul></div>
+<div class="tg-column-2">
+<p><img title="" class="attachment-full wp-post-image alignleft" src="home/images/install.jpg" alt="feature"></p>
+</div>
+<div class="tg-column-1" style="display: none;">
+<h5><b>Example</b></h5>
+<p><span style="font-weight: 400;">Your users are adding items in their cart but what if they don&rsquo;t end up purchasing them? How can you determine the possible problem?</span></p>
+<p><span style="font-weight: 400;">rocQ enables you to track each event undertaken throughout your users&rsquo; journey across your app. This not only helps you determine what exactly is causing the hindrance, but also figures out areas of improvement.</span></p>
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<hr><div>
+<div class="section-wrapper" id="revenue">
+<div class="tg-container">
+<div class="tg-column-wrapper clearfix">
+<div class="tg-column-2">
+<h3><b>Revenue</b></h3>
+<p><span style="font-weight: 400;">Your large user base consists of active as well as inactive users. It is essential to discern your inactive users from the active ones. In fact, determining if a user provides value back to your app is much more important than you may think it is. rocQ helps you selectively target those who are most likely to be interested in your content.</span></p>
+<p><span style="font-weight: 400;">Discover your most beneficial users and figure out why they love your application. rocQ helps you understand what they are clicking on and who is bringing these users to you. This enables you to target future campaigns towards acquiring more relevant users.</span></p>
+<h4><b>Benefits</b></h4>
+<ul><li style="font-weight: 400;"><span style="font-weight: 400;">Determine the quality of your users</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Hyper-target the profitable user base</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Invest in traffic sources that convert</span></li>
+</ul></div>
+<div class="tg-column-2">
+<p><img title="" class="attachment-full wp-post-image alignleft" src="home/images/campaign.jpg" alt="feature"></p>
+</div>
+<div class="tg-column-1" style="display: none;">
+<h5><b>Example</b></h5>
+<p><span style="font-weight: 400;">You are getting users from two different mediums, A and B. Now, how would you figure out which one&rsquo;s providing you with the most profitable users?</span></p>
+<p><span style="font-weight: 400;">rocQ enables you to determine that Source A provides 100 users who contribute Rs. 100,000 to your revenue; while Source B provides 1000 users who contribute Rs. 50,000. Now, you know which medium is more dependable.</span></p>
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<hr><div>
+<div class="section-wrapper" id="seg">
+<div class="tg-container">
+<div class="tg-column-wrapper clearfix">
+<div class="tg-column-2">
+<h3><b>Segmentation</b></h3>
+<p><b></b><span style="font-weight: 400;">When it comes to delivering products or services, one size doesn&rsquo;t fit all! </span></p>
+<p><span style="font-weight: 400;">Offering content to relevant and irrelevant target users could very well annoy them, which might even lead them to uninstall your app. Rather, build loyal relationships with users by developing and offering them products and services they actually want.</span></p>
+<p><span style="font-weight: 400;">Get a better understanding of your users&rsquo; activity based on their behavioral traits. rocQ groups similar users into smaller segments by factors such as geographical location, type and lifestyle of users, attitudes and behavior. This enables you to tailor your strategies to their interest. </span></p>
+<h4><b>Benefits</b></h4>
+<ul><li style="font-weight: 400;"><span style="font-weight: 400;">Plan strategies according to users&rsquo; behavioral traits</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Re-engage with individual user segments</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Focus on your most profitable users</span></li>
+</ul></div>
+<div class="tg-column-2">
+<p><img title="" class="attachment-full wp-post-image alignleft" src="home/images/segmentation.jpg" alt="feature"></p>
+</div>
+<p>&nbsp;</p>
+<div class="tg-column-1" style="display: none;">
+<h5><b>Example</b></h5>
+<p><span style="font-weight: 400;">You have an electronics sale upcoming on your app in a couple of days. Why don&rsquo;t you inform the user segment that has bought at least one electronic product in the past 6 months, about the new sale?</span></p>
+<p><span style="font-weight: 400;">rocQ analyzes your data and based on the user behavior, extracts numerous patterns. This helps you offer relevant services to users that share a common characteristic.</span></p>
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<hr><div>
+<div class="section-wrapper" id="pn">
+<div class="tg-container">
+<div class="tg-column-wrapper clearfix">
+<div class="tg-column-2">
+<h3><b>Push Notification</b></h3>
+<p><span style="font-weight: 400;">Most of the mobile phone users keep their devices handy throughout the day. This means you can reach your users wherever they are instead of having to wait for them to access your app. With push notifications, you can follow your users wherever they go.</span></p>
+<p><span style="font-weight: 400;">Push notifications offer numerous benefits in terms of engaging with the users and driving traffic to your app. &nbsp;rocQ enables you to send personalized messages to users about relevant content and events. It is an intelligent approach to bring users back to the app.</span></p>
+<h4><b>Benefits</b></h4>
+<ul><li style="font-weight: 400;"><span style="font-weight: 400;">Personalized messages delivered to home screen</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Track open rate of your push notifications</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Use deep linking tactics to increase conversion</span></li>
+</ul></div>
+<div class="tg-column-2">
+<p><img title="" class="attachment-full wp-post-image alignleft" src="home/images/push-notification.jpg" alt="feature"></p>
+</div>
+<p>&nbsp;</p>
+<div class="tg-column-1" style="display: none;">
+<h5><b>Example</b></h5>
+<p><span style="font-weight: 400;">Your users are eventually losing interest in your game. You target the user segment that hasn&rsquo;t been active for past 2 months and send a push notification. What next? </span></p>
+<p><span style="font-weight: 400;">rocQ determines the number of notifications sent, received and opened. The rate of notifications opened, directly affects your user activity.</span></p>
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<hr><div>
+<div class="section-wrapper" id="inapp">
+<div class="tg-container">
+<div class="tg-column-wrapper clearfix">
+<div class="tg-column-2">
+<h3><b>In-app Messaging</b></h3>
+<p><b></b><span style="font-weight: 400;">Good communication requires attention. If your user has your attention already, why not cash in on this opportunity? How much will that ease your engagement with them!</span></p>
+<p><span style="font-weight: 400;">You can directly communicate with your users individually, right inside your app with beautifully simple in-app messages. rocQ enables you to broadcast engaging notifications as soon as your users open your app. It is up to you to choose who receives your message by targeting segments of your users.</span></p>
+<h4><b>Benefits</b></h4>
+<ul><li style="font-weight: 400;"><span style="font-weight: 400;">Ad as an app experience</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Present filtered content to your user base</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Addresses the targeted audience at their point of need</span></li>
+</ul></div>
+<div class="tg-column-2">
+<p><img title="" class="attachment-full wp-post-image alignleft" src="home/images/in-app-messaging.jpg" alt="feature"></p>
+</div>
+<div class="tg-column-1" style="display: none;">
+<h5><b>Example</b></h5>
+<p><span style="font-weight: 400;">A section of your users haven&rsquo;t missed the last 3 Airline flash sales. How about narrowing down your focus on them &amp; increase the engagement and revenue?</span></p>
+<p><span style="font-weight: 400;">rocQ ensures to send a personalized in-app message to this group as soon as they open the app, informing them about the upcoming 2 day discount sale.</span></p>
+</div>
+</div>
+</div>
+ 
+</div>
+</div>
+<hr><div>
+<div class="section-wrapper" id="uninstall">
+<div class="tg-container">
+<div class="tg-column-wrapper clearfix">
+<div class="tg-column-2">
+<h3><b>Uninstalls Tracking</b></h3>
+<p><span style="font-weight: 400;">Post installation, a number of users end up uninstalling your application. Although the various app stores do provide you with that number, what about the root cause?</span></p>
+<p><span style="font-weight: 400;">The reason can be anything; from fraudulent installations to an ill-timed push notification. rocQ derives specifics of your (ex) users &amp; transforms them into meaningful patterns, even after they&rsquo;ve uninstalled the app. This way you can optimize your app and reduce the chances of uninstallations in the future.</span></p>
+<h4><b>Benefits</b></h4>
+<ul><li style="font-weight: 400;"><span style="font-weight: 400;">Reason out app uninstalls &amp; determine wider trends</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Take action on insights, not assumptions</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Discover worst performing campaigns</span></li>
+</ul></div>
+<div class="tg-column-2">
+<p><img title="" class="attachment-full wp-post-image alignleft" src="home/images/uninstall.jpg" alt="feature"></p>
+</div>
+<p>&nbsp;</p>
+<div class="tg-column-1" style="display:none;">
+<h6><b>Example</b></h6>
+<p><span style="font-weight: 400;">You spend Rs. 40 per app install. But, do you know if the amount you spent on 1000 installs is actually getting you genuine users?</span></p>
+<p><span style="font-weight: 400;">Out of 1000 installs, if 50% users uninstall your app, you&rsquo;ve in fact spent Rs. 80 per install. rocQ tracks these numbers for you and enables you to invest your marketing budget wisely.</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+   </div>
+
+   </article></div><!-- #content -->
+				</div><!-- #primary -->
+
+							</div>
+		</main></div>
+
+	
+   
+   <footer id="colophon" class="footer-with-widget footer-layout-one"><div id="top-footer">
+	<div class="tg-container">
+		<div class="tg-column-wrapper">
+
+                  	<div class="tg-column-3">
+		         <aside id="text-2" class="widget widget_text clearfix"><div class="textwidget"><img src="home/images/logo-rocq.png" alt="rocq"><br>
+rocQ is an mobile app analytics and user engagement platform that provides real-time actionable insights to businesses. We help app owners use data to manage user interaction with their apps and build a relationship with their user base. </div>
+		</aside></div>
+		   
+		            	<div class="tg-column-3">
+ 
+		         <aside id="footer-nav" class="widget widget_text clearfix">
+                 <h4 class="widget-title"><span>Navigation</span></h4>			<div class="textwidget">
+<ul>
+<li><a href="/#features">FEATURES</a></li>
+<li><a href="https://docs.rocq.io/">DOCUMENTATION</a></li>
+
+<li><a href="/#about" >ABOUT</a></li>
+
+<li><a href="pricing.html">PRICING</a></li>
+<li><a href="/#blog">BLOG</a></li>
+
+
+</ul></div>
+        </aside></div>
+		   
+		            	<div class="tg-column-3">
+		         <aside id="text-4" class="widget widget_text clearfix"><h4 class="widget-title"><span>Contact</span></h4>			<div class="textwidget">C-802,803 8th Floor,
+Nirvana Courtyard,
+Nirvana Country Sector-50,
+Gurgaon-122001.
+
+<br><br>
+
+
+<a href="mailto:contact@rocq.io">contact@rocq.io</a></div>
+		</aside></div>
+		   
+      </div> <!-- .tg-column-wrapper -->
+   </div> <!-- .tg-container -->
+</div> <!-- .top-footer -->
+      <div id="bottom-footer">
+         <div class="tg-container" style="color:#989898; font-size:10px;">
+<div class="copyright"><span class="copyright-text">rocq &copy; 2015</span></div>
+
+           
+           <div class="footer-nav">
+               <div id="footer-layout-one" class="menu-social-menu-container">
+<ul id="menu-social-menu" class="menu"><li id="menu-item-169" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-169"><a href="https://www.facebook.com/rocq.io"><i class="fa fa-facebook-square"></i></a></li>
+<li id="menu-item-170" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-170"><a href="https://twitter.com/rocq_io"><i class="fa fa-twitter-square"></i></a></li>
+
+<li id="menu-item-172" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-172"><a href="https://www.linkedin.com/company/rocq"><i class="fa fa-linkedin-square"></i></a></li>
+
+</ul></div>            </div>
+
+
+   
+            <div class="footer-nav">
+                           </div>
+         </div>
+      </div>
+   </footer> 
+
+	</div> <!-- #Page -->
+<div class="fixed-aside-nav">&nbsp;</div>
+ 
+ 
+<script type='text/javascript' src='/home/js/himalayas.js'></script>
+
+ 
+        <script src="/home/js/jquery.singlePageNav.min.js"></script>
+        <script>
+
+            // Prevent console.log from generating errors in IE for the purposes of the demo
+            if ( ! window.console ) console = { log: function(){} };
+  
+            // The actual plugin
+            $('.feature-nav').singlePageNav({
+                offset: $('.feature-nav').outerHeight(),
+                filter: ':not(.external)',
+                updateHash: true,
+                beforeStart: function() {
+                    console.log('begin scrolling');
+                },
+                onComplete: function() {
+                    console.log('done scrolling');
+                }
+            });
+        </script>
+</body>
+</html>
+
+<!-- Google Code for Remarketing Tag -->
+<!--- -----------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on 
+
+pages related to sensitive categories. See more information and instructions on how to setup the 
+
+tag on: http://google.com/ads/remarketingsetup
+------------------------------------------------- -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 947941576;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" 
+
+src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/947941576/?
+
+value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76647206-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

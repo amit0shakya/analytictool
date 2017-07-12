@@ -1,0 +1,1589 @@
+<div ng-controller="PushSendCtrl">
+<div class="pageheader main-nav navbar-fixed-top">
+<div class="media">
+<div class="pageicon pull-left">
+<i class="fa fa-cog"></i>
+</div>
+<div class="media-body">
+<ul class="breadcrumb">
+<li>Push Notification</li>
+<li>Send Push</li>
+</ul>
+<h4>{{PushType || 'Send Push'}}</h4>
+</div>
+</div>
+<div class="pull-right fifth-nav">
+<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+<span class="glyphicon glyphicon-calendar calendar-icon"></span>
+</div>
+</div>
+
+<div class="body-content" ng-hide="push.selected_campaign">
+<div ng-hide="segmentation.show_segmentation">
+<div class="panel " ng-show='ShowPushType'>
+<div class="panel-body no-padding">
+<div class="panel-content">
+<div class="icon-block-container">
+<h2 class="text-center">
+Choose <strong>Message</strong> Type you want to create
+</h2>
+<div class="row" ng-click="init();">
+<div class="col-lg-3"><div class="icon-block" ng-click="ShowPushType=false;push_notification=true ; in_app_message=false; PushType='Push Notification'" ><a href="#"><i class="fa fa-bell-o"></i> <span>Push <br />
+Notification</span></a></div></div>
+<div class="col-lg-3" ng-show="app.ostype=='Android'"><div class="icon-block" ng-click="ShowPushType=false;push_notification=true ; in_app_message=false;PushType='Image Notification'"><a href="#"><i class="fa fa-envelope-o"></i> <span>Image <br />
+Notification</span></a></div></div>
+<div class="col-lg-3" ng-show="app.ostype=='Android'||app.ostype=='iOS'"><div class="icon-block" ng-click="ShowPushType=false;in_app_message=true ; push_notification=false;PushType='In App Message'"><a href="#"><i class="fa fa-comment-o"></i> <span>In App <br />
+Message</span></a></div>
+</div>
+<div class="col-lg-3" ng-show="app.ostype=='Android'app.ostype=='iOS'"><div class="icon-block" ng-click="ShowPushType=false;in_app_message=true ; push_notification=false;PushType='In App Campaign'"><a href="#"><i class="fa fa-comments-o"></i> <span>In App <br />
+Campaign</span></a></div></div>
+
+
+</div>
+
+ </div>
+</div>
+ </div>
+</div>
+
+<div class="page-subheader tp0 pb0" ng-hide="ShowPushType">
+<div class="btn-group pull-right fifth-nav ">
+<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+{{PushType}} <i class="fa fa-angle-down"></i>
+</button>
+<ul class="dropdown-menu rq-dropdown-menu" role="menu" ng-click="init();">
+<li><a href="" ng-click="push_notification=true ; in_app_message=false; PushType='Push Notification';resetToFirstStep()">Push Notification</a></li>
+<li ng-show="app.ostype=='Android'"><a href="" ng-click="push_notification=true ; in_app_message=false;PushType='Image Notification';resetToFirstStep()">Image Notification</a></li>
+<li ng-show="app.ostype=='Android'||app.ostype=='iOS'"><a href="" ng-click="in_app_message=true ; push_notification=false;PushType='In App Message';resetToFirstStep()">In App Message</a></li>
+<li ng-show="app.ostype=='Android'||app.ostype=='iOS'"><a href="" ng-click="in_app_message=true ; push_notification=false;PushType='In App Campaign';resetToFirstStep()">In App Campaign</a></li>
+
+</ul>
+</div>
+<h2>
+Start to fill form below
+</h2>
+
+</div>
+
+<div ng-show="push_notification" class="panel">
+<div class=" row row-nomargin flex-row">
+<div class="col-lg-7 ">	
+<div class="form form-col">
+<form action="" method="get" class="normal-form"  ng-show="addcampaign_success == 0">
+<fieldset >
+
+<div class="form-body ">    
+    <div class="tab-content">
+    
+  <div ng-switch on="selection">
+
+
+
+    <!-- Second Step -->
+    <div ng-switch-when="Step 1: Push Message">
+     <div class="form-group ">
+       <div class="form-header  pl0">
+<h3>Campaign Name</h3>
+</div>
+        <div class="control-group">
+        <div class="controls">
+        <input type="text" id="campaignname" class="form-control " maxlength="50"  ng-model="campaigndata.campaignname" placeholder="Enter campaign name" />
+        <p class="note fsi text-right">Max 50 character</p>
+        </div>
+        </div>
+        </div>
+         <div class="legend"><legend><span>Notification</span></legend></div>
+    <div class="form-group ">
+    <div class="form-header  pl0">
+<h3>Notification Title</h3>
+</div>
+         <div class="control-group" >
+            <div class="controls">
+                <input type="text" id="title" class="form-control" ng-model="campaigndata.title" placeholder="Enter Title" maxlength="50"/>
+                 <p class="note fsi text-right">Max 50 character</p>
+            </div>
+          </div>
+          </div>
+          
+          
+         
+          
+           <div class="form-group ">
+  <div class="form-header  pl0">
+<h3>Notification Message</h3>
+</div>
+          <div class="control-group">
+            <div class="controls">
+                <input type="text" id="message" class="form-control" ng-model="campaigndata.message" placeholder="Enter Message" maxlength="200"/>
+                 <p class="note fsi text-right">Max 200 character</p>
+            </div>
+          </div>
+ </div>
+          
+          <div class="form-group ">
+          
+
+<div class="checkbox form-radio  "  style="margin-top:0;">
+
+<label >
+<input type="checkbox"  ng-checked="addparam_ischecked"  ng-click="eventlisterners()" class="checkbox-style"  >
+ Aditional Values
+</label>
+</div>
+
+<div ng-show="addparam_ischecked" class="field-group" ng-repeat="i in keyValue">
+<div class="col-lg-5 no-padding">
+<input type="text" class="form-control" name="{{'key0'+$index}}" maxlength="100" ng-model="i.key" placeholder="Enter Key" />
+<span  class="alert-rtext" style=" display:none" id="{{'keyerr0'+$index}}">Please enter key</span> <br/>
+</div>
+<div class="col-lg-5 no-padding">
+<input type="text" class="form-control lm10"  name="{{'key1'+$index}}" maxlength="100" ng-model="i.val" placeholder="Enter Value" />
+<span class="alert-rtext lm10" style=" display:none" id="{{'keyerr1'+$index}}">Please enter value</span>  <br/>
+</div>
+<div class="col-lg-2 no-padding text-center"><a ng-hide="$last" ng-click="deletekeyvalue($index)" class="link-black" href=""><i class="glyphicon glyphicon-remove tm10"></i></a></div>
+</div>
+
+</div>
+          
+          <div class="form-group">
+          <div class="checkbox form-radio inputbox" ng-show="app.ostype=='Android' && PushType!='Push Notification'">
+   <label> <input ng-checked="addimage_ischecked" ng-click="addimage();selectImage()"type="checkbox" class="checkbox-style"> &nbsp;
+  
+       Add Image
+    </label>
+  </div>
+
+
+  
+
+  <div ng-show="addimage_ischecked" class=" row gallery-file">
+ 
+
+   <div class="col-lg-12 no-padding">
+<div class="col-lg-6">
+<div class="radio radio-style  ">
+<label><input type="radio" ng-model="prefs.imageurltype" ng-click="campaigndata.ImageUrl=''" value="gallery" class="ng-pristine ng-valid">Upload Image</label>
+</div>
+</div>
+<div class="col-lg-6">
+<div class="radio radio-style ">
+<label><input type="radio" ng-model="prefs.imageurltype" value="url" class="ng-pristine ng-valid">From External URL</label>
+</div>
+</div>
+</div>
+<div ng-show="prefs.imageurltype=='gallery'" class="tm10 col-lg-12">
+<button class="btn  btn-blue previous  mr10 no-radius" ng-click="selectImage()" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    GALLERY
+</button>
+
+
+
+<div class="fileUpload btn btn-default no-radius mr10" style="margin-top:0; ">
+    <span>UPLOAD</span>
+    <input type='file' id='_file0' accept=".jpg,.jpeg,.png" class=" upload btn-dblue">
+    <!-- <input id="uploadfile" type="file" class="upload btn-dblue" /> -->
+</div>
+<span class="note">(Maximum file size is 100 KB) </span>
+</div>
+
+ 
+<!-- <button  type='button'  class="btn  btn-default    no-radius" >PASTE URL</button> -->
+ 
+
+
+
+<img style="display:none" id="uploading_image0" src="images/squares.gif" width="32px" height="32px"/>
+
+<div class="controls col-lg-12" ng-show="prefs.imageurltype=='url'">
+                <input  id="imageurl" class="form-control" maxlength="500" ng-model="campaigndata.ImageUrl" placeholder="Enter URL" />
+                 <!-- <p class="note fsi text-right">Max 120 character</p> -->
+            </div>
+
+<!-- 
+<form >
+  Add your homepage:
+  <input type="url" name="homepage">
+  <input type="submit">
+</form>
+  -->
+</div>
+
+
+
+ 
+
+
+  <div class="alert alert-danger alert-dismissible" role="alert" id="upload_error0" style="display:none; margin-bottom:0; margin-top:8px; ">
+   <button type="button" class="close" onclick="$('#upload_error0').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="error-message0"> An error occured!</span>
+</div>
+
+<div class="alert alert-success alert-dismissible" role="alert" id="upload_success0" style="display:none; margin-bottom:0; margin-top:8px;">
+<button type="button" class="close" onclick="$('#upload_success0').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="success-message0"> Success!</span>
+</div>
+
+<div ng-show="addimage_ischecked && prefs.imageurltype=='gallery'"  class="collapse tm10 text-center" id="collapseExample" >
+  <div class="upload-img-holder" style="height:310px;overflow:auto">
+  <div class="uploaded-img btn-group" >
+  <div ng-hide="haveimages()" class="default-message"> <p>There are no Images</p></div>
+ 
+  <div class="col-lg-4 imageSelector img-holder" ng-repeat="image in imageArray">
+  <img ng-src="{{image}}" class="img"/>
+  </div>
+ 
+   </div>
+   
+  </div>
+</div>
+ 
+</div>
+
+  <div class="form-group ">
+  <div class="form-header  pl0">
+<h3>Notifictaion Action</h3>
+</div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style mr5">
+  <label >
+  <input type="radio"  ng-model="campaigndata.landing" value="Application" ng-click = "campaigndata.url = null"  >
+
+     Application 
+  </label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding" >
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.landing" value="Other Page" ng-click="defaultText = 'Enter Deep-Link URL'">
+    Other Page
+  </label>
+</div>
+</div>
+<div class="col-lg-6 no-padding col-md-6 col-sm-6 no-padding">
+<div class="radio radio-style mr5">
+  <label>
+    <input type="radio" ng-model="campaigndata.landing" value="Web Page" ng-click="defaultText = 'Enter Web URL'">
+    Web Page
+  </label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.landing" value="APP Store" ng-click="defaultText = 'Enter App Store URL'">
+    APP Store
+  </label>
+</div>
+</div>
+
+<div class="col-lg-12 no-padding col-sm-12">
+<textarea ng-hide ="campaigndata.landing == 'Application' " id="urlbox" class="form-control" rows="3" cols="6" ng-model="campaigndata.url" maxlength="500" placeholder="{{defaultText}}"></textarea>
+</div>
+    </div>
+   
+   <div class="form-group ">
+<div class="form-header  pl0">
+<h3>Do you want to show multiple notifications?</h3>
+</div>
+        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style mr5">
+  <label>
+    <input type="radio"  ng-model="campaigndata.rq_id" value="single" >
+    Single 
+  </label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding" >
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.rq_id" value="multiple">
+    Multiple
+  </label>
+</div>
+</div>
+
+
+   </div>
+
+
+   <div class="form-group ">
+<div class="form-header  pl0">
+<h3>Image Url for Notifictaion Icon</h3>
+</div>
+        <div class="col-lg-12 no-padding col-sm-12">
+<input  class="form-control" ng-model="campaigndata.prod_img" maxlength="500" placeholder="Enter URL"/>
+</div>
+
+
+   </div>
+
+
+   
+      </div>
+
+    
+
+   
+    
+
+
+<!-- Second Step -->
+ <div  ng-switch-when="Step 2: Group Selection">
+
+<div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+  <div class="form-header  pl0">
+<h3>TARGET USERS</h3>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+  <div class="radio radio-style  ">
+<label><input type="radio" ng-click="$parent.targetkey='all'" ng-model="prefs.Target" value="All">All</label>
+</div>
+</div>
+
+<!--  <div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style ">
+<label><input type="radio" ng-click="getlocations()" ng-model="prefs.Target" value="Location">Location</label>
+</div> 
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style ">
+<label><input type="radio" ng-click="getevents()" ng-model="prefs.Target" value="Event">Event</label>
+</div>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style ">
+<label><input type="radio" ng-click="getsessions()" ng-model="prefs.Target" value="Session">Session</label>
+</div>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style " >
+<label><input type="radio" ng-click="getsegments()" ng-model="prefs.Target" value="Custom">Custom Segment</label>
+</div>
+</div> -->
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding" ng-if="!segmentation.show_segmentation" ng-init="getdynamicsegment()">
+<div class="radio radio-style " >
+<label><input type="radio" ng-click="getdynamicsegment()" ng-model="prefs.Target" value="Dynamic">Dynamic Segment</label>
+</div>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+&nbsp;
+</div>
+<div ng-hide="prefs.Target=='All'" class="col-lg-10 col-sm-10 col-md-10 no-padding">
+<div class="col-lg-12 no-padding">
+  <select ng-options="item.y as item.x group by item.z for item in TargetKeyList" class="form-control-list " ng-model="$parent.targetkey">
+  </select>
+</div>
+</div>
+<div ng-show="prefs.Target=='Dynamic'" class="col-lg-2 col-sm-2 col-md-2 no-padding">
+<div class="rsfs-labels ml10">
+ <button type="button" class="add" ng-click="segmentation.show_segmentation=true"><i class="fa fa-plus"></i></button>
+ </div>
+</div>
+
+
+
+
+</div>
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+
+<div class="form-header  pl0 tm30">
+<h3>SCHEDULE</h3>
+</div>
+
+ <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style">
+  <label>
+    <input type="radio"  ng-model="prefs.sheduleTime" value="Now" >Launch Now</label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style">
+<label>
+    <input type="radio"  ng-model="prefs.sheduleTime" value="Later" ng-init="initializeDatePicker()">Schedule Later</label>
+</div>
+</div>
+<div >
+ <div class="form-group " ng-show="prefs.sheduleTime=='Later'">
+
+<div  class="field-group" >
+<div class="col-lg-12 no-padding">
+                <div style="overflow:hidden;">
+    <div class="form-group tm20">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="datepicker" data-DateTimePicker></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+</div>
+</div>
+ 
+ 
+ <!--  <select class="form-control-list" ng-model="campaigndata.segment" ng-options="segment as 
+  segment.segmentname for segment in segments" style="display:none;">
+  </select> -->
+
+ 
+  <div ng-hide="app.accesstype=='Viewer'">
+   <button ng-show="push_in_progress=='false'" class="next btn-green btn-lg  tm20" ng-click= "launchcampaign();push_in_progress='true'" ng-disabled="flag">Submit</button> 
+   <div ng-hide="push_in_progress=='false'">
+   PLEASE WAIT...
+   <img  id="uploading_image" src="images/squares.gif" width="32px" height="32px" class="mmt5" />
+   </div>
+   </div>
+    <div ng-show="app.accesstype=='Viewer'">
+      <button class="next btn-grey btn-lg tm20" ng-disabled="true">Submit</button> 
+  <p class="rtext"> Your Account doesn't have enough permissions to launch the push</p>
+</div>
+</div>
+  </div>
+    </div>
+    
+ 
+    </div>
+    </div>
+
+  <div class="clearfix"></div>
+  
+  <ul class="pager row">
+    <li class="col-lg-5 col-md-5 col-sm-5 pl0" ng-style="{visibility: hasPreviousStep() ? 'visible' : 'hidden'}" >
+      <a href="javascript:void(0);" ng-click="decrementStep()" class="previous btn-black previous ">Previous </a>
+    </li>
+    <li class="col-lg-2 col-md-2 col-sm-2"></li>
+    <li class="visible col-lg-5 col-md-5 col-sm-5 pr0" ng-show="hasNextStep()">
+      <a href="javascript:void(0);" ng-click="incrementStep()" class="next btn-blue ">Next </a>
+    </li>
+  </ul>
+  <div class="clearfix"></div>  
+   </fieldset>
+</form>
+
+ <div ng-show="addcampaign_success == 1" class="success-message">
+   <h2>Success</h2>
+    <button class="next btn-green tm10" ng-click= "init()">Create new Push</button> 
+    <p>You have successfully created a push launch</p>
+  </div>
+   <div ng-show="addcampaign_success == 2" class="danger-message">
+    <h2 class="sendpush_error">Similar push already exists</h2>
+     <button class="next btn-green tm10" ng-click= "init()">Create new Push</button> 
+     <p>Hence Push not launched</p>
+  </div>
+
+</div>
+</div>
+
+<div class=" col-lg-5 ">
+<div ng-class="{'Android':'aside-block form-col android-phone android-notification','iOS':'aside-block form-col ios-phone ios-notification','Windows':'aside-block form-col android-phone android-notification '}[app.ostype]">
+<p class="preview">Preview</p>
+
+<div class="media preview-msg">
+
+<div class="media-left notification-thumb">
+   <span class="glyphicon glyphicon-picture" aria-hidden="true" ng-hide="campaigndata.prod_img"></span>
+   <img  ng-src="{{campaigndata.prod_img}}" ng-class="{true:'default-thumb'}[true]" ng-show="campaigndata.prod_img" width="30px" />
+  </div>
+  
+  
+  <div class="media-body">
+ 
+<div class="app-message-content">
+
+<!-- <div  ng-init='editheading=false; editline1=false' >
+<div ng-show="app.ostype=='Android'">
+<h2 >{{app.application}}</h2>
+</div>
+</div> -->
+<div >
+<!-- <input ng-show="editheading" maxlength="50" ng-blur='editheading=false' ng-model='campaigndata.title' name="" type="text" placeholder="Enter Title" class="form-field-device-heading" focus-on-show /> -->
+<h2 >{{campaigndata.title || app.application}} </h2>
+</div>
+<!-- <input ng-show="editline1" maxlength="200" ng-blur='editline1=false' ng-model='campaigndata.message' maxlength="200" name="" type="text" placeholder="Enter Message" class="form-field-device-subheading" focus-on-show /> -->
+<p >{{campaigndata.message || 'Enter Message'}} </p>
+</div>
+ </div>
+ <div ng-show="PushType=='Image Notification'" class="msg-thumb" >
+<!-- <div ng-click="editimageurl=true" ng-hide="editimageurl"> -->
+<!-- <span class="upload-img-text" ng-hide="campaigndata.ImageUrl">Upload Image</span> -->
+<img  ng-src="{{campaigndata.ImageUrl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[campaigndata.ImageUrl=='' || campaigndata.ImageUrl==undefined ]" />
+
+<!-- </div> -->
+<!-- <input ng-show="editimageurl" maxlength="500" ng-blur='editimageurl=false' ng-model="campaigndata.ImageUrl" type="text" class="img-upload" placeholder="Paste image url..." focus-on-show> -->
+</div>
+  </div>
+ 
+
+
+
+
+
+
+<!-- <div class="media preview-msg">
+<p class="msg-thumb"><img src="/images/icon-image.png" class="default-thumb" /></p>
+  <div class="media-body">
+ <p class="pull-right"  id="buttons"><a href="javascript:void(0);" id="activetab"  ><span class="fa fa-edit"></span></a></p> 
+ <div ng-if = "campaigndata.title == null"> 
+  <h2>{{app.application}}</h2>
+  </div>
+  <div ng-if = "campaigndata.title != null"> 
+  <h2>{{campaigndata.title}}&nbsp;</h2>
+  </div>
+ 
+ 
+ <div ng-if = "campaigndata.message != null"> 
+      <p>{{campaigndata.message}}</p>
+  </div>
+  <div ng-if = "campaigndata.message == null"> 
+      <p>Campaign Message</p>
+  </div>
+ </div>
+
+</div> -->
+<!-- <div id="image-preview"></div> -->
+
+
+</div>
+
+
+<div class="preview-value">
+<div class="col-lg-4">
+ <p>Campaign</p>
+<h2  ng-if = "campaigndata.campaignname == null">Demo</h2>
+<h2 ng-if = "campaigndata.campaignname != null">{{campaigndata.campaignname}}</h2>
+ 
+</div>
+
+  
+<div class="col-lg-4">
+  <p>Landing</p> 
+  <h2>{{campaigndata.landing}} 
+  <div ng-if = "campaigndata.landing != 'Application'"> 
+      {{campaigndata.url}} 
+  </div>
+  </h2>
+</div>
+
+<div class="col-lg-4" >
+  <p>User</p>
+   <h2>{{targetkey}}</h2>
+ </div>
+</div>
+
+
+</div>
+
+
+
+
+ 
+</div>
+</div>
+
+<div ng-show="in_app_message" class="panel ">
+<div class="row row-nomargin flex-row">
+
+ 
+<div class="col-lg-7">
+<div class="form ">
+<form action="" method="get" class="normal-form" ng-show="addcampaign_success == 0">
+<fieldset >
+
+<div class="form-body">
+    <div class="tab-content">
+    
+  
+
+  <div id="example-basic">
+   <div ng-switch on="iamselection+''">
+    <!-- First step -->
+  <!--  <section ng-switch-when="1">
+      <div>
+   
+        <div class="form-group tm180">
+        <div class="control-group">
+        <div class="controls">
+        
+        <input type="text" id="campaignname" class="form-control " maxlength="50"  ng-model="campaigndata.campaignname" placeholder="Enter campaign name" />
+        <p class="note fsi text-right">Max 50 character</p>
+        </div>
+        </div>
+        </div>
+       
+      </div>
+
+   </section> -->
+
+
+   <!-- First step -->
+<section ng-switch-when="1">
+
+ <div class="form-group " ng-hide="PushType=='In App Campaign'">
+     <div class="form-header pl0 ">
+<h3>Campaign Name</h3>
+</div>
+                <input type="text"  maxlength="50" id="iamcampaignname" ng-model="campaigndata.campaignname" class="form-control form-control-bborder"  placeholder="Enter Campaign name" />
+                <p class="note fsi text-right">Max 50 character</p>
+          </div>
+    <div class="legend"><legend><span>Notification</span></legend></div>
+    <div class="form-header pl0 ">
+<h3>Notification Message</h3>
+</div>
+    <div class="form-group">
+         <div class="control-group" >
+            <div class="controls">
+                <input type="text" id="iamtitle" maxlength="50" class="form-control" ng-model="campaigndata.title" placeholder="Enter Title" />
+                 <p class="note fsi text-right">Max 50 character</p>
+            </div>
+          </div>
+          </div>
+           
+           <div class="form-group ">
+  
+          <div class="control-group">
+            <div class="controls"> 
+                <input type="text" id="iammessage" class="form-control" ng-model="campaigndata.message" placeholder="Enter Message" maxlength="200"/>
+                 <p class="note fsi text-right">Max 200 character</p>
+            </div>
+          </div>
+ </div>
+ 
+ <!-- <div class="form-group ">
+ <div class= "edit-view row">
+<div class="msg-thumb ">
+<div ng-click="editimageurl=true" ng-hide="editimageurl" class="">
+<span class="upload-img-text" ng-hide="campaigndata.ImageUrl">Upload Image</span>
+<img ng-src="{{campaigndata.ImageUrl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[campaigndata.ImageUrl=='' || campaigndata.ImageUrl==undefined ]" src="/images/icon-image.png" class="default-thumb">
+</div>
+<input ng-show="editimageurl" ng-blur="editimageurl=false" maxlength="500" ng-model="campaigndata.ImageUrl" type="text" class="img-upload ng-pristine ng-valid ng-hide  mtb" placeholder="Paste image url..." focus-on-show="">
+</div>
+</div>
+
+ 
+ </div> -->
+ 
+ 
+          
+          <div class="form-group tm10">
+
+<div class="checkbox form-radio  "  style="margin-top:0;">
+<label><input type="checkbox"  ng-checked="addparam_ischecked"  ng-click="eventlisterners()" class="checkbox-style">
+&nbsp; 
+ Aditional Values
+</label>
+
+</div>
+
+<div ng-show="addparam_ischecked" class="field-group" ng-repeat="i in keyValue">
+<div class="col-lg-5 no-padding">
+<input type="text" class="form-control" name="{{'key0'+$index}}" maxlength="100" ng-model="i.key" placeholder="Enter Key" />
+<span  class="alert-rtext" style=" display:none" id="{{'keyerr0'+$index}}">Please enter key</span> <br/>
+</div>
+<div class="col-lg-5 no-padding">
+<input type="text" class="form-control lm10"  name="{{'key1'+$index}}" maxlength="100" ng-model="i.val" placeholder="Enter Value" />
+<span class="alert-rtext lm10" style=" display:none" id="{{'keyerr1'+$index}}">Please enter value</span>  <br/>
+</div>
+<div class="col-lg-2 text-center no-padding"><a ng-hide="$last" ng-click="deletekeyvalue($index)" class="link-black" href=""><i class="glyphicon glyphicon-remove tm10"></i></a></div>
+</div>
+
+</div>
+          
+          <div class="form-group">
+          <div class="checkbox form-radio inputbox" ng-show="app.ostype=='Android' && PushType!='Push Notification'">
+   <label> <input ng-checked="addimage_ischecked" ng-click="addimage();selectImage()"type="checkbox" class="checkbox-style"> &nbsp;
+  
+       Add Image
+    </label>
+  </div>
+
+
+  
+
+  <div ng-show="addimage_ischecked" class=" row gallery-file">
+ 
+
+   <div class="col-lg-12 no-padding">
+<div class="col-lg-6">
+<div class="radio radio-style  ">
+<label><input type="radio" ng-model="prefs.imageurltype" ng-click="campaigndata.ImageUrl=''" value="gallery" class="ng-pristine ng-valid" name="01M">Upload Image</label>
+</div>
+</div>
+<div class="col-lg-6">
+<div class="radio radio-style ">
+<label><input type="radio" ng-model="prefs.imageurltype" value="url" class="ng-pristine ng-valid" name="01M">From External URL</label>
+</div>
+</div>
+</div>
+<div ng-show="prefs.imageurltype=='gallery'" class="tm10 col-lg-12">
+<button class="btn  btn-blue previous  mr10 no-radius" ng-click="selectImage()" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+    GALLERY
+</button>
+
+
+
+<div class="fileUpload btn btn-default no-radius mr10" style="margin-top:0; ">
+    <span>UPLOAD</span>
+    <input type='file' id='_file1' accept=".jpg,.jpeg,.png" class=" upload btn-dblue">
+    <!-- <input id="uploadfile" type="file" class="upload btn-dblue" /> -->
+</div>
+<span class="note">(Maximum file size is 100 KB) </span>
+</div>
+
+ 
+<!-- <button  type='button'  class="btn  btn-default    no-radius" >PASTE URL</button> -->
+ 
+
+
+
+<img style="display:none" id="uploading_image1" src="images/squares.gif" width="32px" height="32px"/>
+
+<div class="controls col-lg-12" ng-show="prefs.imageurltype=='url'">
+                <input  id="imageurl" class="form-control" maxlength="500" ng-model="campaigndata.ImageUrl" placeholder="Enter URL" />
+                 <!-- <p class="note fsi text-right">Max 120 character</p> -->
+            </div>
+
+<!-- 
+<form >
+  Add your homepage:
+  <input type="url" name="homepage">
+  <input type="submit">
+</form>
+  -->
+</div>
+
+
+
+ 
+
+
+  <div class="alert alert-danger alert-dismissible" role="alert" id="upload_error1" style="display:none; margin-bottom:0; margin-top:8px; ">
+   <button type="button" class="close" onclick="$('#upload_error1').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="error-message1"> An error occured!</span>
+</div>
+
+<div class="alert alert-success alert-dismissible" role="alert" id="upload_success1" style="display:none; margin-bottom:0; margin-top:8px;">
+<button type="button" class="close" onclick="$('#upload_success1').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="success-message1"> Success!</span>
+</div>
+
+<div ng-show="addimage_ischecked && prefs.imageurltype=='gallery'"  class="collapse tm10 text-center" id="collapseExample2">
+  <div class="upload-img-holder" style="height:310px;overflow:auto">
+  <div class="uploaded-img btn-group" >
+  <div ng-hide="haveimages()" class="default-message"> <p>There are no Images</p></div>
+ 
+  <div class="col-lg-4 imageSelector img-holder" ng-repeat="image in imageArray">
+  <img ng-src="{{image}}" class="img"/>
+  </div>
+ 
+   </div>
+   
+  </div>
+</div>
+ 
+</div>
+
+
+<div class="form-group">
+<div class="form-header  pl0">
+<h3>Notifictaion Action</h3>
+</div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style mr5">
+  <label>
+    <input type="radio"  ng-model="campaigndata.landing" value="Application" ng-click = "campaigndata.url = null">
+    Application 
+  </label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding" >
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.landing" value="Other Page" ng-click="defaultText = 'Enter Deep-Link URL'">
+    Other Page
+  </label>
+</div>
+</div>
+<div class="col-lg-6 no-padding col-md-6 col-sm-6 no-padding">
+<div class="radio radio-style mr5">
+  <label>
+    <input type="radio" ng-model="campaigndata.landing" value="Web Page" ng-click="defaultText = 'Enter Web URL'">
+    Web Page
+  </label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.landing" value="APP Store" ng-click="defaultText = 'Enter App Store URL'">
+    APP Store
+  </label>
+</div>
+</div>
+
+<div class="col-lg-12 no-padding col-sm-12">
+<textarea ng-hide ="campaigndata.landing == 'Application' " id="urlbox" class="form-control" rows="3" cols="6" ng-model="campaigndata.url" maxlength="500" placeholder="{{defaultText}}"></textarea>
+</div>
+    </div>
+
+
+     <div class="form-group ">
+<div class="form-header  pl0">
+<h3>Do you want to show multiple notifications?</h3>
+</div>
+        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style mr5">
+  <label>
+    <input type="radio"  ng-model="campaigndata.rq_id" value="single" >
+    Single 
+  </label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding" >
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.rq_id" value="multiple">
+    Multiple
+  </label>
+</div>
+</div>
+
+
+   </div>
+
+
+
+   <div class="form-group ">
+<div class="form-header  pl0">
+<h3>Image Url for Notifictaion Icon</h3>
+</div>
+        <div class="col-lg-12 no-padding col-sm-12">
+<input  class="form-control" ng-model="campaigndata.prod_img" maxlength="500" placeholder="Enter URL"/>
+</div>
+
+
+   </div>
+   
+      </section>
+
+    <!--   <section>
+        
+          
+    <div ng-switch-when="2">
+  
+    </div>
+      </section> -->
+
+
+
+   <!-- Second step -->
+    <section ng-switch-when="2">
+        
+        <div class="form-group " ng-show="PushType=='In App Campaign'">
+     <div class="form-header pl0 ">
+<h3>Campaign Name</h3>
+</div>
+
+                <input type="text" id="iamcampaignname"  maxlength="50" ng-model="campaigndata.campaignname" class="form-control form-control-bborder"  placeholder="Enter Campaign name" />
+                <p class="note fsi text-right">Max 50 character</p>
+          </div>
+          
+          
+          <div class="legend"><legend><span>In App Message</span></legend></div>
+          
+          
+          <div class="form-group  ">
+  
+<div class="form-header pl0">
+<h3>Message Type</h3>
+</div>
+<div id='MessagetypeHolder' class="row">
+<div class="col-lg-3 " ng-click="$parent.showimage=true; $parent.showbutton=true; $parent.showtext=true; prefs.msg_type_selected=1 ">
+<p class="icon-appmsg icon-appmsg1" ng-class="{1:'selected'}[prefs.msg_type_selected]">&nbsp;</p>
+</div>
+<div class="col-lg-3" ng-click="$parent.showimage=true; $parent.showbutton=true; $parent.showtext=false; prefs.msg_type_selected=2" >
+<p class="icon-appmsg icon-appmsg2" ng-class="{2:'selected'}[prefs.msg_type_selected]">&nbsp;</p>
+</div>
+
+<div class="col-lg-3" ng-click="$parent.showimage=false; $parent.showbutton=true; $parent.showtext=true; prefs.msg_type_selected=3">
+<p class="icon-appmsg icon-appmsg3" ng-class="{3:'selected'}[prefs.msg_type_selected]">&nbsp;</p>
+</div>
+<div class="col-lg-3" ng-click="$parent.showimage=true; $parent.showbutton=false; $parent.showtext=false; prefs.msg_type_selected=4">
+<p class="icon-appmsg icon-appmsg4" ng-class="{4:'selected'}[prefs.msg_type_selected]">&nbsp;</p>
+</div>
+<!-- <div ng-init="eventlistener()">
+</div> -->
+</div>
+
+</div>
+
+<div class="form-group">
+<div class="edit-view border-thin">
+<!-- <div class="row">
+<div  class="msg-thumb bm20"  ng-show="showimage">
+<div ng-click="editimageurl=true" ng-hide="editimageurl">
+<span class="upload-img-text" ng-hide="iamimageurl">Upload Image</span>
+<img  ng-src="{{iamimageurl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[iamimageurl=='' || iamimageurl==undefined ]" />
+
+</div>
+<input ng-show="editimageurl" maxlength="500" ng-blur='editimageurl=false' ng-model="$parent.iamimageurl" type="text" class="img-upload mtb" placeholder="Paste image url..." focus-on-show>
+</div>
+</div> -->
+
+<div class="form-group" >
+          <!-- <div class="checkbox form-radio inputbox" ng-show="app.ostype=='Android' && PushType!='Push Notification'">
+   <label> <input ng-checked="addimage_ischecked" ng-click="addimage();selectImage()"type="checkbox" class="checkbox-style"> &nbsp;
+  
+       Add Image
+    </label>
+  </div> -->
+
+
+  
+
+  <div ng-show="showimage" class=" row gallery-file">
+ 
+
+   <div class="col-lg-12 no-padding">
+<div class="col-lg-6">
+<div class="radio radio-style  ">
+<label><input type="radio" ng-model="prefs.iamimageurltype" ng-click="$parent.iamimageurl=''" value="gallery" class="ng-pristine ng-valid" >Upload Image</label>
+</div>
+</div>
+<div class="col-lg-6">
+<div class="radio radio-style ">
+<label><input type="radio" ng-model="prefs.iamimageurltype" value="url" class="ng-pristine ng-valid">Add Image From External URL</label>
+</div>
+</div>
+</div>
+<div ng-show="prefs.iamimageurltype=='gallery'" class="tm10 col-lg-12">
+<button class="btn  btn-blue previous  mr10 no-radius" ng-click="iamselectImage()" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+    GALLERY
+</button>
+
+
+
+<div class="fileUpload btn btn-default no-radius mr10" style="margin-top:0; ">
+    <span>UPLOAD</span>
+    <input type='file' id='_file2' accept=".jpg,.jpeg,.png" ng-click="addimage()" class=" upload btn-dblue">
+    <!-- <input id="uploadfile" type="file" class="upload btn-dblue" /> -->
+</div>
+<span class="note">(Maximum file size is 100 KB) </span>
+</div>
+
+<img style="display:none" id="uploading_image2" src="images/squares.gif" width="32px" height="32px"/>
+
+<div class="controls col-lg-12" ng-show="prefs.iamimageurltype=='url'">
+                <input  id="iamimageurl" class="form-control" maxlength="500" ng-model="$parent.iamimageurl" placeholder="Enter URL" />
+                 <!-- <p class="note fsi text-right">Max 120 character</p> -->
+            </div>
+
+
+</div>
+
+  <div class="alert alert-danger alert-dismissible" role="alert" id="upload_error2" style="display:none; margin-bottom:0; margin-top:8px; ">
+   <button type="button" class="close" onclick="$('#upload_error2').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="error-message2"> An error occured!</span>
+</div>
+
+<div class="alert alert-success alert-dismissible" role="alert" id="upload_success2" style="display:none; margin-bottom:0; margin-top:8px;">
+<button type="button" class="close" onclick="$('#upload_success2').hide()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ <span id="success-message2"> Success!</span>
+</div>
+
+<div ng-show="prefs.iamimageurltype=='gallery'"  class="collapse tm10 text-center" id="collapseExample3">
+  <div class="upload-img-holder" id="iamimageGallery" style="height:310px;overflow:auto">
+  <div class="uploaded-img btn-group" >
+  <div ng-hide="haveimages()" class="default-message"> <p>There are no Images</p></div>
+ 
+  <div class="col-lg-4 imageSelector img-holder" ng-repeat="image in imageArray">
+  <img ng-src="{{image}}" class="img"/>
+  </div>
+ 
+   </div>
+   
+  </div>
+</div>
+ 
+</div>
+
+<div class="form-header pl0" ng-show="showtext">
+<h3>Title</h3>
+</div>
+<div class="control-group" ng-show="showtext">
+            <div class="controls">
+                <input type="text" id="iamheading" class="form-control" ng-model="$parent.heading" placeholder="Enter Title" maxlength="50"/>
+                 <p class="note fsi text-right">Max 50 character</p>
+            </div>
+          </div>
+<div class="form-header pl0" ng-show="showtext">
+<h3>Message</h3>
+</div>
+ <div class="control-group" ng-show="showtext">
+            <div class="controls">
+                <input type="text" id="iamline1" class="form-control" ng-model="$parent.line1" placeholder="Enter Message" maxlength="200"/>
+                 <p class="note fsi text-right">Max 200 character</p>
+            </div>
+          </div>
+<div class="form-header pl0" ng-show="showbutton">
+<h3>Button Text</h3>
+</div>
+<div class="control-group" ng-show="showbutton">
+          <div class="controls">
+              <input type="text" id="iambuttontext" class="form-control" ng-model="$parent.buttontext" placeholder="Enter Button Text" maxlength="20"/>
+               <p class="note fsi text-right">Max 20 character</p>
+          </div>
+        </div>
+</div>
+</div>
+
+
+
+<div class="form-group">
+
+<div class="form-header  pl0" ng-show="showbutton">
+<h3>Button Action</h3>
+</div>
+
+<div class="col-lg-12 no-padding" ng-show="showbutton">
+<div class="col-lg-6 pl0">
+<div class="radio radio-style  ">
+<label><input type="radio" ng-model="prefs.buttonaction" value="rq_cpy" class="ng-pristine ng-valid" name="01M">Copy To Clipboard</label>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="radio radio-style ">
+<label><input type="radio" ng-model="prefs.buttonaction" value="rq_open" class="ng-pristine ng-valid" name="01M">Open Page</label>
+</div>
+</div>
+<div class="col-lg-2">
+<div class="radio radio-style ">
+<label><input type="radio" ng-model="prefs.buttonaction" value="rq_close" class="ng-pristine ng-valid" name="01M">Close</label>
+</div>
+</div>
+</div>
+
+ <div class="form-group " ng-show="prefs.buttonaction=='rq_open' && showbutton" >
+        <div class="form-sub-option">
+
+<div class="col-lg-4 pl0" >
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.iamlanding" value="Other Page" ng-click="defaultText = 'Enter Deep-Link URL'">
+    Other Page
+  </label>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="radio radio-style mr5">
+  <label>
+    <input type="radio" ng-model="campaigndata.iamlanding" value="Web Page" ng-click="defaultText = 'Enter Web URL'">
+    Web Page
+  </label>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="radio">
+  <label>
+    <input type="radio" ng-model="campaigndata.iamlanding" value="APP Store" ng-click="defaultText = 'Enter App Store URL'">
+    APP Store
+  </label>
+</div>
+</div>
+
+
+<div class="col-lg-12 no-padding col-sm-12">
+<textarea ng-hide ="campaigndata.iamlanding == 'Application' " id="urlbox" class="form-control" rows="3" cols="6" ng-model="$parent.iamurl" placeholder="{{defaultText}}"></textarea>
+</div>
+    </div>
+
+</div>
+ 
+<div class="form-header  pl0 tm65">
+<h3>Message Close</h3>
+</div>
+<div class="col-lg-12 no-padding">
+<div class="col-lg-6">
+<div class="radio radio-style ">
+<label><input type="radio" ng-model="prefs.autoclose" value="no">Manual Close</label>
+</div>
+</div>
+ 
+<div class="col-lg-6">
+<div class="radio radio-style  ">
+<label><input type="radio" ng-model="prefs.autoclose" value="yes" >Auto Close in 10 sec</label>
+</div>
+</div>
+</div>
+<div class="form-header  pl0 tm65">
+<h3>Expires</h3>
+</div>
+<div class="col-lg-12 no-padding">
+<div class="col-lg-6 pl0">
+<div class="radio radio-style ">
+<label><input type="radio" ng-model="prefs.expire" value="no">Never</label>
+</div>
+</div>
+ 
+<div class="col-lg-6">
+<div class="radio radio-style  ">
+<label><input type="radio" ng-model="prefs.expire" value="yes" >Custom Date</label>
+</div>
+</div>
+</div>
+ <div class="col-lg-12"   ng-show="prefs.expire=='yes'">
+    <div class="row" ng-init="initializeDatePicker2()">
+        <div class='col-sm-8'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 no-padding tm30" ng-show="PushType=='In App Campaign'">
+  <div class="form-header pl0">
+<h3>Enter Screen Name on which Message will appear</h3>
+</div>
+<div class="col-lg-12 no-padding">
+
+<div class="form-group">
+        <div class="control-group">
+        <div class="controls">
+        
+        <input type="text" class="form-control "  ng-model="$parent.activityname" placeholder="eg: com.example.screenname" />
+        </div>
+        </div>
+        </div>
+
+
+<!-- <div class="col-lg-12 no-padding">
+<select name="" class="form-control form-control-bborder">
+<option value="1">Select Page Name</option>
+</select> 
+ 
+</div> -->
+
+<div class="form-header  pl0">
+<h3>Display Message After Time Delay Of</h3>
+</div>
+<div class="row">
+
+<div class="col-lg-4 ">
+   <select ng-model="$parent.timedelay" ng-options="i for i in getNumber(100)" class=" form-control ">
+ </select>
+ </div>
+<div class="col-lg-8 no-padding"><span class="note tm5">Seconds</span></div>
+</div>
+</div>
+
+</div> 
+
+
+        
+    </section>
+
+
+
+      <!-- Third step -->
+    <section ng-switch-when="3">
+      
+<div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+  <div class="form-header  pl0">
+<h3>TARGET USERS</h3>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+  <div class="radio radio-style  ">
+<label><input type="radio" ng-click="$parent.targetkey='all'" ng-model="prefs.Target" value="All">All</label>
+</div>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style ">
+<label><input type="radio" ng-click="getlocations()" ng-model="prefs.Target" value="Location">Location</label>
+</div>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style ">
+<label><input type="radio" ng-click="getevents()" ng-model="prefs.Target" value="Event">Event</label>
+</div>
+</div>
+
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style ">
+<label><input type="radio" ng-click="getsessions()" ng-model="prefs.Target" value="Session">Session</label>
+</div>
+</div>
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+
+<div class="radio radio-style " >
+<label><input type="radio" ng-click="getsegments()" ng-model="prefs.Target" value="Custom">Custom Segment</label>
+</div>
+</div>
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+&nbsp;
+</div>
+<div ng-hide="prefs.Target=='All'" class="col-lg-12 col-sm-12 col-md-12 no-padding">
+<div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+  <select ng-options="item.x as item.x group by item.z for item in TargetKeyList" class="form-control-list tm20" ng-model="$parent.targetkey">
+  </select>
+</div>
+</div>
+
+
+</div>
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+
+<div class="form-header  pl0 tm30">
+<h3>SCHEDULE</h3>
+</div>
+
+ <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style">
+  <label>
+    <input type="radio"  ng-model="prefs.sheduleTime" value="Now" >Launch Now</label>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+  <div class="radio radio-style">
+<label>
+    <input type="radio"  ng-model="prefs.sheduleTime" value="Later" ng-init="initializeDatePicker()">Schedule Later</label>
+</div>
+</div>
+<div >
+ <div class="form-group " ng-show="prefs.sheduleTime=='Later'">
+
+<div  class="field-group" >
+<div class="col-lg-12 no-padding">
+
+  
+                <div style="overflow:hidden;">
+    <div class="form-group tm20">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="datepicker" data-DateTimePicker></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</div>
+
+</div>
+
+
+
+</div>
+</div>
+ 
+ <div ng-hide="app.accesstype=='Viewer'">
+   <button ng-show="push_in_progress=='false'" class="next btn-green btn-lg  tm20" ng-click= "launchcampaign();push_in_progress='true'" ng-disabled="flag">Submit</button> 
+   <div ng-hide="push_in_progress=='false'">
+   PLEASE WAIT...
+   <img  id="uploading_image" src="images/squares.gif" width="32px" height="32px" class="mmt5" />
+   </div>
+   </div>
+   <div ng-show="app.accesstype=='Viewer'">
+      <button class="next btn-grey btn-lg tm20" ng-disabled="true">Submit</button> 
+  <p class="rtext"> Your Account doesn't have enough permissions to launch the push</p>
+</div>
+
+
+    </section>
+
+    <div class="clearfix"></div>
+  
+  <ul class="pager row">
+    <li class="col-lg-5 col-md-5 col-sm-5 pl0" ng-style="{visibility: iamPreviusButtonVisible() ? 'visible' : 'hidden'}" >
+      <a href="" ng-click="iamvalidation(false)" class="previous btn-black previous ">Previous </a>
+    </li>
+    <li class="col-lg-2 col-md-2 col-sm-2"></li>
+    <li class="visible col-lg-5 col-md-5 col-sm-5 pr0" ng-show="iamselection<3">
+      <a href="" ng-click="iamvalidation(true)" class="next btn-blue ">Next </a>
+    </li>
+  </ul>
+  <div class="clearfix"></div> 
+
+
+     
+
+     </div>
+   
+   
+    
+</div>
+
+   
+ 
+    
+ 
+    </div>
+    </div>
+
+ 
+   </fieldset>
+</form>
+
+ <div ng-show="addcampaign_success == 1" class="success-message">
+   <h2>Success</h2>
+    <button class="next btn-green tm10" ng-click= "init()">Create new Push</button> 
+    <p>You have successfully created a push launch</p>
+  </div>
+   <div ng-show="addcampaign_success == 2" class="danger-message">
+    <h2 class="sendpush_error">Similar push already exists</h2>
+     <button class="next btn-green tm10" ng-click= "init()">Create new Push</button> 
+     <p>Hence Push not launched</p>
+  </div>
+ 
+   
+
+</div>
+</div>
+
+
+<div class="col-lg-5">
+<div  id="androidnotification" ng-class="{'Android':'aside-block flex-col android-phone android-notification','iOS':'aside-block flex-col ios-phone ios-notification','Windows':'aside-block flex-col android-phone android-notification '}[app.ostype]">
+
+<p class="preview">Preview</p>
+
+<div ng-show='showpreviewtype=="notification"'>
+<div class="media preview-msg">
+<div class="media-left notification-thumb">
+   <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+   <img  ng-src="{{campaigndata.prod_img || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[campaigndata.prod_img=='' || campaigndata.Imaprod_imggeUrl==undefined ]" />
+  </div>
+  <div class="media-body">
+  <div class="app-message-content">
+  <h2 >{{campaigndata.title || app.application}} </h2>
+<p >{{campaigndata.message || 'Enter Message'}} </p>
+ </div>
+ </div>
+ <div  class="msg-thumb " >
+<!-- <div ng-click="editimageurl=true" ng-hide="editimageurl"> -->
+<!-- <span class="upload-img-text" ng-hide="campaigndata.ImageUrl">Upload Image</span> -->
+<img  ng-src="{{campaigndata.ImageUrl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[campaigndata.ImageUrl=='' || campaigndata.ImageUrl==undefined ]" />
+
+<!-- </div> -->
+<!-- <input ng-show="editimageurl" maxlength="500" ng-blur='editimageurl=false' ng-model="campaigndata.ImageUrl" type="text" class="img-upload" placeholder="Paste image url..." focus-on-show> -->
+</div>
+</div>
+
+
+<!-- <div class="preview-msg-iphone" ng-show="app.ostype=='iOS'">
+<div class="msg-light-box">
+<div class="preview-appmsg-thumb">
+<img  ng-show='showimage' ng-src="{{iamimageurl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[iamimageurl=='' || iamimageurl==undefined ]" />
+</div>
+<h2 ng-show='showtext'>{{heading || 'heading'}} </h2>
+<p ng-show='showtext'>{{line1 || 'line1'}} </p>
+<button type="text" class="btn btn-orange" ng-show='showbutton'  >{{buttontext || 'Button'}} </button>
+</div>
+</div> -->
+</div>
+
+<div ng-show='showpreviewtype=="iam"' class="android-phone">
+
+<div ng-class="{'Android':'preview-msg-android','iOS':'preview-msg-ios'}[app.ostype]" >
+<div class="msg-light-box">
+<div class="preview-appmsg-thumb">
+<img  ng-show='showimage' ng-src="{{iamimageurl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[iamimageurl=='' || iamimageurl==undefined ]" />
+</div>
+<div class="msg-body" ng-show='showtext'>
+<h2 >{{heading || 'Enter Title'}} </h2>
+<p >{{line1 || 'Enter Message'}} </p>
+<!-- <p ng-show='showtext'>{{line2 || 'line2'}}</p> -->
+</div>
+<div class="msg-body" ng-show='showbutton' >
+<button type="text" class="btn btn-orange"  >{{buttontext || 'Button'}} </button>
+</div>
+</div>
+</div>
+
+<!-- <div class="  preview-msg-iphone" ng-show="app.ostype=='iOS'">
+<div class="msg-light-box">
+<div class="preview-appmsg-thumb">
+<img  ng-show='showimage' ng-src="{{iamimageurl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[iamimageurl=='' || iamimageurl==undefined ]" />
+</div>
+<h2 ng-show='showtext'>{{heading || 'Enter Title'}} </h2>
+<p ng-show='showtext'>{{line1 || 'Enter Message'}} </p>
+<button type="text" class="btn btn-orange" ng-show='showbutton'  >{{buttontext || 'Button'}} </button>
+</div>
+</div> -->
+</div>
+ 
+<div class="media preview-msg" ng-show='showpreviewtype=="preview"'>
+<div  class="msg-thumb " ng-show="showimage">
+<div ng-click="editimageurl=true" ng-hide="editimageurl">
+<span class="upload-img-text" ng-hide="iamimageurl">Upload Image</span>
+<img  ng-src="{{iamimageurl || '/images/icon-image.png'}}" ng-class="{true:'default-thumb'}[iamimageurl=='' || iamimageurl==undefined ]" />
+</div>
+<input ng-show="editimageurl" ng-blur='editimageurl=false' maxlength="500" ng-model="iamimageurl" type="text" class="img-upload" placeholder="Paste image url..." focus-on-show>
+</div>
+  <div class="media-body" >
+ 
+<div ng-show="showtext" class="app-message-content">
+
+<div  ng-init='editheading=false; editline1=false; editlin2=false'>
+<input ng-show="editheading" ng-blur='editheading=false' ng-model='heading' maxlength="50" name="" type="text" placeholder="Enter Title" class="form-field-device-heading" focus-on-show />
+<h2 ng-hide="editheading" ng-click='editheading=true'>{{heading || 'Click to Enter Title'}} <span class="fa fa-edit"></span></h2>
+
+<input ng-show="editline1" ng-blur='editline1=false' ng-model='line1' maxlength="200" name="" type="text" placeholder="Enter Message" class="form-field-device-subheading" focus-on-show />
+<p ng-hide="editline1" ng-click='editline1=true'>{{line1 || 'Click to Enter Message'}} <span class="fa fa-edit"></span></p>
+
+<!-- <input ng-show="editlin2" ng-blur='editlin2=false' ng-model='line2' name="" type="text" placeholder="Enter sub heading is here" class="form-field-device-subheading" focus-on-show />
+<p ng-hide="editlin2" ng-click='editlin2=true' >{{line2 || 'Enter sub heading is here'}}<span class="glyphicon glyphicon-editable"></span></p> -->
+</div>
+</div>
+<div  ng-show="showbutton" class="app-message-content">
+<div  class="action-btn">
+ <input ng-show="editbutton" ng-blur='editbutton=false' maxlength="20" ng-model='buttontext' type="text" class="btn btn-orange  btn-lg tm10"    value="CALL TO ACTION" focus-on-show />  
+ <div ng-hide="editbutton" ng-click='editbutton=true' class="btn btn-orange  btn-lg tm10">{{buttontext || 'Close'}} <span class="fa fa-edit"></span></div>
+</div>
+ </div>
+  </div>
+ 
+
+</div>
+</div>
+</div>
+
+
+ 
+</div>
+</div>
+</div>
+<div ng-if="segmentation.show_segmentation">
+  <ng-include src = "'partials/push-segmentation.html'"> </ng-include>
+</div>
+
+<div class="row" ng-hide="segmentation.show_segmentation">
+<div class="col-lg-12 ">
+<div class="panel">
+<div class="panel-body progress-panel">
+<div class="task-progress task-progress-noborder">
+<div class="pull-right btn-group fifth-nav">
+  <div class="btn-group pull-right fifth-nav">
+                       
+                        
+            <button type="button" ng-csv="filteredcampaignslistCSV" csv-header="['Campaign Name', 'Launch Time','Sent','Received','Opened','Status','Message Type' ]" filename="Campaigns_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+
+            <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+            
+        </div>
+  <a ng-show="campaign_loading=='false'" href="" ng-click="getcampaigns();campaign_loading='true'" class="bltext"><span class="glyphicon glyphicon-refresh fs12" aria-hidden="true"> Refresh</span></a>
+  <img ng-hide="campaign_loading=='false'" id="uploading_image" src="images/squares.gif" width="32px" height="32px" class="mmt5" />
+
+</div>
+
+<h2>Campaigns List</h2>
+</div>
+
+<div class="text-center panel-content" id="camp_table">
+ <div class="table-component">
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th>Campaign Name</th>
+        <th>Launch Time</th>
+        <th>Sent <span class=" fs12">(Imported)</span></th>
+        <th ng-show="app.ostype=='Android'">Success</th>
+        <th ng-show="app.ostype=='iOS'">Failure</th>
+        <th ng-if="showthis">Received</th>
+       <!-- <th >Opened</th>  -->
+        <th>Status</th>
+        <th>Message Type</th>
+        <th>Re-Send</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr ng-hide="table.table1loaded">
+   <td colspan="8" >
+         <p class="text-center"><img src="images/ajax-loader.gif"></p>
+    </td>
+</tr>
+
+       
+
+      <tr ng-show="table.table1loaded" ng-repeat="elem in filteredcampaignslist" ng-init="initializepopover()">
+        <td ng-hide="elem.PushReqTimestamp=='Multiple Dates'"  style="cursor:pointer; font-weight:bold;"   > <div data-toggle="popover" title="Message" data-placement="right" data-trigger="hover" data-content="{{elem.message}}">{{ elem.src}}</div></td>
+        <td ng-show="elem.PushReqTimestamp=='Multiple Dates'" ng-click="$root.push.selected_campaign=elem.src;getcampaigns()" style="cursor:pointer; font-weight:bold;"  class="btext  "> {{ elem.src}}</td>
+        <td  class="fs11">{{ elem.date}}</td>
+        <td ><strong>{{ elem.cpc}}</strong> <span class="graytext fs12 pl10">{{ elem.ic || ""}}</span></td>
+        <td ng-show="app.ostype=='Android'"><div class="text-center">{{elem.successdata}}</div></td>
+        <td  ng-show="app.ostype=='iOS'"><div class="text-center">{{ elem.fc}}</div></td>
+
+        <!--<td><div class="text-center">{{ elem.coc}}BB</div></td>  Open row data is hide  -->
+        <td ng-if="showthis"><div class="text-center">{{ elem.csc}}</div></td>
+
+
+        <td><span class="label fs12" ng-class="{'completed':'label-success','running':'label-info','pending':'label-info','queued':'label-warning','scheduled':'label-primary','Deleted':'label-danger'}[elem.status]">{{elem.status}}</span> <span class="fs11 bltext" ng-show="elem.crt">{{ elem.csf}}</span></td>
+        <td class="fs11">{{ elem.mt}} </td>
+        <td><a  href="" ng-show="elem.status"  ng-click="reschedule(elem.ref)" class="fs12"><i class="fa fa-send"></i> Resend</a>&nbsp;&nbsp;&nbsp;&nbsp;<a ng-show="elem.csf=='scheduled'" href=""  ng-click="deleteScheduled(elem.ref,$index)" class="fs12"><span class="glyphicon glyphicon-trash"></span></a></td>
+        
+      </tr>
+      <tr ng-show="filteredcampaignslist.length==0 && table.table1loaded">
+      <td colspan="8"><div class="default-message"><p>No Data Found</p></div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+  <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+<div ng-if="push.selected_campaign">
+  <ng-include src = "'partials/push-detail.html'"> </ng-include>
+</div>
+
+</div>
+<script src="lib/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="lib/bootstrap-datepicker/bootstrap-datetimepicker.min.css"/>

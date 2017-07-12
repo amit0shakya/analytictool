@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<title>Pricing | rocQ </title>
+<link rel="stylesheet"  href="home/css/style.css" type="text/css" media="all">
+<link rel="stylesheet"  href="home/css/font-awesome.min.css?ver=1.0.0" type="text/css" media="all">
+<link rel="stylesheet"  href="//fonts.googleapis.com/css?family=Crimson+Text%3A700%7CRoboto%3A400%2C700%2C900%2C300&amp;ver=4.4.1" type="text/css" media="all">
+
+<link rel="stylesheet" href="home/css/magnific-popup.css?ver=1.0.0" type="text/css" media="all">
+<link rel="stylesheet" id="bfa-font-awesome-css" href="//cdn.jsdelivr.net/fontawesome/4.5.0/home/css/font-awesome.min.css?ver=4.5.0" type="text/css" media="all">
+<script type="text/javascript" src="home/js/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js" ></script>
+
+<script>
+     $(document).ready(function(e){
+           $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
+           var formMiddle=(($(window).height())/2)-($(".form-div").height()/2)
+           $(".form-div").css({"top":formMiddle+"px"})
+           
+           $(".fixed-aside-nav, .princing-contact").click(function(){
+                    showform();
+           })
+           
+           $(".closebtn").click(function(){
+                    hideform();
+           })
+           
+          function showform(){
+                    $(".form-container").css({"display":"block"})
+                    $(".form-div").animate({"opacity":"1"},{"duration":1000})
+                    $(".closebtn").animate({"opacity":"1"},{"duration":500})
+                    $(".lightboxbg").animate({"opacity":".95"});
+                    
+                    
+                    setTimeout(function(){
+                              $(".form-div").css({"opacity":"1"});
+                            //  $("body,html").css({'overflow':'hidden'});
+                    },900)
+                    
+                   $(".fixed-aside-nav").animate({"right":"-80px","opacity":"0"})
+                    
+          }
+           
+           
+           function hideform(){
+                    
+                     $(".form-div").animate({"opacity":"0"},{"duration":1000})
+                     $(".closebtn").animate({"opacity":"0"},{"duration":500})
+                     $(".lightboxbg").animate({"opacity":"0"});
+                     
+                     setTimeout(function(){
+                              $(".form-div").css({"opacity":"1"});
+                             // $("body,html").css({'overflow':'auto'});
+                               $(".form-container").css({"display":"none"})
+                    },1000)
+                     
+                     $(".fixed-aside-nav").animate({"right":"5px","opacity":"1"})
+           }
+           
+           /*
+           $(".contactbtn").click(function(e){
+              e.preventDefault();
+              showform();
+           })*/
+           
+ });
+
+          
+          
+$(window).resize(function(e){
+          $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
+           $(".form-div").css({"top":(($(window).height()-500)/2)+"px"})
+})  
+</script>
+
+<style type="text/css">
+	#ptsBlock_867526 {
+  	width: 100%;
+    text-transform: uppercase;
+}
+ 
+#ptsBlock_867526 .ptsCol {
+    	  		 
+  	    transition: box-shadow 0.25 ease 0;
+}
+#ptsBlock_867526 p {
+	margin: 0;
+}
+#ptsBlock_867526 .ptsCell{
+	padding: 12px;
+	text-transform: none;
+	
+    border: 1px solid rgb(255,255,255);
+    border-bottom: 1px solid rgb(217,217,217);
+    border-right: 1px solid rgb(217,217,217);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    text-shadow: 0 -1px rgba(0,0,0,0.6);
+}
+#ptsBlock_867526 .ptsColHeader {
+	padding: 15px;
+}
+#ptsBlock_867526 .ptsColDesc {
+	padding: 30px 15px;
+}
+#ptsBlock_867526 .ptsCell:nth-child(odd) {
+	background-color: rgb(251,251,251);
+}
+#ptsBlock_867526 .ptsCell:nth-child(even) {
+	background-color: rgb(239,239,239);
+}
+#ptsBlock_867526 .ptsColFooter {
+	background-color: rgb(228,228,228);
+	padding: 20px;
+	border: 1px solid rgb(200,200,200);
+    box-shadow: inset 0 1px rgb(253,253,253),inset 0 0 0 1px rgba(255,255,255,0.1);
+	
+	/* gradient */
+	background-image: linear-gradient(top, rgb(228,228,228), rgb(207,207,207)); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(228,228,228)', endColorstr='rgb(207,207,207)'); /* IE5.5 - 7 */
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgb(228,228,228)', endColorstr='rgb(207,207,207)'); /* IE8 */
+	background: -ms-linear-gradient(top, rgb(228,228,228), rgb(207,207,207)); /* IE9 */
+	background: -moz-linear-gradient(top, rgb(228,228,228), rgb(207,207,207)); /* Firefox */ 
+	background: -o-linear-gradient(top, rgb(228,228,228), rgb(207,207,207)); /* Opera 11  */
+	background: -webkit-linear-gradient(top, rgb(228,228,228), rgb(207,207,207)); /* Chrome 11  */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(228,228,228)), color-stop(1, rgb(207,207,207))); /* Chrome 10, Safari */
+}
+#ptsBlock_867526 .ptsActBtn:hover {
+	 background-color: rgb(255,255,255); /* background color for non-css3 browsers */
+}
+#ptsBlock_867526 .ptsActBtn {
+	height: 50px;
+	padding: 0 2em;
+	cursor: pointer;
+	font-weight: 400;
+    font-size: 1.4em;
+    text-decoration: none;
+	display: inline-block;
+  	padding: 4px 20px;
+  	width: 100%;
+  	border-radius: 3px;
+}
+
+#ptsBlock_867526 .ptsActBtn .ptsEditArea {
+  	text-decoration: none !important;
+  	border: none !important;
+	width: 100%;
+	text-transform: none;
+	line-height: 2em;
+	color: #fff;
+}
+ 
+#ptsBlock_867526 .ptsCol .ptsTableElementContent,
+#ptsBlock_867526 .ptsCol .ptsTableElementContent span {
+	transition: box-shadow 0.3s ease, margin 0.3s ease, font 0.3s ease;
+  	-webkit-transition: box-shadow 0.3s ease, margin 0.3s ease, font 0.3s ease;
+    -moz-transition: box-shadow 0.3s ease, margin 0.3s ease, font 0.3s ease;
+    -ms-transition: box-shadow 0.3s ease, margin 0.3s ease, font 0.3s ease;
+    -o-transition: box-shadow 0.3s ease, margin 0.3s ease, font 0.3s ease;
+}
+#ptsBlock_867526 .ptsCol.hover .ptsTableElementContent {
+	z-index: 101;
+  	box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+  	-webkit-box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+	margin-top: -20px;
+}
+#ptsBlock_867526 .ptsCol.hover .ptsColHeader {
+	border-top-left-radius: 5px;
+  	border-top-right-radius: 5px;
+}
+#ptsBlock_867526 .ptsCol.hover .ptsColFooter {
+	border-bottom-left-radius: 5px;
+  	border-bottom-right-radius: 5px;
+}
+
+/*start for desc col color */
+#ptsBlock_867526 .ptsCol.ptsTableDescCol  .ptsColHeader {
+	background-color: #fff;
+}
+#ptsBlock_867526 .ptsCol.ptsTableDescCol .ptsColDesc{
+	background-color: #fff;
+}
+/*end for desc col color */
+
+/*start for col color 1*/
+#ptsBlock_867526 .ptsCol-1 .ptsColHeader {
+	background-color: #ed8000;
+}
+#ptsBlock_867526 .ptsCol-1 .ptsColDesc,
+#ptsBlock_867526 .ptsCol-1 .ptsActBtn:hover {
+	background-color: #f19300;
+}
+#ptsBlock_867526 .ptsCol-1 .ptsActBtn {
+	background-color: #ed8000;
+}
+/*end for col color 1*/
+
+/*start for col color 2*/
+#ptsBlock_867526 .ptsCol-2 .ptsColHeader {
+	background-color: #D85200;
+}
+#ptsBlock_867526 .ptsCol-2 .ptsColDesc,
+#ptsBlock_867526 .ptsCol-2 .ptsActBtn:hover {
+	background-color: #E06400;
+}
+#ptsBlock_867526 .ptsCol-2 .ptsActBtn {
+	background-color: #D85200;
+}
+/*end for col color 2*/
+
+/*start for col color 3*/
+#ptsBlock_867526 .ptsCol-3 .ptsColHeader {
+	background-color: #B5280B;
+}
+#ptsBlock_867526 .ptsCol-3 .ptsColDesc,
+#ptsBlock_867526 .ptsCol-3 .ptsActBtn:hover {
+	background-color: #C3350F;
+}
+#ptsBlock_867526 .ptsCol-3 .ptsActBtn {
+	background-color: #B5280B;
+}
+/*end for col color 3*/
+
+/*Colors set*/
+#ptsBlock_867526 .ptsCol .ptsColHeader {
+  	color: #fff;
+}
+#ptsBlock_867526 .ptsCol .ptsColDesc {
+  	color: #fff;
+}
+#ptsBlock_867526 .ptsCol .ptsRows {
+  	color: #d0d0d0;
+}
+</style>
+</head>
+<body class="home page ">
+
+
+
+<!-- FORM CONTAINER STARTS -->
+<div id="page" class="hfeed site">
+<div class="form-container">
+<div class="closebtn">x</div>
+<div class="form-div">
+<div class="form-head"><span>CONTACT</span><span>US</span> </div>
+<form action="/contactus" method="post" class="wpcf7-form" onsubmit="return false;">
+<div style="display: none;">
+          <input type="hidden" name="_wpcf7" value="55">
+          <input type="hidden" name="_wpcf7_version" value="4.3.1">
+          <input type="hidden" name="_wpcf7_locale" value="en_US">
+          <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f55-o1">
+          <input type="hidden" name="_wpnonce" value="649fcebd00" required>
+</div>
+<!--<p>Your Name (required)<br>-->
+          <span class="wpcf7-form-control-wrap your-name">
+          <input type="text" id="your-name" value="" placeholder="Your Name (required)" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false">
+          </span> 
+</p>
+<!--<p>Your Email (required)<br>-->
+          <span class="wpcf7-form-control-wrap your-email">
+                    <input type="email" id="your-email" placeholder="Your Email (required)" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" required>
+          </span> </p>
+<!--<p>Subject<br>-->
+          <span class="wpcf7-form-control-wrap your-subject">
+                    <input type="text" id="your-subject" value=""  placeholder="Subject" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false">
+          </span> 
+</p>
+<!--<p>Your Message<br>-->
+          <span class="wpcf7-form-control-wrap your-message">
+                    <textarea id="your-message" cols="40" rows="10" placeholder="Your Message" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false"></textarea>
+          </span> </p>
+<p>
+          <input type="submit" value="Send" id="form-button-submit"class="wpcf7-form-control wpcf7-submit">
+          <img src='home/images/ajax-loader.gif' style="display:none" id = "ajax-loader">
+          <div class="wpcf7-response-output wpcf7-display-none" id="response-messages"></div>
+          </p>
+</form>
+                              
+                    </div>
+                    <div class="lightboxbg"></div>
+          </div>   <!-- LIGHT BOX ENDS  -->
+
+<!--   FORM CONTAINER ENDS   -->
+
+            <div id="page" class="hfeed site">
+		<header id="masthead" class="site-header clearfix" role="banner">
+        <div class="header-wrapper clearfix stick non-transparent">
+			<div class="tg-container">
+			
+					<div class="logo">
+						<a href="/" title="rocQ" rel="home"><img src="home/images/logo-rocq.png" alt="rocQ"></a>
+					</div> <!-- logo-end -->
+				
+				<div class="menu-search-wrapper">
+
+					 <!-- home-search-end -->
+
+					<nav id="site-navigation" class="main-navigation" role="navigation"><h4 class="menu-toggle hide"></h4>
+                        <div class="menu-primary-container"><ul id="menu-menu" class="menu"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-6"><a href="/">Home</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-19"><a href="/#features">Features</a></li>
+<li id="menu-item-150" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-150"><a href="https://docs.rocq.io/">Documentation</a></li>
+<!--
+<li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-7"><a href="/#about">About</a></li>-->
+<li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="pricing.html">Pricing</a></li>
+<li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-27"><a href="/#blog">blog</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-26"><a href="contact.html">contact</a></li>
+<li id="menu-item-219" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-219"><a href="/login">Sign In</a></li>
+</ul></div>                 </nav><!-- nav-end --></div> <!-- Menu-search-wrapper end -->
+			</div><!-- tg-container -->
+		</div><!-- header-wrapepr end -->
+
+			</header>
+            <div id="content" class="site-content">
+	   <main id="main" class="clearfix no-sidebar-full-width"><div>
+
+				<div id="primary">
+					<div id="content-2">
+						
+<article id="post-89" class="post-89 page type-page status-publish hentry"><h2 class="entry-title">Pricing</h2>
+   <div class="entry-content">
+      <p>Clear, simple &amp; affordable pricing for businesses based on their Monthly Active Users.<span id="more-89"></span></p>
+<h1 style="text-align: center;">PLANS BUILT FOR EVERY TEAM</h1>
+<h5 style="text-align: center;">Pick yours today</h5>
+<p>&nbsp;</p>
+<div class="tg-container">
+<p style="text-align: center;">Whether yours is a flourishing business or an ambitious startup, we offer plans that suit the way you want to track data, discover, patterns &amp; engage users. Get in touch with us and we&rsquo;ll help you choose a perfect plan based on the number of your Monthly Active Users.</p>
+<p>&nbsp;</p>
+
+<!--
+<div class="ptsTableFrontedShell">
+	<div id="ptsBlock_867526" class="ptsBlock " data-id="8">
+			<div class="ptsBlockContent"><div class="ptsContainer">
+
+<div class="ptsColsWrapper ui-sortable">
+<div class="ptsEl ptsCol ptsCol-0 ptsTableDescCol ptsElWithArea" data-el="table_col_desc" data-color="#fff">
+    <div class="ptsTableElementContent ptsElArea">
+        <div class="ptsColHeader" style="height: 50px;">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><br></p></div>
+        </div>
+        <div class="ptsColDesc" style="height: 179px; color: rgb(98, 98, 98);">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 46px; line-height: 56.626px; text-transform: none;" data-mce-style="font-size: 46px; line-height: 56.626px; text-transform: none;">PLAN</span></p><p>CHOOSE PLAN which suit your requirement<br></p></div>
+        </div>
+        <div class="ptsRows ui-sortable" style="height: auto;">
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><br></p><p class="p1"><span class="s1">Monthly Active&nbsp;Users (MAU)</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><br></p><p class="p1"><span class="s1">Custom&nbsp;Segmentation (per month)</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><br></p><p class="p1"><span class="s1">Push &nbsp;Notifications (per month)</span></p></div>
+            </div>
+            
+            
+            
+            
+            
+        </div>
+        <div class="ptsColFooter" style="height: 160px; display: none;"></div>
+    </div>
+</div>
+<div class="ptsEl ptsCol ptsElWithArea ptsCol-1" data-color="rgb(241, 147, 0)" data-el="table_col" data-enb-color="1">
+    <div class="ptsTableElementContent ptsElArea">
+        <div class="ptsColHeader" style="height: 50px;">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 13px; color: #ffffff;" data-mce-style="font-size: 13px; color: #ffffff;">FREE</span></p></div>
+        </div>
+        <div class="ptsColDesc" style="height: 179px;">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 36pt;" data-mce-style="font-size: 36pt;">$0</span></p><p><span data-mce-style="color: #ffffff;">Payable Every Month</span></p></div>
+        </div>
+        <div class="ptsRows ui-sortable" style="height: auto;">
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">&lt;100K</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">0</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">100K</span></p></div>
+            </div>
+            
+            
+            
+            
+            
+        </div>
+        <div class="ptsColFooter" style="height: 160px;">
+            <div class="ptsActBtn ptsEl ptsElInput" data-el="btn" data-bgcolor-to="txt" data-bgcolor="#fff" data-bgcolor-elements=".ptsEditArea">
+                <a href="contact.html" class="ptsEditArea ptsInputShell">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ptsEl ptsCol ptsElWithArea ptsCol-2" data-color="rgb(224, 100, 0)" data-el="table_col" data-enb-color="1">
+    <div class="ptsTableElementContent ptsElArea">
+        <div class="ptsColHeader" style="height: 50px;">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="color: #ffffff;" data-mce-style="color: #ffffff;">Startup</span></p></div>
+        </div>
+        <div class="ptsColDesc" style="height: 179px;">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 36pt;" data-mce-style="font-size: 36pt;">$199</span></p><p><span data-mce-style="color: #ffffff;">Payable&nbsp;Per month</span></p></div>
+        </div>
+        <div class="ptsRows ui-sortable" style="height: auto;">
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">100K-500K &nbsp;</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">3</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">5 Million</span></p></div>
+            </div>
+            
+            
+            
+            
+            
+        </div>
+        <div class="ptsColFooter" style="height: 160px;">
+            <div class="ptsActBtn ptsEl ptsElInput" data-el="btn" data-bgcolor-to="txt" data-bgcolor="#fff" data-bgcolor-elements=".ptsEditArea">
+                <a href="contact.html" class="ptsEditArea ptsInputShell">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ptsEl ptsCol ptsElWithArea ptsCol-3" data-color="rgb(195, 53, 15)" data-el="table_col" data-enb-color="1">
+    <div class="ptsTableElementContent ptsElArea">
+        <div class="ptsColHeader" style="height: 50px;">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="color: #ffffff;" data-mce-style="color: #ffffff;">business</span></p></div>
+        </div>
+        <div class="ptsColDesc" style="height: 179px;">
+            <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 36pt;" data-mce-style="font-size: 36pt;">$299</span></p><p><span style="font-size: 12pt; line-height: 48px;" data-mce-style="font-size: 12pt; line-height: 48px;">payable per month</span></p></div>
+        </div>
+        <div class="ptsRows ui-sortable" style="height: auto;">
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">500K-1Million</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">15</span></p></div>
+            </div>
+            <div class="ptsCell" style="height: 67px;">
+                <div class="ptsEl" data-el="table_cell_txt" data-type="txt"><p><span style="font-size: 14pt;" data-mce-style="font-size: 14pt;">25 Million</span></p></div>
+            </div>
+            
+            
+            
+            
+            
+        </div>
+        <div class="ptsColFooter" style="height: 160px;">
+            <div class="ptsActBtn ptsEl ptsElInput" data-el="btn" data-bgcolor-to="txt" data-bgcolor="#fff" data-bgcolor-elements=".ptsEditArea">
+                <a href="contact.html" class="ptsEditArea ptsInputShell">Register<br></a>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="princing-contact">Contact us for Pricing</div>
+
+</div>
+<div style="clear: both;"></div>
+</div>
+
+
+
+</div>
+		</div></div>
+</div>
+   </div>
+
+   </article></div><!-- #content-2 -->
+				</div><!-- #primary -->
+
+							</div>
+		</main></div>
+
+	
+   
+   <footer id="colophon" class="footer-with-widget footer-layout-one"><div id="top-footer">
+	<div class="tg-container">
+		<div class="tg-column-wrapper">
+
+                  	<div class="tg-column-3">
+		         <aside id="text-2" class="widget widget_text clearfix"><div class="textwidget"><img src="home/images/logo-rocq.png" alt="rocq"><br>
+rocQ is an mobile app analytics and user engagement platform that provides real-time actionable insights to businesses. We help app owners use data to manage user interaction with their apps and build a relationship with their user base. </div>
+		</aside></div>
+		   
+		            	<div class="tg-column-3">
+		         <aside id="footer-nav" class="widget widget_text clearfix">
+                 <h4 class="widget-title"><span>Navigation</span></h4>			<div class="textwidget">
+<ul>
+<li><a href="/#features">FEATURES</a></li>
+<li><a href="https://docs.rocq.io/">DOCUMENTATION</a></li>
+
+<li><a href="/#about" >ABOUT</a></li>
+
+<li><a href="pricing.html">PRICING</a></li>
+<li><a href="/#blog">BLOG</a></li>
+
+
+</ul></div>
+        </aside></div>
+		   
+		            	<div class="tg-column-3">
+		         <aside id="text-4" class="widget widget_text clearfix"><h4 class="widget-title"><span>Contact</span></h4>			<div class="textwidget">C-802,803 8th Floor,
+Nirvana Courtyard,
+Nirvana Country Sector-50,
+Gurgaon-122001.
+
+
+
+
+<a href="mailto:contact@rocq.io">contact@rocq.io</a></div>
+		</aside></div>
+		   
+      </div> <!-- .tg-column-wrapper -->
+   </div> <!-- .tg-container -->
+</div> <!-- .top-footer -->
+      <div id="bottom-footer">
+         <div class="tg-container" style="color:#989898; font-size:10px;">
+<div class="copyright"><span class="copyright-text">rocq &copy; 2015</span></div>
+
+           
+           <div class="footer-nav">
+               <div id="footer-layout-one" class="menu-social-menu-container">
+<ul id="menu-social-menu" class="menu"><li id="menu-item-169" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-169"><a href="https://www.facebook.com/rocq.io"><i class="fa fa-facebook-square"></i></a></li>
+<li id="menu-item-170" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-170"><a href="https://twitter.com/rocq_io"><i class="fa fa-twitter-square"></i></a></li>
+
+<li id="menu-item-172" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-172"><a href="https://www.linkedin.com/company/rocq"><i class="fa fa-linkedin-square"></i></a></li>
+
+</ul></div>            </div>
+
+
+   
+            <div class="footer-nav">
+                           </div>
+         </div>
+      </div>
+   </footer> 
+
+	</div> 
+    <div class="fixed-aside-nav">&nbsp;</div>
+    <!-- #Page -->
+ 
+<link rel="stylesheet"  href="/home/css/frontend.tables.css" type="text/css" media="all">
+
+<script type='text/javascript' src='/home/js/himalayas.js'></script>
+</body>
+</html>
+
+<!-- Google Code for Remarketing Tag -->
+<!--- -----------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on 
+
+pages related to sensitive categories. See more information and instructions on how to setup the 
+
+tag on: http://google.com/ads/remarketingsetup
+------------------------------------------------- -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 947941576;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" 
+
+src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/947941576/?
+
+value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76647206-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

@@ -1,0 +1,817 @@
+ <div ng-controller="RevenueCtrl"> 
+  <div class="pageheader main-nav navbar-fixed-top">
+    <div class="media">
+      <div class="pageicon pull-left">
+        <i class="fa fa-th"></i>
+      </div>
+      <div class="media-body">
+        <ul class="breadcrumb">
+          <li>User Engagement</li>
+          <li>Revenue</li>
+        </ul>
+        <h4>Revenue</h4>
+      </div>
+    </div>
+    <div class="pull-right fourth-nav">
+      <input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+      <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+    </div>
+  </div>
+
+  <div class="body-content">
+
+    <div class="state-overview row sm-gap">
+      <div class="col-lg-4 col-sm-6">
+        <section class="panel blue">
+          <div class="symbol ">
+            <i class="fa-trends fa-strend ">&nbsp;</i>
+          </div>
+          <div class="value">
+            <p>REVENUE PER USER</p>
+            <h1 class="count"><i class="fa fa-inr"></i> {{transcactionperuser}}</h1>
+            <p class="rating"> {{transcactionperuser_change}}%  <i ng-class="{true:'fa fa-long-arrow-up ',false:'fa fa-long-arrow-down '}[transcactionperuser_change >= 0]"></i></p>
+          </div>
+        </section>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <section class="panel green">
+          <div class="symbol  ">
+            <i class="fa-trends fa-revenue"></i>
+          </div>
+          <div class="value">
+            <p>TOTAL REVENUE</p>
+            <h1 class=" count2"><i class="fa fa-inr"></i> {{revenue}}</h1>
+            <p class="rating"> {{revenue_change}}% <i ng-class="{true:'fa fa-long-arrow-up ',false:'fa fa-long-arrow-down '}[revenue_change >= 0]"></i></p>
+          </div>
+        </section>
+      </div>
+      <div class="col-lg-4 col-sm-6">
+        <section class="panel red  ">
+          <div class="symbol  ">
+            <i class="fa-trends fa-visitor"></i>
+          </div>
+          <div class="value">
+            <p>TOTAL USERS</p>
+            <h1 class=" count3">{{transactionusers}}</h1>
+            <p class="rating"> {{transactionusers_change}}% <i ng-class="{true:'fa fa-long-arrow-up ',false:'fa fa-long-arrow-down '}[transactionusers_change >= 0]"></i></p>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+
+<div class="row">
+        <div class="col-lg-12">
+    <div class="third-nav">
+      <ul class="nav nav-tabs" role="tablist" ng-init="tab=1">
+        <li ng-class="{active:tab===1}">
+          <a href ng-click="tab = 1" role="tab" data-toggle="tab">
+            <i class="fa fa-clock-o"></i><span>Overview</span>
+          </a>
+        </li>
+        <li ng-class="{active:tab===2}">
+          <a href ng-click="tab=2" role="tab" data-toggle="tab">
+            <i class="fa fa-paper-plane-o"></i><span>Source</span>
+          </a>
+        </li>
+        <li ng-class="{active:tab===3}">
+          <a href ng-click="tab=3" role="tab" data-toggle="tab">
+            <i class="fa fa-map-marker"></i><span>Location</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane fade in active" ng-show="tab===1">
+
+        <div class="panel ">
+          <div class="panel-body progress-panel ">
+            <div class="row ">
+              <div class="col-lg-8 ">
+                <div class="panel">
+                  <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                   
+                        <div class="btn-group pull-right fifth-nav">
+                        <button id='TotalVsInorganicvsOrganic_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-pdf ">&nbsp;</i>
+                        </button>
+                        <button id='TotalVsInorganicvsOrganic_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-img ">&nbsp;</i>
+                        </button>
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        </div>
+                        
+                        
+
+                      <h2>Organic/Inorganic</h2>
+
+                    </div>
+
+
+
+
+                    <div id="TotalVsInorganicvsOrganic" class="text-center panel-content">
+                      <!-- <img src="images/img-gp41.png"     > -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-lg-4 graph-desc pl5">
+               <div class="col-lg-12 no-padding">
+                <div class="panel">
+                  <div class="panel-body progress-panel">
+                    <div class="task-progress mb0 task-progress-border">
+                      <div class="btn-group pull-right fifth-nav">
+                        <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        <a href="#"> <i class="fa-trends fa-excel pull-right">&nbsp;</i></a>
+                      </div>
+
+                      <h2>Revenue By Location</h2>
+
+                    </div>
+
+                    <div class=" panel-content">
+                     <div class="table-data">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mb0">
+
+                        <tbody>
+                          <tr ng-repeat="elem in RevenueByLocation | limitTo:6">
+                            <td width="48%" class="td-label" >{{elem.x}}</td>
+                            <td width="52%" ><span class="value fs20 mr10 fa fa-inr">{{elem.a}}</span> <span ng-class="{true:'fs11 gtext',false:'fs11 rtext'}[elem.b >= 0]">{{elem.b}}% <i ng-class="{true:'fa fa-level-up ',false:'fa fa-level-down '}[elem.b >= 0]"></i></span></td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-body progress-panel border-top ">
+        <div class="row ">
+          <div class="col-lg-12 ">
+            <div class="panel">
+              <div class="panel-body progress-panel no-border">
+                <div class="task-progress">
+                   <div class="btn-group pull-right fifth-nav">
+                        <button id='OneVsTwoVsThreeRepeatedUser_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-pdf ">&nbsp;</i>
+                        </button>
+                        <button id='OneVsTwoVsThreeRepeatedUser_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-img ">&nbsp;</i>
+                        </button>
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        </div>
+
+                  <h2>Revenue Through Repeated User</h2>
+
+                </div>
+
+                <div id="OneVsTwoVsThreeRepeatedUser" class="text-center panel-content tm20">
+                  <!-- <img src="images/img-gp45.png"> -->
+                   </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+
+
+        <div class="panel-body progress-panel border-top tm20">
+          <div class="row">
+            <div class="col-lg-12">
+
+              <div class="panel-body progress-panel">
+                <div class="task-progress task-progress-noborder">
+                 <div class="btn-group pull-right fifth-nav">
+                      <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        
+                      <button type="button" ng-csv="TransactionsDayWiseListCSV" csv-header="['Date', 'Total Revenue','Revenue/User','Total Transactions', 'Change']" filename="Revenue_Day_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                  </div>
+
+                  <h2>Table</h2>
+                </div>
+
+                <div class="text-center panel-content">
+                 <div class="table-component">
+                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+
+                        <th>Date <i class="fa fa-caret-down"></i></th>
+                        <th>Total Revenue <i class="fa fa-caret-down"></i></th>
+                        <th>Revenue/User <i class="fa fa-caret-down"></i></th>
+                        <th>Total Transaction <i class="fa fa-caret-down"></i></th>
+                        <th>Change <i class="fa fa-caret-down"></i></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- <tr ng-hide="table1loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr> -->
+
+                      <tr  ng-repeat="elem in transaction_daywise_list">
+
+                        <td>{{elem.x}}</td>
+                        <td><span class="otext"><i class="fa fa-inr"></i> {{elem.y}}</span></td>
+                        <td><i class="fa fa-inr"></i> {{elem.z}}</td>
+                        <td>{{elem.a}}</td>
+                        <td>{{elem.b}}% <span ng-class="{true:'glyphicon glyphicon-upload gtext',false:'glyphicon glyphicon-download rtext'}[elem.b >= 0]" aria-hidden="true"></span></td>
+                      </tr>
+
+                      <!-- <tr>
+
+                        <td>23 May</td>
+                        <td><span class="otext">$438.00</span></td>
+
+                        <td>$245.00</td>
+                        <td>2345</td>
+                        <td>8976 <span class="glyphicon glyphicon-download rtext" aria-hidden="true"></span></td>
+                      </tr>
+                      <tr>
+
+                        <td>23 May</td>
+                        <td><span class="otext">$8732.00</span></td>
+
+                        <td>$225.00</td>
+                        <td>2345</td>
+                        <td>8976 <span class="glyphicon glyphicon-upload gtext" aria-hidden="true"></span></td>
+                      </tr> -->
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+        <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="transaction_items" ng-model="transaction_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>      
+          
+
+
+
+
+    </div>
+  </div>
+
+
+  <div class="tab-pane fade in active" ng-show="tab===2">
+
+    <div class="panel ">
+      <div class="panel-body progress-panel ">
+        <div class="row ">
+          <div class="col-lg-8 ">
+            <div class="panel">
+              <div class="panel-body progress-panel">
+                <div class="task-progress">
+                   <div class="btn-group pull-right fifth-nav">
+                        <button id='RevenueBySourceChart_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-pdf ">&nbsp;</i>
+                        </button>
+                        <button id='RevenueBySourceChart_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-img ">&nbsp;</i>
+                        </button>
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        </div>
+                        
+
+                  <h2>Trend of Source </h2>
+
+                </div>
+
+
+                <div class="text-center bp10">
+                  <div class="btn-group  fifth-nav text-left">
+                    <!-- <button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+                      SELECT SOURCE <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu rq-dropdown-menu" role="menu">
+                      <li><a href="#">Source1 </a></li>
+                      <li><a href="#">Source2</a></li>
+                    </ul> -->
+                     <div> <select ng-model="selectedRevenueSource" ng-options="item.x for item in topRevenueSources" class="btn btn-default dropdown-toggle rq-dropdown"></select>
+                     </div>
+                  </div>
+
+                 
+
+
+
+                </div>
+
+                    <div id="RevenueBySourceChart" class="text-center panel-content">
+                  <!-- <img src="images/img-gp46.png"     > -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 graph-desc pl5">
+           <div class="col-lg-12 no-padding">
+            <div class="panel">
+              <div class="panel-body progress-panel">
+                <div class="task-progress mb0 task-progress-border">
+                  <div class="btn-group pull-right fifth-nav">
+                    <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                    <a href="#"> <i class="fa-trends fa-excel pull-right">&nbsp;</i></a>
+                  </div>
+
+                  <h2>Revenue By Source</h2>
+
+                </div>
+
+
+                <div class=" panel-content">
+                 <div class="table-data ">
+                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mb0">
+
+                    <tbody>
+                      <tr class="smheading">
+                        <td>Revenue/Source</td>
+                        <td>Revenue/User</td>
+                        <td>User</td>
+                      </tr>
+                      <tr class="table-thincol" ng-repeat ="elem in RevenueBySource_list" >
+                        <td ><p class="tb-subheading">{{elem.x}}</p>
+                         <span class="value fs20 "><i class="fa fa-inr"></i> {{elem.z}}</span></td>
+                         <td class="td-label"><p class="tb-subheading"></p><i class="fa fa-inr"></i> {{elem.y}}</td>
+                         <td width="25%" class="td-label"><p class="tb-subheading"></p> {{elem.a}} </td>
+                       </tr>
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-body progress-panel border-top ">
+            <div class="row ">
+              <div class="col-lg-6 border-right">
+                <div class="panel">
+                  <div class="panel-body progress-panel no-border">
+                    <div class="task-progress ">
+
+                      <div class="btn-group pull-right fifth-nav">
+                        <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        <a href="#"> <i class="fa-trends fa-img pull-right">&nbsp;</i></a>
+                        <a href="#">  <i class="fa-trends fa-pdf pull-right">&nbsp;</i> </a>
+                      </div>
+
+                      <h2>Revenue By Keyword</h2>
+
+                    </div>
+
+
+                    <div class=" panel-content mti10  ">
+                     <div class="table-data">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mb0">
+
+                        <tbody>
+
+
+                          <tr ng-repeat="elem in topRevenueKeyword">
+                            <td class="no-bottomborder">{{elem.x}}
+                              <p class="pull-right"><span class="value fs17 "><i class="fa fa-inr"></i> {{elem.y}}</span> &nbsp;&nbsp;<span ng-class="{true:'fs11 gtext',false:'fs11 rtext'}[elem.z >= 0]">{{elem.z}}%<i ng-class="{true:'fa fa-level-up ',false:'fa fa-level-down '}[elem.z >= 0]"></i></span></p>
+
+                              <div class="status progress-sm" style="width:100%">
+                                <div class="progress transparent progress-large no-radius" style="width:100%">
+                                  <div ng-style="{width : elem.a+'%'}" ng-class="'progress-bar progress-bar-'+elem.c+' animate-progress-bar'" data-percentage="64.8%">{{elem.a}}%</div>
+                                  <!-- <div class="progress-bar progress-bar-gray" style="width: 80%"> 80%  </div> -->
+                                </div>
+                              </div>
+                            </td>
+
+                          </tr>
+
+
+                         <!--  <tr>
+                            <td class="no-bottomborder">Online Cheap shopping
+                              <p class="pull-right"><span class="value fs20 ">$2547</span> <span class="gtext fs11">30% <i class="fa fa-level-up"></i></span></p>
+
+                              <div class="status progress-sm" style="width:100%">
+                                <div class="progress transparent progress-large no-radius" style="width:100%">
+                                  <div style="width: 40%;" class="progress-bar progress-bar-success animate-progress-bar" data-percentage="64.8%">40%</div>
+                                  <div class="progress-bar progress-bar-gray" style="width: 60%"> 60%  </div>
+                                </div>
+
+                              </div>
+
+
+                            </td>
+
+                          </tr>
+
+
+                          <tr>
+                            <td class="no-bottomborder">Free ticket
+                              <p class="pull-right"><span class="value fs20 ">$2547</span> <span class="gtext fs11">30% <i class="fa fa-level-up"></i></span></p>
+
+                              <div class="status progress-sm" style="width:100%">
+                                <div class="progress transparent progress-large no-radius" style="width:100%">
+                                  <div style="width: 40%;" class="progress-bar progress-bar-warning animate-progress-bar" data-percentage="64.8%">40%</div>
+                                  <div class="progress-bar progress-bar-gray" style="width: 60%"> 60%  </div>
+                                </div>
+
+                              </div>
+
+
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="no-bottomborder">Book ticket in delhi ncr
+                              <p class="pull-right"><span class="value fs20 ">$2547</span> <span class="gtext fs11">30% <i class="fa fa-level-up"></i></span></p>
+
+                              <div class="status progress-sm" style="width:100%">
+                                <div class="progress transparent progress-large no-radius" style="width:100%">
+                                  <div style="width: 20%;" class="progress-bar progress-bar-pink animate-progress-bar" data-percentage="64.8%">20%</div>
+                                  <div class="progress-bar progress-bar-gray" style="width: 80%"> 80%  </div>
+                                </div>
+
+                              </div>
+
+
+                            </td>
+
+                          </tr>
+
+
+                          <tr>
+                            <td class="no-bottomborder">Online Cheap shopping
+                              <p class="pull-right"><span class="value fs20 ">$2547</span> <span class="rtext fs11">30% <i class="fa fa-level-down"></i></span></p>
+
+                              <div class="status progress-sm" style="width:100%">
+                                <div class="progress transparent progress-large no-radius" style="width:100%">
+                                  <div style="width: 40%;" class="progress-bar progress-bar-dyellow animate-progress-bar" data-percentage="64.8%">40%</div>
+                                  <div class="progress-bar progress-bar-gray" style="width: 60%"> 60%  </div>
+                                </div>
+
+                              </div>
+
+
+                            </td>
+
+                          </tr> -->
+
+
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-lg-6   ">
+
+              <div class="panel">
+                <div class="panel-body progress-panel">
+                <div class="task-progress ">
+
+                      <div class="btn-group pull-right fifth-nav">
+                        <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        <a href="#"> <i class="fa-trends fa-img pull-right">&nbsp;</i></a>
+                        <a href="#">  <i class="fa-trends fa-pdf pull-right">&nbsp;</i> </a>
+                      </div>
+
+                      <h2>Revenue By Inorganic/Organic</h2>
+
+                    </div>
+                    
+                    
+                <div class="map-state text-center tm70">
+            
+									<h2><i class="fa fa-inr"></i> {{revenue}}</h2>
+									<p>TOTAL REVENUE</p>
+									
+								</div>
+                      <div class="col-lg-12  col-sm-6 col-md-6 no-padding org-ing-value tm20">
+											<div class="col-lg-6">    
+							               <div class="location-label">Inorganic <span></span></div>
+                                              <div class="caption col-lg-6 no-padding">
+													<p class="text-muted cap-text">Revenue</p>
+													<h3 class="tm0   ng-binding"><i class="fa fa-inr"></i> {{InOrganicRevenue}}</h3>
+                                                 <p class="ga-value   "> <span class="fs10"><span ng-class="{true:'gtext ',false:'rtext'}[InOrganicRevenue_change >= 0]">{{InOrganicRevenue_change}}%</span> <i ng-class="{true:'fa fa-arrow-up gtext fs10 ',false:'fa fa-arrow-down rtext fs10'}[InOrganicRevenue_change >= 0]"></i></i> </span></p>
+												</div>
+                                                 
+												<div class="caption col-lg-6 no-padding">
+													<p class="text-muted cap-text">Revenue/User</p>
+													<h3 class="tm0   ng-binding"><i class="fa fa-inr"></i> {{RevenueperInOrganicuser}} </h3>
+												</div>
+                                                
+                                                
+                                                
+											</div>
+											
+                                            <div class="col-lg-6   "> 
+                                           <div class="location-label">Organic <span></span></div>
+                                              <div class="caption col-lg-6 no-padding">
+													<p class="text-muted cap-text">Revenue</p>
+													<h3 class="tm0   ng-binding"><i class="fa fa-inr"></i> {{OrganicRevenue}}</h3>
+                                                        <p class="ga-value"> <span class="fs10"><span ng-class="{true:'gtext ',false:'rtext'}[OrganicRevenue_change >= 0]">{{OrganicRevenue_change}}%</span> <i ng-class="{true:'fa fa-arrow-up gtext fs10 ',false:'fa fa-arrow-down rtext fs10'}[OrganicRevenue_change >= 0]"></i> </span></p>
+												</div>
+                                                 
+												<div class="caption col-lg-6 no-padding">
+													<p class="text-muted cap-text">Revenue/User</p>
+													<h3 class="tm0   ng-binding"><i class="fa fa-inr"></i> {{RevenueperOrganicuser}}</h3>
+												</div>
+                                                
+											</div>
+                                            
+                                            
+										
+									</div>          
+                                
+                
+                  
+
+                  
+
+
+                </div>
+
+
+              </div>
+
+
+
+
+              
+
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="panel-body progress-panel border-top ">
+          <div class="row">
+            <div class="col-lg-12">
+
+              <div class="panel-body progress-panel">
+                <div class="task-progress task-progress-noborder">
+                  <div class="btn-group pull-right fifth-nav">
+                        <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        
+                          <button type="button" ng-csv="SourceListCSV" csv-header="['Source Name','Revenue/User', 'Total Revenue(INR)','User']" filename="Revenue_Source_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                        </div>
+
+                  <h2>Table</h2>
+                </div>
+
+                <div class="text-center panel-content">
+                 <div class="table-component">
+                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mb0">
+
+                    <tr >
+                      <th>S.No. <i class="fa fa-caret-down"></i></th>
+                      <th>Source Name <i class="fa fa-caret-down"></i></th>
+                      <th>Revenue/User <i class="fa fa-caret-down"></i></th>
+                      <th>Total Revenue(INR) <i class="fa fa-caret-down"></i></th>
+                    </tr>
+                    <tbody>
+                      <!-- <tr ng-hide="table2loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr>
+ -->
+                      <tr  ng-repeat="elem in source_list">
+                        <td >{{$index}}</td>
+                        <td >{{elem.x}}</td>
+                        <td ><i class="fa fa-inr"></i> {{elem.y}}</td>
+                        <td ><span class="otext"><i class="fa fa-inr"></i> {{elem.z}}</span></td>
+
+                      </tr>
+                      
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+         <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="source_items" ng-model="source_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>    
+
+
+    </div>
+  </div>
+
+
+
+  <div class="tab-pane fade in active" ng-show="tab===3">
+
+    <div class="panel ">
+      <div class="panel-body progress-panel ">
+
+        <div class="row ">
+          <div class="col-lg-8 ">
+            <div class="panel">
+              <div class="panel-body progress-panel">
+                <div class="task-progress">
+                  <div class="btn-group pull-right fifth-nav">
+                        <button id='RevenueByCityChart_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-pdf ">&nbsp;</i>
+                        </button>
+                        <button id='RevenueByCityChart_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-img ">&nbsp;</i>
+                        </button>
+                        <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        </div>
+                        
+
+                  <h2>Location/Revenue</h2>
+
+                </div>
+
+                <div class="text-center bp10">
+                  <div class="btn-group  fifth-nav text-left">
+                    <!-- <button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+                      SELECT STATE <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu rq-dropdown-menu" role="menu">
+                      <li><a href="#">Uttar Pradesh</a></li>
+                      <li><a href="#">Bihar</a></li>
+                    </ul> -->
+                     <select ng-model="selectedRevenueCity" ng-options="item.x for item in topRevenueCity" class="btn btn-default dropdown-toggle rq-dropdown"></select>
+                    
+                  </div>
+
+
+
+                </div>
+
+
+                    <div id="RevenueByCityChart" class="text-center panel-content">
+                  <!-- <img src="images/img-gp38.png"  width="641"> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 graph-desc  pl5">
+
+            <div class="panel">
+              <div class="panel-body progress-panel">
+                <div class="task-progress mb0 task-progress-border">
+                  <div class="btn-group pull-right fifth-nav">
+                    <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                    <a href="#"> <i class="fa-trends fa-excel pull-right">&nbsp;</i></a>
+                  </div>
+
+                  <h2>Revenue by Location</h2>
+
+                </div>
+
+
+                <div class=" panel-content">
+                 <div class="table-data">
+                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mb0">
+
+                    <tbody>
+
+
+                      <tr ng-repeat = "elem in RevenueByLocation | limitTo:5">
+                        <td width="50%"><p class="tb-subheading">{{elem.x}}</p>
+                          <p><span class="value fs20 "><i class="fa fa-inr"></i> {{elem.a}}</span> <span ng-class="{true:'fs11 gtext',false:'fs11 rtext'}[elem.b >= 0]">{{elem.b}}%<i ng-class="{true:'fa fa-level-up ',false:'fa fa-level-down '}[elem.b >= 0]"></i></span></p></td>
+                          <td  ><div class="status progress-lg" style="width:100%">
+                            <div class="progress transparent progress-large no-radius" style="width:100%">
+                              <div ng-style="{width: elem.c+'%'}" class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%">{{elem.c}}%</div> 
+
+                              <!-- <div class="progress-bar progress-bar-gray" style="width: 80%"> 80%  </div> -->
+
+
+                            </div>
+
+                          </div></td>
+                        </tr>
+
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div  class="graph-line-info text-right">
+                       <ul class="list-inline list-unstyled">
+                        <li><span class="bg-blue bar-piller"></span> Organic</li>
+                        <li><span class="bg-gray bar-piller"></span> Inorganic</li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-lg-12">
+
+                <div class="panel-body progress-panel">
+                  <div class="task-progress border-top task-progress-noborder ">
+                     <div class="btn-group pull-right fifth-nav">
+                        <a href="#"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        
+                        <button type="button" ng-csv="LocationListCSV" csv-header="['Location', 'Revenue/User','Total Revenue (INR)', 'Organic','Inorganic','Organic Share(in %)','Change in Revenue(in %)']" filename="Revenue_City_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                      </div>
+                    <h2>Table</h2>
+                  </div>
+                  <div class="text-center panel-content">
+                   <div class="table-component">
+                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th>S.No.</th>
+                          <th>Location <i class="fa fa-caret-down"></i></th>
+                          <th>Revenue/User <i class="fa fa-caret-down"></i></th>
+                          <th>Total Revenue (INR) <i class="fa fa-caret-down"></i></th>
+                          <th>Organic <i class="fa fa-caret-down"></i></th>
+                          <th>Inorganic <i class="fa fa-caret-down"></i></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       <!--  <tr ng-hide="table3loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr>
+ -->
+                        <tr  ng-repeat="elem in location_list">
+                          <td>{{$index+1+(location_current_page-1)*10}}</td>
+                          <td><span>{{elem.x1}}</span></td>
+                          <td><i class="fa fa-inr"></i> {{elem.x2}}</td>
+                          <td><span class="otext"><i class="fa fa-inr"></i> {{elem.x3}}</span></td>
+                          <td><i class="fa fa-inr"></i> {{elem.x4}}</td>
+                          <td><i class="fa fa-inr"></i> {{elem.x5}} </td>
+                        </tr>
+                        
+
+
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+           
+            </div>
+          </div>
+          <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="location_items" items-per-page="10" ng-model="location_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>

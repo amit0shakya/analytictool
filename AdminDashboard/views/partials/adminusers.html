@@ -1,0 +1,230 @@
+
+
+<body class="cbp-spmenu-push rocq-mob-spmenupush " id="gallery" >
+  <div data-ng-controller="AuthenticationController">
+<nav class="navbar navbar-default navbar-static-top">
+  <form  data-ng-submit="logout()">
+      <div class="container">
+        <div class="navbar-top">
+  <div class="nav nav-pills pull-right">
+      <button type="submit" class="btn btn-orange tm10">Logout</button>
+          </div>       
+   <a href="#" class="brand"><img src="/admindb/images/logo-rocq.png" width="127" height="48"  ></a>
+        </div>
+         
+      </div>
+    
+    </form>
+    </nav>
+    </div>
+
+  <div data-ng-controller="TotalusersController">
+      <div class="jumbotron header header-blue">
+       <div class="container">
+       <div class="hd-block-holder">
+       <div class="col-lg-2  hd-block  ">
+       
+       <img src="/admindb/images/icon-user.png">
+        <p>USERS</p>
+
+  <h2>{{new_users}}
+ 
+  </h2>
+  
+
+       </div>
+       
+       <div class="col-lg-3 hd-block border-left-right">
+     
+       <img src="/admindb/images/icon-session.png">
+        <p>Sessions</p>
+        <h2>{{totalSessions}}</h2>
+        </div>
+        
+        <div class="col-lg-3 hd-block">
+     
+       <img src="/admindb/images/icon-event.png">
+        <p>Events</p>
+        <h2>{{totalEvents}}</h2>
+        </div>
+        
+        
+        <div class="col-lg-2 hd-block border-left-right">
+     
+       <img src="/admindb/images/icon-ping.png">
+        <p>Ping Push</p>
+        <h2>{{PingSent}}</h2>
+        </div>
+        
+        <div class="col-lg-2 hd-block">
+     
+       <img src="/admindb/images/icon-notification.png">
+        <p>Push Notifications</p>
+        <h2>{{PushNotifications}}</h2>
+        </div>
+        
+        
+       </div>
+       
+       <div class="media" style="display:none;">
+  
+  <div class="media-body text-center">
+ 
+<div class="user-source">
+ <div class="col-lg-6"><img src="/admindb/images/icon-apple.png">
+ <p>{{Ios_Users}}</p>
+ </div>
+  <div class="col-lg-6">
+  <img src="/admindb/images/icon-android.png">
+ <p>{{Android_Users}}</p>
+  
+  </div>
+   <div class="col-lg-4" style="display:none;">
+    <img src="/admindb/images/icon-window.png">
+ <p>{{Window_Users}}</p>
+   </div>
+ </div>
+
+
+    </div>
+</div>
+
+       
+ </div>
+      </div>
+
+<div class="container">
+ <div class="panel ">
+<div class="panel-body progress-panel">
+<div class="task-progress task-progress-noborder">
+
+<div class="pull-right date-update"><span id="demo">Last Update -</span>  
+
+
+<script>
+var d = new Date();
+d.setDate(d.getDate() -1);
+document.getElementById("demo").innerHTML ="Total Users till :  "+ d.toDateString();
+</script>
+
+
+
+</div>
+
+<h1>User List</h1>
+
+</div>
+
+<div class="text-center panel-content toggletextdelegate" >
+ <div class="table-component">
+ <table class=" header-fixed" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <thead>
+
+    <th width="40%">Application Name</th>
+    <th width="15%">Users</th>
+     <th width="15%">MAU</th>
+      <th width="15%">Monthly Campaign</th>
+      <th width="15%">Monthly notification</th>
+
+  </tr>
+  </thead>
+  <tbody >
+  <tr ng-repeat="elem in apps" ng-init="initializepopover()">
+  <td colspan="5" style="padding:0;">
+  <table style="margin-bottom:0;" class='toggletextdelegate2'>
+  <tr ng-if="$odd"></tr>
+   <tr >
+      <td width="40%">{{elem.application}}</td>
+       <td width="15%">{{elem.TotalDownload}}</td>
+       <td width="15%">{{elem.CurrentUsers}}</td>
+       <td width="15%">{{elem.pn}}</td>
+       <td width="15%"> {{elem.totalnotif}} &nbsp;&nbsp; <a href="" data-toggle="collapse" class="fs11 toggletext" data-target="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">Details</a></td>
+    </tr>
+    <tr ng-if="$odd"></tr>
+    <tr >
+    
+    <td colspan="5" style="padding:0;" >
+    <div class="collapse npw text-center toggletextref" id="collapseExample{{$index}}">
+    <div class="col-lg-2"> <p>Image <br>
+Notifications</p>
+<h3> {{elem.totalimagenotif}}</h3></div>
+ <div class="col-lg-2">
+  Normal <br>
+Notifications <h3>{{elem.normalnotif}}</h3>
+  </div>
+  <div class="col-lg-2">
+  In App <br>
+Message <h3>{{elem.inAppnotif}}</h3>
+  </div>
+  <div class="col-lg-2">
+  In App <br>
+Campaign
+ <h3>{{elem.inAppCampaignnotif}}</h3>
+  </div>
+  <div class="col-lg-2">
+  Image sent through server <h3>{{elem.imageservernotif}}</h3>
+  </div>
+  <div class="col-lg-2">
+  Image sent through URL <h3> {{elem.imgURLnotif}}</h3>
+  </div>
+  </div>
+    </td>
+    </tr>
+    
+  </table>
+  </td>
+  </tr>
+  
+     
+ 
+ 
+  </tbody>
+</table>
+</div>
+
+ </div>
+</div>
+</div>
+ </div>
+ 
+ <div class="container"><p class="copy">&copy; copyright Rocq 2015 16</p></div>
+
+
+
+<script src="/admindb/js/bootstrap.min.js"></script> 
+<style type="text/css">
+  .header-fixed {
+    width: 100% 
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 600px;
+}
+
+
+.header-fixed > thead > tr > th {
+    /*width: 20%;*/
+    float: left;
+}
+</style>
+
+</body>
+ </div>

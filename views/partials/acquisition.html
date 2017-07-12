@@ -1,115 +1,206 @@
-<div class="pageheader">
-    <div class="media">
-        <div class="pageicon pull-left">
-            <i class="fa fa-th"></i>
+<div ng-controller="AoverviewCtrl">
+    <div class="pageheader main-nav navbar-fixed-top">
+        <div class="media">
+            <div class="pageicon pull-left">
+                <i class="fa fa-th"></i>
+            </div>
+            <div class="media-body">
+                <ul class="breadcrumb">
+                    <!-- <li><a href=""><i class="fa fa-th"></i></a></li> -->
+                    <li>Acquisition</li>
+                </ul>
+                <h4>Acquisition</h4>
+            </div>
         </div>
-        <div class="media-body">
-            <ul class="breadcrumb">
-                <li><a href=""><i class="fa fa-th"></i></a></li>
-                <li>Acquisition</li>
-            </ul>
-            <h4>Acquisition</h4>
+        <div class="pull-right fourth-nav">
+            <input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+            <span class="glyphicon glyphicon-calendar calendar-icon"></span>
         </div>
     </div>
-    <div class="panel default-blue pull-right  date-time" >
-        <div class="symbol ">
-            <span class="day">Tuesday</span>
-            <span class="date">28</span> <span class="month">Oct</span>
-        </div>
-        <div class="value">
-            <p class="time-zone">PM</p>
-            <p class="time">06:25</p>
 
+    <div class="body-content">
+        <div class="state-overview row">
+            <div class="col-lg-4 col-sm-6">
+                <section class="panel blue ">
+                    <div class="symbol pull-right">
+                        <i class="fa-trends fa-pinstal">&nbsp;</i>
+                    </div>
+                    <div class="value">
+                        <p class="tp30">Paid Installs</p>
+                        <h1 class="count">{{ paid_installs }}</h1>
+                    </div>
+                </section>
+                <div class="panel-footer panel dblue ">
+                    <div class="col-lg-8 pftitle"><span>Top Source</span>{{paid_source}}</div>
+                    <div class="col-lg-4 pfvalue text-right">{{paid_count}}</div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <section class="panel red">
+                    <div class="symbol pull-right">
+                        <i class="fa-trends fa-oinstal">&nbsp;</i>
+                    </div>
+                    <div class="value">
+                        <p class="tp30">Organic Installs</p>
+                        <h1 class=" count2">{{organic_installs}}</h1>
+                    </div>
+                </section>
+                <div class="panel-footer panel dred">
+                    <div class="col-lg-8 pftitle"><span>Top keyword</span>{{top_term}}</div>
+                    <div class="col-lg-4 pfvalue text-right">{{term_count}}</div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <section class="panel green">
+                    <div class="symbol pull-right">
+                        <i class="fa-trends fa-uninstal">&nbsp;</i>
+                    </div>
+                    <div class="value">
+                        <p class="tp30">Uninstalls</p>
+                        <h1 class=" count3">{{uninstalls}}</h1>
+                    </div>
+                </section>
+                <div class="panel-footer panel dgreen">
+                    <div class="col-lg-8 pftitle"><span>Uninstalls</span>{{uninstall_source}}</div>
+                    <div class="col-lg-4 pfvalue  text-right">{{uninstall_count}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel">
+                    <div class="panel-body progress-panel">
+                        <div class="task-progress">
+                            <div class="btn-group pull-right fifth-nav">
+                                 <button id='PaidVsOrganic_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                                <i class="fa-trends fa-pdf ">&nbsp;</i>
+                                </button>
+                                <button id='PaidVsOrganic_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                                    <i class="fa-trends fa-img ">&nbsp;</i>
+                                </button>
+                                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                            </div>
+                            <h2>Paid / Organic</h2>
+                        </div>
+                        <div id="PaidVsOrganic" class="text-center panel-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel">
+                    <div class="panel-body progress-panel">
+                        <div class="task-progress">
+                            <div class="btn-group pull-right fifth-nav">
+                                  <button id='InstallsVsUninstalls_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                                <i class="fa-trends fa-pdf ">&nbsp;</i>
+                                </button>
+                                <button id='InstallsVsUninstalls_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                                    <i class="fa-trends fa-img ">&nbsp;</i>
+                                </button>
+                                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                            </div>
+                            <h2>Installs / Uninstalls</h2>
+                        </div>
+                        <div id="InstallsVsUninstalls" class="text-center panel-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-lg-4 col-sm-6">
+                <div class="panel">
+                    <div class="panel-body progress-panel media-plist">
+                       
+                        <div class="task-progress">
+                            <div class="btn-group pull-right fifth-nav">
+                               <button id='mapStates_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-pdf ">&nbsp;</i>
+                </button>
+                <button id='mapStates_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-img ">&nbsp;</i>
+                </button>
+                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                            </div>
+                            <h2>Paid Installs</h2>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                         
+                            
+                            <ul class="media-list media-plist  ">
+                                <li ng-repeat="source in paid_sources " class="media ">
+                                    <div class="pname wf bp10">{{ source.x}}   <div class="status-massage pull-right">{{ (source.y/paid_installs_raw)*100 | number:2 }}%</div></div> 
+                                    
+                                    
+                                    <div class="status wf bm10">
+                                        <div class="progress transparent progress-mid no-radius" style="width:100%">
+                                            <div  ng-style="{ 'width' : (source.y/paid_installs_raw)*100 + '%'}"class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="40%"></div>
+                                        </div>
+                                        
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+               <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <div class="btn-group pull-right fifth-nav">
+                            <button id='topKeyWords_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-pdf ">&nbsp;</i>
+                            </button>
+                            <button id='topKeyWords_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                                <i class="fa-trends fa-img ">&nbsp;</i>
+                            </button>
+                            <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                        </div>
+                        <h2>Organic Installs</h2>
+                    </div>
+                    <section  id="topKeyWords" class="panel  panel-transparent text-center  " style="margin-bottom:0; padding-bottom:0;" >
+                        <!-- <img src="images/img-gp2.png">  -->
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+           <div class="panel">
+            <div class="panel-body progress-panel media-plist">
+                <div class="task-progress">
+                    <div class="btn-group pull-right fifth-nav">
+                        <button id='mapStates_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-pdf ">&nbsp;</i>
+                </button>
+                <button id='mapStates_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-img ">&nbsp;</i>
+                </button>
+                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+                    </div>
+                    <h2>Uninstalls</h2>
+                </div>
+                
+                <div class="col-lg-12">
+                    <ul class="media-list media-plist ">
+                        <li ng-repeat="source in paid_sources_uninstalls " class="media ">
+                            <div class="pname wf bp10">{{ source.x}}   <div class="status-massage pull-right">{{ (source.y/paid_uninstalls_raw)*100 | number:2 }}%</div></div> 
+                            
+                            
+                            <div class="status wf bm10">
+                                <div class="progress transparent progress-mid no-radius" style="width:100%">
+                                    <div  ng-style="{ 'width' : (source.y/paid_uninstalls_raw)*100 + '%'}"class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="40%"></div>
+                                </div>
+                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="body-content" ng-controller="AoverviewCtrl">
-    <div class="state-overview row">
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel green">
-                <div class="symbol pull-right">
-                    <i class="fa-trends fa-pinstal">&nbsp;</i>
-                </div>
-                <div class="value">
-                    <p class="tp30">Paid Installs</p>
-                    <h1 class="count">{{ paid_installs }}</h1>
-                </div>
-            </section>
-            <div class="panel-footer panel dgreen">
-                <div class="col-lg-8 pftitle"><span>Top Source</span>{{paid_source}}</div>
-                <div class="col-lg-4 pfvalue text-right">{{paid_count}}</div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel red">
-                <div class="symbol pull-right">
-                    <i class="fa-trends fa-oinstal">&nbsp;</i>
-                </div>
-                <div class="value">
-                    <p class="tp30">Organic Installs</p>
-                    <h1 class=" count2">{{organic_installs}}</h1>
-                </div>
-            </section>
-            <div class="panel-footer panel dred">
-                <div class="col-lg-8 pftitle"><span>Top keyword</span>{{top_term}}</div>
-                <div class="col-lg-4 pfvalue text-right">{{term_count}}</div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <section class="panel blue">
-                <div class="symbol pull-right">
-                    <i class="fa-trends fa-uninstal">&nbsp;</i>
-                </div>
-                <div class="value">
-                    <p class="tp30">Uninstall</p>
-                    <h1 class=" count3">{{uninstalls}}</h1>
-                </div>
-            </section>
-            <div class="panel-footer panel dblue">
-                <div class="col-lg-8 pftitle"><span>Uninstall</span>{{uninstall_source}}</div>
-                <div class="col-lg-4 pfvalue  text-right">{{uninstall_count}}</div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="panel">
-                <div class="panel-body progress-panel">
-                    <div class="task-progress">
-                        <h1>PAID / ORGANIC</h1>
-                    </div>
-                    <div id="PaidVsOrganic" class="text-center panel-content">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="panel">
-                <div class="panel-body progress-panel">
-                    <div class="task-progress">
-                        <h1>INSTALLS / UNINSTALLS</h1>
-                    </div>
-                    <div id="InstallsVsUninstalls" class="text-center panel-content">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row ">
-        <div class="col-lg-4 col-sm-6">
-            <section id="paidSources" class="panel  panel-transparent text-center">
-                <!-- <img src="images/img-gp1.png">  -->
-            </section>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <section id="topKeyWords" class="panel  panel-transparent text-center">
-                <!-- <img src="images/img-gp2.png">  -->
-            </section>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-            <section id="uninstallSources" class="panel panel-transparent text-center">
-                <!-- <img src="images/img-gp3.png">  -->
-            </section>
-        </div>
-    </div>
+</div>
 </div>

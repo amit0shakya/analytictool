@@ -1,0 +1,132 @@
+<div class="no-aside-nav  default-container">
+<div class="page-container">
+<div class="sidebar-menu">
+<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left sidebar-menu toggle-others fixed collapsed" id="cbp-spmenu-s1">
+<div class="navbar " role="navigation">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/application"><img src="images/logo.png" width="127" height="48" class="logo-lg"> 
+          <img src="images/logo-small.png" class="logo-sm" ></a>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="main-content">
+<div ng-controller = "AuthenticationController">
+<div class="navbar main-nav navbar-fixed-top" role="navigation">
+        
+ 
+        <div class="navbar-collapse   " role="navigation">
+          <ul class="nav navbar-nav primary-nav">
+
+            <li><a href="/application">Application</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right secondary-nav">
+           <li class="setting"><a href="/invite"><i class="fa fa-cog fa-2x"></i></a></li>
+            <li class="dropdown notifications" ><div class="profile-pic"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="images/avatar-small.png" alt=""  height="35" width="34">  <span class="caret"></span> </a>
+            <ul class="dropdown-menu" role="menu">
+               <!--  <li><a href="#"><i class="fa fa-user"></i> &nbsp; Profile</a></li> -->
+                <li><a href="#" ng-click = "logout()"><i class="fa fa-sign-out"></i> &nbsp; Logout</a></li>
+              </ul>
+            </div>
+      
+            </li>
+          </ul>
+        </div>
+      
+    </div>
+    </div>
+    
+<div ng-controller = "ApplicationController">
+<div class="body-content">
+
+<div class="form-app sm-form">
+<div  ng-show="addapp_success == 0" class="panel" >
+<div class="panel-body">
+
+<div class="panel-content " >
+<div class="reg-form tm30">
+<form data-ng-submit="submitapp()">
+       <h2>CREATE A NEW APPLICATION</h2> 
+
+  <div class="form-group tm30">
+  <label>Pick a name for your application</label>
+  <input type="text" id="application" name="application" class="form-control" data-ng-model="credentials.application" placeholder="Enter Applications Name" required>
+  </div>
+  
+  <div class="form-group tm10">
+  <label>Select the category that best fits this application.</label>
+<select class="form-control" data-ng-model="credentials.category" required>
+<option value="">Please select</option>
+<option value="Books and Reference">Books and Reference</option>
+<option value="Business">Business</option>
+<option value="Comics">Comics</option>
+<option value="Communication">Communication</option>
+<option value="Education">Education</option>
+<option value="Entertainment">Entertainment</option>
+<option value="Finance">Finance</option>
+<option value="Health and Fitness">Health and Fitness</option>
+<option value="Libraries and Demo">Libraries and Demo</option>
+<option value="Lifestyle">Lifestyle</option>
+<option value="Live Wallpaper">Live Wallpaper</option>
+<option value="Media and Video">Media and Video</option>
+<option value="Medical">Medical</option>
+<option value="Music and Audio">Music and Audio</option>
+<option value="News and Magazines">News and Magazines</option>
+<option value="Personalization">Personalization</option>
+<option value="Photography">Photography</option>
+<option value="Productivity">Productivity</option>
+<option value="Shopping">Shopping</option>
+<option value="Social">Social</option>
+<option value="Sports">Sports</option>
+<option value="Tools">Tools</option>
+<option value="Transportation">Transportation</option>
+<option value="Travel and Local">Travel and Local</option>
+<option value="Weather">Weather</option>
+<option value="Widgets">Widgets</option>
+<option value="Games">Games</option>
+</select>
+  
+  </div>
+     
+<div class="form-group tm10">
+  <label>Select the device category </label>
+<select class="form-control" data-ng-model="credentials.ostype" required>
+<option value="">Please select</option>
+<option value="Android">Android</option>
+<option value="iOS">iOS</option>
+<option value="Windows">Windows</option>
+</select>
+  </div>
+   <div class="form-group text-left tm10 bm30 ">
+  <button type="submit" class="btn btn-blue fblock btn-lg" ng-class="{disabled: is_demo()}">CREATE</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+<div ng-show="addapp_success == 1">
+<p class="bg-success pw20"><span><strong>Congratulations!!</strong> </span>
+Your new application "{{credentials.application}}" was successfully created.</p>
+<div class="panel">
+<div class="panel-body">
+<div class="panel-content ">
+<div class="reg-form  ">
+<p class="tm20" ><span class="fs12 graytext">Your unique application key is:</span> <strong class="otext">{{credentials.app_secret}}</strong></p>
+<p class="tm20 border-top tp20">Download the rocQ SDK for {{credentials.ostype}}</p>
+  <button type="button" ng-click="download_sdk(credentials.app_secret,credentials.ostype)" class="btn btn-blue bm30 ">Download</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

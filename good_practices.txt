@@ -1,0 +1,7 @@
+1) Don't keep unnecessary local variables as scope variables
+
+2) Try To keep the function size small
+
+3) Try ur best not to repeat the code
+
+4) Don't keep to many files in a folder

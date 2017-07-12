@@ -1,4 +1,5 @@
-<div class="pageheader">
+<div ng-controller= "UEoverviewCtrl">
+<div class="pageheader main-nav navbar-fixed-top">
     <div class="media">
         <div class="pageicon pull-left">
             <i class="fa fa-user"></i>
@@ -11,19 +12,8 @@
             <h4>User Engagement</h4>
         </div>
     </div>
-    <div class="panel default-blue pull-right  date-time" >
-        <div class="symbol ">
-            <span class="day">Tuesday</span>
-            <span class="date">28</span> <span class="month">Oct</span>
-        </div>
-        <div class="value">
-            <p class="time-zone">PM</p>
-            <p class="time">06:31</p>
-
-        </div>
-    </div>
 </div>
-<div class="body-content" ng-controller= "UEoverviewCtrl">
+<div class="body-content" >
     <div class="state-overview row">
         <div class="col-lg-4 col-sm-6">
             <section class="panel panel-block p-blue text-center">
@@ -108,5 +98,5 @@
             </div>
         </div>
     </div>
-
+</div>
 </div>

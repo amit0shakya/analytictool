@@ -1,0 +1,184 @@
+<div class="no-aside-nav  default-container">
+<div class="page-container">
+<div class="sidebar-menu">
+<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left sidebar-menu toggle-others fixed collapsed" id="cbp-spmenu-s1">
+<div class="navbar " role="navigation">
+
+        <div class="navbar-header">
+          
+          <a class="navbar-brand" href="/application"><img src="images/logo.png" width="127" height="48" class="logo-lg"> 
+          <img src="images/logo-small.png" class="logo-sm" ></a>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="main-content">
+<div ng-controller = "AuthenticationController">
+<div class="navbar main-nav navbar-fixed-top" role="navigation">
+        
+ 
+        <div class="navbar-collapse   " role="navigation">
+          <ul class="nav navbar-nav primary-nav">
+
+            <li><a href="/application">Application</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right secondary-nav">
+            <li class="setting"><a href="/invite"><i class="fa fa-user-plus fa-2x"></i></a></li>
+            <li class="dropdown notifications" ><div class="profile-pic"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="images/avatar-small.png" alt=""  height="35" width="34">  <span class="caret"></span> </a>
+            <ul class="dropdown-menu" role="menu">
+               <!--  <li><a href="#"><i class="fa fa-user"></i> &nbsp; Profile</a></li> -->
+                <li><a href="#" ng-click = "logout()"><i class="fa fa-sign-out"></i> &nbsp; Logout</a></li>
+              </ul>
+            </div>
+      
+            </li>
+          </ul>
+        </div>
+      
+    </div>
+    </div>
+    
+<div ng-controller = "ApplicationController">
+<div class="body-content" ng-init="init_for_invite_page()">
+
+<div class="form-app md-form">
+
+<div class="alert alert-success alert-dismissible mb0" style="display:none" role="alert" id="Success">
+<button type="button" class="close" onclick="$('#Success').hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span id="success-msg">Success!</span>
+</div >
+
+ <div class="alert alert-danger alert-dismissible mb0" style="display:none" role="alert" id="Error" >
+                            <button type="button" class="close" onclick="$('#Error').hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span id="error-msg">An error occured!</span>
+</div>
+<div class="form form-cminfo bg-transparent" >
+  
+                
+<div  ng-show="addapp_success == 0"  >
+
+<form data-ng-submit="grant_access()">
+
+  <div class="form-header  col-lg-2">
+  <h2 class="tm0">Invite People</h2> 
+</div>
+  <div class="form-group  col-lg-3">
+ 
+  <input type="email" ng-model="newuser.username" name="application" class="form-control"  placeholder="Email id" required>
+  </div>
+  
+  <div class="form-group col-lg-3">
+ 
+<select class="form-control form-control-file"  ng-model="newuser.accesstype" required>
+<option value="">Select Permission</option>
+<option value="Admin">Admin</option>
+<option value="Editor">Editor</option>
+<option value="Viewer">Viewer</option>
+
+</select>
+  
+  </div>
+  <div class="form-group col-lg-2">
+  
+<div     
+    isteven-multi-select
+    input-model="adminapps"
+    output-model="selectedapps"
+    button-label="application"
+    item-label="application"
+    tick-property="ticked"
+    max-labels="1"
+    max-height="210px"
+>
+</div>
+   
+ 
+</div>
+   <div class="form-group text-left  bm10 col-lg-1">
+  <button type="submit" class="btn button-blue-border no-radius " ng-class="{disabled: is_demo()}">Grant Access</button>
+  </div>
+  
+</form>
+
+
+
+</div>
+
+                
+
+</div>
+
+
+<div class="row">
+            <div class="col-lg-12 ">
+                <div class="panel">
+                    <div class="panel-body progress-panel">
+                        <div class="task-progress task-progress-noborder">
+                        <div class="pull-right fourth-nav ">
+<div class="right-inner-addon">
+<i class="glyphicon glyphicon-search"></i>
+<input type="search"  class="form-control" ng-model="search" placeholder="Search" required="">
+</div>
+</div>
+
+                            <h2>Table</h2>
+                        </div>
+
+                        <div class="text-center panel-content">
+                         <div class="table-component">
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <thead>
+                                  <tr>
+                                    <th width="6%">S.N.</th>
+                                    <th>Name</th>
+                                    <th>App</th>
+                                    <th>Access</th>
+                                    <th>Revoke</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-hide="table1loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr>
+<!-- | startFrom:(visitor_current_page-1)*items_per_page1 | limitTo:items_per_page1 -->
+                              <tr ng-show="table1loaded" dir-paginate="item in granted_accesses | filter:search|itemsPerPage:10">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.username}}</td>
+                                 <td>{{item.application}}</td>
+                                <td>{{item.accesstype}}</td>
+                                <td><a ng-show="item.accesstype!='Revoked'" href="" ng-click="revoke_access(item)" >revoke</a></td>
+                              </tr>
+
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls
+
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" >
+    </dir-pagination-controls>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

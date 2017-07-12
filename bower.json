@@ -1,8 +1,13 @@
 {
-	"name": "NewDashboard",
-	"version": "0.3.2",
-	"description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-	"dependencies": {
-		"angular-daterangepicker": "latest"
-	}
+  "name": "NewDashboard",
+  "version": "0.3.2",
+  "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+  "dependencies": {
+    "angular-daterangepicker": "latest",
+    "angular-jqcloud": "latest",
+    "ng-csv": "latest"
+  },
+  "resolutions": {
+    "angular": "1.x"
+  }
 }

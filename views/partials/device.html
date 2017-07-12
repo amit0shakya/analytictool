@@ -1,37 +1,34 @@
-<div class="pageheader">
+<div ng-controller="DeviceCtrl">
+<div class="pageheader main-nav navbar-fixed-top">
   <div class="media">
     <div class="pageicon pull-left">
       <i class="fa fa-bar-chart-o"></i>
     </div>
   <div class="media-body">
     <ul class="breadcrumb">
-      <li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
       <li>Overall Analysis</li>
+      <li>Device</li>
     </ul>
-    <h4>Overall Analysis Devices</h4>
+    <h4>Device</h4>
   </div>
   </div>
-<div class="panel default-blue pull-right  date-time" >
-<div class="symbol ">
- <span class="day">Monday</span>
- <span class="date">10</span> <span class="month">Feb</span>
-</div>
-<div class="value">
-<p class="time-zone">PM</p>
-<p class="time">03:27</p>
-</div>
-</div>
+
+<div class="pull-right">
+      <input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
 </div>
 
-<div class="body-content" ng-controller="DeviceCtrl">
+</div>
+
+<div class="body-content">
 <div class="state-overview row">
 <div class="col-lg-4 col-sm-6">
-<section class="panel green wtext">
+<section class="panel blue  wtext">
 <div class="value">
-<p>Top Device modal</p>
-<h1 class=" count2">{{oatop20Devices[0].x}}</h1>
+<p>Most Used Device</p>
+<h1 class=" count2 bm0">{{oa_top_device.y}} </h1>
+<span class="fs12">{{oa_top_device.x}}</span>
 </div>
-  <div class=" pull-right tm22">
+  <div class=" pull-right tm30">
     <img src="images/icon-mobile.png" ></div>
 
 </section>
@@ -43,21 +40,21 @@
 <div class="col-lg-4 col-sm-6">
 <section class="panel red wtext">
 <div class="value">
-<p>Top Decise vendor</p>
-<h1 class=" count2">{{oatop20Devices[0].y}}</h1>
+<p>Chief Vendor</p>
+<h1 class=" count2">{{top_manu[0].x}}</h1>
 </div>
-  <div class=" pull-right tm22">
+  <div class=" pull-right tm30">
     <img src="images/icon-mobile.png" ></div>
 </section>
 
 </div>
 <div class="col-lg-4 col-sm-6">
-<section class="panel blue wtext">
+<section class="panel green  wtext">
 <div class="value">
-<p>Total no of Device</p>
-<h1 class=" count2">{{oatop20Devices[0].z}}</h1>
+<p>Total Devices</p>
+<h1 class=" count2">{{oa_total_devices}}</h1>
 </div>
-  <div class=" pull-right tm22">
+  <div class=" pull-right tm30">
     <img src="images/icon-mobile.png" ></div>
 </section>
 
@@ -76,23 +73,16 @@
 
 <div class="panel-body progress-panel">
 <div class="task-progress">
-<div class=" fifth-nav">
-
-
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
-Select Device <i class="fa fa-angle-down"></i>
-</button>
-<ul class="dropdown-menu rq-dropdown-menu" role="menu">
-<li><a href="#">Device 1</a></li>
-<li><a href="#">Device 2</a></li>
-</ul>
-</div>
-
-
-<h1>Device</h1></div>
-
- 
+    <div class="btn-group pull-right fifth-nav">
+        <button id='OATopDevices_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+            <i class="fa-trends fa-pdf ">&nbsp;</i>
+        </button>
+        <button id='OATopDevices_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+            <i class="fa-trends fa-img ">&nbsp;</i>
+        </button>
+        <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+    </div>
+    <h2>Top Devices</h2>
 </div>
 
 <div id = "OATopDevices" class="text-center panel-content">
@@ -113,7 +103,12 @@ Select Device <i class="fa fa-angle-down"></i>
 <div class="panel">
 <div class="panel-body progress-panel">
 <div class="task-progress task-progress-noborder">
-<h1>Devices </h1>
+<div class="btn-group pull-right fifth-nav">
+    <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+            
+  <button type="button" ng-csv="OADeviceStatsCSV" csv-header="['Device', 'New Users','Active Users','Session']" filename="Devices_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+</div>
+<h2>Devices List</h2>
 </div>
 
 <div class="text-center panel-content">
@@ -124,20 +119,32 @@ Select Device <i class="fa fa-angle-down"></i>
         <th>Device</th>
         <th>New Users</th>
         <th>Active Users</th>
-        <th>Sessions</th>
+<!--        <th>Sessions</th>-->
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="elem in devicestatslist">
+ <!--  <tr ng-hide="table1loaded">
+        <td colspan="5" >
+            <p class="text-center"><img src="images/ajax-loader.gif"></p>
+       </td>
+  </tr>
+ -->
+
+      <tr  ng-repeat="elem in filtereddeviceslist">
         <td>{{ elem.x }}</td>
         <td>{{ elem.y }}</td>
         <td>{{ elem.z }}</td>
-        <td>{{ elem.a }}</td>
+<!--        <td>{{ elem.a }}</td>-->
       </tr>
     </tbody>
   </table>
-  <pagination total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm" boundary-links="true"></pagination>
 </div>
+</div>
+
+  <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
+
+
 </div>
 </div>
 </div>

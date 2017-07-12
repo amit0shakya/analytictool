@@ -667,8 +667,8 @@
         },
 
         hideCalendars: function() {
-            this.container.removeClass('show-calendar');
-            this.element.trigger('hideCalendar.daterangepicker', this);
+       //     this.container.removeClass('show-calendar');
+       //     this.element.trigger('hideCalendar.daterangepicker', this);
         },
 
         // when a date is typed into the start to end date textboxes
@@ -707,6 +707,8 @@
             var label = e.target.innerHTML;
             this.chosenLabel = label;
             if (label == this.locale.customRangeLabel) {
+                this.container.find('.ranges li').removeClass('active');
+                this.chosenLabel = this.container.find('.ranges li:last').addClass('active').html();
                 this.showCalendars();
             } else {
                 var dates = this.ranges[label];
@@ -1027,7 +1029,7 @@
                 html += '<th></th>';
 
             if (!minDate || minDate.isBefore(calendar.firstDay)) {
-                html += '<th class="prev available"><i class="fa fa-arrow-left icon-arrow-left glyphicon glyphicon-arrow-left"></i></th>';
+                html += '<th class="prev available"><i class=" glyphicon glyphicon-arrow-left"></i></th>';
             } else {
                 html += '<th></th>';
             }

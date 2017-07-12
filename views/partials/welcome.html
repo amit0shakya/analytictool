@@ -1,0 +1,235 @@
+<div class="page-container" data-ng-controller="AuthenticationController">
+	<div class="sidebar-menu">
+		<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left sidebar-menu toggle-others fixed collapsed" id="cbp-spmenu-s1">
+			<div class="navbar " role="navigation">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/application">
+						<img src="images/logo.png" width="127" height="48" class="logo-lg">
+						<img src="images/logo-small.png" class="logo-sm" > 
+					</a>
+				</div>
+				<div class="clearfix nav-bar">
+					<div class="user-info-wrapper">
+						<div class="profile-wrapper">
+							<div ng-if = "app.ostype == 'Android'"> 
+					          <img  src="images/avatar-android.png" >
+					      </div>
+					      <div ng-if = "app.ostype == 'iOS'"> 
+					           <img  src="images/avatar-ios.png" >
+					      </div>
+					      <div ng-if = "app.ostype == 'Windows'"> 
+					           <img  src="images/avatar-window.png" >
+					      </div> 
+						</div>
+						<div class="user-info">
+							<div class="greeting">&nbsp</div>
+							<div class="username"><span class="semi-bold">{{appname}}</span></div>
+							<div class="status"><span></span></div>
+						</div>
+					</div>
+					<div id="sidebar">
+						<div id="scrollbox4">
+							<div id='cssmenu'>
+								<ul class="nav" >
+									<li class="selected"><a href="" ng-click="reloadPage('dashboard.html')" class="nav-link"><i class="fa fa-tachometer "></i> &nbsp; <i class="nav-text">Overview</i> </a>
+									</li>
+									<li  ><a href=""  class="nav-link"><i class="fa fa-cog"></i> &nbsp; <i class="nav-text">Trends</i> <span>&nbsp;</span></a>
+										<ul>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('trends.html')"> Overview</a></li>
+											<!-- <li><a href="" class="sub-nav" ng-click="reloadPage('newusers.html')"> New Users</a></li> -->
+											<li><a href="" class="sub-nav" ng-click="reloadPage('activeusers.html')"> Active Users</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('sessions.html')">Sessions</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('cohort.html')">Cohort</a></li>
+										</ul>
+									</li>
+									<li ><a href="" class="nav-link"><i class="fa fa-th"></i> &nbsp; <i class="nav-text">Acquisition</i>  <span>&nbsp;</span></a>
+										<ul>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('acquisition.html')"> Overview</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('installs.html')">Installs</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('uninstalls.html')"> UnInstalls</a></li>
+										</ul>
+									</li>
+									<li ><a href="" class="nav-link"><i class="fa fa-bar-chart-o"></i>&nbsp; <i class="nav-text">Overall Analysis</i> <span>&nbsp;</span></a>
+										<ul>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('overall-analysis.html')"> Overview</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('device.html')"> Device</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('network.html')"> Network</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('location.html')"> Location</a></li>
+										</ul>
+									</li>
+									 <li ><a href="" class="nav-link"><i class="fa fa-group"></i>&nbsp; <i class="nav-text">User Engagement</i> <span>&nbsp;</span></a>
+										<ul>
+											 <li><a href="" class="sub-nav" ng-click="reloadPage('revenue.html')"> Revenue</a></li> 
+                                            <li><a href="" class="sub-nav" ng-click="reloadPage('segmentation.html')"> Segmentation</a></li>
+                                            <li><a href="" class="sub-nav" ng-click="reloadPage('event.html')"> Events</a></li>
+                                            <li><a href="" class="sub-nav" ng-click="reloadPage('realtimeevents.html')">Real Time Events</a></li>
+                                             <li><a href="" class="sub-nav" ng-click="reloadPage('screenflow.html')"> Screen Flow</a></li>
+										</ul>
+									</li>  
+
+									<li><a href="" class="nav-link"><i class="fa fa-calendar"></i> &nbsp; <i class="nav-text">Push Notification</i> <span>&nbsp;</span></a>   
+										<ul>
+
+
+											<li><a href="" class="sub-nav" ng-click="reloadPage('send-push.html')"> Sendpush</a></li>
+
+											
+                                     <li><a href="" class="sub-nav" ng-click="reloadPage('push-segmentation.html')"> Send Push Segmentation</a></li>
+                                     
+                                       <li><a href="" class="sub-nav" ng-click="reloadPage('custom-segmentation.html')"> Custom Segmentation</a></li>
+
+
+                                            <li><a href="" class="sub-nav" ng-click="reloadPage('send-push-report.html')"> Send Push Report</a></li>
+                                            <!-- <li><a href="" class="sub-nav" ng-click="subPage='partials/In-App-Message.html'"> In App Message</a></li> -->
+										</ul>
+									</li>
+									<li><a href="" class="nav-link"><i class="fa fa-newspaper-o"></i>&nbsp; <i class="nav-text">Ad Campaigns</i> <span>&nbsp;</span></a>
+										<ul>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('campaigns.html')">campaigns</a></li>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('campaignsoverview.html')">campaigns Report</a></li>
+                                            <li><a href="" class="sub-nav" ng-click="reloadPage('campaigns-inner.html')">campaigns Report Inner</a></li>
+										</ul>
+									</li>
+									<li ng-hide="app.accesstype=='Viewer'"><a href="" class="nav-link"><i class="fa fa-cog"></i>&nbsp; <i class="nav-text">Configuration</i> <span>&nbsp;</span></a>
+										<ul>
+											<li><a href="" class="sub-nav" ng-click="reloadPage('pushconfiguration.html')">Push Configuration</a></li>
+										</ul>
+									</li>
+									<!-- <li class="last"><a href=""><i class="fa fa-sign-out"></i> &nbsp; <i class="nav-text">Go Outside</i></a></li> -->
+									
+								</ul>
+							</div>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="main-content">
+		<div class="navbar main-nav navbar-fixed-top" role="navigation">
+			<div class="navbar-collapse ">
+				<ul class="nav navbar-nav primary-nav">
+					<li><section class="buttonset">
+						<button id="showLeftPush" onclick="hide_show_navigation_menu()"><span class="rq rq-toggle rq-2x"></span></button>	</section></li>
+				
+					<li><a href="/application">Application</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right secondary-nav">
+            <li class="setting"><a href="/invite"><i class="fa fa-user-plus	 fa-2x"></i></a></li>
+				<li class="dropdown notifications" >
+						<div class="profile-pic"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="images/avatar-small.png" alt=""  height="35" width="34">  <span class="caret"></span> </a>
+							<ul class="dropdown-menu" role="menu">
+								
+								<li><a href="#" ng-click = "logout()"><i class="fa fa-sign-out"></i> &nbsp; Logout</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+        
+		<ng-include src = "subPage" ng-init="subPage = 'partials/dashboard.html'"> </ng-include>
+		<!-- <div ng-view></div> -->
+	</div>
+	
+</div>
+	<script>
+		$(document).ready(function(){
+
+  $('#cssmenu > ul > li:has(ul)').addClass("has-sub");
+ $('.cbp-spmenu-open #cssmenu > ul > li > a').click(function() {
+
+ });
+ 
+  $('#cssmenu > ul > li:first-child > a').click(function() {
+    $('#cssmenu li ul').slideUp('normal');
+  });
+	  
+  $('#cssmenu > ul > li > a').click(function() {
+    var checkElement = $(this).next();
+    
+    $('#cssmenu li').removeClass('selected');
+    $(this).closest('li').addClass('selected');	
+    
+    
+    if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+      $(this).closest('li').removeClass('selected');
+      checkElement.slideUp('normal');
+    }
+    
+    if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+      $('#cssmenu ul ul:visible').slideUp('normal');
+      checkElement.slideDown('normal');
+    }
+    
+    if (checkElement.is('ul')) {
+      return false;
+    } else {
+      return true;	
+    }		
+  });
+
+});
+
+
+$(document).ready(function(){	
+      var win = $(this);
+      if (win.width() < 800) { 
+     $('body').addClass('mob-aside-nav');
+      }
+    else
+    {
+      $('body').removeClass('mob-aside-nav');
+    }
+});	
+	
+	
+
+$(document).ready(function(){
+ var heroHeight = $(window).height()-162+'px';
+ var windowHeight = $(window).height();
+//$('#sidebar').height()
+
+$('#scrollbox4').css({'height' : ( heroHeight ) });
+
+
+
+$('#scrollbox4').enscroll({
+    verticalTrackClass: 'track4',
+    verticalHandleClass: 'handle4',
+    minScrollbarLength: 28
+});
+
+
+
+ var heroHeight1 = $(window).height()-162+'px';
+ var windowHeight = $(window).height();
+//$('#sidebar').height()
+
+$('#scrollbox5').css({'height' : ( heroHeight1 ) });
+
+
+
+$('#scrollbox5').enscroll({
+    verticalTrackClass: 'track4',
+    verticalHandleClass: 'handle4',
+    minScrollbarLength: 28
+});
+
+
+
+$('#sidebar .sub-nav').click(function() {
+  $('#sidebar .sub-nav').removeClass('activenav');    
+  $(this).addClass('activenav');
+}); 
+
+});
+
+
+$('#cssmenu .sub-nav').click(function(){
+    $("html, body").animate({ scrollTop: 0 }, 600);
+    return false;
+ });
+	</script>
+  
+

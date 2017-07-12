@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<title>rocQ</title>
+<link rel="stylesheet"  href="home/css/style.css" type="text/css" media="all">
+<link rel="stylesheet"  href="home/css/font-awesome.min.css?ver=1.0.0" type="text/css" media="all">
+<link rel="stylesheet" id="himalayas-google-fonts-css" href="//fonts.googleapis.com/css?family=Crimson+Text%3A700%7CRoboto%3A400%2C700%2C900%2C300&amp;ver=4.4.1" type="text/css" media="all">
+<link rel="stylesheet" href="home/css/magnific-popup.css?ver=1.0.0" type="text/css" media="all">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css?ver=4.5.0" type="text/css" media="all">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js" ></script>
+          
+<script>
+ $(document).ready(function(e){
+           $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
+           var formMiddle=(($(window).height())/2)-($(".form-div").height()/2)
+           $(".form-div").css({"top":formMiddle+"px"})
+           
+           $(".fixed-aside-nav").click(function(){
+                    showform();
+           })
+           
+           $(".closebtn").click(function(){
+                    hideform();
+           })
+           
+          function showform(){
+                    $(".form-container").css({"display":"block"})
+                    $(".form-div").animate({"opacity":"1"},{"duration":1000})
+                    $(".closebtn").animate({"opacity":"1"},{"duration":500})
+                    $(".lightboxbg").animate({"opacity":".95"});
+                    
+                    
+                    setTimeout(function(){
+                              $(".form-div").css({"opacity":"1"});
+                            //  $("body,html").css({'overflow':'hidden'});
+                    },900)
+                    
+                   $(".fixed-aside-nav").animate({"right":"-80px","opacity":"0"})
+                    
+          }
+           
+           
+           function hideform(){
+                    
+                     $(".form-div").animate({"opacity":"0"},{"duration":1000})
+                     $(".closebtn").animate({"opacity":"0"},{"duration":500})
+                     $(".lightboxbg").animate({"opacity":"0"});
+                     
+                     setTimeout(function(){
+                              $(".form-div").css({"opacity":"1"});
+                             // $("body,html").css({'overflow':'auto'});
+                               $(".form-container").css({"display":"none"})
+                    },1000)
+                     
+                     $(".fixed-aside-nav").animate({"right":"5px","opacity":"1"})
+           }
+          /* 
+           $(".contactbtn").click(function(e){
+              e.preventDefault();
+              showform();
+           })*/
+           
+ });
+
+          
+          
+$(window).resize(function(e){
+          $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
+           $(".form-div").css({"top":(($(window).height()-500)/2)+"px"})
+})
+</script>
+          
+<script type="text/javascript">
+   $(document).ready(function() {
+             
+   $(".form-div input, .form-div textarea").focus(function(e){
+          $(this).removeClass("showerror");  
+   })
+             
+             
+$('#form-button-submit').on('click', function(e){
+   e.preventDefault();
+          
+   
+
+   var name = $('input#your-name').val(),
+       email = $('input#your-email').val(),
+       subject = $('input#your-subject').val(),
+       message = $('textarea#your-message').val(),
+       formData = 'name=' + name + '&email=' + email + '&subject=' + subject + '&message=' + message;
+
+       // Form Validation
+        $('#response-messages').removeClass('wpcf7-display-none')
+         $('#response-messages').addClass('wpcf7-display-block')
+        $('#response-messages').addClass('wpcf7-validation-errors')
+         $('#response-messages').removeClass('wpcf7-response-output')
+       if (!name) {
+         $('#response-messages').html('Please Enter your Name');      
+         $("#your-name").addClass("showerror");
+         return;
+       }
+       else if (!isEmail(email)) {
+          if(email.length==0){
+           $('#response-messages').html('Please Enter your Email')
+          }else{
+           $('#response-messages').html('Please Check your Email')           
+          }       
+         
+          $("#your-email").addClass("showerror");
+         return false;
+       }
+       else if (!message) {
+         $('#response-messages').html('Please Enter your Message')
+         return;
+       }
+       else{
+         $('#response-messages').addClass('wpcf7-display-none')
+         $('#response-messages').removeClass('wpcf7-display-block')
+         $('#ajax-loader').show()
+       }
+
+
+    function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+   }
+    
+  
+          
+    $.ajax({
+      type: 'post',
+      url: '/contactus',
+      data: formData,
+      success: function(results) {
+         $('#ajax-loader').hide()
+         if (results=='success') {
+          document.location.pathname='/thankyou.html'
+               // $('#response-messages').removeClass('wpcf7-display-none')
+               // $('#response-messages').addClass('wpcf7-display-block')
+               // $('#response-messages').removeClass('wpcf7-validation-errors')
+               // $('#response-messages').addClass('wpcf7-response-output')
+               // $('#response-messages').html('Your message was sent successfully. Thanks.');
+         };
+      }
+    });
+});
+});
+   </script>
+          
+          
+</head>
+<body class="home page">
+          <div class="form-container">
+                    <div class="closebtn">x</div>
+<div class="form-div">
+<div class="form-head"><span>CONTACT</span><span>US</span> </div>
+<form action="/contactus" method="post" class="wpcf7-form" onsubmit="return false;">
+<div style="display: none;">
+          <input type="hidden" name="_wpcf7" value="55">
+          <input type="hidden" name="_wpcf7_version" value="4.3.1">
+          <input type="hidden" name="_wpcf7_locale" value="en_US">
+          <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f55-o1">
+          <input type="hidden" name="_wpnonce" value="649fcebd00" required>
+</div>
+<!--<p>Your Name (required)<br>-->
+          <span class="wpcf7-form-control-wrap your-name">
+          <input type="text" id="your-name" value="" placeholder="Your Name (required)" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false">
+          </span> 
+</p>
+<!--<p>Your Email (required)<br>-->
+          <span class="wpcf7-form-control-wrap your-email">
+                    <input type="email" id="your-email" placeholder="Your Email (required)" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" required>
+          </span> </p>
+<!--<p>Subject<br>-->
+          <span class="wpcf7-form-control-wrap your-subject">
+                    <input type="text" id="your-subject" value=""  placeholder="Subject" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false">
+          </span> 
+</p>
+<!--<p>Your Message<br>-->
+          <span class="wpcf7-form-control-wrap your-message">
+                    <textarea id="your-message" cols="40" rows="10" placeholder="Your Message" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false"></textarea>
+          </span> </p>
+<p>
+          <input type="submit" value="Send" id="form-button-submit"class="wpcf7-form-control wpcf7-submit">
+          <img src='home/images/ajax-loader.gif' style="display:none" id = "ajax-loader">
+          <div class="wpcf7-response-output wpcf7-display-none" id="response-messages"></div>
+          </p>
+</form>
+                              
+                    </div>
+                    <div class="lightboxbg"></div>
+          </div>   <!-- LIGHT BOX ENDS  -->
+          
+            <div id="page" class="hfeed site">
+            <header id="masthead" class="site-header clearfix" role="banner">
+            <div class="header-wrapper clearfix stick transparent">
+			<div class="tg-container">
+				<div class="logo">
+						<a href="/" title="rocQ" rel="home">
+                        <img src="home/images/logo-rocq.png" alt="rocQ">
+                        </a>
+					</div> <!-- logo-end --> 
+				
+				<div class="menu-search-wrapper">
+
+					 <!-- home-search-end -->
+
+					<nav id="site-navigation" class="main-navigation" role="navigation">
+                    <h4 class="menu-toggle hide"></h4>
+						<div class="menu-primary-container"><ul id="menu-menu" class="menu"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-6"><a href="#home">Home</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-19"><a href="#features">Features</a></li>
+<li id="menu-item-150" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-150"><a href="https://docs.rocq.io/">Documentation</a></li>
+<!-- <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-7"><a href="#about">About</a></li> -->
+<li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="pricing.html">Pricing</a></li>
+<li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-27"><a href="#blog">blog</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-26 contactbtn">
+          <a href="contact.html">contact</a></li>
+<li id="menu-item-219" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-219"><a href="/login">Sign In</a></li>
+</ul></div>					</nav><!-- nav-end --></div> <!-- Menu-search-wrapper end -->
+			</div><!-- tg-container -->
+		</div><!-- header-wrapepr end -->
+
+		
+   <div id="home" class="slider-wrapper">
+
+      <div class="bxslider">
+                     <div class="slides">
+
+               <div class="parallax-overlay"> </div>
+
+               <figure><img width="1600" height="780" src="home/images/banner-uninstall.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="uninstall" srcset="home/images/banner-uninstall-300x146.jpg 300w,home/images/banner-uninstall-1024x499.jpg 1024w, home/images/banner-uninstall.jpg 1600w" sizes="(max-width: 1600px) 100vw, 1600px"></figure><div class="tg-container">
+
+                                             <h3 class="caption-title">
+                           <span>Discover a clearer picture of uninstalls</span>
+                        </h3>
+                                             <div class="caption-sub">
+                           Identify what causes your users to lose interest in your app                        </div>
+
+                      
+                                       </div>
+                           </div>
+                        <div class="slides">
+
+               <div class="parallax-overlay"> </div>
+
+               <figure><img width="1600" height="780" src="home/images/banner-install.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="install" srcset="home/images/banner-install-300x146.jpg 300w, home/images/banner-install-1024x499.jpg 1024w, home/images/banner-install.jpg 1600w" sizes="(max-width: 1600px) 100vw, 1600px"></figure><div class="tg-container">
+
+                                             <h3 class="caption-title">
+                           <span>Track your installs &amp; attribution</span>
+                        </h3>
+                                             <div class="caption-sub">
+                           Monitor your app conversions &amp; measure your Facebook adverts ROI                        </div>
+
+                       
+                                       </div>
+                           </div>
+                        <div class="slides">
+
+               <div class="parallax-overlay"> </div>
+
+               <figure><img width="1600" height="780" src="home/images/banner-user.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="user2" srcset="home/images/banner-user-300x146.jpg 300w, home/images/banner-user-1024x499.jpg 1024w, home/images/banner-user.jpg 1600w" sizes="(max-width: 1600px) 100vw, 1600px"></figure><div class="tg-container">
+
+                                             <h3 class="caption-title">
+                           <span>Understand users&rsquo; activity &amp; behavior</span>
+                        </h3>
+                                             <div class="caption-sub">
+                           Attain maximum insights &amp; engagement in real-time through segmentation                        </div>
+
+                         
+                                       </div>
+                           </div>
+                        <div class="slides">
+
+               <div class="parallax-overlay"> </div>
+
+               <figure><img width="1600" height="780" src="home/images/banner-rocq.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="bn1" srcset="home/images/banner-rocq-300x146.jpg 300w, home/images/banner-rocq-1024x499.jpg 1024w, home/images/banner-rocq.jpg 1600w" sizes="(max-width: 1600px) 100vw, 1600px"></figure><div class="tg-container">
+
+                                             <h3 class="caption-title">
+                           <span>Rocq</span>
+                        </h3>
+                                             <div class="caption-sub">
+                           Understand your app users &amp; their choices using a powerful yet lightweight SDK                        </div>
+
+                      
+                                       </div>
+                           </div>
+                  </div><!-- bxslider -->
+   </div>
+	</header><div id="content" class="site-content">
+		<section id="himalayas_contact_widget-6" class="widget widget_contact_block clearfix"><div class="section-wrapper">
+         <div class="tg-container">
+
+            <div class="section-title-wrapper">
+                           </div>
+
+            <div class="contact-form-wrapper tg-column-wrapper clearfix">
+                                 <div class="tg-column-2">
+                         	<div id="wpaft-logo-slider" class="owl-carousel">
+		
+	<div class="logo-container">
+				<img width="176" height="73" src="home/images/logo-shine.png" class="attachment-full size-full wp-post-image" alt="logo-shine">
+	</div>
+		
+	<div class="logo-container">
+				<img width="176" height="73" src="home/images/logo-pvr.png" class="attachment-full size-full wp-post-image" alt="logo-pvr">
+	</div>
+		
+	<div class="logo-container">
+				<img width="176" height="73" src="home/images/logo-housejoy.png" class="attachment-full size-full wp-post-image" alt="logo-housejoy">
+	</div>
+		
+	<div class="logo-container">
+				<img width="176" height="73" src="home/images/logo-homeshop.png" class="attachment-full size-full wp-post-image" alt="logo-homeshop">
+	</div>
+		  </div>
+	                  </div>
+                           </div><!-- .contact-content-wrapper -->
+         </div><!-- .tg-container -->
+      </div>
+   </section><section id="himalayas_service_widget-3" class="widget widget_service_block clearfix"><div id="services">
+         <div class="section-wrapper">
+            <div class="tg-container">
+
+               <div class="section-title-wrapper">
+                  <h2 class="main-title"> </h2>                     <h4 class="sub-title"> </h4>
+                                 </div>
+
+                                 <div class="service-content-wrapper clearfix">
+                     <div class="tg-column-wrapper clearfix">
+
+                        
+                           <div class="tg-column-3 tg-column-bottom-margin">
+                              
+                                 <div class="service_icon_class">
+                                    <div class="image-wrap">
+                                       <i class="fa fa-money"></i>                                    </div>
+                                 </div>
+                              
+                              <div class="service-desc-wrap">
+                                 <h5 class="service-title"><a title="Pricing" href="pricing.html" alt="Pricing"> Pricing</a></h5>
+
+                                 <div class="service-content">
+                                    <p>Clear, simple &amp; affordable pricing for businesses based on their Monthly Active Users.</p>
+                                 </div>
+
+                                 <a class="service-read-more" href="pricing.html" title="Pricing"> Read more<i class="fa fa-angle-double-right"> </i></a>
+                              </div>
+                           </div>
+                           
+                           <div class="tg-column-3 tg-column-bottom-margin">
+                              
+                                 <div class="service_icon_class">
+                                    <div class="image-wrap">
+                                       <i class="fa fa-question-circle"></i>                                    </div>
+                                 </div>
+                              
+                              <div class="service-desc-wrap">
+                                 <h5 class="service-title"><a title="Faq" href="faq.html" alt="Faq"> Faq</a></h5>
+
+                                 <div class="service-content">
+                                    <p>Tell us, what can we help you with &amp; get answers to all your queries</p>
+                                 </div>
+
+                                 <a class="service-read-more" href="faq.html" title="Faq"> Read more<i class="fa fa-angle-double-right"> </i></a>
+                              </div>
+                           </div>
+                           
+                           <div class="tg-column-3 tg-column-bottom-margin">
+                              
+                                 <div class="service_icon_class">
+                                    <div class="image-wrap">
+                                       <i class="fa fa-users"></i>          </div>
+                                 </div>
+                              
+                              <div class="service-desc-wrap">
+                                 <h5 class="service-title"><a title="Customer Stories" href="customer-stories.html" alt="Customer Stories"> Customer Stories</a></h5>
+
+                                 <div class="service-content">
+                                    <p>Real life stories of businesses who achieved promising results using our services.</p>
+                                 </div>
+
+                                 <a class="service-read-more" href="customer-stories.html" title="Customer Stories"> Read more<i class="fa fa-angle-double-right"> </i></a>
+                              </div>
+                           </div>
+                                                </div>
+                  </div>
+                              </div>
+         </div>
+      </div>
+      </section>
+     
+     <section id="himalayas_call_to_action_widget-6" class="widget widget_call_to_action_block clearfix" style="margin-bottom:0; padding-bottom:0;">
+      <div class="no-bg-image cta-text-style-2 clearfix" style="background-color:#409ac9; ">
+         <div class="parallax-overlay"></div>
+         <div class="section-wrapper cta-text-section-wrapper">
+            <div class="tg-container">
+
+               <div class="cta-text-content">
+                                       <div class="cta-text-title">
+                        <h2>Easy Integration
+</h2>
+                     </div>
+                                       <div class="cta-text-desc">
+                        <p>Easy to understand installation process with a technical expert just a call away.
+</p>
+                     </div>
+                                 </div>
+                                 <a class="cta-text-btn" href="https://docs.rocq.io/" title="Read More">Read More</a>
+                           </div>
+         </div>
+      </div>
+      </section><section id="himalayas_about_us_widget-5" class="widget widget_about_block clearfix"><div id="features">
+         <div class="section-wrapper">
+            <div class="tg-container">
+
+               <div class="section-title-wrapper">
+                                 </div>
+
+                              <div class="about-content-wrapper tg-column-wrapper clearfix">
+                                          <div class="about-image tg-column-2">
+                           <img width="550" height="500" src="home/images/thumb-features.png" class="attachment-full size-full wp-post-image" alt="feature" srcset="home/images/thumb-features-300x273.png 300w, home/images/thumb-features.png 550w" sizes="(max-width: 550px) 100vw, 550px"></div>
+                     
+                     <div class="about-content tg-column-2">
+                        <h2 class="about-title"> <a href="features.html" title="Features" alt="Features">Features</a></h2><div class="about-content"><p>CAMPAIGN MANAGEMENT, POST INSTALL BEHAVIOR, CUSTOM SEGMENTATION, PUSH NOTIFICATION, IN-APP MESSAGING, UNINSTALL TRACKING</p></div><div class="about-btn"> <a href="features.html">Read more</a></div>                     </div>
+                                 </div><!-- .about-content-wrapper -->
+                           </div><!-- .tg-container -->
+         </div>
+      </div>
+   </section><section id="himalayas_our_team_widget-3" class="widget widget_our_team_block clearfix"><div id="about" class="no-bg-image clearfix" style="display: none">
+
+         <div class="parallax-overlay"></div>
+         <div class="section-wrapper">
+            <div class="tg-container">
+
+               <div class="section-title-wrapper">
+                  <h2 class="main-title">About</h2>                     <h4 class="sub-title">rocQ helps you use data to manage user interaction with your app and build a relationship with your user base. This was you can make better business decisions based on existing data, leading to income production and cost reduction.
+</h4>
+                                 </div>
+
+                              <div class="team-content-wrapper clearfix">
+                  <div class="tg-column-wrapper clearfix">
+                     
+                        <div class="tg-column-3 tg-column-bottom-margin">
+                           <div class="team-block">
+
+                              <div class="team-img-wrapper">
+
+                                 <div class="team-img">
+                                    <img width="350" height="300" src="home/images/asim.jpg" class="attachment-himalayas-portfolio-image size-himalayas-portfolio-image wp-post-image" alt="team2" srcset="home/images/asim-300x257.jpg 300w, home/images/asim.jpg 350w" sizes="(max-width: 350px) 100vw, 350px"></div>
+
+                                 <div class="team-name">
+                                    ASIM SAH  </div>
+                              </div>
+
+                              <div class="team-desc-wrapper">
+                                 <div class="team-content"><p>An old hand with creative &amp; a digital strategist with over a decade of experience, Asim is a social media junkie &amp; a random thinker.</p></div><a class="team-name" href="https://www.linkedin.com/in/asimsah" title="ASIM SAH" alt="ASIM SAH" target="_blank">ASIM SAH</a>                              </div>
+                           </div><!-- .team-block -->
+                        </div><!-- .tg-column-3 -->
+                     
+                        <div class="tg-column-3 tg-column-bottom-margin">
+                           <div class="team-block">
+
+                              <div class="team-img-wrapper">
+
+                                 <div class="team-img">
+                                    <img width="350" height="300" src="home/images/adarsh.jpg" class="attachment-himalayas-portfolio-image size-himalayas-portfolio-image wp-post-image" alt="team1" srcset="home/images/adarsh-300x257.jpg 300w, home/images/adarsh.jpg 350w" sizes="(max-width: 350px) 100vw, 350px"></div>
+
+                                 <div class="team-name">
+                                    ADARSH JAIN                                 </div>
+                              </div>
+
+                              <div class="team-desc-wrapper">
+                                 <div class="team-content"><p>An IIT graduate with more than 10 years of experience, he has worked with many MNCs &amp; holds multiple patents in the Technology domain.</p></div><a class="team-name" href="https://www.linkedin.com/in/adarshj" title="ADARSH JAIN" alt="ADARSH JAIN" target="_blank">ADARSH JAIN</a>                              </div>
+                           </div><!-- .team-block -->
+                        </div><!-- .tg-column-3 -->
+                     
+                        <div class="tg-column-3 tg-column-bottom-margin">
+                           <div class="team-block">
+
+                              <div class="team-img-wrapper">
+
+                                 <div class="team-img">
+                                    <img width="350" height="300" src="home/images/shashank.jpg" class="attachment-himalayas-portfolio-image size-himalayas-portfolio-image wp-post-image" alt="team3" srcset="home/images/shashank-300x257.jpg 300w, home/images/shashank.jpg 350w" sizes="(max-width: 350px) 100vw, 350px"></div>
+
+                                 <div class="team-name">
+                                    SHASHANK AGARWAL                                 </div>
+                              </div>
+
+                              <div class="team-desc-wrapper">
+                                 <div class="team-content"><p>A big data specialist, Shashank has been a programmer from the age of 15 &amp; has helped multiple startups to make it big.</p></div><a class="team-name" href="https://www.linkedin.com/in/shashank734" title="SHASHANK AGARWAL" alt="SHASHANK AGARWAL" target="_blank">SHASHANK AGARWAL</a>                              </div>
+                           </div><!-- .team-block -->
+                        </div><!-- .tg-column-3 -->
+                                       </div><!-- .tg-column-wrapper -->
+               </div><!-- .team-content-wrapper -->
+
+               
+            </div><!-- .tg-container -->
+         </div><!-- .section-wrapper -->
+      </div>
+
+      </section><section id="himalayas_featured_posts_widget-3" class="widget widget_featured_posts_block clearfix"><div id="blog" class="parallax-section" style="background-image:url(home/images/bg-blog.jpg);background-repeat:no-repeat;background-size:cover;background-attachment:fixed;">
+         <div class="parallax-overlay"> </div>
+         <div class="section-wrapper">
+            <div class="tg-container">
+
+               <div class="section-title-wrapper">
+                  <h2 class="main-title">BLOG</h2>                                       <h4 class="sub-title">
+                        Choose whether to display Latest posts or posts of Specific Category.                     </h4>
+                                 </div>
+
+               <div class="blog-content-wrapper clearfix">
+               <div class="tg-column-wrapper clearfix">
+
+                  
+                     <div class="tg-column-3 tg-column-bottom-margin">
+                     <div class="blog-block">
+
+                                                   <div class="blog-img">
+                              <img width="319" height="142" src="home/images/thumb-uninstall.jpeg" class="attachment-himalayas-featured-image size-himalayas-featured-image wp-post-image" alt="1-4ws7UgujfMd3qShAChmkyQ (1)"></div>
+                         
+                        <div class="blog-content-wrapper">
+
+                           <h5 class="blog-title"> <a href="/home/blog/5reasons-why-you-should-track-uninstalls.html" title="5 Reasons Why You Should Track Uninstalls">5 Reasons Why You Should Track Uninstalls</a></h5>
+
+                           
+
+                           <div class="blog-content">
+                              <p>The various app stores surely provide you with the number of uninstallations, but what about their reasons?</p>
+                           </div>
+
+                           <a class="blog-readmore" href="/home/blog/5reasons-why-you-should-track-uninstalls.html" title="5 Reasons Why You Should Track Uninstalls"> Read more <i class="fa fa-angle-double-right"> </i> </a>
+                        </div>
+
+                     </div><!-- .blog-block -->
+                     </div><!-- .tg-column-3 -->
+
+                  
+                     <div class="tg-column-3 tg-column-bottom-margin">
+                     <div class="blog-block">
+
+                                                   <div class="blog-img">
+                              <img width="319" height="142" src="home/images/thumb-uninstalltracking.png" class="attachment-himalayas-featured-image size-himalayas-featured-image wp-post-image" alt="1-SuazagWKverMsW2iDoUNQg"></div>
+                         
+                        <div class="blog-content-wrapper">
+
+                           <h5 class="blog-title"> <a href="/home/blog/why-is-uninstall-tracking-more-important-than-you-think.html" title="Why is Uninstall Tracking More Important than You Think?">Why is Uninstall Tracking More Important than You Think?</a></h5>
+
+                           
+
+                           <div class="blog-content">
+                              <p>One-third of the users sent to your app through campaigns and traffic sources are fake! Did that make you jump out of your skin? </p>
+                           </div>
+
+                           <a class="blog-readmore" href="/home/blog/why-is-uninstall-tracking-more-important-than-you-think.html" title="Why is Uninstall Tracking More Important than You Think?"> Read more <i class="fa fa-angle-double-right"> </i> </a>
+                        </div>
+
+                     </div><!-- .blog-block -->
+                     </div><!-- .tg-column-3 -->
+
+                  
+                     <div class="tg-column-3 tg-column-bottom-margin">
+                     <div class="blog-block">
+
+                                                   <div class="blog-img">
+                              <img width="319" height="142" src="home/images/thumb-appmarketing.jpeg" class="attachment-himalayas-featured-image size-himalayas-featured-image wp-post-image" alt="1-nrKnYWD5AgJKGHVZICYe0A"></div>
+                         
+                        <div class="blog-content-wrapper">
+
+                           <h5 class="blog-title"> <a href="/home/blog/5app-marketing-tools-trends-you-must-know.html" title="5 App Marketing Tools &amp; Trends You Must Know">5 App Marketing Tools &amp; Trends You Must Know</a></h5>
+
+                           
+
+                           <div class="blog-content">
+                              <p>With &lsquo;the problem of abundance&rsquo; in respective app stores, a strong app marketing strategy is a must to sell your services.</p>
+                           </div>
+
+                           <a class="blog-readmore" href="/home/blog/5app-marketing-tools-trends-you-must-know.html" title="5 App Marketing Tools &amp; Trends You Must Know"> Read more <i class="fa fa-angle-double-right"> </i> </a>
+                        </div>
+
+                     </div><!-- .blog-block -->
+                     </div><!-- .tg-column-3 -->
+
+                  
+               </div><!-- .tg-column-wrapper -->
+               </div><!-- .blog-content-wrapper -->
+
+            </div><!-- .tg-container -->
+         </div><!-- .section-wrapper -->
+      </div>
+
+      </section>
+
+  
+
+
+
+
+
+   </div>
+
+   
+   <footer id="colophon" class="footer-with-widget footer-layout-one" style="margin:0px"><div id="top-footer">
+	<div class="tg-container">
+		<div class="tg-column-wrapper">
+
+                  	<div class="tg-column-3">
+		         <aside id="text-2" class="widget widget_text clearfix"><div class="textwidget"><img src="home/images/logo-rocq.png" alt="rocq"><br>
+rocQ is an mobile app analytics and user engagement platform that provides real-time actionable insights to businesses. We help app owners use data to manage user interaction with their apps and build a relationship with their user base. </div>
+		</aside></div>
+		   
+		            	<div class="tg-column-3">
+ 
+		         <aside id="footer-nav" class="widget widget_text clearfix">
+                 <h4 class="widget-title"><span>Navigation</span></h4>			<div class="textwidget">
+<ul>
+<li><a href="/#features">FEATURES</a></li>
+<li><a href="https://docs.rocq.io/">DOCUMENTATION</a></li>
+
+<!-- <li><a href="/#about" >ABOUT</a></li> -->
+
+<li><a href="pricing.html">PRICING</a></li>
+<li><a href="#blog">BLOG</a></li>
+
+
+</ul></div>
+        </aside></div>
+		   
+		            	<div class="tg-column-3">
+		         <aside id="text-4" class="widget widget_text clearfix"><h4 class="widget-title"><span>Contact</span></h4>			<div class="textwidget">C-802,803 8th Floor,
+Nirvana Courtyard,
+Nirvana Country Sector-50,
+Gurgaon-122001.
+<br><br>
+
+<a href="mailto:contact@rocq.io">contact@rocq.io</a></div>
+		</aside></div>
+		   
+      </div> <!-- .tg-column-wrapper -->
+   </div> <!-- .tg-container -->
+</div> <!-- .top-footer -->
+      <div id="bottom-footer">
+         <div class="tg-container" style="color:#989898; font-size:10px;">
+<div class="copyright"><span class="copyright-text">rocq &copy; 2015</span></div>
+
+           
+           <div class="footer-nav">
+               <div id="footer-layout-one" class="menu-social-menu-container">
+<ul id="menu-social-menu" class="menu"><li id="menu-item-169" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-169"><a href="https://www.facebook.com/rocq.io"><i class="fa fa-facebook-square"></i></a></li>
+<li id="menu-item-170" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-170"><a href="https://twitter.com/rocq_io"><i class="fa fa-twitter-square"></i></a></li>
+
+<li id="menu-item-172" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-172"><a href="https://www.linkedin.com/company/rocq"><i class="fa fa-linkedin-square"></i></a></li>
+
+</ul></div>            </div>
+
+
+   
+            
+         </div>
+      </div>
+   </footer>
+    
+	</div> 
+
+          <div class="fixed-aside-nav">&nbsp;</div>
+    <!-- #Page -->
+
+<link rel='stylesheet' id='wpaft-logo-slider-css'  href='home/css/client-carousel.css' 
+type='text/css' media='all' />
+
+<script type='text/javascript' src='home/js/himalayas.js'></script>
+
+ 
+<script type='text/javascript' src='home/js/jquery.bxslider.min.js'></script>
+<script type='text/javascript' src='home/js/slider-setting.js'></script>
+<script type='text/javascript' src='home/js/jquery.nav.js'></script>
+
+ 
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpaft = {"items":"4","single_item":"","slide_speed":"500","pagination_speed":"500","rewind_speed":"500","auto_play":"","stop_on_hover":"1","navigation":"","pagination":"","responsive":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='home/js/client-carousel.js'></script>
+
+</body>
+</html>
+
+
+
+<!-- Google Code for Remarketing Tag -->
+<!--- -----------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on 
+
+pages related to sensitive categories. See more information and instructions on how to setup the 
+
+tag on: http://google.com/ads/remarketingsetup
+------------------------------------------------- -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 947941576;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" 
+
+src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/947941576/?
+
+value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76647206-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

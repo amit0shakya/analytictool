@@ -1,0 +1,217 @@
+<div ng-controller="EventsCtrl">
+	<div class="pageheader main-nav navbar-fixed-top">
+		<div class="media">
+			<div class="pageicon pull-left">
+				<i class="fa fa-th"></i>
+			</div>
+			<div class="media-body">
+				<ul class="breadcrumb">
+					<li>User Engagement</li>
+					<li>Events</li>
+				</ul>
+				<h4>Events</h4>
+			</div>
+		</div>
+		<div class="pull-right fifth-nav">
+			<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+			<span class="glyphicon glyphicon-calendar calendar-icon"></span>
+		</div>
+	</div>
+
+	<div class="body-content" >
+		
+		<div class="panel">
+					<div class="panel-body progress-panel">
+						<div class="panel-content"> 
+							<div class="col-lg-12 no-padding">
+                            <div class="task-progress">
+                    
+									<div class="btn-group pull-right fifth-nav">
+										<button id='Events_line_chart_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                           					 <i class="fa-trends fa-pdf ">&nbsp;</i>
+                        				</button>
+                    				    <button id='Events_line_chart_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                      					      <i class="fa-trends fa-img ">&nbsp;</i>
+                       					 </button>
+                     				   <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+									</div>
+								  <h2>{{selectedeventname || 'Events'}}</h2>	
+						 
+
+                    
+
+                    </div>
+                    
+								
+							<div   class="graph-container text-center">
+															<div id = "Events_line_chart" class="graph-container">
+
+								<!-- <img src="images/img-gp47.png" > -->
+							</div>
+						</div>
+					</div>
+				</div>
+				 
+				
+			</div>
+            </div>
+            
+            <div class="panel">
+            
+            <div class="panel-body progress-panel ">
+					
+					<div class="row">
+						<div class="col-lg-4" >
+
+							<div class="panel-body progress-panel">
+								
+								<div class="text-center panel-content">
+									<div class="simple-table" id="Enametable" >
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<thead>
+												<tr>
+													<th width="70%">Event</th>
+													<th width="30%">Total</th>
+												</tr> 
+											</thead>
+											<tbody>
+												<tr ng-hide="table1loaded">
+                                					<td colspan="5" >
+                                 						 <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                					</td>
+                             					 </tr>
+
+											<tr><td colspan="2" style="padding:0">
+											    <div class="input-group input-group-sm search-control"> 
+											        <span class="input-group-addon ">
+											          <span class="glyphicon glyphicon-search"></span>
+											        </span>
+											        <input type="text" class="form-control" placeholder="Search" ng-change="updateFilteredeventList()" ng-model="eventquery"></input>
+											    </div>
+											</td></tr>
+												<tr ng-show="table1loaded" id="Ename{{$index}}" ng-repeat="elem in EventsNameListSlice" ng-class="{true:'active'}[$first]">
+													<td ng-click="getEventsNameGranwise($index,currentPage_tab1)">{{elem.x}}</td>
+													<td>{{elem.y}}</td>
+												</tr>
+												<!-- <tr class="active">
+													<td>Menu Button</td>
+													<td>882</td>
+												</tr> -->
+											</tbody>
+										</table>
+ 										<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>			
+									</div>
+								</div>
+
+							 
+
+
+							</div>
+						</div>
+						<div class="col-lg-4">
+
+							<div class="panel-body progress-panel">
+								
+
+								<div class="text-center panel-content">
+									<div class="simple-table" id="OtherParamtable">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<thead>
+												<tr>
+													<th width="100%">Properties </th>
+													<!-- <th width="30%">Total </th> -->
+												</tr> 
+											</thead>
+											<tbody>
+												<tr ng-hide="table2loaded">
+                               						 <td colspan="5" >
+                                  						<p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                					 </td>
+                            					  </tr>
+
+											<tr><td colspan="2" style="padding:0">
+											    <div class="input-group input-group-sm search-control"> 
+											        <span class="input-group-addon ">
+											          <span class="glyphicon glyphicon-search"></span>
+											        </span>
+											        <input type="text" class="form-control" placeholder="Search" ng-change="updateFilteredpropList()" ng-model="propquery"></input>
+											    </div>
+											</td></tr>
+												<tr ng-show="table2loaded" id="OPname{{$index}}" ng-repeat="elem in EventsOtherParamNameSlice" ng-class="{true:'selected'}[$first]">
+													<td >{{elem.x}}</td>
+													<!-- <td>{{elem.y}}</td> -->
+												</tr>
+												<!-- <tr >
+													<td>link_url</td>
+													<td>882</td>
+												</tr> -->
+											</tbody>
+										</table>
+ 										<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab2" ng-model="currentPage_tab2" max-size="maxSize_tab2" class="pagination-sm pull-right" boundary-links="true"></pagination>
+									</div>
+								</div>
+
+								 
+
+							</div>
+						</div>
+                        
+                        
+                        <div class="col-lg-4" >
+
+							<div class="panel-body progress-panel">
+								
+
+								<div class="text-center panel-content">
+									<div class="simple-table" id="OtherParamValuetable">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<thead>
+												<tr >
+													<th width="60%">Value </th>
+													<th width="40%"><span>Total</span> <button style="vertical-align: middle;" type="button" ng-csv="EventsOtherParamVal" csv-header="['Event property', 'Count']" filename="{{ParamCountFileName}}" class="btn-nobg" ><i class="fa-trends fa-excel">&nbsp;</i></button></th>
+												</tr> 
+											</thead>
+											<tbody>
+												<tr ng-hide="table3loaded">
+                                					<td colspan="5" >
+                                  						<p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                					</td>
+                              </tr>
+
+											<tr><td colspan="2" style="padding:0">
+											    <div class="input-group input-group-sm search-control"> 
+											        <span class="input-group-addon ">
+											          <span class="glyphicon glyphicon-search"></span>
+											        </span>
+											        <input type="text" class="form-control" placeholder="Search" ng-change="updateFilteredvalueList()" ng-model="valuequery"></input>
+											    </div>
+											</td></tr>
+												<tr ng-show="table3loaded" ng-repeat="elem in EventsOtherParamValSlice">
+													<td>{{elem.x}}</td>
+													<td>{{elem.y}}</td>
+												</tr>
+												<!-- <tr >
+													<td>setting icon</td>
+													<td>882</td>
+												</tr> -->
+											</tbody>
+										</table>
+                                     <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab3" ng-model="currentPage_tab3" max-size="maxSize_tab3" class="pagination-sm pull-right" boundary-links="true"></pagination>
+									</div>
+								</div>
+
+								 
+
+							</div>
+						</div>
+                        
+					</div>
+					
+					 		
+					
+				</div>
+            </div>
+            
+            
+</div>
+</div>

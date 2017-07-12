@@ -1,0 +1,285 @@
+/* General styles for all menus */
+.cbp-spmenu {
+	background: #304d6f;
+	position: fixed;
+}
+
+.cbp-spmenu h3 {
+	color: #afdefa;
+	font-size: 1.9em;
+	padding: 20px;
+	margin: 0;
+	font-weight: 300;
+	background: #0d77b6;
+}
+
+.cbp-spmenu a {
+	display: block;
+	color: #fff;
+	font-size: 15px;
+
+}
+
+.cbp-spmenu .nav-bar  a:hover {
+	background: #2a4668 !important;
+}
+
+.cbp-spmenu a:active {
+	background: #afdefa;
+	color: #47a3da;
+}
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+	width: 250px;
+	height: 100%;
+	top: 0;
+	z-index: 9999;
+}
+
+
+.cbp-spmenu-horizontal {
+	width: 100%;
+	height: 150px;
+	left: 0;
+	z-index: 1000;
+	overflow: hidden;
+}
+
+.cbp-spmenu-horizontal h3 {
+	height: 100%;
+	width: 20%;
+	float: left;
+}
+
+.cbp-spmenu-horizontal a {
+	float: left;
+	width: 20%;
+	padding: 0.8em;
+	border-left: 1px solid #258ecd;
+}
+
+/* Vertical menu that slides from the left or right */
+
+.cbp-spmenu-left {
+	left: 0;
+}
+
+.cbp-spmenu-right {
+	right: -240px;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+	left: -185px;
+}
+
+.cbp-spmenu-right.cbp-spmenu-open {
+	right: 0px;
+}
+
+/* Horizontal menu that slides from the top or bottom */
+
+.cbp-spmenu-top {
+	top: -150px;
+}
+
+.cbp-spmenu-bottom {
+	bottom: -150px;
+}
+
+.cbp-spmenu-top.cbp-spmenu-open {
+	top: 0px;
+}
+
+.cbp-spmenu-bottom.cbp-spmenu-open {
+	bottom: 0px;
+}
+
+/* Push classes applied to the body */
+
+.cbp-spmenu-push {
+	overflow-x: hidden;
+	position: relative;
+	left: 0;
+}
+
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+/*	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+*/}
+
+/* Example media queries */
+
+
+.buttonset #showLeftPush{ background-color:transparent !important; border:none; outline:none;}
+.buttonset #showLeftPush.active{ margin-left:0;}
+
+
+
+.table-component,.table-data,.simple-table {
+	 width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.table-component .filler {
+	font-family: "Blokk", Arial, sans-serif;
+	color: #d3d3d3;
+}
+.table-component table,.table-data table {
+    border-collapse: collapse;
+    margin-bottom: 0;
+    width: 100%;
+    background: #fff;
+}
+.table-data .td-label{ color:#666; font-size:13px; font-weight:300;}
+.table-data td,.table-data th {
+    padding: 1.0em 1.5em;
+    text-align: left; border-bottom:1px solid #eee;
+}
+.table-data .gray-text{ font-size:13px; color:#aaa !important;}
+.table-data tr:last-child td{ border-bottom:0;}
+
+
+.table-component td.selected span { font-size:22px; }
+.table-component td.hvalue { background-color:#75e5b9; color:#fff; }
+
+.table-component td,.table-component th {
+    padding: 1.1em 15px;
+    text-align: left;  border-bottom: 1px solid #e7e8ea;
+}
+.table-component tr:last-child td{ border-bottom:0;}
+
+.table-component td.active,.table-component th.active{   background-color: #e6e6e6;
+  border-bottom: 1px solid #fff;}
+.table-component	td.err {
+		background-color: #e992b9;
+		color: #fff;
+		font-size: 0.75em;
+		text-align: center;
+		line-height: 1;
+	}
+.table-component th {
+    background-color: #31bc86;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+.table-component tbody th {
+	background-color: #2ea879;
+}
+.table-component tbody tr:nth-child(2n+1) {
+    background-color: #f5f5f5;
+    transition: all .125s ease-in-out;
+}
+.table-component tbody tr:hover {
+    background-color: rgba(129,208,177,.3);
+}
+
+.table-cohort tbody tr:nth-child(2n+1) {
+    background-color: transparent !important;
+  
+}
+.table-cohort tbody tr:hover {
+    background-color: transparent !important;
+}
+
+
+.simple-table table {
+    border-collapse: collapse;
+    margin-bottom: 0;
+    width: 100%;
+    background: #fff;
+}
+.simple-table td,.simple-table th {
+    padding: 1.0em 1.5em;
+    text-align: left; border-bottom:1px solid #eee;
+}
+ 
+ .simple-table tbody tr:nth-child(2n+1) {
+    background-color: #f5f5f5;
+    transition: all .125s ease-in-out;
+}
+.simple-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.simple-table  tr{ position:relative;}
+.simple-table  tr.active:after{ content:'';
+	width: 0; 
+	height: 0; 
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid #31bc86;
+	position:absolute;     right: -8px;
+    margin-top: 15px; display:none;
+}
+.simple-table  tr.active td,.simple-table  tr.active td:hover{
+    background-color: #31bc86;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.simple-table  tr.selected td,.simple-table  tr.selected td:hover{
+    background-color: #cff2e4;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+.simple-table  tr.selected:after{ content:'';
+	width: 0; 
+	height: 0; 
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid #cff2e4;
+	position:absolute;     right: -8px;
+    margin-top: 15px; display:none;
+}
+
+
+
+/* Base Styles */
+#cssmenu,
+#cssmenu ul,
+#cssmenu li,
+#cssmenu a {
+  font-family: 'Open Sans', sans-serif;
+  position: relative; 
+   -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  -o-transition: all 100ms ease-in;
+  -ms-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+}
+#cssmenu a .nav-text{ font-style:normal;}
+#cssmenu { position:relative;}
+#cssmenu > ul > li > a {
+  display: block;
+ 
+}
+#cssmenu > ul > li > a:hover {
+  text-decoration: none;
+}
+#cssmenu > ul > li.active {
+  border-bottom: none;
+}
+#cssmenu > ul > li.has-sub > a span {
+  background: url(../images/icon_plus.png) 96% center no-repeat; float:right; width:20px;   
+}
+#cssmenu > ul > li.has-sub.selected > a span {
+  background: url(../images/icon_minus.png) 96% center no-repeat;
+}
+#cssmenu ul ul { display: none; padding: 0; list-style:none;   background-color:#193454 !important; color:#fff; text-decoration:none; 
+} 
+#cssmenu ul ul li { padding: 0;}
+#cssmenu ul ul a { display: block;  border-right:7px solid #193454; font-size:13px; text-decoration:none;}
+#cssmenu ul ul a:hover{ background-color:#1f3e63 !important;  border-right:7px solid #1f3e63 !important;}
+

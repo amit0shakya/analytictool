@@ -1,0 +1,129 @@
+ <div > 
+
+  <div class="body-content">
+
+<div class="row">
+
+<div class="col-lg-12">
+<div class="panel mb0">
+        <div class="panel-body progress-panel">
+          <div class="panel-content">
+          <div class="task-progress bm0">
+          <div  class="  fifth-nav btn-group pull-right">  
+            <button type="button" class="btn btn-default dropdown-toggle form-control ng-binding" data-toggle="dropdown" aria-expanded="true">
+<i class="fa fa-angle-down pull-right tm5"></i>
+
+{{push.selected_campaign || 'Select Campaign'}}
+</button>
+ <ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu">
+<li ng-repeat="elem in api_campaigns_with_details"><a href="" ng-click="push.selected_campaign=elem;getcampaigns()" >{{elem}}</a></li>
+</ul>
+
+            </div>
+            
+             <div class="btn-group  ">
+             <button type="button" class="btn btn-default bs-docs-activate-animated-progressbar " data-toggle="button" aria-pressed="false" autocomplete="off" ng-click='push.selected_campaign=null;getcampaigns()'><i class="fa fa-angle-left"></i> Back</button> 
+</div> 
+            
+          </div>
+          
+          
+  <div class="task-progress task-progress-noborder">
+      <div  class="  fifth-nav btn-group pull-right">
+        <div class="btn-group ">
+          <button id='PushCampaignTrends_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                           <i class="fa-trends fa-pdf ">&nbsp;</i>
+                      </button>
+                      <button id='PushCampaignTrends_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                            <i class="fa-trends fa-img ">&nbsp;</i>
+                       </button>
+                     <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+        </div>
+      </div>
+      <h2>{{push.selected_campaign}} </h2>
+      
+  </div>
+  <div id="PushCampaignTrends" class="graph-container ">
+    <!-- <img src="images/img-gp10.jpg" class="full-image">  -->
+  </div>
+</div>
+  </div>
+</div>
+  </div>
+
+
+
+<div class="col-lg-12 ">
+<div class="panel">
+<div class="panel-body progress-panel border-top">
+<div class="task-progress task-progress-noborder">
+<div class="pull-right btn-group fifth-nav">
+  <div class="btn-group pull-right fifth-nav">
+                       
+                        
+            <button type="button" ng-csv="filteredcampaignslistCSV" csv-header="['Campaign Name', 'Launch Time','Sent','Received','Opened','Status','Message Type' ]" filename="Campaigns_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                      </div>
+  <a ng-show="campaign_loading=='false'" href="" ng-click="getcampaigns();$parent.$parent.campaign_loading='true'" class="bltext"><span class="glyphicon glyphicon-refresh fs12" aria-hidden="true"> Refresh</span></a>
+  <img ng-hide="campaign_loading=='false'" id="uploading_image" src="images/squares.gif" width="32px" height="32px" class="mmt5" />
+</div>
+<h2>Table</h2>
+</div>
+
+<div class="text-center panel-content" id="camp_table">
+ <div class="table-component">
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <!-- <th>Campaign Name</th> -->
+        <th>Launch Time</th>
+        <th>Sent <span class=" fs12">(Imported)</span></th>
+        <th>Failed <span class=" fs12">(Imported)</span></th>
+        <th ng-show="app.ostype=='Android'">Received</th>
+        <th ng-show="app.ostype=='iOS'">Failure</th>
+        <th>Opened</th>
+        <th>Status</th>
+        <th>Message Type</th>
+        <th>Re-Send</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-hide="table.table1loaded">
+                                <td colspan="9" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr>
+
+      <tr ng-show="table.table1loaded" ng-repeat="elem in filteredcampaignslist" ng-init="initializepopover()" >
+        <!-- <td ng-click="getFunnelData($index)" style="cursor:pointer"><div data-toggle="popover" title="Message" data-placement="right" data-trigger="hover" data-content="{{elem.message}}">{{ elem.src}}</div></td> -->
+        <td class="fs11">{{ elem.date}}</td>
+        <td><strong>{{ elem.cpc}}</strong> <span class="graytext fs12 pl10">{{ elem.ic || ""}}</span></td>
+         <td><strong>{{ elem.fc}}</strong> <span class="graytext fs12 pl10">{{ elem.ifc || ""}}</span></td>
+        <td ng-show="app.ostype=='Android'"><div class="text-center">{{ elem.csc}}</div></td>
+        <td ng-show="app.ostype=='iOS'"><div class="text-center">{{ elem.fc}}</div></td>
+        <td><div class="text-center">{{ elem.coc}}</div></td>
+        <td><span class="label fs12" ng-class="{'completed':'label-success','running':'label-info','pending':'label-info','queued':'label-warning','scheduled':'label-primary','Deleted':'label-danger'}[elem.status]">{{elem.status}}</span> <span class="fs11 bltext" ng-show="elem.crt">{{ elem.csf}}</span></td>
+        <td class="fs11">{{ elem.mt}} </td>
+        <td><a  href="" ng-show="elem.status"  ng-click="reschedule(elem.ref)" class="fs12"><i class="fa fa-send"></i> Resend</a>&nbsp;&nbsp;&nbsp;&nbsp;<a ng-show="elem.csf=='scheduled'" href=""  ng-click="deleteScheduled(elem.ref,$index)" class="fs12"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+      <tr ng-show="filteredcampaignslist.length==0 && table.table1loaded">
+      <td colspan="8"><div class="default-message"><p>No Data Found</p></div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+  <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
+
+
+</div>
+</div>
+</div>
+</div>
+ 
+
+
+
+</div>
+</div>

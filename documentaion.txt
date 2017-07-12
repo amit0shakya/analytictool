@@ -1,0 +1,217 @@
+----------------------GIT BRANCHES-------------------
+Repo Name is "dashboard"
+
+Production Branch that is live on 132 server
+- production3
+
+Demo Branch that is live on 155 server (http://demo.rocq.io/)
+- demo2
+
+Latest Branch or Development Branch
+- mysql
+
+Following brnaches are no where in use and safe to delete
+Demolink , master, Production, production2
+
+
+
+--------------------------SERVERS INFO--------------------
+1) http://rocq.io/ is on node on 148.251.42.132 server running through supervisor
+
+2) http://demo.rocq.io/ is on wordpress on 148.251.42.155 server
+
+3) http://blog.rocq.io/ is on wordpress on 148.251.42.155 server in "/home/dev/blog/wordpress" directory
+
+4) http://docs.rocq.io/ is on wordpress on 148.251.42.155 server
+
+5) 44.76.122.130:8000 is for testing purpose in "/home/dev/sourabh/dashboard" directory
+
+
+-------------------------DATABSE INFO-------------------
+
+1) Dashboard connects to the database using "/config/database.js" file
+
+2) While deploying on production Jenkins replaces the "/config/database.js" file with "/prod/database.js" file
+
+
+
+----------------STEPS TO DEPLOY THE CODE IN PRODUCTION-----------
+
+1) Copy the changes from development branch to production branch
+
+2) Minify the code by running "node minify.js" in root dir of dashboard
+
+3) Push the changes in production branch
+
+4) Login to jenkins: http://148.251.152.87:8081/jenkins/job/rocq_dashboard/
+
+5) Press "Build Now" button
+
+6) Congratulations! Your new code is live in production
+
+
+
+-------------------MINIFICATION------------------
+1)"node minify.js"  minifies and concatenates all the js, css files into two files rocq.css and rocq.js
+
+2) To use the minified files, remove all the local js and css links from index.html and add rocq.css and rocq.js to it
+
+3) index.html of Production branch already have the step 2 done.
+
+
+
+------------------FILE STRUCTURE-------------------
+
+dashboard
+		|
+		|
+		AdminDashboard     // contains all the html, css and js of http://rocq.io/admin
+		|
+		|
+		app 				// node server files
+		|
+		|
+		config				// node server files
+		|
+		|
+		Home  				//contains all the html,css and js of home pages of rocq.io.
+		|
+		|
+		prod 				// nginx server files
+		|
+		|
+		public				// contains all the css and js of dashboard
+		|
+		|
+		views				// contains all the html files of dashboard
+		|
+		|
+		minify.js 			// script to minify the js and css files
+		|
+		|
+		server.js    		// node server main file
+		|
+		|
+		*schem.sql       	// backup of schema of dashboard database 
+
+
+
+------------------------DASHBOARD FLOW--------------------
+1) /views/index.html is loaded by browser to load all the js files including angular js and its controllers and route.js
+
+2) route.js contains $routeProvider which loads the appropriate html.
+
+3) let say http://rocq.io/dashboard is opened. $routeProvider will call the welcome.html file to load.
+
+4) welcome.html contains the sidebar on the left side and loads the approprite partial page on right side
+
+OVERVIEW OF "/public/js" dir
+
+public/js
+		|
+		|
+		controllers   // contains all the controllers
+		|
+		|
+		extra
+		|	|
+		|	|
+		|	aside.js   // js for hamburger menu button in the header
+		|	|
+		|	|
+		|	classie.js  // helper lib for aside.js
+		|	|
+		|	|
+		|	enscroll.min.js  // scrollbar lib used in sidebar
+		|	|
+		|	|
+		|	jquery.slimscroll.js  // not in use
+		|
+		globvar
+		|	  |
+		|	  |
+		|	  charts.js  // fusion chart configurations for all the charts on dashboard
+		|	  |
+		|	  |
+		|	  config.js  //  contains one variable for jetty server api url
+		|
+		|
+		lib		// contains all the libraries
+		|
+		|
+		services
+		|	   |
+		|	   |
+		|	   authentication.js  // I don't know.
+		|	   |
+		|	   |
+		|	   jetty.js    // helper functions to hit jetty server api and push server api
+		|	   |
+		|	   |
+		|	   json.js 		// helper function to manipulate the json data
+		|	   |
+		|	   |
+		|	   utilities.js  // more helper functions to manipulate the json data
+		|
+		|
+		route.js    // main file to initiate angular js
+
+
+------------------------JS FILES------------------------
+
+acquisition.html     ------>        aoverview.js       
+activationsent.html     ------>            authentication.js  
+activationsuccessful.html     ------>   	none          
+activeusers.html     ------>              newusers.js
+addapplication.html     ------>    	       authentication.js, application.js   
+application.html     ------>              authentication.js, application.js 
+campaigns-inner.html     ------>           campaignreport.js   
+campaigns.html     ------>              campaign-tracker.js
+campaignsoverview.html     ------>            campaignreport.js   
+cohort.html     ------>              cohort.js
+custom-segmentation.html     ------>    	none as of now          
+dashboard.html     ------>              	doverview.js
+device.html     ------>              device.js
+event.html     ------>              events.js
+installs.html     ------>          installs.js    
+invite.html     ------>              authentication.js, application.js   
+location.html     ------>         	location.js     
+login.html     ------>              authentication.js  
+network.html     ------>          network.js    
+newusers.html     ------>             newusers.js 
+overall-analysis.html     ------>             oaoverview.js 
+password-forgot.html     ------>              password-forgot.js
+password-reset.html     ------>              password-forgot.js
+push-detail.html     ------>              none, this page is ng-included in send-push.html
+push-segmentation.html     ------>              push-segmentation.js
+pushconfiguration.html     ------>              pushconf.js
+revenue.html     ------>              revenue.js
+screen-map.html     ------>              not in use
+screenflow.html     ------>       screenflow.js, screenflow-outerview.js, screenflow-innverview.js
+segmentation.html     ------>              none as of now 
+send-push-report.html     ------>              push-report.js
+send-push.html     ------>              pushsend.js
+sessions.html     ------>              sessions.js
+signup.html     ------>              authentication.js  
+terms.html     ------>           	none   
+trends.html     ------>              toverview.js
+uninstalls.html     ------>              uninstall.js
+user-engagement.html     ------>           not in use   
+welcome.html     ------>              authentication.js  
+
+
+------------------------User Access------------------------
+hello.rocq.io has admin access to all apps
+
+VIEWER: Can View all pages except sendpush, pushconfiguration and adcampaigns page.
+EDITOR:	Ca View all the pages
+ADMIN:  Can Give Access to other users
+
+---------------------------------------------------------
+
+
+
+
+
+
+

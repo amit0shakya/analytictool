@@ -1,465 +1,697 @@
-<div class="pageheader">
-	<div class="media">
-		<div class="pageicon pull-left">
-			<i class="fa fa-th"></i>
+<div ng-controller="InstallsCtrl" ng-init="init('NU','long')">
+	<div class="pageheader main-nav navbar-fixed-top">
+		<div class="media">
+			<div class="pageicon pull-left">
+				<i class="fa fa-user"></i>
+			</div>
+			<div class="media-body">
+				<ul class="breadcrumb">
+					<li>Trends</li>
+					<li>Installs</li>
+				</ul>
+				<h4>Installs</h4>
+			</div>
 		</div>
-		<div class="media-body">
-			<ul class="breadcrumb">
-				<li><a href=""><i class="glyphicon  fa fa-th"></i></a></li>
-				<li>Acquisition</li>
+		<div class="pull-right fourth-nav">
+			<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+			<span class="glyphicon glyphicon-calendar calendar-icon"></span>
+		</div>
+	</div>
+	<div class="body-content" >
+		<div class="third-nav">
+			<ul class="nav nav-tabs" role="tablist" ng-init="tab=1">
+				<li ng-class="{active:tab===1}">
+					<a href ng-click="tab = 1" role="tab" data-toggle="tab">
+						<i class="fa fa-clock-o"></i><span>Installs</span>
+					</a>
+				</li>
+				<li ng-class="{active:tab===2}" ng-hide="app.ostype=='iOS'">
+					<a href ng-click="tab=2" role="tab" data-toggle="tab">
+						<i class="fa fa-paper-plane-o"></i><span>Source</span>
+					</a>
+				</li>
+				<li ng-class="{active:tab===3}">
+					<a href ng-click="tab=3" role="tab" data-toggle="tab">
+						<i class="fa fa-mobile-phone"></i><span>Device</span>
+					</a>
+				</li>
+				<li ng-class="{active:tab===4}">
+					<a href ng-click="tab=4" role="tab" data-toggle="tab">
+						<i class="fa fa-map-marker"></i> <span>Location</span>
+					</a>
+				</li>
 			</ul>
-			<h4>Acquisition</h4>
 		</div>
-	</div>
-	<div class="panel default-blue pull-right  date-time" >
-		<div class="symbol ">
-			<span class="day">Monday</span>
-			<span class="date">10</span> <span class="month">Feb</span>
-		</div>
-		<div class="value">
-			<p class="time-zone">PM</p>
-			<p class="time">03:27</p>
-		</div>
-	</div>
-</div>
+		<div class="tab-content">
+			<div class="tab-pane fade in active" ng-show="tab===1">
+				<div class="panel">
+					<div class="panel-body progress-panel">
+						<div class="panel-content"> 
+							<div class="col-lg-9 no-padding col-sm-12">
+								<div class="graph-header">
+									<div class="btn-group pull-right fifth-nav">
+										<button id='TnewUsersTrend_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                           					 <i class="fa-trends fa-pdf ">&nbsp;</i>
+                        				</button>
+                    				    <button id='TnewUsersTrend_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                      					      <i class="fa-trends fa-img ">&nbsp;</i>
+                       					 </button>
+                     				   <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+									</div>
+									<div class="graph-line-info">
+									
+								</div>
+							</div>
+							<div id = "TnewUsersTrend" class="graph-container">
+							</div>
+							<div class="state-overview   tm30">
+								<div class="col-lg-4 col-sm-6">
+									<section class="panel panel-sblock border  ">
+										<div class="symbol ">
+											<i class="fa-trends fa-smuser">&nbsp;</i>
+										</div>
+										<div class="value">
+											<p>Installs</p>
+											<h1 class="count rtext">{{ new_users }} </h1>
+										</div>
+									</section>
+								</div>
+								<div class="col-lg-4 col-sm-6">
+									<section class="panel panel-sblock border p-blue ">
+										<div class="symbol ">
+											<i class="fa-trends fa-smmob">&nbsp;</i>
+										</div>
+										<div class="value">
+											<p>Most Used Device</p>
+											<h1 class="count">{{ top_devices[0].y}} <span class="device-modal">{{ top_devices[0].x}}</span>  </h1>
 
-<div class="body-content" ng-controller="InstallsCtrl">
-	<div class="third-nav">
-		<div class="pagesecheader pull-left">
-			<h5>Inorganic</h5>
-			<p>ordered by uptime status</p>
-		</div>
-		<ul class="nav nav-tabs pull-right" role="tablist" ng-init="tab=1">
-			<li ng-class="{active:tab===1}">
-				<a href ng-click="tab = 1" role="tab" data-toggle="tab">
-					<i class="fa fa-paper-plane-o"></i> <span>Source</span>
-				</a>
-			</li>
-			<li ng-class="{active:tab===2}">
-				<a href ng-click="tab=2" role="tab" data-toggle="tab">
-					<i class="fa fa-mobile-phone"></i> <span>Device</span>
-				</a>
-			</li>
-			<li ng-class="{active:tab===3}">
-				<a href ng-click="tab=3" role="tab" data-toggle="tab">
-					<i class="fa fa-map-marker"></i> <span>Location</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-	<div class="tab-content">
-		<div class="tab-pane fade in active" ng-show="tab===1">
-			<div class="panel">
-				<div class="panel-body progress-panel">
-					<div class="panel-content">
-						<div class="col-lg-12 no-padding ">
-							<div class="graph-header">
-								<div class="graph-line-info">
-									<ul class="list-inline list-unstyled">
-										<li><span class="bg-blue bar-piller"></span> Source1</li>
-										<li><span class="bg-orange bar-piller"></span> Source2</li>
-									</ul>
+										</div>
+									</section>
 								</div>
-							</div>
-							<div id = "TopSourceInstalls" class="graph-container">
-								<!-- <img src="images/img-gp16.png" class="full-image">  -->
+								<div class="col-lg-4 col-sm-6">
+									<section class="panel panel-sblock border p-yellow ">
+										<div class="symbol ">
+											<i class="fa-trends fa-smmap">&nbsp;</i>
+										</div>
+										<div class="value">
+											<p>Chief Vendor</p>
+
+											<h1 class="count">{{ top_manufacturer }}</h1>
+										</div>
+									</section>
+								</div>
 							</div>
 						</div>
-						<div  class="pull-right fifth-nav">
-							<select ng-model="selectedSource" ng-options="item.x for item in topSourcesInstalls | limitTo:3" >
-								<!-- <option value= ""> Select Source </option> -->
-							</select>
-						</div>
-						<div class="col-lg-12 no-padding">
-							<div class="col-lg-4 col-md-4 col-sm-4">
-								<div class="thumbnail no-border analysis-report">
-									<div class="col-lg-8">    
-										<div class="caption">
-											<p class="text-muted">Top Sources Installs</p>
-											<h3>{{topsources_installs}}</h3>
+						<div class="col-lg-3 col-sm-12"> 
+							<div class="graph-desc tp30"> 
+								<div class="col-lg-12 col-sm-6">
+                                <span class="left arrow" ></span>
+								<p class="duration ">Installs in last 30 Days</p>
+								<p class="graph-value"> {{newusers_last30days}}</p>
+								</div>
+                                <div class="col-lg-12 col-sm-6">
+                                <div class="progress-thinbar border-top tm30">
+									<div class="panel">
+										<div class="pname btext"> {{ top_devices[0].y}} {{ top_devices[0].x}} </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div ng-style="{ 'width' : top_devices_percent[0] + '%'}"  class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
+											</div>
+											<div class="status-massage">{{ top_devices_percent[0] }}%</div>
 										</div>
 									</div>
-									<!-- <div class="col-lg-8">  
-										<img src="images/img6.png" width="91" height="33"  >
-									</div> -->
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4">
-								<div class="thumbnail no-border analysis-report">
-									<div class="col-lg-12">    
-										<div class="caption">
-											<p class="text-muted">Installs from {{selectedSource.x}}</p>
-											<h3>{{selectedSource.y}}</h3>
+									<div class="panel">
+										<div class="pname rtext"> {{ top_devices[1].y}} {{ top_devices[1].x}}  </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div ng-style="{ 'width' : top_devices_percent[1] + '%'}" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
+											</div>
+											<div class="status-massage">{{ top_devices_percent[1] }}%</div>
 										</div>
 									</div>
-									<!-- <div class="col-lg-8">  
-										<img src="images/img7.png" width="91" height="33"  >
-									</div> -->
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4">
-								<div class="thumbnail no-border analysis-report">
-									<div class="col-lg-12">    
-										<!-- <div class="caption">
-											<p class="text-muted">Uninstalls from {{selectedSource.x}}</p>
-											<h3>17,561</h3>
-										</div> -->
+									<div class="panel">
+										<div class="pname ytext">{{ top_devices[2].y}} {{ top_devices[2].x}}   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div ng-style="{ 'width' : top_devices_percent[2] + '%'}" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">{{ top_devices_percent[2] }}%</div>
+										</div>
 									</div>
-									<!-- <div class="col-lg-8">  
-										<img src="images/img8.png" width="91" height="33"  >
-									</div> -->
+									<div class="panel">
+										<div class="pname gtext">{{ top_devices[3].y}} {{ top_devices[3].x}}   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div  ng-style="{ 'width' : top_devices_percent[3] + '%'}"class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">{{ top_devices_percent[3] }}%</div>
+										</div>
+									</div>
 								</div>
+                                </div>
 							</div>
 						</div>
 					</div>
+				</div>
+				
+				
+				
+				<div class="panel-body progress-panel border-top tp20">
+					<div class="task-progress task-progress-noborder">
+						<div class="btn-group pull-right fifth-nav">
+                        <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+                        
+						<button type="button" ng-csv="VisitorsDayWiseListCSV" csv-header="['Date', 'Installs','Change in %','Organic','Inorganic','Uninstalls',GoalUsers ]" filename="New_Users_Day_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                      </div>
+                      
+                      
+                        
+                        <h2>Day Wise List</h2>
+                        
+                        
+					</div>
+					<div class="text-center panel-content">
+						<div class="table-component">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th width="10%" class="text-center">Date</th>
+										<th width="20%">Installs</th>
+										<th width="20%" >Organic</th>
+										<th width="20%">Inorganic</th>
+										<th width="20%">Uninstalls</th>
+										<th width="20%">Goal Events</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr ng-hide="table1loaded"> 
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr> -->
+									<tr  ng-repeat="elem in page_daywise_list">
+										<td class="  text-center"  ><strong class="fs18">{{ elem.x }}</strong>   </td>
+										<td>  {{ elem.y }} <span class="fs11 tb-change "><strong>{{ elem.z | number:1 }}%</strong></span> <span  ng-class="{true:'glyphicon glyphicon-upload gtext fs11',false:'glyphicon glyphicon-download rtext fs11'}[elem.z >= 0]" ></span></td>
+
+										<td > {{elem.a}}</td>
+                                        <td>{{elem.b}}</td>
+										<td>{{elem.e}}</td>
+										<td>{{elem.f}}</td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+					
+					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="visitor_items" ng-model="visitor_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination> 
+					
+					
+					
+					
 				</div>
 			</div>
 		</div>
 		<div class="tab-pane fade in active" ng-show="tab===2">
 			<div class="panel">
 				<div class="panel-body progress-panel">
-					<div class="panel-content"> 
-						<div class="col-lg-9 no-padding">
-							<div class="graph-header">
-								<div class="btn-group pull-right fifth-nav">
-									<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
-										Month <i class="fa fa-angle-down"></i>
-									</button>
-									<ul class="dropdown-menu rq-dropdown-menu" role="menu">
-										<li><a href="#">Week</a></li>
-										<li><a href="#">Year</a></li>
-									</ul>
+					<div class="panel-content">
+
+						<div class="col-lg-9 no-padding ">
+							<div class="task-progress">
+									<div  class="  fifth-nav bm8 pull-right">
+										
+										<div class="btn-group ">
+											<button id='TopSourceTrends_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+	                           					 <i class="fa-trends fa-pdf ">&nbsp;</i>
+	                        				</button>
+	                    				    <button id='TopSourceTrends_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+	                      					      <i class="fa-trends fa-img ">&nbsp;</i>
+	                       					 </button>
+	                     				   <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+										</div>
+									</div>
+								
+     <div class="multiselect-md">                          
+     <div class="btn-group" 
+    isteven-multi-select    
+    input-model="top_sources"
+    output-model="selectedtop_sources"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+ </div>
+                                
+                                
 								</div>
-							</div>
-							<div id="TopPaidManuDevices" class="graph-container">
-								<!-- <img src="images/img-gp18.png" class="full-image"> --> 
+							<div class="border">
+								
+								<div class="graph-container">
+								<span class="badge blockinfo ">Install</span>
+								<div id="TopSourceTrends" class="graph-container tm1">
+								</div>
+								</div>
+								
+								<div class="faded-bgcontainer">
+									<span class="badge blockinfo ">Uninstall</span>
+									<div id="TopSourceUninstalls" class="graph-container  tm1">
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="col-lg-3"> 
-							<div class="graph-desc tp30"> 
+							<div class="graph-desc tp30 panel-transparent"> 
 								<span class="left arrow"></span>
-								<!-- <img src="images/img9.png" > -->
-								<div class="progress-thinbar border-top tm30">
-									<div id="Paid_manu_share" class="graph-container">
-									</div>
-									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-12 no-padding">    
-												<div class="caption">
-													<p class="text-muted">Total Inorganic Installs</p>
-													<h3>{{totalPaidInstalls1}}</h3>
-												</div>
-											</div>
-											<!-- <div class="col-lg-6">  
-												<img src="images/img7.png"   height="33" width="91">
-											</div> -->
-										</div>
-									</div>
-									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-6 no-padding">    
-												<!-- <div class="caption">
-													<p class="text-muted">Uninstall</p>
-													<h3>17,561</h3>
-												</div> -->
-											</div>
-											<!-- <div class="col-lg-6">  
-												<img src="images/img8.png"   height="33" width="91">
-											</div> -->
-										</div>
-									</div>
+								
+								<div class="task-progress no-padding">
+									<h2>Source Wise Data</h2>
+									<p class="progress-type">Top {{top_sources.length}} sources showing here</p>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="tab-pane fade in active" ng-show="tab===3">
-			<div class="panel">
-				<div class="panel-body progress-panel no-padding ">
-					<div class="panel-content ">
-						<div class="col-lg-4 "> 
-							<div class="graph-desc tp30 no-border"> 
-								<div class="map-state text-center">
-									<img src="images/img-gp15.jpg" >
-									<h2>20000</h2>
-									<p>Download from delhi</p>
-									<span class="label label-default">UP</span>
-									<span class="label label-danger">Bihar</span>
-									<span class="label label-danger">Kolkatta</span>
+
+								<div class="progress-thinbar   bm40 ">
+									<ul class="media-list media-plist">
+										<li ng-repeat="top_source in top_sources |limitTo: 5" class="media border-bottom bm30">
+											<div class="pull-left heading fthin"> {{top_sources_percent[$index]}}% <span class="bg-green piller piller-70"></span></div>
+											<div class="media-body content"><p>{{top_source.x}}</p></div>
+										</li>
+										
+									</ul>
 								</div>
-								<div class="progress-thinbar">
-									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-4 no-padding">    
-												<div class="caption">
-													<p class="text-muted">Install</p>
-													<h3>17,561</h3>
-												</div>
-											</div>
-											<div class="col-lg-8">  
-												<img src="images/img7.png"   height="33" width="91">
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-4 no-padding">    
-												<div class="caption">
-													<p class="text-muted">Uninstall</p>
-													<h3>17,561</h3>
-												</div>
-											</div>
-											<div class="col-lg-8">  <img src="images/img8.png"   height="33" width="91"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-8 no-padding ">
-							<div class="rq-map text-center">
-								<img src="images/img-gp13.jpg" width="531" height="332">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="third-nav">
-		<div class="pagesecheader pull-left">
-			<h5>Organic</h5>
-			<p>ordered by uptime status</p>
-		</div>
-		<ul class="nav nav-tabs pull-right" role="tablist" ng-init="tab_org=4">
-			<li ng-class="{active:tab_org===4}">
-				<a href ng-click="tab_org = 4" role="tab" data-toggle="tab">
-					<i class="fa fa-paper-plane-o"></i> <span>Keyword</span>
-				</a>
-			</li>
-			<li ng-class="{active:tab_org===5}">
-				<a href ng-click="tab_org=5" role="tab" data-toggle="tab">
-					<i class="fa fa-mobile-phone"></i> <span>Device</span>
-				</a>
-			</li>
-			<li ng-class="{active:tab_org===6}">
-				<a href ng-click="tab_org=6" role="tab" data-toggle="tab">
-					<i class="fa fa-map-marker"></i> <span>Location</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-	<div class="tab-content">
-		<div class="tab-pane fade in active" ng-show="tab_org===4">
-			<div class="panel">
-				<div class="panel-body progress-panel">
-					<div class="panel-content">
-						<div class="col-lg-12 no-padding ">
-							<div id="SourceKeywords" class="graph-container">
-								<!-- <img src="images/img-gp17.png" class="full-image">  -->
+								
 							</div>
 						</div>
 						<div class="col-lg-12 no-padding">
-							<div class="col-lg-4 col-md-4 col-sm-4">
-								<div class="thumbnail no-border analysis-report">
-									<div class="col-lg-12 no-padding">    
-										<div class="caption">
-											<p class="text-muted">Top KeyWords Installs</p>
-											<h3>{{top_terms_installs}}</h3>
-										</div>
-									</div>
-									<!-- <div class="col-lg-8">  
-										<img src="images/img7.png" width="91" height="33">
-									</div> -->
+							<div class="col-lg-4 col-sm-4">
+								
+								<div id = "OrgvsInorg_share" class="graph-container tm10">
+									<!-- <img src="images/img-gp9.jpg" > -->
 								</div>
 							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4">
-								<!-- <div class="thumbnail no-border analysis-report">
-									<div class="col-lg-4 no-padding">    
-										<div class="caption">
-											<p class="text-muted">Uninstall</p>
-											<h3>17,561</h3>
-										</div>
-									</div>
-									<div class="col-lg-8">  <img src="images/img8.png" width="91" height="33"  ></div>
-								</div> -->
+							<div class="col-lg-4 col-sm-4">
+								
+								<div id = "topKeywords_share" class="graph-container tm30">
+									<!-- <img src="images/img-gp14.jpg" > -->
+								</div>
 							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-4">
-								<!-- <div class="thumbnail no-border analysis-report">
-									<div class="col-lg-4 no-padding">    
-										<div class="caption">
-											<p class="text-muted">Uninstall</p>
-											<h3>17,561</h3>
-										</div>
-									</div>
-									 <div class="col-lg-8">  <img src="images/img8.png" width="91" height="33"  ></div>
-								</div> -->
+							<div class="col-lg-4 col-sm-4" ng-if="tab===2">
+								
+								<div class="tm30"><jqcloud fontSize="{'from': .08, 'to':.04}"center="{x: 0.5, y:0.5}" words="words" width="330" height="250" steps="8"></jqcloud></div>
 							</div>
 						</div>
 					</div>
 				</div>
+				
+				
+				<div class="panel-body progress-panel border-top tp20">
+					<div class="task-progress task-progress-noborder">
+						<div class="btn-group pull-right fifth-nav">
+                        <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+                        
+						<button type="button" ng-csv="SourceNewUsersListCSV" csv-header="['Source', 'Installs']" filename="Source_New_Users_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                        </div>
+						<h2>Source Installs List</h2>
+					</div>
+					<div class="text-center panel-content">
+						<div class="table-component">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th width="30%">Source</th>
+										<th width="20%"  >Installs</th>
+										<th width="20%"  >Share</th>
+										<th width="20%"  >Uninstalls</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<!-- <tr ng-hide="table2loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr> -->
+									<tr  ng-repeat="elem in filteredsourcenewuserslist">
+										<td>{{ elem.x }}</td>
+										<td><strong>{{ elem.y }}</strong></td>
+										<td><span class=" ng-binding tb-change">{{ (elem.y/paid_installs_total_raw)*100 |  number:2 }}%</span>    
+                                         <span  ng-class="{true:'glyphicon glyphicon-upload gtext',false:'glyphicon glyphicon-download rtext'}[elem.y >= 0]" ></span>  
+                                        
+                                        
+											<div class="progress value-progress mmt5" style="display:none;" >
+												<div class="progress-bar bar-green " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : (elem.y/paid_installs_total_raw)*100 + '%'}">
+													<span class="sr-only">60% Complete</span>
+												</div>
+											</div>
+
+
+										</td>
+										<td>{{ elem.z || 0}}</td>
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="source_items" ng-model="source_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination> 
+					
+				</div>
 			</div>
+			
+			
+			
 		</div>
-
-
-		<div class="tab-pane fade in active" ng-show="tab_org===5">
+		<div class="tab-pane fade in active" ng-show="tab===3">
 			<div class="panel">
 				<div class="panel-body progress-panel">
+					<div class="panel-content">
 
-					<div class="panel-content"> 
-						<div class="col-lg-9 no-padding">
-							<div class="graph-header">
-								<div class="btn-group pull-right fifth-nav">
-									<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
-										Select Keword <i class="fa fa-angle-down"></i>
-									</button>
-									<ul class="dropdown-menu rq-dropdown-menu" role="menu">
-										<li><a href="#">Keyword 1</a></li>
-										<li><a href="#">Keyword 2</a></li>
-									</ul>
-								</div>
 
-								<div class="graph-line-info">
-									<ul class="list-inline list-unstyled">
-										<li><span class="bg-blue bar-piller"></span> Keyword 1</li>
-										<li><span class="bg-orange bar-piller"></span> Keyword 2</li>
-									</ul>
-								</div>
 
+							 
+
+
+
+
+
+						<div class="col-lg-12 no-padding">
+							<div class="task-progress">
+									<div  class="  fifth-nav bm8 pull-right">
+										<div class="btn-group ">
+											<button id='NUTopDeviceTrends_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+	                           					 <i class="fa-trends fa-pdf ">&nbsp;</i>
+	                        				</button>
+	                    				    <button id='NUTopDeviceTrends_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+	                      					      <i class="fa-trends fa-img ">&nbsp;</i>
+	                       					 </button>
+	                     				   <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+										</div>
+									</div>
+                                    <div class="multiselect-md"> 
+     <div class="btn-group" 
+    isteven-multi-select
+    input-model="top_devices"
+    output-model="selectedtop_manus"
+     button-label="x"
+    item-label="x"
+    tick-property="ticked"
+    max-labels="5"
+    max-height="210px"
+></div>
+</div>
 							</div>
-							<div id="TopOrganicManuDevices" class="graph-container">
-								<!-- <img src="images/img-gp19.jpg" class="full-image">  -->
+							<div id="NUTopDeviceTrends" class="graph-container ">
+								<!-- <img src="images/img-gp10.jpg" class="full-image">  -->
 							</div>
-
-
 						</div>
-						<div class="col-lg-3"> 
-							<div class="graph-desc tp30"> 
-								<span class="left arrow"></span>
-								<div class="progress-thinbar ">
-									<div id="Organic_manu_share" class="graph-container">
+						<div class="col-lg-12 no-padding    ">
+							<div class="col-lg-6 no-padding">
+								
+								<div id = "manu_share" class="graph-container text-center mmb5 ">
+									<!-- <img src="images/img-gp11.jpg"  > -->
 								</div>
+							</div>
 
-									<!-- <div class="panel">
-										<div class="pname btext">Keyword 1 </div> 
-										<div class="status">
-											<div class="progress transparent progress-mid no-radius" style="width:100%">
-												<div style="width: 20%;" class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
+
+							<div class="col-lg-6 bg-gray">
+								<div class="  dv-holder  ">
+									<div class="col-lg-6 col-md-6 col-sm-6  ">
+										<div class=" msg-block background-blue wtext bm10 bg-mobile">
+											<div class="pname tp35"><span>{{top_manus[0].x}}</span>  </div> 
+											<div class="status">
+												<span class="msg-value">{{top_manus[0].y}}</span>
 											</div>
-											<div class="status-massage">20%</div>
 										</div>
 									</div>
-
-									<div class="panel">
-										<div class="pname rtext">Keyword 2  </div> 
-										<div class="status">
-											<div class="progress transparent progress-mid no-radius" style="width:100%">
-												<div style="width: 40%;" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
+									<div class="col-lg-6 col-md-6 col-sm-6 pl0">
+										<div class=" msg-block background-lred wtext bm10 bg-mobile">
+											<div class="pname tp35"><span >{{top_manus[1].x}} </span> </div> 
+											<div class="status">
+												<span class="msg-value">{{top_manus[1].y}}</span>
 											</div>
-											<div class="status-massage">40%</div>
 										</div>
 									</div>
-
-									<div class="panel">
-										<div class="pname ytext">Keyword 3   </div> 
-										<div class="status">
-											<div class="progress transparent progress-mid no-radius" style="width:100%">
-												<div style="width: 70%;" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+									<div class="col-lg-6 col-md-6 col-sm-6  ">
+										<div class=" msg-block background-dblue wtext bg-mobile">
+											<div class="pname tp35"><span >{{top_manus[2].x}} </span> </div> 
+											<div class="status">
+												<span class="msg-value">{{top_manus[2].y}}</span> 
 											</div>
-											<div class="status-massage">70%</div>
 										</div>
 									</div>
-
-
-									<div class="panel">
-										<div class="pname gtext">Keyword 4   </div> 
-										<div class="status">
-											<div class="progress transparent progress-mid no-radius" style="width:100%">
-												<div style="width: 25%;" class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+									<div class="col-lg-6 col-md-6 col-sm-6 pl0">
+										<div class=" msg-block background-green wtext bg-mobile">
+											<div class="pname tp35"><span >{{top_manus[3].x}} </span> </div> 
+											<div class="status">
+												<span class="msg-value">{{top_manus[3].y}}</span> 
 											</div>
-											<div class="status-massage">25%</div>
 										</div>
-									</div> -->
+									</div>
 								</div>
-
-								<div class="progress-thinbar border-top tm30">
-
-									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-12 no-padding">    
-												<div class="caption">
-													<p class="text-muted">Total Organic Installs</p>
-													<h3>{{totalOrgInstalls1}}</h3>
-												</div>
-											</div>
-											<!-- <div class="col-lg-6">  <img src="images/img6.png"   height="33" width="91"></div> -->
-
-										</div>
-
+							</div>
+						</div>
+						<div class="col-lg-12 no-padding">
+							<div class="col-lg-6 col-sm-6">
+								
+								<div id="topmanu_share" class="graph-container text-center ">
+									<!-- <img src="images/img-gp15.png"> -->
+								</div>
+							</div>
+							<div class="col-lg-6 col-sm-6">
+								<div class="panel tm10">
+									<div class="task-progress">
+										<h1>Top {{ top_manus[0].x }} Devices</h1>
 									</div>
-
-
-
-									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-6 no-padding">    
-												<!-- <div class="caption">
-													<p class="text-muted">Install</p>
-													<h3>17,561</h3>
-												</div> -->
-											</div>
-											<!-- <div class="col-lg-6">  <img src="images/img7.png"   height="33" width="91"></div> -->
-										</div>
-									</div>
+									<ul class="media-list media-plist">
+										<li ng-repeat = "top_manu_device in top_manu_devices" class="media border-bottom ">
+											<div class="pull-left heading fthin">{{ top_manu_device.y }}% <span class="bg-green piller piller-35"></span></div>
+											<div class="media-body content"><p class="ltext">{{ top_manus[0].x}} {{ top_manu_device.x }}</p></div>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				
+				<div class="panel-body progress-panel border-top tm20">
+					<div class="task-progress task-progress-noborder">
+						<div class="btn-group pull-right fifth-nav">
+                        <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+                        
+						<button type="button" ng-csv="DeviceNewUsersListCSV" csv-header="['Manufacturer','Model','Installs']" filename="Device_New_Users_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                        </div>
+						<h2>Device Installs List</h2>
+					</div>
+					<div class="text-center panel-content">
+						<div class="table-component">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>             
+										<th width="30%">Device</th>
+										<th width="30%">Installs</th>
+										<th width="20%">Share</th>
+										<!-- <th width="20%">Uninstalls</th> -->
+									</tr>
+								</thead>
+								<tbody>
+                                       <!-- <tr ng-hide="table3loaded">
+                                <td colspan="5" >
+                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                </td>
+                              </tr> -->
+
+									<tr  ng-repeat="dev in filtereddevicenewuserslist">
+										<td>{{ dev.y }} {{ dev.x }}</td>
+										<td>{{ dev.z }}</td>
+										<td>
+											<span class=" ng-binding tb-change">{{ (dev.z/total_new_users_raw)*100 |  number:2 }}%</span>
+                                             <span  ng-class="{true:'glyphicon glyphicon-upload gtext',false:'glyphicon glyphicon-download rtext'}[dev.z >= 0]" ></span>  
+                                             
+											<div class="progress value-progress mmt5" style="display:none;">
+												<div class="progress-bar bar-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : (dev.z/total_new_users_raw)*100 + '%'}">
+													<span class="sr-only">60% Complete</span>
+												</div>
+											</div>
+
+
+										</td>
+										<!-- <td>{{ dev.a }}</td> -->
+									</tr>
+								</tbody>
+							</table>
+							
+						</div>
+					</div>
+					
+					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="device_items" ng-model="device_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>
+					
+					
+				</div>
 			</div>
 		</div>
-		<div class="tab-pane fade in active" ng-show="tab_org===6">
+		
+		
+		<div class="tab-pane fade in active" ng-show="tab===4">
 			<div class="panel">
-				<div class="panel-body progress-panel no-padding ">
-					<div class="panel-content ">
-						<div class="col-lg-4 "> 
+				<div class="panel-body progress-panel no-padding">
+					<div class="panel-content">
+						<div class="col-lg-4 col-sm-12"> 
 							<div class="graph-desc tp30 no-border"> 
-								<div class="map-state">
-									<div class=" text-center"><img src="images/img-gp15.jpg"></div>
-									<div class="tp20 text-muted fs13"><span class="rtext"><strong>04</strong></span> Popular Keyword in Delhi</div>
-									<h3>Online Shoping, Movie ticket,Shoping site</h3>
+								<!-- <img src="images/img-gp12.jpg" width="261" height="158"> -->
+								<div class="panel panel-block p-blue text-center  col-sm-6 col-lg-12">
+									<div class="graph-header">
+									<div  class="  fifth-nav bm8 text-right">
+									</div>
+									</div>
+									<div id="top10Cities" class="text-center panel-content"></div>
 								</div>
-								<div class="progress-thinbar">
-									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-4 no-padding">    
-												<div class="caption">
-													<p class="text-muted">Install</p>
-													<h3>17,561</h3>
-												</div>
+								<div class="progress-thinbar  tm0 bm0  col-sm-6 col-lg-12">
+									<div class="panel bp10">
+										<div class="pname btext">{{cities[0].x}} </div> 
+										<div class="status">
+											<div class="status-massage pull-right mmt20">{{top_cities_percent[0]}}%</div>
+											<div class="progress transparent progress-large no-radius" style="width:100%">
+												<div ng-style="{ 'width' : top_cities_percent[0] + '%'}" class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="40%"></div>
 											</div>
-											<div class="col-lg-8">  <img src="images/img7.png"   height="33" width="91"></div>
 										</div>
 									</div>
-									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
-										<div class="thumbnail no-border analysis-report">
-											<div class="col-lg-4 no-padding">    
-												<div class="caption">
-													<p class="text-muted">Uninstall</p>
-													<h3>17,561</h3>
-												</div>
+									<div class="panel bp10">
+										<div class="pname rtext">{{cities[1].x}} </div> 
+										<div class="status">
+											<div class="status-massage pull-right mmt20">{{top_cities_percent[1]}}%</div>
+											<div class="progress transparent progress-large no-radius" style="width:100%">
+												<div ng-style="{ 'width' : top_cities_percent[1] + '%'}" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="40%"></div>
 											</div>
-											<div class="col-lg-8">  <img src="images/img8.png"   height="33" width="91"></div>
+										</div>
+									</div>
+									<div class="panel bp10">
+										<div class="pname ytext">{{cities[2].x}} </div> 
+										<div class="status">
+											<div class="status-massage pull-right mmt20">{{top_cities_percent[2]}}%</div>
+											<div class="progress transparent progress-large no-radius" style="width:100%">
+												<div ng-style="{ 'width' : top_cities_percent[2] + '%'}" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+											</div>
+										</div>
+									</div>
+									<div class="panel ">
+										<div class="pname gtext">{{cities[3].x}} </div> 
+										<div class="status">
+											<div class="status-massage pull-right mmt20">{{top_cities_percent[3]}}%</div>
+											<div class="progress transparent progress-large no-radius" style="width:100%">
+												<div ng-style="{ 'width' : top_cities_percent[3] + '%'}" class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8 no-padding ">
-							<div class="rq-map text-center">
-								<img src="images/img-gp13.jpg" width="531" height="332"></div>
+						<div class="col-lg-8 no-padding rq-map col-sm-12">
+							<!-- <div class="rq-map text-center"> -->
+							<!-- <img src="images/img-gp13.jpg" width="531" height="332"> -->
+							<div id="mapStates" class="graph-container rq-map"></div>
+							<!-- </div> -->
+						</div>
+					</div>
+
+				</div>
+				
+				<div class="panel-body progress-panel border-top ">
+					<div class="row">
+						<div class="col-lg-6 pr0 col-sm-6">
+							<div class="panel">
+							<div class="panel-body progress-panel">
+								<div class="task-progress task-progress-noborder">
+									<div class="btn-group pull-right fifth-nav">
+			                        <a href="" class="fsize-bl" ><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+			                        
+									<button type="button" ng-csv="CityNewUsersListCSV" csv-header="['City', 'Installs']" filename="New_Users_City_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+			                     	</div>
+									<h2>city wise list</h2>
+								</div>
+
+								<div class="text-center panel-content">
+									<div class="table-component">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<thead>
+												<tr>
+													<th width="70%">City</th>
+													<th width="30%">Installs</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- <tr ng-hide="table4loaded">
+                                					<td colspan="5" >
+                                  						<p class="text-center"><img src="images/ajax-loader.gif"></p>
+                               						 </td>
+                             					 </tr> -->
+
+												<tr ng-repeat="elem in page_city_list">
+													<td>{{ elem.x }}</td>
+													<td>{{ elem.y }}</td>
+												</tr>
+											</tbody>
+										</table>
+										
+									</div>
+								</div>
+								<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="city_items" ng-model="city_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>  
+								
+							</div>
+							</div>
+							
+							
+							
+						</div>
+						<div class="col-lg-6 pl0 border-left col-sm-6">
+							<div class="panel">
+							<div class="panel-body progress-panel">
+								<div class="task-progress task-progress-noborder">
+									<div class="btn-group pull-right fifth-nav">
+				                        <a href="" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
+				                        
+										<button type="button" ng-csv="StateNewUsersListCSV" csv-header="['State', 'Installs']" filename="New_Users_State_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+				                    </div>
+									<h2>state wise list</h2>
+								</div>
+
+								<div class="text-center panel-content">
+									<div class="table-component">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<thead>
+												<tr>
+													<th width="70%">State</th>
+													<th width="30%">Installs</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- <tr ng-hide="table5loaded">
+                               						 <td colspan="5" >
+                                 						 <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                               						 </td>
+                             					 </tr> -->
+
+												<tr  ng-repeat="elem in page_state_list">
+													<td>{{ elem.x }}</td>
+													<td>{{ elem.y }}</td>
+												</tr>
+											</tbody>
+										</table>
+										
+									</div>
+								</div>
+								
+								<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="state_items" ng-model="state_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>
+								
+								
+							</div>
+							</div>
+							
+							
+							
+							
+							
 						</div>
 					</div>
 				</div>

@@ -1,104 +1,328 @@
-<div class="pageheader">
-	<div class="media">
-		<div class="pageicon pull-left">
-			<i class="fa fa-home"></i>
-		</div>
-		<div class="media-body">
-			<ul class="breadcrumb">
-				<li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
-				<li>Dashboard</li>
-			</ul>
-			<h4>OVERVIEW</h4>
-		</div>
-	</div>
-	<div class="panel default-blue pull-right  date-time" >
-		<div class="symbol ">
-			<span class="day">Tuesday</span>
-			<span class="date">28</span> <span class="month">Oct</span>
-		</div>
-		<div class="value">
-			<p class="time-zone">PM</p>
-			<p class="time">06:23</p>
-		</div>
-	</div>
+<div ng-controller="DoverviewCtrl">
+  <div class="pageheader main-nav navbar-fixed-top">
+    <div class="media">
+      <div class="pageicon pull-left">
+        <i class="fa fa-th"></i>
+      </div>
+      <div class="media-body">
+        <ul class="breadcrumb">
+          <li>Dashboard</li>
+        </ul>
+        <h4>Dashboard</h4>
+      </div>
+    </div>
+    <div class="pull-right fourth-nav">
+     <input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+     <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+   </div>
 </div>
-<div class="body-content" ng-controller="DoverviewCtrl">
-	<div class="state-overview row">
-		<div class="col-lg-4 col-sm-6">
-			<section class="panel green">
-				<div class="symbol terques">
-					<i class="fa fa-user"></i>
-				</div>
-				<div class="value">
-					<p>New Users</p>
-					<h1 class="count">{{new_users | number}}</h1>
-					<p class="rating"> 2% <i class="fa fa-long-arrow-down"></i></p>
-				</div>
-			</section>
-		</div>
-		<div class="col-lg-4 col-sm-6">
-			<section class="panel red">
-				<div class="symbol dred">
-					<i class="fa fa-tags"></i>
-				</div>
-				<div class="value">
-					<p>Active Users</p>
-					<h1 class="count2">{{active_users | number}}</h1>
-					<p class="rating"> 4% <i class="fa fa-long-arrow-up"></i></p>
-				</div>
-			</section>
-		</div>
-		<div class="col-lg-4 col-sm-6">
-			<section class="panel blue">
-				<div class="symbol dblue">
-					<i class="fa fa-shopping-cart"></i>
-				</div>
-				<div class="value">
-					<p>Total Downloads</p>
-					<h1 class=" count3">{{downloads | number}}</h1>
-					<p class="rating"> 4% <i class="fa fa-long-arrow-down"></i></p>
-				</div>
-			</section>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel">
-				<div class="panel-body progress-panel">
-					<div class="task-progress">
-						<h1>New Users</h1>
-					</div>
-					<div id="newUsersTrend" class="text-center panel-content">
-						<!-- <img src="images/img1.png" width="853" height="325"> -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-6">
-			<div class="panel">
-				<div class="panel-body progress-panel">
-					<div class="task-progress">
-						<h1>Top Devices</h1>
-					</div>
-					<div id="topDevices" class="text-center panel-content">
-						<!-- <img src="images/img1.png" width="853" height="325"> -->
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="panel">
-				<div class="panel-body progress-panel">
-					<div class="task-progress">
-						<h1>DOWNLOAD TRIGGERS</h1>
-					</div>
-					<div id="downloadTriggers" class="text-center panel-content">
-						<!-- <img src="images/img3.png"> -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+ <div class="body-content">
+  <div class="state-overview row sm-gap">
+    <div class="col-lg-4 col-sm-6">
+      <section class="panel blue">
+        <div class="symbol pull-left ">
+          <i class="fa-trends fa-oinstal">&nbsp;</i>
+        </div>
+        <div class="value ">
+          <p  >Total Installs</p>
+          <h1 class="count">{{installs}}</h1>
+          <p class="rating"> 
+            {{installs_change}}% 
+            <i ng-class="{true:'fa fa-long-arrow-up ',false:'fa fa-long-arrow-down '}[installs_change >= 0]"></i>
+          </p>
+        </div>
+      </section>
+
+
+
+
+
+    </div>
+    <div class="col-lg-4 col-sm-6">
+      <section class="panel red">
+        <div class="symbol pull-left">
+          <i class="fa-trends fa-visitor">&nbsp;</i>
+        </div>
+        <div class="value">
+          <p  >Active Users</p>
+          <h1 class=" count2">{{activeusers}}</h1>
+          <p class="rating"> 
+            {{activeusers_change}}% 
+            <i ng-class="{true:'fa fa-long-arrow-up ',false:'fa fa-long-arrow-down '}[activeusers_change >= 0]"></i>
+          </p>
+        </div>
+      </section>
+
+    </div>
+    <div class="col-lg-4 col-sm-6">
+      <section class="panel green">
+        <div class="symbol pull-left">
+          <i class="fa-trends fa-revenue">&nbsp;</i>
+        </div>
+        <div class="value">
+          <p  >Total Revenue</p>
+          <h1 class=" count3">{{revenue}}</h1>
+
+          <p class="rating"> {{revenue_change}}% 
+             <i ng-class="{true:'fa fa-long-arrow-up ',false:'fa fa-long-arrow-down '}[revenue_change >= 0]"></i>
+          </p>
+        </div>
+      </section>
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="panel">
+        <div class="panel-body progress-panel">
+          <div class="task-progress">
+            <div class="btn-group pull-right fifth-nav">
+                <button id='newUsersTrend_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-pdf ">&nbsp;</i>
+                </button>
+                <button id='newUsersTrend_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-img ">&nbsp;</i>
+                </button>
+                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+            </div>
+
+            <h2>New User</h2>
+
+          </div>
+
+          <div id="newUsersTrend" class="text-center panel-content">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-4">
+    <div class="row">
+      <div class="col-lg-12 col-sm-6  ">
+        <div class="panel">
+          <div class="panel-body progress-panel">
+            <div class="text-center panel-content">
+              <div class="average-time">
+                <p  class="time-title">Average Session Time</p>
+                <ul class="time-holder">
+                  <li class=" no-padding"><p class="time-block">{{avg_session_length_hours}}</p><p class="time-format">Hour</p></li>
+                  <li class=" no-padding lr-margin"><p class="time-block ">{{avg_session_length_minutes}}</p><p class="time-format">Minute</p></li>
+                  <li class="active no-padding"><p class="time-block">{{avg_session_length_seconds}}</p><p class="time-format">Second</p></li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-sm-6 ">
+        <div class="panel">
+          <div class="panel-body progress-panel">
+            <div id="InstallsUninstalls" class="text-center panel-content">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+
+
+  <div class="row ">
+    <div class="col-lg-4 col-sm-6">
+      <div class="panel">
+        <div class="panel-body progress-panel">
+          <div class="task-progress">
+            <div class="btn-group pull-right fifth-nav">
+                <button id='activeUsersTrend_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-pdf ">&nbsp;</i>
+                </button>
+                <button id='activeUsersTrend_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-img ">&nbsp;</i>
+                </button>
+                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+            </div>
+
+            <h2>Active User</h2>
+
+          </div>
+
+          <div id="activeUsersTrend" class="text-center panel-content">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-6">
+      <div class="panel">
+        <div class="panel-body progress-panel">
+          <div class="task-progress ">
+            <div class="btn-group pull-right fifth-nav">
+                <button id='NetworkType_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-pdf ">&nbsp;</i>
+                </button>
+                <button id='NetworkType_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-img ">&nbsp;</i>
+                </button>
+                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+            </div>
+
+            <h2>Network</h2>
+
+          </div>
+          
+          <div id = "NetworkType" class="text-center panel-content">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-4 col-sm-12">
+      <div class="panel">
+        <div class="panel-body progress-panel">
+
+          <div class="task-progress bm0">
+            <div class="btn-group pull-right fifth-nav">
+              <button id='mapStates_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-pdf ">&nbsp;</i>
+                </button>
+                <button id='mapStates_exportpng' type='Button' value='Export to PDF' class="btn-nobg pull-left">
+                    <i class="fa-trends fa-img ">&nbsp;</i>
+                </button>
+                <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+            </div>
+
+            <h2>Locations</h2>
+
+          </div>
+
+          <!-- <div class="text-center panel-content"> -->
+          <div id="mapStates" class="graph-container   "></div>
+            <!-- <img src="images/img-gp35.png"> -->
+          <!-- </div> -->
+         <div class="top-loc">
+          <div class="st-nm"><span>TOP STATE</span> {{top_state.x}}<span class="seperator"></span></div>
+          <div class="usr-num"><span>USERS</span> {{top_state.y}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="panel">
+        <div class="panel-body progress-panel">
+          <div class="task-progress ">
+            <div class="ga-analysis text-center">
+              <ul class="list-inline">
+                <li class="col-lg-4">
+                  <p class="ga-heading">Total Events</p>
+                  <p class="ga-value">{{total_events}}</p>
+                </li>
+                <li class="col-lg-4">
+                  <p class="ga-heading">Revenue</p>
+                  <p class="ga-value"><i class="fa fa-inr"></i> {{revenue}}</p>
+                </li>
+                <!-- <li class="col-lg-3">
+                  <p class="ga-heading">Profit</p>
+                  <p class="ga-value">&#8377 546</p>
+                </li> -->
+
+                <li class="col-lg-4">
+                  <p class="ga-heading">Total Visitors</p>
+                  <p class="ga-value">{{TotalVisitors}}</p>
+                </li>
+
+
+              </ul>
+
+            </div>
+          </div>
+
+
+          <div class="text-center panel-content">
+                      <!-- <img src="images/img-gp36.png"> -->
+            <div id = "RevenueBySource" class="text-center panel-content bp13">
+
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <div class="col-lg-4">
+      <div class="col-lg-12 no-padding">
+        <div class="panel">
+          <div class="panel-body progress-panel">
+            <div class="task-progress mb0">
+
+               <div class="btn-group pull-right fifth-nav">
+                        <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
+
+                        <button type="button" ng-csv="top_eventsCSV" csv-header="['Event Name', 'Count']" filename="Top_Events.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
+                    </div>
+              <h2>Top Events</h2>
+
+            </div>
+
+
+            <div class=" panel-content">
+             <div class="table-data">
+               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mb0">
+
+                <tbody>
+                  <tr ng-repeat="elem in top_events">
+                    <td class="gray-text">{{elem.x}}</td>
+                    <td>{{elem.y}}</td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+
+</div>
+
+
+ </div>
 </div>

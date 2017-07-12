@@ -1,18 +1,38 @@
-var utilities = angular.module('Services')
-utilities.service('UtilitiesService', function() {
+var utilities = angular.module('Services');
+utilities.service('UtilitiesService', ['$rootScope',function($rootScope) {
 	/* if input is 1234 it returns 1.23K */
 	this.numberFormat = function(labelValue) {
+		if (labelValue==undefined) {return 0};
+		if (isNaN(labelValue)) {return 0};
+		if (isNaN(Number(labelValue))) {return 0};
 		var val = Math.abs(Number(labelValue)) >= 1.0e+9 ? Math.abs(Number(labelValue)) / 1.0e+9 + "B"
 		   : Math.abs(Number(labelValue)) >= 1.0e+6 ? Math.abs(Number(labelValue)) / 1.0e+6 + "M"
 		   : Math.abs(Number(labelValue)) >= 1.0e+3 ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
-		   : Math.abs(Number(labelValue));
+		   : Math.abs(Number(labelValue))+"";
 		if(labelValue<1000) {
-			return val;
+			return Math.round(labelValue);
 		}
 		else {
 			return parseFloat(val).toPrecision(3) + val.replace(/[^B|M|K]/g,"");
 		}
 	};
+
+	this.CommaSeparatedNumberFormat = function(labelValue) {
+		if (labelValue==undefined) {return 0};
+		if (isNaN(labelValue)) {return 0};
+		if (isNaN(Number(labelValue))) {return 0};
+		// uncomment this line line to get comma separation after 3 digits.
+	//	return labelValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		labelValue=Number(labelValue)
+		x=labelValue.toFixed(0);
+		var lastThree = x.substring(x.length-3);
+		var otherNumbers = x.substring(0,x.length-3);
+		if(otherNumbers != '')
+  		lastThree = ',' + lastThree;
+		return otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+	};
+
+
 	/** sorts the elements of array in ascending order
 	  * input data : [ {
 						"x" : "a",
@@ -33,12 +53,27 @@ utilities.service('UtilitiesService', function() {
 		  			  }
 		  			]
 	  */
-	this.ascending = function(data) {
-		data.sort(function(a,b) {
-			if(Number(a.y) > Number(b.y)) {
+	this.ascending = function(data,noVar) {
+		if(typeof data == 'string')
+		{
+			return data
+		}
+		data.sort(function(a,b) 
+		{
+			if(noVar == 2)
+			{	
+				var temp1 = Number(a.y)
+				var temp2 = Number(b.y)
+			}
+			if(noVar == 3)
+			{	
+				var temp1 = Number(a.z)
+				var temp2 = Number(b.z)
+			}	
+			if(temp1 > temp2) {
 	    		return 1;
 	    	}
-	    	if(Number(a.y) < Number(b.y)) {
+	    	if(temp1 < temp2) {
 	    		return -1;
 	    	}
 	    	return 0;
@@ -46,29 +81,101 @@ utilities.service('UtilitiesService', function() {
 		return data;
 	};
 	/* same as above function but in descending order */
-	this.descending = function(data) {
-		data.sort(function(a,b) {
-			if(Number(a.y) < Number(b.y)) {
+	this.descending = function(data,noVar) {
+		if(typeof data == 'string')
+		{
+			return data
+		}
+		data.sort(function(a,b) 
+		{
+			if(noVar == 2)
+			{	
+				var temp1 = Number(a.y)
+				var temp2 = Number(b.y)
+			}
+			if(noVar == 3)
+			{	
+				var temp1 = Number(a.z)
+				var temp2 = Number(b.z)
+			}	
+			if(temp1 < temp2) {
 	    		return 1;
 	    	}
-	    	if(Number(a.y) > Number(b.y)) {
+	    	if(temp1 > temp2) {
 	    		return -1;
 	    	}
 	    	return 0;
 		});
 		return data;
 	};
+
+
 	/* draws the chart in html elem with id as element_id and given width and height */
 	this.draw_chart = function(data,chart,element_id,width,height) {
-        var myChart = new FusionCharts( "fusionCharts/"+chart, element_id+"Chart", width, height, "0" );
+
+		var exportevent = 
+	    {
+	        "renderComplete": function (e, a) {
+
+	        		   var ToPdf = element_id+"_exportpdf";
+	        		   var ToPng = element_id+"_exportpng";
+	                   
+	                   // Cross-browser event listening
+	                   var addListener = function (elem, evt, fn) {
+	                       if (elem && elem.addEventListener) {
+	                       		//elem.removeEventListener(evt, undefined);
+	                           elem.addEventListener(evt, fn);
+	                       }
+	                       else if (elem && elem.attachEvent) {
+	                       	   //elem.detachEvent("on" + evt, undefined);
+	                           elem.attachEvent("on" + evt, fn);
+
+	                       } 
+	                       else {
+	                           elem["on" + evt] = fn;
+	                       }
+	                   };
+
+	                   var removeListener = function (el) {
+	                   		elClone = el.cloneNode(true);
+
+							el.parentNode.replaceChild(elClone, el);
+	                   }
+	                   
+	                   // Export chart method
+	                   var exportFC = function () {
+
+	                       var types = { 
+	                           'exportpdf': "pdf",
+	                           'exportpng': "png"
+	                       };
+	                       if (e && e.sender && e.sender.exportChart) {
+	                            e.sender.exportChart({
+	                               exportFileName: element_id,
+	                               exportFormat: types[(this.id).split('_').pop()]
+	                           });
+	                       }
+	                   };
+	                   
+	                   // Remove events
+	                   removeListener(document.getElementById(ToPdf))
+	                   removeListener(document.getElementById(ToPng))
+	                   // Attach events
+	                   addListener(document.getElementById(ToPdf), "click", exportFC);
+	                   addListener(document.getElementById(ToPng), "click", exportFC);
+	               }
+	    }
+
+        var myChart = new FusionCharts( "fusionCharts/"+chart, element_id+"Chart", width, height, "0" ,{events: exportevent});
         myChart.setJSONData(data);
         myChart.render(document.getElementById(element_id))
 	}
 	/* returns the total count of an array  sums all values with key "y" */
 	this.total_count = function(data) {
 		sum = 0
-		for(i=0;i<data.length;i++)
+		for(i=0;i<data.length;i++) {
 			sum+=parseInt(data[i].y)
+		}
 		return sum
 	}
 	/** data is json array 
@@ -155,12 +262,10 @@ utilities.service('UtilitiesService', function() {
 			for(j=0;j<devices.length;j++)
 			{
 				var d_model = devices[j].x1;
-				console.log(d_model);
 				if(d_model in device_map) 
 				{
 					device_map[d_model].y = device_map[d_model].y + devices[j].y;
 					device_map[d_model].x = devices[j].x2;
-					console.log(device_map[d_model].y);
 				}
 				else
 				{
@@ -177,7 +282,6 @@ utilities.service('UtilitiesService', function() {
 			return b[1] - a[1];
 		});
 		var top20 = [];
-		console.log(array);
 		if(max == undefined)  ///if max is not required
 		{
 			max = array.length;
@@ -261,8 +365,42 @@ utilities.service('UtilitiesService', function() {
 	    }
 	    return mod_data;
 	}
+
+	this.session_split_2 = function(data,type){
+        var mod_data = [];
+		for(k=0;k<data.length;k++)
+	    {
+            
+            if(type == 1)
+            {
+            	var sessions1 = parseInt((data[k].y).split('__')[0]);
+            	var avg_session1 = parseFloat((data[k].y).split('__')[1]/60000).toFixed(2);
+	       		mod_data = mod_data.concat({"x": data[k].x, "y": sessions1});
+            }
+	       	else if(type == 2)
+	       	{
+	       		var sessions1 = parseInt((data[k].z).split('__')[0]);
+            	var avg_session1 = parseFloat((data[k].z).split('__')[1]/60000).toFixed(2);
+	       		mod_data = mod_data.concat({"x": data[k].y+" "+data[k].x, "y": sessions1, "z":avg_session1});
+	       	}
+	        else if(type == 3)
+	       	{
+	       		var sessions1 = parseInt((data[k].z).split('__')[0]);
+            	var avg_session1 = parseFloat((data[k].z).split('__')[1]/60000).toFixed(2);
+	       		mod_data = mod_data.concat({"x": data[k].y+" "+data[k].x, "y": sessions1});
+	       	}
+	       	else
+	       	{
+	       		var sessions1 = parseInt((data[k].y).split('__')[0]);
+            	var avg_session1 = parseFloat((data[k].y).split('__')[1]/60000).toFixed(2);
+            	mod_data = mod_data.concat({"x": data[k].x, "y": sessions1, "z":avg_session1});
+            }
+	    }
+	    return mod_data;
+	}
+
 	/*
-	max - max nsize of array to be returned
+	max - max size of array to be returned
 	parse - whether to parse json string or not
 	*/
 	this.top_cummulative_5var = function(data,parse,max){
@@ -282,13 +420,13 @@ utilities.service('UtilitiesService', function() {
 				var d_manu = devices[j].x2;
 				if(d_manu in device_map) 
 				{
-					device_map[d_manu].y = device_map[d_manu].y + devices[j].x5;
-					device_map[d_manu].z = device_map[d_manu].z + devices[j].x4;
+					device_map[d_manu].y = device_map[d_manu].y + devices[j].x6;
+					device_map[d_manu].z = device_map[d_manu].z + devices[j].x5;
 					device_map[d_manu].a = device_map[d_manu].a + devices[j].x3;
 				}
 				else
 				{
-					device_map[d_manu] = { "y" : devices[j].x5, "z": devices[j].x4, "a": devices[j].x3, "m": devices[j].x1 };
+					device_map[d_manu] = { "y" : devices[j].x6, "z": devices[j].x5, "a": devices[j].x3, "m": devices[j].x1 };
 				}
 			}
 		}
@@ -326,12 +464,10 @@ utilities.service('UtilitiesService', function() {
 			for(j=0;j<devices.length;j++)
 			{
 				var d_model = devices[j].x;
-				console.log(d_model);
 				if(d_model in device_map) 
 				{
 					device_map[d_model].x = device_map[d_model].x + (devices[j].y*devices[j].k);
 					device_map[d_model].y = device_map[d_model].y + devices[j].y;
-					console.log(device_map[d_model].y);
 				}
 				else
 				{
@@ -348,7 +484,6 @@ utilities.service('UtilitiesService', function() {
 			return b[1] - a[1];
 		});
 		var top = [];
-		console.log(array);
 		if(max == undefined)  ///if max is not required
 		{
 			max = array.length;
@@ -360,4 +495,136 @@ utilities.service('UtilitiesService', function() {
 		}
 		return top;
 	}
-})
+// type is optional and pass it if you want to use clicklistener on map
+// type==1 is for paid maps; tyoe==2 is for Organic maps
+	this.draw_map = function(data,chart,element_id,width,height,type) {
+		var entityClicked=null;
+		if (type!==undefined) {
+			
+			if (type==1) 
+			{
+				entityClicked =
+				{
+					"entityClick" : data.entityclicked
+			}
+		}
+		
+			
+	};
+		
+		
+		var myMap = new FusionCharts(chart, element_id+"Chart", width, height, "0",{events: entityClicked} );
+		myMap.setJSONData(data);
+		myMap.setTransparent(true);
+		myMap.render(document.getElementById(element_id));
+	}
+
+	var fill_map = function(elements,map,type){	
+		for(j=0;j<elements.length;j++)
+			{
+				switch(type){
+					case 2: 
+						var d_manu = elements[j].x;
+						if(d_manu in map) 
+						{
+							map[d_manu].y = map[d_manu].y + elements[j].y;
+						}
+						else
+						{
+							map[d_manu] = { "y" : elements[j].y };
+						}
+						break;
+					case 3:
+						var d_manu = elements[j].x2;
+						if(d_manu in map) 
+						{
+							map[d_manu].y = map[d_manu].y + elements[j].y;
+							map[d_manu].x = elements[j].x1;
+						}
+						else
+						{
+							map[d_manu] = {"x" : elements[j].x1, "y" : elements[j].y };
+						}
+						break;
+					case 5:
+						var d_manu = elements[j].x2;
+						if(d_manu in map) 
+						{
+							map[d_manu].y = map[d_manu].y + elements[j].x6;
+							map[d_manu].z = map[d_manu].z + elements[j].x5;
+							map[d_manu].a = map[d_manu].a + elements[j].x3;
+						}
+						else
+						{
+							map[d_manu] = { "y" : elements[j].x6, "z": elements[j].x5, "a": elements[j].x3, "m": elements[j].x1 };
+						}
+						break;
+				}
+			}
+	}
+
+	this.top_cummulative_new = function(data,parse,type,max){
+		var map = {};
+		for(i=0;i<data.length;i++)
+		{
+			if(parse){
+				elements = JSON.parse(data[i].a);
+			}	
+			else{
+				elements = data[i].a;
+			}
+			fill_map(elements,map,type);
+		}
+		var array = [];
+		for(a in map){
+		 array.push([a,map[a].y])
+		}
+		array.sort(function(a,b)
+		{
+			return b[1] - a[1];
+		});
+		var top = [];
+		if(max == undefined)  ///if max is not required
+		{
+			max = array.length;
+		}
+		for(i=0;i<array.length && i<max; i++) {
+			var key = array[i][0];
+			switch(type){
+
+					case 2:
+						var temp = { "x" : key, "y" : map[key].y };
+						break;
+
+					case 3:
+						var temp = { "x" : key, "y" : map[key].x, "z" : map[key].y};
+						break;
+
+					case 5:
+						var temp = { "x" : map[key].m+" "+ key, "y" : map[key].y, "z" : map[key].z, "a" : map[key].a };
+						break;
+
+			}
+			top = top.concat(temp);
+		}
+		return top;
+	}
+
+	this.convertToMinutes = function(seconds){
+		if (seconds<0 && $rootScope.user.username!='hello@rocq.io') {
+			seconds=-seconds
+		};
+		
+	    return Math.floor(seconds/60)+":"+("00"+seconds%60).slice(-2);
+	}
+
+	this.generateUUID = function(){
+		var d = new Date().getTime();
+	    var uuid = 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	        var r = (d + Math.random()*16)%16 | 0;
+	        d = Math.floor(d/16);
+	        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+	    });
+	    return uuid;
+	}
+}]);

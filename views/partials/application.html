@@ -1,0 +1,187 @@
+<div class="no-aside-nav  ">
+<div class="page-container">
+<div class="sidebar-menu">
+<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left sidebar-menu toggle-others fixed collapsed"  >
+<div class="navbar " role="navigation">
+        <div class="navbar-header">         
+          <a class="navbar-brand" href="#"><img src="images/logo.png" width="127" height="48" class="logo-lg">  </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="main-content">
+<div ng-controller = "AuthenticationController">
+<div class="navbar main-nav navbar-fixed-top" role="navigation">
+        
+ 
+        <div class="navbar-collapse   " role="navigation">
+          <ul class="nav navbar-nav primary-nav">
+            <li><a href="/application">Application</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right secondary-nav">
+            <li class="setting"><a href="/invite"><i class="fa fa-user-plus fa-2x"></i></a></li>
+            <li class="dropdown notifications" ><div class="profile-pic"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="images/avatar-small.png" alt=""  height="35" width="34">  <span class="caret"></span> </a>
+            <ul class="dropdown-menu" role="menu">
+               <!--  <li><a href="#"><i class="fa fa-user"></i> &nbsp; Profile</a></li> -->
+                <li><a href="#" ng-click = "logout()"><i class="fa fa-sign-out"></i> &nbsp; Logout</a></li>
+              </ul>
+            </div>
+      
+            </li>
+          </ul>
+        </div>
+      
+    </div>
+    </div>
+<div ng-controller = "ApplicationController" ng-init="init_for_app_page()">
+<div class="pageheader navbar-fixed-top">
+<div class="media">
+<div class="pageicon pull-left">
+<i class="fa fa-tachometer"></i>
+</div>
+<div class="media-body">
+<h4 class="tp10">{{firstname}}</h4>
+</div>
+</div>
+
+
+<div class="pull-right fourth-nav tp10">
+  
+	<button type="button" onclick="window.location.href='/addapp'" class="btn btn-active dropdown-toggle rq-dropdown mr10" data-toggle="dropdown">
+		<i class="fa fa-plus"></i> New
+	</button>
+  <!-- 	<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown" ng-click="download_sdk(app.app_secret)">
+		Download SDK
+	</button>	 -->
+</div>
+</div>
+
+<div class="body-content">
+
+<div class="pagesecheader ">
+<div class="pull-right">
+<div class="input-group ">
+<div class="btn-group  mr10">
+<div class="search-field">
+<span class="glyphicon glyphicon-search search-icon"></span>
+<input class="form-control" type="text" placeholder="Search" ng-model="appsearch">
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+<h2 class="num-list bm20 tp10"><span>Number of applications : </span> {{total_apps}}</h2>
+ 
+</div>
+
+
+
+
+<div class="row">
+<div class="col-lg-12">
+<div class="panel rocq-list">
+<div class="panel-body">
+
+<div class="panel-content ">
+<ul class="media-list ">
+  <li ng-repeat="app in apps | filter:appsearch"  class="media border-top"  >
+
+    
+    <div class="col-lg-2  col-sm-2 media-left" ng-click = "openapp(app)" >
+      <div ng-if = "app.ostype == 'Android'"> 
+          <img  src="images/android.png" >
+      </div>
+      <div ng-if = "app.ostype == 'iOS'"> 
+           <img  src="images/ios.png" >
+      </div> 
+      <div ng-if = "app.ostype == 'Windows'"> 
+          <img  src="images/window.png" >
+      </div>
+    </div>
+    <div class="media-body border-left col-lg-10 col-sm-10" >
+    <div class="row">
+    <div class="col-lg-5 col-sm-5" ng-click = "openapp(app)">
+    <h2 class="media-heading">{{app.application}}</h2>
+      <p class="dvc">{{app.ostype}}</p>
+      <p class="ctg">{{app.category}} </p>
+      </div>
+      
+      <div class="col-lg-7 col-sm-7 aside-info no-padding">
+      
+      <div class="col-lg-2 col-sm-2  tm20" ng-click = "openapp(app)">
+      <div ng-show="user.username=='hello@rocq.io'">
+        <h3>{{app.CurrentUsers}}</h3>
+      <p class="note">MAU</p>
+      </div>
+      </div>
+       <div class="col-lg-2 col-sm-2  tm20" ng-click = "openapp(app)">
+      <div ng-show="user.username=='hello@rocq.io'">
+        <h3>{{app.campaigns}}</h3>
+      <p class="note">Push Campaigns</p>
+      </div>
+      </div>
+      <div class="col-lg-2 col-sm-2  tm20" ng-click = "openapp(app)">
+      <div ng-show="user.username=='hello@rocq.io'">
+        <h3>{{app.pn}}</h3>
+      <p class="note">Push Notifications</p>
+      </div>
+      </div>
+      <div class="col-lg-2 col-sm-2  tm20" ng-click = "openapp(app)">
+      <h3>{{app.TotalDownload}}</h3>
+      <p class="note">Total Downloads</p>
+      </div>
+       <div class=" col-lg-4 col-sm-4 text-center">
+      <div class="icon-setting">
+<button class="btn btn-default rq-dropdown" type="button" data-toggle="collapse" data-target="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">
+  INFO
+</button>
+</div>
+</div>
+
+      <!-- <div class="col-lg-6 ">
+<h4>{{app.CurrentUsers}}</h4>
+<p class="note">Current Installs</p>
+      
+      </div> -->
+  <!-- <div class="col-lg-6"><p class="note"	>Trends</p>
+      <h4>NA<span class="fs9 fa fa-arrow-down rtext" >&nbsp;</span></h4>
+      </div> -->
+
+
+      
+      </div>
+      </div>
+      </div>
+      
+    
+
+
+    
+
+
+    <div class="collapse col-lg-12 col-sm-12 no-padding" id="collapseExample{{$index}}">
+  <div class="id-info">
+   <p  ><span class="fs12 graytext">Your unique application key is:</span> <strong class="otext">{{app.app_secret}}</strong></p>
+      <p class="tm20">Download the rocQ SDK for {{app.ostype}}</p>
+        <button type="button" class="btn btn-green  " ng-click="download_sdk(app.app_secret,app.ostype)">DOWNLOAD</button>
+  </div>
+</div> 
+  </li>
+
+   
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

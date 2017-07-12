@@ -1,0 +1,5 @@
+<project basedir=".">
+<target name="copy">
+	 <copy file="${folder}/database.js" todir="config/" overwrite="true"/>
+</target>
+</project>

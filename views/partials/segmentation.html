@@ -1,0 +1,90 @@
+<div ng-controller="EventsCtrl">
+	<div class="pageheader main-nav navbar-fixed-top">
+		<div class="media">
+			<div class="pageicon pull-left">
+				<i class="fa fa-th"></i>
+			</div>
+			<div class="media-body">
+				<ul class="breadcrumb">
+					<li>User Engagement</li>
+					<li>Segmentation</li>
+				</ul>
+				<h4>Segmentation</h4>
+			</div>
+		</div>
+		<div class="pull-right fifth-nav">
+			<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+			<span class="glyphicon glyphicon-calendar calendar-icon"></span>
+		</div>
+	</div>
+
+	<div class="body-content" >
+		
+<div class="panel">
+<div class="panel-body">
+<div class="task-progress">
+<div class="btn-group pull-right fifth-nav">
+<div class="nav-bookmark">
+<ul class="list-inline">
+<li> 
+ <a  data-toggle="dropdown">
+<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+</a>
+<div class="dropdown-menu rq-dropdown-menu" role="menu">
+<div class="form">
+<div class="field-group col-lg-12"><input name="" type="text" /></div>
+<div class="field-group col-lg-12"> <div class="col-lg-8">Remove</div>  <div class="col-lg-4"><input name="" type="button" value="Add" /></div></div>
+</div>
+
+</div>
+ 
+
+</li>
+<li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+</ul>
+</div>
+</div>
+<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+Select Event <i class="fa fa-angle-down"></i>
+</button>
+<ul class="dropdown-menu rq-dropdown-menu" role="menu">
+
+<li><a href="#">Event Name 1</a></li>
+<li><a href="#">Event Name 1</a></li>
+</ul>
+</div>
+</div>
+
+
+<div class="panel-content"> 
+
+     <div class="default-message"> <p>Choose an event to begin your analysis.</p> </div>
+     
+     <div class="sr-wrapper"></div>            
+                    
+                    
+</div>
+</div>
+</div>
+
+
+                        
+        <div class="panel">
+					<div class="panel-body progress-panel">
+						<div class="panel-content"> 
+							
+				 <div   class="graph-container text-center">
+															<div id = "Events_line_chart" class="graph-container">
+
+							</div>
+						</div>
+				
+			</div>
+            </div>
+            </div>
+            
+            
+            
+            
+</div>
+</div>

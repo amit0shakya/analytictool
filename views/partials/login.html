@@ -1,0 +1,126 @@
+<div data-ng-controller="AuthenticationController">
+<nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-top pull-left">
+   <a href="http://rocq.io/" class="brand"><img src="images/logo-rocq.png" width="127" height="48"  ></a>
+        </div>
+        <div id="navbar" class="pull-right" ng-hide="is_demo()">
+          <ul class="nav navbar-nav navbar-right navbar-reg" >
+           <li class="active"><a href="javascript:void(0);" ng-click = "register()">Register Now </a></li>
+          </ul>
+        </div> 
+      </div>
+    </nav>
+      <div class="jumbotron bg-header">
+       
+       <div class="rocq-jumbotron">
+       <div class="col-lg-4 col-sm-4 col-md-4 ">
+       <ul class="media-list left-colm">
+  <li class="media">
+    <div class="pull-right">
+        <i class="fa-trends fa-heatmap">&nbsp;</i>
+       </div>
+    <div class="media-body">
+      <h2 class="media-heading"><span>Heat</span> Map</h2>
+
+    </div>
+  </li>
+  <li class="media">
+    <div class="pull-right">
+        <i class="fa-trends fa-ujourney">&nbsp;</i>
+       </div>
+    <div class="media-body">
+      <h2 class="media-heading"><span>User</span>  Journey</h2>
+
+    </div>
+  </li>
+  
+  <li class="media">
+    <div class="pull-right">
+        <i class="fa-trends fa-inunstall">&nbsp;</i>
+       </div>
+    <div class="media-body">
+      <h2 class="media-heading"><span>Install/Uninstall</span><br />
+ Tracking</h2>
+
+    </div>
+  </li>
+  
+</ul></div>
+       <div class="col-lg-4 col-sm-4 col-md-4"><img src="images/img-gadget.png" ></div>
+       <div class="col-lg-4 col-sm-4 col-md-4 right-colm">
+       <ul class="media-list">
+  <li class="media">
+    <div class="pull-left">
+        <i class="fa-trends fa-pushnotice">&nbsp;</i>
+       </div>
+    <div class="media-body">
+      <h2 class="media-heading"><span>Customized</span> Push Notification</h2>
+
+    </div>
+  </li>
+  <li class="media">
+    <div class="pull-left">
+        <i class="fa-trends fa-idata">&nbsp;</i>
+       </div>
+    <div class="media-body">
+      <h2 class="media-heading"><span>Intelligent</span> Data</h2>
+
+    </div>
+  </li>
+  
+  <li class="media">
+    <div class="pull-left">
+        <i class="fa-trends fa-segmentation">&nbsp;</i>
+       </div>
+    <div class="media-body">
+      <h2 class="media-heading"><span>S</span>egmentation</h2>
+
+    </div>
+  </li>
+  
+</ul>
+       </div>
+       </div>
+       
+      </div>
+
+<div class="container">
+ <div class="login-form">
+<h2>Sign in to your account</h2>
+
+ <form class="form-inline" data-ng-submit="signin()">
+  <div class="form-group col-lg-4">
+  	<label class="sr-only" for="username">Username</label>
+	<input type="email" id="username" name="username" class="form-control" data-ng-model="credentials.username" ng-click="error=''" placeholder="Username">
+  </div>
+  <div class="form-group col-lg-4">
+    <label class="sr-only" for="password">Password</label>
+	<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" ng-click="error=''" placeholder="Password">
+  </div>
+   <div class="form-group col-lg-4 text-left ">
+  <button type="submit" class="btn btn-default form-control">SIGN IN</button>
+  </div>
+  <div class="form-group col-lg-8 text-left">
+  	<p ng-show="error" class="tp5 rtext fs12">{{error}}</p>
+  </div>
+  <div class="form-group col-lg-4">
+ <p class="forgot"><a ng-hide="is_demo()" href="/forgotpassword"  data-poptrox="iframe,500x180">Forgot Password ?</a></p>
+  </div>
+  
+</form>
+ </div>
+ </div>
+ 
+ <div class="container"><p class="copy">&copy; copyright Rocq 2015 16</p></div>
+ </div>
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72393215-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
