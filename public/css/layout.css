@@ -1,0 +1,71 @@
+
+#customWidget {
+	position: relative;
+	height: 36px;
+}
+
+input.inputDate {
+	border: 1px solid #999;
+	padding: 4px;
+	border-bottom-color: #ddd;
+	border-right-color: #ddd;
+	width: 65px;
+}
+#widget {
+	position: relative;
+}
+#widgetField {
+	height: 26px;
+	position: relative;
+}
+#widgetField a 	{
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 38px;
+}
+#widgetField span	{
+	position: absolute;
+	top: 0;
+}
+#widgetField .selected-date {padding-top: 13px; font-size: 11px; right: 64px;}
+
+#widgetCalendar:before  {
+	width: 0; 
+	height: 0; 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #304d6f;
+	content: "";
+position: absolute;
+top: 0px;
+display: block;
+z-index: 9999;
+right: 10px;
+	}
+#widgetCalendar {
+	position: absolute;
+	top: 45px;
+	right: 0;
+	height: 0px;
+	overflow: hidden;
+	width: 280px;
+	 z-index:999;
+}
+#widgetCalendar .datepicker {
+	position: absolute;
+	bottom: 0;
+	top: 7px;
+}
+#widgetCalendar .datepickerContainer{	 width:100% !important;}
+
+#widgetCalendar .datepickerBorderT,
+#widgetCalendar .datepickerBorderB,
+#widgetCalendar .datepickerBorderL,
+#widgetCalendar .datepickerBorderR,
+#widgetCalendar .datepickerBorderTL,
+#widgetCalendar .datepickerBorderTR,
+#widgetCalendar .datepickerBorderBL,
+#widgetCalendar .datepickerBorderBR { display:none;}
+#widgetCalendar .datepicker a:hover{color: #fff;}
+	

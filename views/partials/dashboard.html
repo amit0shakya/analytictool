@@ -1,0 +1,104 @@
+<div class="pageheader">
+	<div class="media">
+		<div class="pageicon pull-left">
+			<i class="fa fa-home"></i>
+		</div>
+		<div class="media-body">
+			<ul class="breadcrumb">
+				<li><a href=""><i class="glyphicon glyphicon-home"></i></a></li>
+				<li>Dashboard</li>
+			</ul>
+			<h4>OVERVIEW</h4>
+		</div>
+	</div>
+	<div class="panel default-blue pull-right  date-time" >
+		<div class="symbol ">
+			<span class="day">Tuesday</span>
+			<span class="date">28</span> <span class="month">Oct</span>
+		</div>
+		<div class="value">
+			<p class="time-zone">PM</p>
+			<p class="time">06:23</p>
+		</div>
+	</div>
+</div>
+<div class="body-content" ng-controller="DoverviewCtrl">
+	<div class="state-overview row">
+		<div class="col-lg-4 col-sm-6">
+			<section class="panel green">
+				<div class="symbol terques">
+					<i class="fa fa-user"></i>
+				</div>
+				<div class="value">
+					<p>New Users</p>
+					<h1 class="count">{{new_users | number}}</h1>
+					<p class="rating"> 2% <i class="fa fa-long-arrow-down"></i></p>
+				</div>
+			</section>
+		</div>
+		<div class="col-lg-4 col-sm-6">
+			<section class="panel red">
+				<div class="symbol dred">
+					<i class="fa fa-tags"></i>
+				</div>
+				<div class="value">
+					<p>Active Users</p>
+					<h1 class="count2">{{active_users | number}}</h1>
+					<p class="rating"> 4% <i class="fa fa-long-arrow-up"></i></p>
+				</div>
+			</section>
+		</div>
+		<div class="col-lg-4 col-sm-6">
+			<section class="panel blue">
+				<div class="symbol dblue">
+					<i class="fa fa-shopping-cart"></i>
+				</div>
+				<div class="value">
+					<p>Total Downloads</p>
+					<h1 class=" count3">{{downloads | number}}</h1>
+					<p class="rating"> 4% <i class="fa fa-long-arrow-down"></i></p>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="task-progress">
+						<h1>New Users</h1>
+					</div>
+					<div id="newUsersTrend" class="text-center panel-content">
+						<!-- <img src="images/img1.png" width="853" height="325"> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="task-progress">
+						<h1>Top Devices</h1>
+					</div>
+					<div id="topDevices" class="text-center panel-content">
+						<!-- <img src="images/img1.png" width="853" height="325"> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="task-progress">
+						<h1>DOWNLOAD TRIGGERS</h1>
+					</div>
+					<div id="downloadTriggers" class="text-center panel-content">
+						<!-- <img src="images/img3.png"> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

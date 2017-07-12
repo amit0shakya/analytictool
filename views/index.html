@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Rocq</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" href="css/default.css" /> 
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/layout.css" />
+
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
+	<link rel="stylesheet" href="lib/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
+	<!-- <link rel="stylesheet" type="text/css" href="css/rocq.min.css" /> -->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script> 
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+
+	<script src="js/controllers/Doverview.js"></script> 
+	<script src="js/controllers/Trends/Toverview.js"></script> 
+	<script src="js/controllers/Trends/newusers.js"></script> 
+	<script src="js/controllers/Trends/activeusers.js"></script>
+	<script src="js/controllers/Trends/sessions.js"></script>
+	<script src="js/controllers/Trends/cohort.js"></script>
+	<script src="js/controllers/UserEngagement/UEoverview.js"></script> 
+	<script src="js/controllers/Acquisition/Aoverview.js"></script> 
+	<script src="js/controllers/Acquisition/installs.js"></script>
+	<script src="js/controllers/Acquisition/uninstalls.js"></script>  
+	<script src="js/controllers/OverallAnalysis/OAoverview.js"></script>
+	<script src="js/controllers/OverallAnalysis/device.js"></script> 
+	<script src="js/controllers/OverallAnalysis/network.js"></script> 
+	<script src="js/services/jetty.js"></script> 
+	<script src="js/services/utilities.js"></script> 
+	<script src="js/services/json.js"></script> 
+	<script src="js/route.js"></script> 
+	<script src="js/charts.js"></script>
+	<script src="js/FusionCharts.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/config.js"></script>
+
+	<!-- <script src="lib/jquery/jquery.js"></script>
+	<script src="lib/angular/angular.js"></script> -->
+	<script src="lib/moment/moment.js"></script>
+	<script src="lib/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script src="lib/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+	<!-- <script src="dist/js/rocq.min.js"></script> -->
+</head>
+<body class="cbp-spmenu-push rocq-mob-spmenupush" ng-app="Rocq">
+	<div class="page-container">
+		<div class="sidebar-menu">
+			<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left sidebar-menu toggle-others fixed collapsed" id="cbp-spmenu-s1">
+				<div class="navbar " role="navigation">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">
+							<img src="images/logo.png" width="127" height="48" class="logo-lg">
+							<img src="images/logo-small.png" class="logo-sm" >
+						</a>
+					</div>
+					<div class="clearfix nav-bar">
+						<div class="user-info-wrapper">
+							<div class="profile-wrapper"> <img src="images/avatar.png" alt="" height="74" width="74"> </div>
+							<div class="user-info">
+								<div class="greeting">Welcome</div>
+								<div class="username">John <span class="semi-bold">Smith</span></div>
+								<div class="status">Status: <span>Online</span></div>
+							</div>
+						</div>
+						<div id="sidebar">
+							<div id="scrollbox4">
+								<div id='cssmenu'>
+									<ul class="nav" >
+										<li ><a href="/" class="nav-link"><i class="fa fa-tachometer "></i> &nbsp; <i class="nav-text">Overview</i> </a>
+										</li>
+										<li ><a href="/" class="nav-link"><i class="fa fa-cog"></i> &nbsp; <i class="nav-text">Trends</i> <span>&nbsp;</span></a>
+											<ul>
+												<li><a href='trends'> Overview</a></li>
+												<li><a href='newusers'> New Users</a></li>
+												<li><a href='activeusers'> Active Users</a></li>
+												<li><a href='sessions'>Sessions</a></li>
+												<li><a href='cohort'>Cohort</a></li>
+											</ul>
+										</li>
+										<li><a href="/" class="nav-link"><i class="fa fa-user"></i>&nbsp;  <i class="nav-text">User Engagement</i> <span>&nbsp;</span></a>
+											<ul>
+												<li><a href='user-engagement'> Overview</a></li>
+												<li><a href='#'> Events</a></li>
+												<li><a href='#'> Screen Flow</a></li>
+												<li><a href='#'>Screen Map</a></li>
+												<li><a href='#'>Screen</a></li>
+											</ul>
+										</li>
+										<li ><a href="/" class="nav-link"><i class="fa fa-th"></i> &nbsp; <i class="nav-text">Acquisition</i>  <span>&nbsp;</span></a>
+											<ul>
+												<li><a href='acquisition'> Overview</a></li>
+												<li><a href='installs'>Installs</a></li>
+												<li><a href='uninstalls'> UnInstalls</a></li>
+											</ul>
+										</li>
+										<li class="active"><a href="/" class="nav-link"><i class="fa fa-bar-chart-o"></i>&nbsp; <i class="nav-text">Overall Analysis</i> <span>&nbsp;</span></a>
+											<ul>
+												<li><a href='overall-analysis'> Overview</a></li>
+												<li><a href='device'> Device</a></li>
+												<li><a href='network'> Network</a></li>
+												<li><a href='location'> Location</a></li>
+											</ul>
+										</li>
+										<li><a href="/" class="nav-link"><i class="fa fa-calendar"></i> &nbsp; <i class="nav-text">Push Notification</i> <span>&nbsp;</span></a>   
+											<ul>
+												<li><a href='#'> Overview</a></li>
+												<li><a href='#'> Sendpush</a></li>
+											</ul>
+										</li>
+										<li class="last"><a href="#"><i class="fa fa-sign-out"></i> &nbsp; <i class="nav-text">Go Outside</i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-content">
+			<div class="navbar main-nav navbar-fixed-top" role="navigation">
+				<div class="navbar-collapse ">
+					<ul class="nav navbar-nav primary-nav">
+						<li><section class="buttonset">
+							<button id="showLeftPush"><span class="rq rq-toggle rq-2x"></span></button>
+						</section></li>
+						<li class="active"><a href="#">Time Frame</a></li>
+						<li><a href="#">OS</a></li>
+						<li><a href="#">Publishers</a></li>
+						<li><a href="#">Application</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right secondary-nav">
+						<li class="setting"><a href="#"><i class="fa fa-cog fa-2x"></i></a></li>
+						<li class="dropdown notifications" >
+							<div class="profile-pic"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="images/avatar-small.png" alt=""  height="35" width="34">  <span class="caret"></span> <span class="badge">3</span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#"><i class="fa fa-user"></i> &nbsp; Profile</a></li>
+									<li><a href="#"><i class="fa fa-sign-out"></i> &nbsp; Logout</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-view></div>
+		</div>
+	</div>
+	<script src="js/classie.js"></script>
+	<script src="js/aside.js"></script>
+</body>
+</html>

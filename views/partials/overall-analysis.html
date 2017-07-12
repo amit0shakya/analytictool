@@ -1,0 +1,163 @@
+<div class="pageheader">
+	<div class="media">
+		<div class="pageicon pull-left">
+			<i class="fa fa-bar-chart-o"></i>
+		</div>
+		<div class="media-body">
+			<ul class="breadcrumb">
+				<li><a href=""><i class="fa fa-bar-chart-o"></i></a></li>
+				<li>Overall Analysis</li>
+			</ul>
+			<h4>Overall Analysis</h4>
+		</div>
+	</div>
+	<div class="panel default-blue pull-right  date-time" >
+		<div class="symbol ">
+			<span class="day">Monday</span>
+			<span class="date">10</span> <span class="month">Feb</span>
+		</div>
+		<div class="value">
+			<p class="time-zone">PM</p>
+			<p class="time">03:27</p>
+		</div>
+	</div>
+</div>
+<div class="body-content" ng-controller="OAoverviewCtrl">
+	<div class="state-overview row">
+		<div class="col-lg-4 col-sm-6">
+			<section class="panel green  panel-block bm0">
+				<div class="symbol ">
+					<i class="fa-trends fa-tdevice tm20 bm20 ">&nbsp;</i>
+				</div>
+			</section>
+			<div class="panel-footer dgreen panel">
+				<div class="col-lg-8 pftitle"><span>Top Device</span>{{ topModel }} {{ topModelManu }}</div>
+				<div class="col-lg-4 pfvalue text-right"> </div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-sm-6">
+			<section class="panel red panel-block bm0">
+				<div class="symbol pull-right">
+					<i class="fa-trends fa-tregion tm20 bm20">&nbsp;</i>
+				</div>
+			</section>
+			<div class="panel-footer dred panel">
+				<div class="col-lg-8 pftitle"><span>Top region</span> India</div>
+				<div class="col-lg-4 pfvalue text-right"> </div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-sm-6">
+			<section class="panel blue panel-block bm0">
+				<div class="symbol pull-right">
+					<i class="fa-trends fa-toperator tm20 bm20">&nbsp;</i>
+				</div>
+			</section>
+			<div class="panel-footer dblue panel">
+				<div class="col-lg-8 pftitle"><span>Top operator</span>{{ topOperator }}</div>
+				<div class="col-lg-4 pfvalue text-right"> </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="map panel">
+				<div  class="text-center" >
+					<img src="images/map.png" >
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="task-progress">
+						<h1>Top 4 Devices</h1>
+					</div>
+					<div class="text-center panel-content">
+						<div class="panel">
+							<div class="pname btext">{{ top4Devices[4].x2 }} <span>{{ top4Devices[4].x1 }}</span></div> 
+							<div class="status">
+								<div class="progress transparent progress-large no-radius" style="width:100%">
+									<div ng-style="{ 'width' : width4 + '%'}" class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
+								</div>
+								<div class="status-massage">{{ width4 | number:1}}%</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="pname rtext">{{ top4Devices[3].x2 }} <span>{{ top4Devices[3].x1 }}</span> </div> 
+							<div class="status">
+								<div class="progress transparent progress-large no-radius" style="width:100%">
+									<div ng-style="{ 'width' : width3 + '%'}" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
+								</div>
+								<div class="status-massage">{{ width3 | number:1}}%</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="pname ytext">{{ top4Devices[2].x2 }} <span>{{ top4Devices[2].x1 }}</span> </div> 
+							<div class="status">
+								<div class="progress transparent progress-large no-radius" style="width:100%">
+									<div ng-style="{ 'width' : width2 + '%'}" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+								</div>
+								<div class="status-massage">{{ width2 | number:1}}%</div>
+							</div>
+						</div>
+						<div class="panel">
+							<div class="pname gtext">{{ top4Devices[1].x2 }} <span>{{ top4Devices[1].x1 }}</span> </div> 
+							<div class="status">
+								<div class="progress transparent progress-large no-radius" style="width:100%">
+									<div ng-style="{ 'width' : width1 + '%'}" class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+								</div>
+								<div class="status-massage">{{ width1 | number:1}}%</div>
+							</div>
+						</div>
+						<div class="panel bm0">
+							<div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+								<div class=" msg-block background-lred wtext">
+									<div class="pname tp30">{{ top1Manu }}<span> Nexus</span> </div> 
+									<div class="status">
+										<span class="msg-value">{{ top1ManuPer | number:0 }}</span> <span class="badge">%</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<div class=" msg-block background-dblue wtext">
+									<div class="pname tp30">{{ top2Manu }}<span> Core</span> </div> 
+									<div class="status">
+										<span class="msg-value">{{ top2ManuPer | number:0 }}</span> <span class="badge">%</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row ">
+		<div class=" col-sm-6">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="task-progress">
+						<h1>Network operator</h1>
+					</div>
+					<div class="text-center panel-content">
+						<div id="top5Operators" class="text-center panel-content">
+                    	</div>
+						<!-- <img src="images/operator.png"> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class=" col-sm-6">
+			<section class="panel  panel-transparent text-center">
+				<div class="task-progress">
+					<h1>Network Type</h1>
+				</div>
+				<div id="cellularDoughnut" class="text-center panel-content col-lg-6" >
+                    </div>	
+                <div id="wifiDoughnut" class="text-center panel-content col-lg-6">
+                    </div>
+				<!-- <img src="images/operator-type.png">  -->
+			</section>
+		</div>
+	</div>
+</div>

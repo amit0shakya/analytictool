@@ -1,0 +1,469 @@
+<div class="pageheader">
+	<div class="media">
+		<div class="pageicon pull-left">
+			<i class="fa fa-th"></i>
+		</div>
+		<div class="media-body">
+			<ul class="breadcrumb">
+				<li><a href=""><i class="glyphicon  fa fa-th"></i></a></li>
+				<li>Acquisition</li>
+			</ul>
+			<h4>Acquisition</h4>
+		</div>
+	</div>
+	<div class="panel default-blue pull-right  date-time" >
+		<div class="symbol ">
+			<span class="day">Monday</span>
+			<span class="date">10</span> <span class="month">Feb</span>
+		</div>
+		<div class="value">
+			<p class="time-zone">PM</p>
+			<p class="time">03:27</p>
+		</div>
+	</div>
+</div>
+
+<div class="body-content" ng-controller="InstallsCtrl">
+	<div class="third-nav">
+		<div class="pagesecheader pull-left">
+			<h5>Inorganic</h5>
+			<p>ordered by uptime status</p>
+		</div>
+		<ul class="nav nav-tabs pull-right" role="tablist" ng-init="tab=1">
+			<li ng-class="{active:tab===1}">
+				<a href ng-click="tab = 1" role="tab" data-toggle="tab">
+					<i class="fa fa-paper-plane-o"></i> <span>Source</span>
+				</a>
+			</li>
+			<li ng-class="{active:tab===2}">
+				<a href ng-click="tab=2" role="tab" data-toggle="tab">
+					<i class="fa fa-mobile-phone"></i> <span>Device</span>
+				</a>
+			</li>
+			<li ng-class="{active:tab===3}">
+				<a href ng-click="tab=3" role="tab" data-toggle="tab">
+					<i class="fa fa-map-marker"></i> <span>Location</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="tab-content">
+		<div class="tab-pane fade in active" ng-show="tab===1">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="panel-content">
+						<div class="col-lg-12 no-padding ">
+							<div class="graph-header">
+								<div class="graph-line-info">
+									<ul class="list-inline list-unstyled">
+										<li><span class="bg-blue bar-piller"></span> Source1</li>
+										<li><span class="bg-orange bar-piller"></span> Source2</li>
+									</ul>
+								</div>
+							</div>
+							<div id = "TopSourceInstalls" class="graph-container">
+								<!-- <img src="images/img-gp16.png" class="full-image">  -->
+							</div>
+						</div>
+						<div  class="pull-right fifth-nav">
+							<select ng-model="selectedSource" ng-options="item.x for item in topSourcesInstalls | limitTo:3" >
+								<!-- <option value= ""> Select Source </option> -->
+							</select>
+						</div>
+						<div class="col-lg-12 no-padding">
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<div class="thumbnail no-border analysis-report">
+									<div class="col-lg-8">    
+										<div class="caption">
+											<p class="text-muted">Top Sources Installs</p>
+											<h3>{{topsources_installs}}</h3>
+										</div>
+									</div>
+									<!-- <div class="col-lg-8">  
+										<img src="images/img6.png" width="91" height="33"  >
+									</div> -->
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<div class="thumbnail no-border analysis-report">
+									<div class="col-lg-12">    
+										<div class="caption">
+											<p class="text-muted">Installs from {{selectedSource.x}}</p>
+											<h3>{{selectedSource.y}}</h3>
+										</div>
+									</div>
+									<!-- <div class="col-lg-8">  
+										<img src="images/img7.png" width="91" height="33"  >
+									</div> -->
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<div class="thumbnail no-border analysis-report">
+									<div class="col-lg-12">    
+										<!-- <div class="caption">
+											<p class="text-muted">Uninstalls from {{selectedSource.x}}</p>
+											<h3>17,561</h3>
+										</div> -->
+									</div>
+									<!-- <div class="col-lg-8">  
+										<img src="images/img8.png" width="91" height="33"  >
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade in active" ng-show="tab===2">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="panel-content"> 
+						<div class="col-lg-9 no-padding">
+							<div class="graph-header">
+								<div class="btn-group pull-right fifth-nav">
+									<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+										Month <i class="fa fa-angle-down"></i>
+									</button>
+									<ul class="dropdown-menu rq-dropdown-menu" role="menu">
+										<li><a href="#">Week</a></li>
+										<li><a href="#">Year</a></li>
+									</ul>
+								</div>
+							</div>
+							<div id="TopPaidManuDevices" class="graph-container">
+								<!-- <img src="images/img-gp18.png" class="full-image"> --> 
+							</div>
+						</div>
+						<div class="col-lg-3"> 
+							<div class="graph-desc tp30"> 
+								<span class="left arrow"></span>
+								<!-- <img src="images/img9.png" > -->
+								<div class="progress-thinbar border-top tm30">
+									<div id="Paid_manu_share" class="graph-container">
+									</div>
+									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-12 no-padding">    
+												<div class="caption">
+													<p class="text-muted">Total Inorganic Installs</p>
+													<h3>{{totalPaidInstalls1}}</h3>
+												</div>
+											</div>
+											<!-- <div class="col-lg-6">  
+												<img src="images/img7.png"   height="33" width="91">
+											</div> -->
+										</div>
+									</div>
+									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-6 no-padding">    
+												<!-- <div class="caption">
+													<p class="text-muted">Uninstall</p>
+													<h3>17,561</h3>
+												</div> -->
+											</div>
+											<!-- <div class="col-lg-6">  
+												<img src="images/img8.png"   height="33" width="91">
+											</div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade in active" ng-show="tab===3">
+			<div class="panel">
+				<div class="panel-body progress-panel no-padding ">
+					<div class="panel-content ">
+						<div class="col-lg-4 "> 
+							<div class="graph-desc tp30 no-border"> 
+								<div class="map-state text-center">
+									<img src="images/img-gp15.jpg" >
+									<h2>20000</h2>
+									<p>Download from delhi</p>
+									<span class="label label-default">UP</span>
+									<span class="label label-danger">Bihar</span>
+									<span class="label label-danger">Kolkatta</span>
+								</div>
+								<div class="progress-thinbar">
+									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-4 no-padding">    
+												<div class="caption">
+													<p class="text-muted">Install</p>
+													<h3>17,561</h3>
+												</div>
+											</div>
+											<div class="col-lg-8">  
+												<img src="images/img7.png"   height="33" width="91">
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-4 no-padding">    
+												<div class="caption">
+													<p class="text-muted">Uninstall</p>
+													<h3>17,561</h3>
+												</div>
+											</div>
+											<div class="col-lg-8">  <img src="images/img8.png"   height="33" width="91"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8 no-padding ">
+							<div class="rq-map text-center">
+								<img src="images/img-gp13.jpg" width="531" height="332">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="third-nav">
+		<div class="pagesecheader pull-left">
+			<h5>Organic</h5>
+			<p>ordered by uptime status</p>
+		</div>
+		<ul class="nav nav-tabs pull-right" role="tablist" ng-init="tab_org=4">
+			<li ng-class="{active:tab_org===4}">
+				<a href ng-click="tab_org = 4" role="tab" data-toggle="tab">
+					<i class="fa fa-paper-plane-o"></i> <span>Keyword</span>
+				</a>
+			</li>
+			<li ng-class="{active:tab_org===5}">
+				<a href ng-click="tab_org=5" role="tab" data-toggle="tab">
+					<i class="fa fa-mobile-phone"></i> <span>Device</span>
+				</a>
+			</li>
+			<li ng-class="{active:tab_org===6}">
+				<a href ng-click="tab_org=6" role="tab" data-toggle="tab">
+					<i class="fa fa-map-marker"></i> <span>Location</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="tab-content">
+		<div class="tab-pane fade in active" ng-show="tab_org===4">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="panel-content">
+						<div class="col-lg-12 no-padding ">
+							<div id="SourceKeywords" class="graph-container">
+								<!-- <img src="images/img-gp17.png" class="full-image">  -->
+							</div>
+						</div>
+						<div class="col-lg-12 no-padding">
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<div class="thumbnail no-border analysis-report">
+									<div class="col-lg-12 no-padding">    
+										<div class="caption">
+											<p class="text-muted">Top KeyWords Installs</p>
+											<h3>{{top_terms_installs}}</h3>
+										</div>
+									</div>
+									<!-- <div class="col-lg-8">  
+										<img src="images/img7.png" width="91" height="33">
+									</div> -->
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<!-- <div class="thumbnail no-border analysis-report">
+									<div class="col-lg-4 no-padding">    
+										<div class="caption">
+											<p class="text-muted">Uninstall</p>
+											<h3>17,561</h3>
+										</div>
+									</div>
+									<div class="col-lg-8">  <img src="images/img8.png" width="91" height="33"  ></div>
+								</div> -->
+							</div>
+
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<!-- <div class="thumbnail no-border analysis-report">
+									<div class="col-lg-4 no-padding">    
+										<div class="caption">
+											<p class="text-muted">Uninstall</p>
+											<h3>17,561</h3>
+										</div>
+									</div>
+									 <div class="col-lg-8">  <img src="images/img8.png" width="91" height="33"  ></div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="tab-pane fade in active" ng-show="tab_org===5">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+
+					<div class="panel-content"> 
+						<div class="col-lg-9 no-padding">
+							<div class="graph-header">
+								<div class="btn-group pull-right fifth-nav">
+									<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+										Select Keword <i class="fa fa-angle-down"></i>
+									</button>
+									<ul class="dropdown-menu rq-dropdown-menu" role="menu">
+										<li><a href="#">Keyword 1</a></li>
+										<li><a href="#">Keyword 2</a></li>
+									</ul>
+								</div>
+
+								<div class="graph-line-info">
+									<ul class="list-inline list-unstyled">
+										<li><span class="bg-blue bar-piller"></span> Keyword 1</li>
+										<li><span class="bg-orange bar-piller"></span> Keyword 2</li>
+									</ul>
+								</div>
+
+							</div>
+							<div id="TopOrganicManuDevices" class="graph-container">
+								<!-- <img src="images/img-gp19.jpg" class="full-image">  -->
+							</div>
+
+
+						</div>
+						<div class="col-lg-3"> 
+							<div class="graph-desc tp30"> 
+								<span class="left arrow"></span>
+								<div class="progress-thinbar ">
+									<div id="Organic_manu_share" class="graph-container">
+								</div>
+
+									<!-- <div class="panel">
+										<div class="pname btext">Keyword 1 </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 20%;" class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
+											</div>
+											<div class="status-massage">20%</div>
+										</div>
+									</div>
+
+									<div class="panel">
+										<div class="pname rtext">Keyword 2  </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 40%;" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
+											</div>
+											<div class="status-massage">40%</div>
+										</div>
+									</div>
+
+									<div class="panel">
+										<div class="pname ytext">Keyword 3   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 70%;" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">70%</div>
+										</div>
+									</div>
+
+
+									<div class="panel">
+										<div class="pname gtext">Keyword 4   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 25%;" class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">25%</div>
+										</div>
+									</div> -->
+								</div>
+
+								<div class="progress-thinbar border-top tm30">
+
+									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-12 no-padding">    
+												<div class="caption">
+													<p class="text-muted">Total Organic Installs</p>
+													<h3>{{totalOrgInstalls1}}</h3>
+												</div>
+											</div>
+											<!-- <div class="col-lg-6">  <img src="images/img6.png"   height="33" width="91"></div> -->
+
+										</div>
+
+									</div>
+
+
+
+									<div class="col-lg-12 col-md-6 col-sm-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-6 no-padding">    
+												<!-- <div class="caption">
+													<p class="text-muted">Install</p>
+													<h3>17,561</h3>
+												</div> -->
+											</div>
+											<!-- <div class="col-lg-6">  <img src="images/img7.png"   height="33" width="91"></div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade in active" ng-show="tab_org===6">
+			<div class="panel">
+				<div class="panel-body progress-panel no-padding ">
+					<div class="panel-content ">
+						<div class="col-lg-4 "> 
+							<div class="graph-desc tp30 no-border"> 
+								<div class="map-state">
+									<div class=" text-center"><img src="images/img-gp15.jpg"></div>
+									<div class="tp20 text-muted fs13"><span class="rtext"><strong>04</strong></span> Popular Keyword in Delhi</div>
+									<h3>Online Shoping, Movie ticket,Shoping site</h3>
+								</div>
+								<div class="progress-thinbar">
+									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-4 no-padding">    
+												<div class="caption">
+													<p class="text-muted">Install</p>
+													<h3>17,561</h3>
+												</div>
+											</div>
+											<div class="col-lg-8">  <img src="images/img7.png"   height="33" width="91"></div>
+										</div>
+									</div>
+									<div class="col-lg-12  col-sm-6 col-md-6 no-padding">
+										<div class="thumbnail no-border analysis-report">
+											<div class="col-lg-4 no-padding">    
+												<div class="caption">
+													<p class="text-muted">Uninstall</p>
+													<h3>17,561</h3>
+												</div>
+											</div>
+											<div class="col-lg-8">  <img src="images/img8.png"   height="33" width="91"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8 no-padding ">
+							<div class="rq-map text-center">
+								<img src="images/img-gp13.jpg" width="531" height="332"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

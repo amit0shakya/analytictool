@@ -1,0 +1,291 @@
+      <div class="pageheader">
+        <div class="media">
+          <div class="pageicon pull-left">
+            <i class="fa fa-th"></i>
+          </div>
+          <div class="media-body">
+            <ul class="breadcrumb">
+              <li><a href=""><i class="fa fa-th"></i></a></li>
+              <li>Session</li>
+            </ul>
+            <h4>Session</h4>
+          </div>
+        </div>
+
+        <div class="panel default-blue pull-right  date-time" >
+          <div class="symbol ">
+           <span class="day">Monday</span>
+           <span class="date">10</span> <span class="month">Feb</span>
+         </div>
+         <div class="value">
+          <p class="time-zone">PM</p>
+          <p class="time">03:27</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-content" ng-controller="SessionsCtrl">
+      <div class="state-overview row">
+        <div class="col-lg-4 col-sm-6">
+          <section class="panel green wtext">
+            <div class="col-lg-7 value"><p class="tm20">AVERAGE TIME</p></div>
+            <div class="col-lg-5 text-right"><h1 class="count">{{ avg_time }}</h1>
+              <p class="fs11 mti10 fsi">Minute</p></div>
+
+            </section>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <section class="panel red wtext">
+              <div class="col-lg-7 value">
+                <p class="tm20">Highest session</p>
+              </div>
+              <div class="col-lg-5 text-right">
+                <h1 class=" count2">200</h1>
+                <p class="fs11 mti10 fsi">Minute</p>
+              </div>
+            </section>
+
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <section class="panel blue wtext">
+              <div class="col-lg-7 value">
+                <p class="tp20">Total sessions</p>
+              </div>
+              <div class="col-lg-5 text-right">
+                <h1 class=" count3">{{ total_sessions }}</h1>
+                <!--  <p class="fs11 mti10 fsi">Minute</p> -->
+
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="third-nav">
+              <ul class="nav nav-tabs " role="tablist" ng-init="tab=1">
+                <li ng-class="{active:tab===1}">
+                  <a href ng-click="tab = 1" role="tab" data-toggle="tab">
+                    <i class="fa fa-clock-o"></i> <span>Session</span>
+                  </a>
+                </li>
+                <li ng-class="{active:tab===2}">
+                  <a href ng-click="tab = 2" role="tab" data-toggle="tab">
+                    <i class="fa fa-paper-plane-o"></i> <span>Source</span>
+                  </a>
+                </li>
+                <li ng-class="{active:tab===3}">
+                  <a href ng-click="tab = 3" role="tab" data-toggle="tab">
+                    <i class="fa fa-mobile-phone"></i> <span>Device</span>
+                  </a>
+                </li>
+                <li ng-class="{active:tab===4}">
+                  <a href ng-click="tab = 4" role="tab" data-toggle="tab">
+                    <i class="fa fa-map-marker"></i> <span>Location</span>
+                  </a>
+                </li>
+              </ul>
+            </div> 
+
+            <div class="tab-content">
+              <div class="tab-pane fade in active" ng-show="tab===1">
+                <div class="panel">
+                  <div id = "TsessionsTrend" class="panel-body progress-panel">
+                    <!-- <img src="images/img-gp20.jpg" > -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade in active" ng-show="tab===2">
+                <div class="panel">
+                  <div class="panel-body progress-panel panel-transparent">
+                    <div class="task-progress">
+                      <div class=" fifth-nav">
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+                            Select Time <i class="fa fa-angle-down"></i>
+                          </button>
+                          <ul class="dropdown-menu rq-dropdown-menu" role="menu">
+                            <li><a href="#">Week</a></li>
+                            <li><a href="#">Month</a></li>
+                            <li><a href="#">Year</a></li>
+                          </ul>
+                        </div>
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+                            Select Source <i class="fa fa-angle-down"></i>
+                          </button>
+                          <ul class="dropdown-menu rq-dropdown-menu" role="menu">
+                            <li><a href="#">Source 1</a></li>
+                            <li><a href="#">Source 2</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div id = "SSourceTrends" class="text-center panel-content">
+                      <!-- <img src="images/img-gp20.png"> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="tab-pane fade in active" ng-show="tab===3">
+                <div class="panel">
+                  <div class="panel-body progress-panel panel-transparent">
+                    <div class="task-progress ">
+                      <div class=" fifth-nav">
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+                            Select Time <i class="fa fa-angle-down"></i>
+                          </button>
+                          <ul class="dropdown-menu rq-dropdown-menu" role="menu">
+                            <li><a href="#">Week</a></li>
+                            <li><a href="#">Month</a></li>
+                            <li><a href="#">Year</a></li>
+                          </ul>
+                        </div>
+
+
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+                            Select Device <i class="fa fa-angle-down"></i>
+                          </button>
+                          <ul class="dropdown-menu rq-dropdown-menu" role="menu">
+                            <li><a href="#">Device 1</a></li>
+                            <li><a href="#">Device 2</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div id = "STopManuDevices" class="text-center panel-content">
+                     <!--  <img src="images/img-gp21.jpg"> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade in active" ng-show="tab===4">
+                <div class="panel">
+                  <div class="panel-body progress-panel no-padding ">
+
+                    <div class="panel-content ">
+
+                      <div class="col-lg-4 "> 
+                        <div class="graph-desc tp30 no-border"> 
+                          <div class="map-state text-center">
+                            <img src="images/img-gp15.jpg" >
+                            <h2><i class="fa fa-users fs20"></i> 20000</h2>
+                            <p>User visits from delhi</p>
+
+                            <span class="label label-default">UP</span>
+                            <span class="label label-danger">Bihar</span>
+                            <span class="label label-danger">Kolkatta</span>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-8 no-padding ">
+                        <div class="rq-map text-center">
+                          <img src="images/img-gp13.jpg" width="531" height="332"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-lg-12">
+              <div class="panel">
+                <div class="panel-body progress-panel">
+                  <div class="task-progress">
+                    <div class=" fifth-nav">
+                      <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+                          Select Session <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu rq-dropdown-menu" role="menu">
+                          <li><a href="#">Week</a></li>
+                          <li><a href="#">Month</a></li>
+                          <li><a href="#">Year</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <h1>Session</h1>
+                  </div>
+
+
+
+
+                  <!-- <div  class="text-center panel-content">
+                    <img src="images/img-gp21.png">
+                  </div> -->
+                  <div class="row">
+                  <div class="col-lg-6">
+                  <div class="panel">
+                    <div class="panel-body progress-panel">
+                      <div class="task-progress">
+                      </div>
+                      <div id="sessionlength_share" class="text-center panel-content">
+                        <!-- <img src="images/img1.png" width="853" height="325"> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="panel">
+                    <div class="panel-body progress-panel">
+                      <div class="task-progress">
+                      </div>
+                      <div  id = "sessionssource_share" class="text-center panel-content">
+                       <!--  <img src="images/img3.png"> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-lg-12 ">
+              <div class="panel">
+                <div class="panel-body progress-panel">
+                  <div class="task-progress task-progress-noborder">
+                    <h1>Table List</h1>
+                  </div>
+
+                  <div class="text-center panel-content">
+                   <div class="table-component">
+                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <thead>
+                          <tr>
+                            <th>Source</th>
+                            <th>Number of Sessions</th>
+                            <th>Average Session Length</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="dev in sourcesessionslist">
+                            <td>{{ dev.x }}</td>
+                            <td>{{ dev.y }}</td>
+                            <td>{{ dev.z }} Min</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <pagination total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm" boundary-links="true"></pagination>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

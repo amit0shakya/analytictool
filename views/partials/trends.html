@@ -1,0 +1,134 @@
+<div class="pageheader">
+    <div class="media">
+        <div class="pageicon pull-left">
+            <i class="fa fa-cog"></i>
+        </div>
+        <div class="media-body">
+            <ul class="breadcrumb">
+                <li><a href=""><i class="glyphicon  fa fa-cog"></i></a></li>
+                <li>Trends</li>
+            </ul>
+            <h4>TRENDS</h4>
+        </div>
+    </div>
+    <div class="panel default-blue pull-right  date-time" >
+        <div class="symbol ">
+            <span class="day">Tuesday</span>
+            <span class="date">28</span> <span class="month">Oct</span>
+        </div>
+        <div class="value">
+            <p class="time-zone">PM</p>
+            <p class="time">06:28</p>
+        </div>
+    </div>
+</div>
+<div class="body-content" ng-controller="ToverviewCtrl">
+    <div class="state-overview row">
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-blue text-center">
+                <div class="symbol ">
+                    <i class="fa-trends fa-session">&nbsp;</i>
+                </div>
+                <div class="value">
+                    <p>Average Session Length (minutes)</p>
+                    <h1 class="count"> {{ avg_session_length}}</h1>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-red text-center">
+                <div class="symbol ">
+                    <i class="fa-trends fa-nruser">&nbsp;</i>
+                </div>
+                <div class="value">
+                    <h1 class="count"> 
+                        <span class="first">{{ new_users}}</span> /
+                        <span class="second"> {{ returning_users }}</span>
+                    </h1>
+                    <p class="count-type"> <span class="first">New</span>  <span class="second">Returning</span> </p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-yellow text-center">
+                <div class="symbol ">
+                    <i class="fa-trends fa-muser">&nbsp;</i>
+                </div>
+                <div class="value">
+                    <p>Average Monthly Users</p>
+                    <h1 class="count">{{ avg_monthly_users | number:0 }}</h1>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- <div class="row ">
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel  panel-transparent text-center">
+                <img src="images/img-gp1.png" > 
+            </section>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel  panel-transparent text-center">
+                <img src="images/img-gp2.png" > 
+            </section>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-transparent text-center">
+                <img src="images/img-gp3.png" > 
+            </section>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <h1>Session Time</h1>
+                    </div>
+                    <div id="avgSessionLengthTrend" class="text-center panel-content">
+                        <!-- <img src="images/img1.png" width="853" height="325">  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12" >
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress task-progress-noborder">
+                        <h1>Cohort</h1>
+                    </div>
+                    <div class="text-center panel-content">
+                        <div class="table-component">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>New Users</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
+                                        <th>7</th>
+                                        <th>8</th>
+                                        <th>9</th>
+                                        <th>10</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="elem in cohort">
+                                        <td>{{ elem.z }}</td>
+                                        <td ng-repeat=" code in elem.a">{{ code.y }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>

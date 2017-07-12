@@ -1,0 +1,5 @@
+Instructions for running:
+1. Make sure you have node installed
+2. Type "npm install" in the dashboard directory
+3. Type "node server.js &" to run the server
+

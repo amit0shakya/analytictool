@@ -1,0 +1,115 @@
+<div class="pageheader">
+    <div class="media">
+        <div class="pageicon pull-left">
+            <i class="fa fa-th"></i>
+        </div>
+        <div class="media-body">
+            <ul class="breadcrumb">
+                <li><a href=""><i class="fa fa-th"></i></a></li>
+                <li>Acquisition</li>
+            </ul>
+            <h4>Acquisition</h4>
+        </div>
+    </div>
+    <div class="panel default-blue pull-right  date-time" >
+        <div class="symbol ">
+            <span class="day">Tuesday</span>
+            <span class="date">28</span> <span class="month">Oct</span>
+        </div>
+        <div class="value">
+            <p class="time-zone">PM</p>
+            <p class="time">06:25</p>
+
+        </div>
+    </div>
+</div>
+<div class="body-content" ng-controller="AoverviewCtrl">
+    <div class="state-overview row">
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel green">
+                <div class="symbol pull-right">
+                    <i class="fa-trends fa-pinstal">&nbsp;</i>
+                </div>
+                <div class="value">
+                    <p class="tp30">Paid Installs</p>
+                    <h1 class="count">{{ paid_installs }}</h1>
+                </div>
+            </section>
+            <div class="panel-footer panel dgreen">
+                <div class="col-lg-8 pftitle"><span>Top Source</span>{{paid_source}}</div>
+                <div class="col-lg-4 pfvalue text-right">{{paid_count}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel red">
+                <div class="symbol pull-right">
+                    <i class="fa-trends fa-oinstal">&nbsp;</i>
+                </div>
+                <div class="value">
+                    <p class="tp30">Organic Installs</p>
+                    <h1 class=" count2">{{organic_installs}}</h1>
+                </div>
+            </section>
+            <div class="panel-footer panel dred">
+                <div class="col-lg-8 pftitle"><span>Top keyword</span>{{top_term}}</div>
+                <div class="col-lg-4 pfvalue text-right">{{term_count}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel blue">
+                <div class="symbol pull-right">
+                    <i class="fa-trends fa-uninstal">&nbsp;</i>
+                </div>
+                <div class="value">
+                    <p class="tp30">Uninstall</p>
+                    <h1 class=" count3">{{uninstalls}}</h1>
+                </div>
+            </section>
+            <div class="panel-footer panel dblue">
+                <div class="col-lg-8 pftitle"><span>Uninstall</span>{{uninstall_source}}</div>
+                <div class="col-lg-4 pfvalue  text-right">{{uninstall_count}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <h1>PAID / ORGANIC</h1>
+                    </div>
+                    <div id="PaidVsOrganic" class="text-center panel-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <h1>INSTALLS / UNINSTALLS</h1>
+                    </div>
+                    <div id="InstallsVsUninstalls" class="text-center panel-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-lg-4 col-sm-6">
+            <section id="paidSources" class="panel  panel-transparent text-center">
+                <!-- <img src="images/img-gp1.png">  -->
+            </section>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section id="topKeyWords" class="panel  panel-transparent text-center">
+                <!-- <img src="images/img-gp2.png">  -->
+            </section>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section id="uninstallSources" class="panel panel-transparent text-center">
+                <!-- <img src="images/img-gp3.png">  -->
+            </section>
+        </div>
+    </div>
+</div>

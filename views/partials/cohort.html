@@ -1,0 +1,78 @@
+<div class="pageheader">
+  <div class="media">
+    <div class="pageicon pull-left">
+      <i class="fa fa-cog"></i>
+    </div>
+    <div class="media-body">
+      <ul class="breadcrumb">
+        <li><a href=""><i class="glyphicon  fa fa-cog"></i></a></li>
+        <li>Cohort</li>
+      </ul>
+      <h4>Cohort</h4>
+    </div>
+  </div>
+  <div class="panel default-blue pull-right  date-time" >
+    <div class="symbol ">
+     <span class="day">Monday</span>
+     <span class="date">10</span> <span class="month">Feb</span>
+   </div>
+   <div class="value">
+    <p class="time-zone">PM</p>
+    <p class="time">03:27</p>
+  </div>
+</div>
+</div>
+<div class="body-content" ng-controller="CohortCtrl">
+  <div class="row">
+    <div class="col-lg-12" >
+      <div class="panel">
+        <div class="panel-body progress-panel">
+          <div class="task-progress task-progress-noborder">
+            <div class="pull-right fifth-nav mti10">
+              <div id="widget">
+                <div id="widgetField">
+                  <span class="selected-date"></span>
+                  <a href="#"><span class="fa-rounded bg-orange"><i class="fa fa-calendar"></i></span></a>
+                </div>
+                <div id="widgetCalendar">
+                </div>
+              </div>
+            </div>
+
+            <h1>Cohort List</h1>
+
+          </div>
+
+          <div class="text-center panel-content">
+           <div class="table-component">
+             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                    <th>New Users</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="elem in cohort">
+                  <td>{{ elem.z }}</td>
+                  <td ng-repeat=" code in elem.a">{{ code.y }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,555 @@
+<div class="pageheader">
+	<div class="media">
+		<div class="pageicon pull-left">
+			<i class="fa fa-user"></i>
+		</div>
+		<div class="media-body">
+			<ul class="breadcrumb">
+				<li><a href=""><i class="glyphicon  fa fa-user"></i></a></li>
+				<li>User</li>
+			</ul>
+			<h4>User</h4>
+		</div>
+	</div>
+	<div class="panel default-blue pull-right  date-time" >
+		<div class="symbol ">
+			<span class="day">Monday</span>
+			<span class="date">10</span> <span class="month">Feb</span>
+		</div>
+		<div class="value">
+			<p class="time-zone">PM</p>
+			<p class="time">03:27</p>
+		</div>
+	</div>
+</div>
+<div class="body-content" ng-controller="ActiveUsersCtrl">
+	<div class="third-nav">
+		<!-- <div class="pull-right fourth-nav">
+			<div id="widget">
+				<div id="widgetField">
+					<span class="selected-date"></span>
+					<a href="#"><span class="fa-rounded bg-orange"><i class="fa fa-calendar"></i></span></a>
+				</div>
+				<div id="widgetCalendar">
+				</div>
+			</div>
+		</div> -->
+		<div class="pull-right fourth-nav">
+		 	<input date-range-picker class="form-control date-picker" type="text" ng-model="date" />
+		</div>
+		<ul class="nav nav-tabs" role="tablist" ng-init="tab=1">
+			<li ng-class="{active:tab===1}">
+				<a href ng-click="tab = 1" role="tab" data-toggle="tab">
+					<i class="fa fa-clock-o"></i><span>Visitors</span>
+				</a>
+			</li>
+			<li ng-class="{active:tab===2}">
+				<a href ng-click="tab=2" role="tab" data-toggle="tab">
+					<i class="fa fa-paper-plane-o"></i><span>Source</span>
+				</a>
+			</li>
+			<li ng-class="{active:tab===3}">
+				<a href ng-click="tab=3" role="tab" data-toggle="tab">
+					<i class="fa fa-mobile-phone"></i><span>Device</span>
+				</a>
+			</li>
+			<li ng-class="{active:tab===4}">
+				<a href ng-click="tab=4" role="tab" data-toggle="tab">
+					<i class="fa fa-map-marker"></i> <span>Location</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="tab-content">
+		<div class="tab-pane fade in active" ng-show="tab===1">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="panel-content"> 
+						<div class="col-lg-9 no-padding">
+							<div class="graph-header">
+								<div class="btn-group pull-right fifth-nav">
+									<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+										Export <i class="fa fa-angle-down"></i>
+									</button>
+									<ul class="dropdown-menu rq-dropdown-menu" role="menu">
+										<li><a href="#">Pdf</a></li>
+										<li><a href="#">Excel</a></li>
+									</ul>
+								</div>
+								<div class="graph-line-info">
+									<ul class="list-inline list-unstyled">
+										<li><span class="bg-blue bar-piller"></span> Search Traffic</li>
+										<li><span class="bg-orange bar-piller"></span> Refferal Traffic</li>
+									</ul>
+								</div>
+							</div>
+							<div id = "TactiveUsersTrend" class="graph-container">
+								<!-- <img src="images/img-gp7.jpg"  class="full-image">  -->
+							</div>
+							<div class="state-overview row tm30">
+								<div class="col-lg-4 col-sm-6">
+									<section class="panel panel-sblock border p-red">
+										<div class="symbol ">
+											<i class="fa-trends fa-smuser">&nbsp;</i>
+										</div>
+										<div class="value">
+											<p>Active User</p>
+											<h1 class="count">{{ active_users }} </h1>
+										</div>
+									</section>
+								</div>
+								<div class="col-lg-4 col-sm-6">
+									<section class="panel panel-sblock border p-blue ">
+										<div class="symbol ">
+											<i class="fa-trends fa-smmob">&nbsp;</i>
+										</div>
+										<div class="value">
+											<p>Top Device</p>
+											<h1 class="count">{{ autop20Devices[0].x}}  </h1>
+
+										</div>
+									</section>
+								</div>
+								<div class="col-lg-4 col-sm-6">
+									<section class="panel panel-sblock border p-yellow ">
+										<div class="symbol ">
+											<i class="fa-trends fa-smmap">&nbsp;</i>
+										</div>
+										<div class="value">
+											<p>Top Vender</p>
+
+											<h1 class="count">{{ autop20Devices[0].y}}</h1>
+										</div>
+									</section>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3"> 
+							<div class="graph-desc tp30"> 
+								<span class="left arrow" ></span>
+								<p class="duration ">March - April</p>
+								<p class="graph-value"> 20000</p>
+								<p class="graph-status"><span>Down</span> 100% from the previous month  </p>
+								<div class="progress-thinbar border-top tm30">
+									<div class="panel">
+										<div class="pname btext"> {{ autop20Devices[0].y}} {{ autop20Devices[0].x}} </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div ng-style="{ 'width' : percent_top5[0] + '%'}"  class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
+											</div>
+											<div class="status-massage">{{ percent_top5[0] }}%</div>
+										</div>
+									</div>
+									<div class="panel">
+										<div class="pname rtext"> {{ autop20Devices[1].y}} {{ autop20Devices[1].x}}  </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div ng-style="{ 'width' : percent_top5[1] + '%'}" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
+											</div>
+											<div class="status-massage">{{ percent_top5[1] }}%</div>
+										</div>
+									</div>
+									<div class="panel">
+										<div class="pname ytext">{{ autop20Devices[2].y}} {{ autop20Devices[2].x}}   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div ng-style="{ 'width' : percent_top5[2] + '%'}" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">{{ percent_top5[2] }}%</div>
+										</div>
+									</div>
+									<div class="panel">
+										<div class="pname gtext">{{ autop20Devices[3].y}} {{ autop20Devices[3].x}}   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div  ng-style="{ 'width' : percent_top5[3] + '%'}"class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">{{ percent_top5[3] }}%</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 " >
+							<div class="panel">
+								<div class="panel-body progress-panel">
+									<div class="task-progress task-progress-noborder">
+										<h1>Day Wise List</h1>
+									</div>
+									<div class="text-center panel-content">
+										<div class="table-component">
+											<table width="100%" border="0" cellspacing="0" cellpadding="0">
+												<thead>
+													<tr>
+														<th>Date</th>
+														<th>Active Users</th>
+														<th>Change</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="elem in filtereddaywiselist">
+				                                        <td>{{ elem.x }}</td>
+				                                        <td>{{ elem.y }}</td>
+				                                        <td>{{ elem.z }}</td>
+													</tr>
+												</tbody>
+											</table>
+											<pagination total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm" boundary-links="true"></pagination>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade in active" ng-show="tab===2">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="panel-content">
+						<div class="col-lg-9 no-padding ">
+							<div class="graph-header">
+								<div  class="pull-right fifth-nav">
+									<div class="btn-group">
+										<select id="example-getting-started" multiple="multiple">
+											<option value="cheese">Cheese</option>
+											<option value="tomatoes">Tomatoes</option>
+											<option value="Mozzarella">Mozzarella</option>
+											<option value="Mushrooms">Mushrooms</option>
+											<option value="Pepperoni">Pepperoni</option>
+											<option value="Onions">Onions</option>
+										</select>
+									</div>
+									<div class="btn-group ">
+										<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+											Export <i class="fa fa-angle-down"></i>
+										</button>
+										<ul class="dropdown-menu rq-dropdown-menu" role="menu">
+											<li><a href="#">Pdf</a></li>
+											<li><a href="#">Excel</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="graph-line-info">
+									<ul class="list-inline list-unstyled">
+										<li><span class="bg-blue bar-piller"></span> Search Traffic</li>
+										<li><span class="bg-orange bar-piller"></span> Refferal Traffic</li>
+									</ul>
+								</div>
+							</div>
+							<div id="AUTopSourceTrends" class="graph-container">
+								<!-- <img src="images/img-gp8.jpg" class="full-image">  -->
+							</div>
+						</div>
+						<div class="col-lg-3"> 
+							<div class="graph-desc tp30"> 
+								<span class="left arrow"></span>
+								<ul class="media-list media-plist">
+									<li ng-repeat="topsource in autop5Sources |limitTo: 3" class="media border-bottom">
+										<div class="pull-left heading fthin"> {{percent_top_sources[$index]}}% <span class="bg-green piller piller-70"></span></div>
+										<div class="media-body content"><p>{{topsource.x}}</p></div>
+									</li>
+									<!-- <li class="media border-bottom">
+										<div class="pull-left heading fthin">{{percent_top_sources[1]}}%  <span class="bg-green piller  piller-20"></span></div>
+										<div class="media-body content"><p>{{nutop5Sources[1].x}}</p></div>
+									</li> -->
+									<!-- <li class="media border-bottom">
+										<div class="pull-left heading fthin">{{percent_top_sources[2]}}% <span class="bg-green piller piller-35"></span></div>
+										<div class="media-body content"><p>{{nutop5Sources[2].x}}</p></div>
+									</li> -->
+								</ul>
+								<div class="progress-thinbar  tm30">
+									<div class="panel">
+										<div class="pname btext">Delhi </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 20%;" class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
+											</div>
+											<div class="status-massage">20%</div>
+										</div>
+									</div>
+									<div class="panel">
+										<div class="pname rtext">Mumbai  </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 40%;" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
+											</div>
+											<div class="status-massage">40%</div>
+										</div>
+									</div>
+									<div class="panel">
+										<div class="pname ytext">Kolkata   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 70%;" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">70%</div>
+										</div>
+									</div>
+									<div class="panel">
+										<div class="pname gtext">Chennai   </div> 
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 25%;" class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+											</div>
+											<div class="status-massage">25%</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 no-padding">
+							<div class="col-lg-4">
+								<div class="graph-container text-center">
+									<img src="images/img-gp9.jpg" >
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div id = "AUtopKeywords_share" class="graph-container">
+									<!-- <img src="images/img-gp14.jpg" > -->
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="text-cloud">
+									website updates<br>
+									<span class="fs1">wide</span> online people<br>
+									distributation offline <span class="fs4">videos</span>
+									<span>  status</span> <span class="fs3">social media</span> <span>blogs</span><br>
+									interaction connection<br>
+									viral tags <span class="fs2">web</span> fun www
+									mouth internet fun <br> <span class="fs1">comments</span> advertising <br> markwting <span class="fs4">technology</span> <br>
+									communication
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 " >
+							<div class="panel">
+								<div class="panel-body progress-panel">
+									<div class="task-progress task-progress-noborder">
+										<h1>Top Source Day Wise List</h1>
+									</div>
+									<div class="text-center panel-content">
+										<div class="table-component">
+											<table width="100%" border="0" cellspacing="0" cellpadding="0">
+												<thead>
+													<tr>
+														<th>Source</th>
+														<th>Active Users</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="elem in sourceactiveuserslist">
+				                                        <td>{{ elem.x }}</td>
+				                                        <td>{{ elem.y }}</td>
+													</tr>
+												</tbody>
+											</table>
+											<pagination total-items="totalItems_tab2" ng-model="currentPage_tab2" max-size="maxSize_tab2" class="pagination-sm" boundary-links="true"></pagination>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade in active" ng-show="tab===3">
+			<div class="panel">
+				<div class="panel-body progress-panel">
+					<div class="panel-content">
+						<div class="col-lg-12 no-padding">
+							<div class="graph-header">
+								<div class="pull-right fifth-nav">
+									<div class="btn-group ">
+										<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+											Select Device <i class="fa fa-angle-down"></i>
+										</button>
+										<ul class="dropdown-menu rq-dropdown-menu" role="menu">
+											<li><a href="#">Nokia</a></li>
+											<li><a href="#">Samsung</a></li>
+										</ul>
+									</div>
+									<div class="btn-group ">
+										<button type="button" class="btn btn-default dropdown-toggle rq-dropdown" data-toggle="dropdown">
+											Export <i class="fa fa-angle-down"></i>
+										</button>
+										<ul class="dropdown-menu rq-dropdown-menu" role="menu">
+											<li><a href="#">Pdf</a></li>
+											<li><a href="#">Excel</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="graph-line-info">
+									<ul class="list-inline list-unstyled">
+										<li><span class="bg-blue bar-piller"></span> {{ autop20Devices[0].y }} {{ autop20Devices[0].x }}  </li>
+										<li><span class="bg-orange bar-piller"></span> {{ autop20Devices[1].y }} {{ autop20Devices[1].x }}</li>
+										<li><span class="bg-green bar-piller"></span> {{ autop20Devices[2].y }} {{ autop20Devices[2].x }}</li>
+									</ul>
+								</div>
+							</div>
+							<div id="AUTopDeviceTrends" class="graph-container ">
+								<!-- <img src="images/img-gp10.jpg" class="full-image">  -->
+							</div>
+						</div>
+						<div class="col-lg-12 no-padding">
+							<div class="col-lg-6">
+								<div id = "manu_share_au" class="graph-container text-center">
+									<!-- <img src="images/img-gp11.jpg"  > -->
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="panel bm0">
+									<div class="col-lg-6 col-md-6 col-sm-6  ">
+										<div class=" msg-block background-blue wtext bm10 bg-mobile">
+											<div class="pname tp30"><span>{{autop5Manu[0].x}}</span>  </div> 
+											<div class="status">
+												<span class="msg-value">{{autop5Manu[0].y}}</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6">
+										<div class=" msg-block background-lred wtext bm10 bg-mobile">
+											<div class="pname tp30"><span >{{autop5Manu[1].x}} </span> </div> 
+											<div class="status">
+												<span class="msg-value">{{autop5Manu[1].y}}</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6  ">
+										<div class=" msg-block background-dblue wtext bg-mobile">
+											<div class="pname tp30"><span >{{autop5Manu[2].x}} </span> </div> 
+											<div class="status">
+												<span class="msg-value">{{autop5Manu[2].y}}</span> 
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6">
+										<div class=" msg-block background-green wtext bg-mobile">
+											<div class="pname tp30"><span >{{autop5Manu[3].x}} </span> </div> 
+											<div class="status">
+												<span class="msg-value">{{autop5Manu[3].y}}</span> 
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 no-padding">
+							<div class="col-lg-6">
+								<div class="graph-container text-center tp60">
+									<img src="images/img-gp15.png">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="panel bm0">
+									<div class="task-progress">
+										<h1>Top {{ autop5Manu[0].x }} Devices</h1>
+									</div>
+									<ul class="media-list media-plist">
+										<li ng-repeat = "topmanu_device in topManu_Devices" class="media border-bottom">
+											<div class="pull-left heading fthin">{{ topmanu_device.y }}% <span class="bg-green piller piller-35"></span></div>
+											<div class="media-body content"><p>{{ autop5Manu[0].x}} {{ topmanu_device.x }}</p></div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+						<div class="col-lg-12 " >
+							<div class="panel">
+								<div class="panel-body progress-panel">
+									<div class="task-progress task-progress-noborder">
+										<h1>Top Device Day Wise List</h1>
+									</div>
+									<div class="text-center panel-content">
+										<div class="table-component">
+											<table width="100%" border="0" cellspacing="0" cellpadding="0">
+												<thead>
+													<tr>
+														<th>Device</th>
+														<th>Active Users</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="dev in deviceactiveuserslist">
+				                                        <td>{{ dev.y }} {{ dev.x }}</td>
+				                                        <td>{{ dev.z }}</td>
+													</tr>
+												</tbody>
+											</table>
+											<pagination total-items="totalItems_tab3" ng-model="currentPage_tab3" max-size="maxSize_tab3" class="pagination-sm" boundary-links="true"></pagination>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade in active" ng-show="tab===4">
+			<div class="panel">
+				<div class="panel-body progress-panel no-padding">
+					<div class="panel-content">
+						<div class="col-lg-4"> 
+							<div class="graph-desc tp30 no-border"> 
+								<img src="images/img-gp12.jpg" width="261" height="158">
+								<div class="progress-thinbar  tm10 bm20">
+									<div class="panel bp20">
+										<div class="pname btext">Delhi </div> 
+										<div class="status-massage pull-right mmt20">20%</div>
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 20%;" class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
+											</div>
+										</div>
+									</div>
+									<div class="panel bp20">
+										<div class="pname rtext">Mumbai  </div> 
+										<div class="status-massage pull-right mmt20">40%</div>
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 40%;" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
+											</div>
+										</div>
+									</div>
+									<div class="panel bp20">
+										<div class="pname ytext">Kolkata   </div> 
+										<div class="status-massage pull-right mmt20">70%</div>
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 70%;" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
+											</div>
+
+										</div>
+									</div>
+									<div class="panel bp20">
+										<div class="pname gtext">Chennai   </div> 
+										<div class="status-massage pull-right mmt20">25%</div>
+										<div class="status">
+											<div class="progress transparent progress-mid no-radius" style="width:100%">
+												<div style="width: 25%;" class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8 no-padding ">
+							<div class="rq-map text-center">
+								<img src="images/img-gp13.jpg" width="531" height="332">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

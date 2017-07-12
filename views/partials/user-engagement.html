@@ -1,0 +1,112 @@
+<div class="pageheader">
+    <div class="media">
+        <div class="pageicon pull-left">
+            <i class="fa fa-user"></i>
+        </div>
+        <div class="media-body">
+            <ul class="breadcrumb">
+                <li><a href=""><i class="glyphicon  fa fa-user"></i></a></li>
+                <li>User Engagement</li>
+            </ul>
+            <h4>User Engagement</h4>
+        </div>
+    </div>
+    <div class="panel default-blue pull-right  date-time" >
+        <div class="symbol ">
+            <span class="day">Tuesday</span>
+            <span class="date">28</span> <span class="month">Oct</span>
+        </div>
+        <div class="value">
+            <p class="time-zone">PM</p>
+            <p class="time">06:31</p>
+
+        </div>
+    </div>
+</div>
+<div class="body-content" ng-controller= "UEoverviewCtrl">
+    <div class="state-overview row">
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-blue text-center">
+                <div id="top3Events" class="text-center panel-content"></div>
+            </section>
+            <div class="panel-footer green">
+                <div class="col-lg-8 pftitle"><span>Total</span> Events</div>
+                <div class="col-lg-4 pfvalue text-right">{{ totalEvents }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-red text-center">
+                <div id="top5Screens" class="text-center panel-content">
+                    </div>
+            </section>
+            <div class="panel-footer red text-center">
+                <div class="col-lg-12 pftitle tp10">Maximum time spent</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <section class="panel panel-block p-yellow text-center">
+                <div id="topEventTrend" class="text-center panel-content">
+                        
+                </div>
+                <!-- <img src="images/img-gp6.png" style="margin-top:45px;"> -->
+            </section>
+            <div class="panel-footer blue">
+                <div class="text-left">{{ topEventName }}</div>
+                <div class="text-right">{{ topEventCount }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <h1>Top Events Running</h1>
+                    </div>
+
+                    <div id="eventTrend" class="text-center panel-content">
+                        <!-- <img src="images/img1.png" width="853" height="325"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 " >
+            <div class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress task-progress-noborder">
+                        <h1>Top Screens</h1>
+                    </div>
+
+                    <div class="text-center panel-content">
+                        <div class="table-component">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <thead>
+                                    <tr>
+                                        <th>Screen Name</th>
+                                        <th>Total Visits</th>
+                                        <th>Unique Visits</th>
+                                        <th>Average Time<br/>(minutes)</th>
+                                        <th>Drop Offs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="info in topScreens">
+                                        <td>{{ info.screenName.split(".")[info.screenName.split(".").length-1] }}</td>
+                                        <td>{{ info.totalCount | number }}</td>
+                                        <td>{{ info.uniqueCount | number }}</td>
+                                        <td>{{ info.avgTime / 60000 | number:2 }}</td>
+                                        <td>{{ info.exits | number }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
