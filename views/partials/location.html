@@ -68,7 +68,7 @@
         <div class="panel bp10" ng-repeat="elem in nutop5Languages | limitTo:5">
           <div ng-class="'pname '+col[$index]+'text pl15'">{{elem.x}}&nbsp; </div> 
           <div class="status">
-           
+
             <div class="progress transparent progress-large no-radius" style="width:100%">
               <div ng-style="{ 'width' : percent_top5_lang_nu[$index] + '%'}" ng-class="'progress-bar progress-bar-'+colors[$index]+' animate-progress-bar'" data-percentage="40%"></div>
             </div>
@@ -76,52 +76,52 @@
           </div>
         </div>
         <!-- <div class="panel bp10">
-          <div class="pname rtext pl15">{{nutop5Languages[1].x}} </div> 
+          <div class="pname rtext pl15">{{nutop5Languages[1].x}} </div>
           <div class="status">
-            
+
             <div class="progress transparent progress-large no-radius" style="width:100%">
               <div ng-style="{ 'width' : percent_top5_lang_nu[1] + '%'}" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="40%"></div>
             </div>
             <div class="status-massage  ">{{percent_top5_lang_nu[1]}}%</div>
-            
+
           </div>
         </div> -->
         <!-- <div class="panel bp10">
-          <div class="pname ytext pl15">{{nutop5Languages[2].x}} </div> 
+          <div class="pname ytext pl15">{{nutop5Languages[2].x}} </div>
           <div class="status">
-            
+
             <div class="progress transparent progress-large no-radius" style="width:100%">
               <div ng-style="{ 'width' : percent_top5_lang_nu[2] + '%'}" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
             </div>
             <div class="status-massage  ">{{percent_top5_lang_nu[2]}}%</div>
-            
+
           </div>
         </div>
         <div class="panel bp10">
-          <div class="pname gtext pl15">{{nutop5Languages[3].x}} </div> 
+          <div class="pname gtext pl15">{{nutop5Languages[3].x}} </div>
           <div class="status">
-            
+
             <div class="progress transparent progress-large no-radius" style="width:100%">
               <div ng-style="{ 'width' : percent_top5_lang_nu[3] + '%'}" class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
             </div>
             <div class="status-massage  ">{{percent_top5_lang_nu[3]}}%</div>
-            
+
           </div>
         </div>
         <div class="panel ">
-          <div class="pname ptext pl15">{{nutop5Languages[4].x}} </div> 
+          <div class="pname ptext pl15">{{nutop5Languages[4].x}} </div>
           <div class="status">
-            
+
             <div class="progress transparent progress-large no-radius" style="width:100%">
               <div ng-style="{ 'width' : percent_top5_lang_nu[4] + '%'}" class="progress-bar progress-bar-purple animate-progress-bar" data-percentage="40%"></div>
             </div>
             <div class="status-massage ">{{percent_top5_lang_nu[4]}}%</div>
-            
+
           </div>
         </div> -->
       </div>
 
- 
+
 </div>
 </div>
 </div>
@@ -178,7 +178,7 @@
         <div class="task-progress task-progress-noborder">
           <div class="btn-group pull-right fifth-nav">
             <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
-                        
+
             <button type="button" ng-csv="TopCitiesCSV" csv-header="['City', 'New Users']" filename="New_Users_CityWise.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
             </div>
           <h2>User/City </h2>
@@ -219,7 +219,7 @@
         <div class="task-progress task-progress-noborder">
           <div class="btn-group pull-right fifth-nav">
             <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
-                        
+
             <button type="button" ng-csv="NULanguageCSV" csv-header="['Language', 'New Users']" filename="New_Users_LanguageWise.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
           </div>
           <h2>Language/Users</h2>

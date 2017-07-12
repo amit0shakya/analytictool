@@ -1,0 +1,23 @@
+<div ng-controller="ToastCtrl" >
+   <md-button ng-click="showCustomToast(toastparams)" class="md-raised" class="toast-button">
+      Show Custom Toast
+   </md-button>
+</div>
+
+<!--
+<md-button class="md-raised">1 Day</md-button>
+<md-button class="md-raised">7 Day</md-button>
+<md-button class="md-raised">30 Days</md-button>
+<md-button class="md-raised">60 Days</md-button>
+-->
+
+    
+        <md-input-container class="md-block" flex="10">
+            <label>Days</label>
+            <md-select ng-model="user.state">
+                <md-option ng-repeat="data in dateRange" value="{{data.value}}">{{data.title}}</md-option>
+                <md-option ng-click="customdate()" value="customdate">Custom Date</md-option>
+            </md-select>
+        </md-input-container>
+    
+

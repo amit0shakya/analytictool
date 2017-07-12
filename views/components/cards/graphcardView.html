@@ -1,0 +1,36 @@
+
+        <!-- Card -->
+        <div flex layout-fill layout-padding>
+          <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch flex layout-stretch layout-fill layout-padding>
+
+             <div layout="row" layout-padding layout-align="space-between start" >
+                <md-card-title-text layout="column">
+
+                  <span class="md-subhead">Widget Name</span>
+                </md-card-title-text>
+              </div>
+
+                <div layout="row" layout-stretch layout-fill class="min-height-auto" >
+                      <div flex="90" layout-padding>Chart Area</div>
+                  <!-- filter Icon Start -->
+                  <div flex>
+                      <md-button class="md-icon-button cardsvgicons" aria-label="filters" ng-click="togglefilters()">
+                          <md-tooltip>filters</md-tooltip>
+                        <md-icon class="material-icons" md-svg-icon="svg/filter-icon.svg"></md-icon>
+                      </md-button>
+                  </div>
+                  <!-- filter Icon Ends -->
+              </div>
+
+              <!-- Card Action icons -->
+              <div  layout-align="end end" layout="row">
+                      <md-button class="md-icon-button cardsvgicons" aria-label="filters">
+                        <md-tooltip>Unpin widget</md-tooltip>
+                        <md-icon md-svg-icon="svg/pin-icon.svg"></md-icon>
+                      </md-button>
+              </div>
+              <!-- Card Action icons ends -->
+              
+          </md-card>
+        </div>
+        <!-- Card -->

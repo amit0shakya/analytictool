@@ -818,6 +818,7 @@ $scope.getsessions = function(){
 
             $scope.dsegments = response;
             $scope.TargetKeyList=$scope.dsegments;
+
             if ($rootScope.targetdynamicsegment) {
               $scope.targetkey=$rootScope.targetdynamicsegment;
               $rootScope.targetdynamicsegment=undefined;
@@ -844,7 +845,7 @@ $scope.getsessions = function(){
   $scope.table.table1loaded=false;
    $scope.getcampaigns = function() {
      $scope.table.table1loaded=false;
-     
+
      if($rootScope.app.app_secret=="91c556949f"){
       $scope.showthis=true;
      }else{
@@ -858,24 +859,15 @@ $scope.getsessions = function(){
           // response=undefined
           
 
-         for (var i = 0; i < response.length; i++) {
+              for (var i = 0; i < response.length; i++) {
                     response[i].successdata=UtilitiesService.CommaSeparatedNumberFormat(parseInt(response[i].cpc)-parseInt(response[i].fc));
-                    response[i].cpc=UtilitiesService.CommaSeparatedNumberFormat(response[i].cpc);
-                };
-                for (var i = 0; i < response.length; i++) {
-                    response[i].ic=UtilitiesService.CommaSeparatedNumberFormat(response[i].ic)
-                };
-                for (var i = 0; i < response.length; i++) {
-                    response[i].csc=UtilitiesService.CommaSeparatedNumberFormat(response[i].csc)
-                };
-                for (var i = 0; i < response.length; i++) {
-                    response[i].coc=UtilitiesService.CommaSeparatedNumberFormat(response[i].coc)
-                };
-                for (var i = 0; i < response.length; i++) {
-                    response[i].fc=UtilitiesService.CommaSeparatedNumberFormat(response[i].fc)
-                };
-                for (var i = 0; i < response.length; i++) {
-                    response[i].ifc=UtilitiesService.CommaSeparatedNumberFormat(response[i].ifc)
+                    //response[i].cpc=UtilitiesService.CommaSeparatedNumberFormat(response[i].cpc);
+                   // response[i].ic=UtilitiesService.CommaSeparatedNumberFormat(response[i].ic);
+                    response[i].csc= UtilitiesService.CommaSeparatedNumberFormat(parseInt(response[i].csc))
+                    response[i].sc= UtilitiesService.CommaSeparatedNumberFormat(parseInt(response[i].cpc)-parseInt(response[i].fc))
+                   //response[i].coc=UtilitiesService.CommaSeparatedNumberFormat(response[i].coc);
+                    //response[i].fc=UtilitiesService.CommaSeparatedNumberFormat(response[i].fc);
+                    //response[i].ifc=UtilitiesService.CommaSeparatedNumberFormat(response[i].ifc);
                 };
            $scope.table.table1loaded=true;
 

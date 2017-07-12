@@ -1,0 +1,130 @@
+var Toast = [
+    {
+        "type":"DownloadSuccesfull",
+        "hideDelay":"8000",
+         "position" :"top right",
+         "height":"34px",
+         "width":"265px",
+         "bgcolor":'61cb9f',
+        "rightic":'close',
+         "heading":{
+            "font-family":"something",
+            "font-color":"something",
+            "font-size":"something",
+         },
+         "subheading":{
+            "font-family":"something",
+            "font-color":"something",
+            "font-size":"something",
+         },
+         "font-icon":{
+          "path":"email",
+          "color":"#4154a5"
+         },
+         "image":"path",
+         "svg":"path",
+         "righticon":{
+            "icon":"iconpath",
+            "action":"", //none/close action none defines interactive icon and action close defines click to close toast.
+         },
+         "show":{
+            "position":'top right',
+         },
+         "hide":{// delay mention toast hide auto on mention delay otherwise it will hide on click to right icon;
+            "delay":"3000",
+         }
+        
+    },
+    {
+         "type":"Pinned",
+        "hideDelay":"8000",
+         "position" :"top right",
+         "height":"34px",
+         "width":"265px",
+         "bgcolor":'61cb9f',
+        "rightic":'close',
+         "heading":{
+            "font-family":"something",
+            "font-color":"something",
+            "font-size":"something",
+         },
+         "subheading":{
+            "font-family":"something",
+            "font-color":"something",
+            "font-size":"something",
+         },
+         "font-icon":{
+          "path":"email",
+          "color":"#4154a5"
+         },
+         "image":"path",
+         "svg":"path",
+         "righticon":{
+            "icon":"iconpath",
+            "action":"", //none/close action none defines interactive icon and action close defines click to close toast.
+         },
+         "show":{
+            "position":'top right',
+         },
+         "hide":{// delay mention toast hide auto on mention delay otherwise it will hide on click to right icon;
+            "delay":"3000",
+         }
+    },
+    {
+         "type":"unpined",
+        "hideDelay":"8000",
+         "position" :"top right",
+         "height":"34px",
+         "width":"265px",
+         "bgcolor":'61cb9f',
+        "rightic":'close',
+         "heading":{
+            "font-family":"something",
+            "font-color":"something",
+            "font-size":"something",
+         },
+         "subheading":{
+            "font-family":"something",
+            "font-color":"something",
+            "font-size":"something",
+         },
+         "font-icon":{
+          "path":"email",
+          "color":"#4154a5"
+         },
+         "image":"path",
+         "svg":"path",
+         "righticon":{
+            "icon":"iconpath",
+            "action":"", //none/close action none defines interactive icon and action close defines click to close toast.
+         },
+         "show":{
+            "position":'top right',
+         },
+         "hide":{// delay mention toast hide auto on mention delay otherwise it will hide on click to right icon;
+            "delay":"3000",
+         }
+    },
+    {}
+];
+
+/*
+
+var toastSkin=function(){
+    
+    this.skinObj={
+        a:"A old value",
+        b:"B old value",
+        c:"C old value"
+    }
+}
+
+toastSkin.prototype.setval=function(param,value){
+   // for(var index in this.skinObj){
+        
+        if(param in this.skinObj){
+            this.skinObj[param]=value;
+        }
+        
+   // }
+}*/

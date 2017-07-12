@@ -1,0 +1,34 @@
+<!-- Card -->
+<div flex layout-fill layout-padding>    
+  <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch flex layout-stretch layout-fill layout-padding>
+    <div layout="row" layout-stretch layout-fill class="min-height-auto" >
+
+        <!--Table Heading-->
+        <md-table-container layout-stretch layout-fill>
+              <table md-table ng-model="selected" md-progress="promise">
+            <thead md-head md-colors="{background: 'blue-400'}" md-on-reorder="tableData">
+                <tr md-row>
+                    <th md-column ng-repeat="colName in tablejson.columns" style="text-align:center; padding:0px;">
+                        <span style="color:white; text-align:center;" flex><h4>{{colName.title}}</h3></span>
+                    </th>              
+                </tr>
+            </thead>
+                  
+            <tbody md-body layout-stretch layout-fill>
+                <tr layout-stretch layout-fill md-row ng-repeat="colData in tablejson.data | limitTo: tablePagination.rowsPerPage : (tablePagination.currentPage - 1) * tablePagination.totalrows" >
+                <td md-cell style=" text-align:center; padding:0px;" flex>{{colData.event}}</td>
+                <td md-cell style=" text-align:center; padding:0px;" flex>{{colData.count}}</td>
+                </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+    </div>
+      
+      <div flex layout-stretch >
+          <md-table-pagination class="custompagination" md-page="tablePagination.currentPage" md-limit="tablePagination.totalrows" md-total="{{tablejson.data.length}}" md-limit-options="[5, 10, 15]" md-on-paginate="tablePagination.rowsPerPage" md-page-select md-label="{page: 'Page:', rowsPerPage: 'Rows per page:', of: 'of'}"></md-table-pagination>
+      </div>
+      <!--
+      <div><md-table-pagination md-limit="5" md-limit-options="[5, 10, 15]" md-page="0" md-total="{{tablejson.data.length}}" md-on-paginate="tableData" md-page-select></md-table-pagination></div>-->
+  </md-card>
+</div>
+<!-- Card -->

@@ -1,0 +1,43 @@
+
+
+<div layout="row">
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-whiteframe="4">
+<!-- fix issue here -->
+<md-toolbar class="md-hue-2" class="left-slidenav" style="background-color:#fff; border-bottom:none;" md-scroll-shrink>
+  <h2 class="md-toolbar-tools">
+    <span><img src="./images/logo-rocq.png" alt="" /></span>
+  </h2>
+  <md-divider></md-divider>
+</md-toolbar>
+
+    <div  class="height-auto sideNav marginTop20">
+        <ul flex layout="column" role="navigation">
+            <li ng-init="mystyle={'height':'0px'}; state=true" layout="column" ng-repeat="item in menu_item" ng-click="mystyle={height:togglenav(item.sublinks,state)}; state=!state" ng-class="{true:'normalNavbg', false: 'selectedNavbg'}[state]">
+            
+                <md-button class="navbtn" layout="row"  ng-class="{true:'normalNavbg', false: 'selectedTabbg'}[state]">
+                    <div flex layout="row">
+                        <i ng-style="state && {'color':'#666'} || {'color': '#fff'}" class="material-icons" layout-padding>{{item.icon}}</i>
+                        <div ng-style="state && {'color':'#666'} || {'color': '#fff'}">{{item.title}}</div>
+                    </div>
+                    
+                    <div ng-if="item.sublinks" flex class="navArrow">
+                        <i ng-style="state && {'color':'#666'} || {'color': '#fff'}" class="material-icons" class="anim" ng-class="{true:'arrdn', false: 'arrup'}[state]">
+                            keyboard_arrow_down
+                        </i>
+                    </div>
+                </md-button>
+                
+                <div ng-if="item.sublinks" ng-style="mystyle" class="anim subnavli" >
+                    <ul>
+                        <li layout="column" ng-repeat="subnav in item.sublinks">
+                            <md-button class="navbtn" layout-stretch>
+                                {{subnav.title}}
+                            </md-button>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</md-sidenav>
+</div>

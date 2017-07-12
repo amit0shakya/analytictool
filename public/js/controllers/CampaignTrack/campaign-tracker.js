@@ -50,9 +50,11 @@ adtracker.controller('AdTrackerCtrl',['$scope','$rootScope','$q','$http','JettyS
           };
           // $scope.campaigninfo.dq = "https://play.google.com/store?hl=en&tab=n8&transaction_id={transaction_id}&campaign_id={campaign_id}"
           // $scope.campaigninfo.dr = "https://play.google.com/store?hl=en&tab=n8&transaction_id={transaction_id}&campaign_id={campaign_id}"
+           
            $scope.addcampaignvalidation={};
            $scope.addcampaignvalidation.cnnil = !$scope.campaigninfo.do
            $scope.addcampaignvalidation.pnnil = !$scope.campaigninfo.dp
+           
            //$scope.addcampaignvalidation.pburlnil = !$scope.campaigninfo.dq
            $scope.campaigninfo.dq=$scope.campaigninfo.dq || undefined;
            $scope.addcampaignvalidation.pburlinvalid= $scope.campaigninfo.dq
@@ -104,21 +106,48 @@ adtracker.controller('AdTrackerCtrl',['$scope','$rootScope','$q','$http','JettyS
           $scope.$watch('currentPage_tab2 + itemsPerPage5', function() {
               var begin = (($scope.currentPage_tab2 - 1) * $scope.itemsPerPage5),
               end = begin + $scope.itemsPerPage5;
+              
               $scope.filteredcampaignslist =  $scope.campaignlist.slice(begin, end);
-                            console.log(4)
-      });
-      
-
+             
+                  // console.log($scope.filteredcampaignsliststats);
+                  //
+                  // .splice();
+                  // $scope.campaignliststats.slice(begin, end);
+            });
           }).error(function(response) {
-            console.log(response)
+            
           });
       };
 
       $scope.listCampaignStats = function() {
           $http.post('/listTrackerStats', {o:$rootScope.app.app_secret,endGap:$scope.endGap,noDays:$scope.noDays}).success(function(response) {
-               $scope.table1loaded=true;
- 
+              $scope.table1loaded=true;
               $scope.campaign_loading='false'
+
+              var removeCampaign=["Campaign 1","Campaign 2","sm fb campaign","FHM India DishTv","Digidesk – registration campaign","Digidesk Installs","Digidesk installs","FHMIndia registration mXpresso","Digidesk installs 2"];
+              var lgt=response.length;
+            
+              for(var i=0;i<response.length; i++){
+                var campaignName=response[i].do+"";
+
+                if(response[i].dp == "Social Campaign"){
+                  response[i].do = "SL Social Campaign";
+                  response[i].dp = "SL";
+                 }
+                
+                for(var j=0;j<removeCampaign.length;j++){
+                  var rc=removeCampaign[j]+"";
+                   if(campaignName==rc){
+                      response.splice(i,1);
+                      i--;
+                      break;
+                    }
+                 }
+                }
+
+              $scope.table1loaded=true;
+              $scope.campaign_loading='false';
+
               for (var i = 0; i < response.length; i++) {
                 if (response[i].dt==0) {
                   response[i].rate=null;
@@ -129,14 +158,48 @@ adtracker.controller('AdTrackerCtrl',['$scope','$rootScope','$q','$http','JettyS
               };
               $scope.campaignliststats=response.reverse();
 
-              $scope.itemsPerPage = 10
-          $scope.currentPage_tab1 = 1;
-          $scope.maxSize_tab1 = 5;
-          $scope.totalItems_tab1 = $scope.campaignliststats.length;
-          $scope.$watch('currentPage_tab1 + itemsPerPage', function() {
+              $scope.itemsPerPage = 20
+              $scope.currentPage_tab1 = 1;
+              $scope.maxSize_tab1 = 5;
+              $scope.totalItems_tab1 = $scope.campaignliststats.length;
+              $scope.$watch('currentPage_tab1 + itemsPerPage', function() {
+
               var begin = (($scope.currentPage_tab1 - 1) * $scope.itemsPerPage),
               end = begin + $scope.itemsPerPage;
-              $scope.filteredcampaignsliststats =  $scope.campaignliststats.slice(begin, end);
+              
+              $scope.filteredcampaignsliststats =  $scope.campaignliststats.slice(begin, end)
+
+              if($rootScope.app.app_secret=="5ae8aebd7c" || $rootScope.app.app_secret=="784b8c2995"){
+              var campaignData=$scope.campaignliststats.slice(begin, end);   
+
+              var removeCampaign=["FHM India DishTv","Digidesk - registration campaign","Digidesk Installs","Digidesk installs 2","FHMIndia registration mXpresso"];
+               
+                for(var i=0;i<campaignData.length; i++){
+                var campaignName=campaignData[i].do+"";
+                 if((campaignName=="Social Campaign") && (campaignData[i].dp == "Social Campaign")){
+                  campaignData[i].do = "SL Social Campaign";
+                  campaignData[i].dp = "SL";
+                 }else{
+                   if(((campaignName=="sm fb campaign") || (campaignName=="sm FB campaign")) && (campaignData[i].dp == "fb")){
+                     campaignData[i].do = "Social Campaign";
+                     campaignData[i].dp = "Social Media";
+                   }else{
+                    for(var j=0;j<removeCampaign.length;j++){
+                  
+                  var rc=removeCampaign[j]+"";
+                      if(campaignName==rc){
+                        campaignData.splice(i,1);
+                         i--;
+                         break;
+                      }
+                     }
+                   }
+                 }
+                }
+                  $scope.filteredcampaignsliststats =  campaignData;
+                }else{
+                   $scope.filteredcampaignsliststats =  $scope.campaignliststats.slice(begin, end);
+                }
               
                             
       });

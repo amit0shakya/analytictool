@@ -521,7 +521,7 @@ Action <i class="fa fa-angle-down"></i>
         <th>Sent <span class=" fs12">(Imported)</span></th>
         <th ng-show="app.ostype=='Android'">Received</th>
         <th ng-show="app.ostype=='iOS'">Failure</th>
-        <th>Opened</th>
+<!--    <th>Opened</th>   -->
         <th>Status</th>
         <th>Message Type</th>
       </tr>
@@ -534,13 +534,14 @@ Action <i class="fa fa-angle-down"></i>
                               </tr>
 
       <tr ng-show="table1loaded" ng-repeat="elem in filteredcampaignslist" ng-init="initializepopover()" >
-        <td ng-hide="elem.PushReqTimestamp=='Multiple Dates'" ng-click="getFunnelData($index)" style="cursor:pointer"><div data-toggle="popover" title="Message" data-placement="right" data-trigger="hover" data-content="{{elem.message}}">{{ elem.src}}</div></td>
+      <td ng-hide="elem.PushReqTimestamp=='Multiple Dates'" ng-click="getFunnelData($index)" style="cursor:pointer">
+        <div data-toggle="popover" title="Message" data-placement="right" data-trigger="hover" data-content="{{elem.message}}">{{ elem.src}}</div></td>
         <td ng-show="elem.PushReqTimestamp=='Multiple Dates'" ng-click="$root.push.selected_campaign=elem.src" style="cursor:pointer; font-weight:bold;"  class="btext  "> {{ elem.src}}</td>
         <td class="fs13">{{ elem.date}}</td>
         <td><strong>{{ elem.cpc}}</strong> <span class="graytext fs12 pl10">{{ elem.ic || ""}}</span></td>
         <td ng-show="app.ostype=='Android'"><div class="text-center">{{ elem.csc}}</div></td>
         <td ng-show="app.ostype=='iOS'"><div class="text-center">{{ elem.fc}}</div></td>
-        <td><div class="text-center">{{ elem.coc}}</div></td>
+    <!--    <td><div class="text-center">{{ elem.coc}}</div></td>   -->
          <td><span class="label fs12" ng-class="{'completed':'label-success','running':'label-info','pending':'label-info','queued':'label-warning','scheduled':'label-primary'}[elem.status]">{{elem.status}}</span> <span class="fs11 bltext" ng-show="elem.crt">{{ elem.csf}}</span></td>
         <td>{{ elem.mt}}</td>
       </tr>

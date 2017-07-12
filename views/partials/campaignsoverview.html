@@ -26,7 +26,7 @@
             <i class="fa-trends fa-revenue">&nbsp;</i>
         </div>
         <div class="value ">
-          <p>Total Campaign</p>
+          <p>Total Campaigns</p>
           <h1 class="count ng-binding">{{noOfCampaigns}}</h1>
           <!-- <p class="rating ng-binding"> 
            {{noOfActiveCampaigns}}
@@ -59,7 +59,7 @@
            <i class="fa-trends fa-gpubl">&nbsp;</i>
         </div>
         <div class="value">
-          <p>Total Install</p>
+          <p>Total Installs</p>
           <h1 class="count3 ng-binding">{{noOfInstalls}}</h1>
 
          <!--  <p class="rating ng-binding"> 56.2k unique
@@ -107,17 +107,12 @@
 </div>
 
 
-
-
 </div>
 
 
 <div class="panel">
 <div class="panel-body no-padding">
-
-
 <div class="task-progress rq-block ">
-
 <div class="pull-right tm5"><div class="btn-group ">
 <button id='PushCampaignTrends_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
 <i class="fa-trends fa-pdf ">&nbsp;</i>
@@ -128,14 +123,14 @@
 <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i> </a>
 </div>
 </div>
-
-<div class="pull-right mr20 " >
+<div class="pull-right mr20">
 <div class="btn-group mr5" style="display:none;">
+
 <!-- <button type="button" class="btn btn-default dropdown-toggle ng-binding" data-toggle="dropdown" aria-expanded="false">
 <i class="fa fa-angle-down pull-right tm4"></i>
 Compare Campaign
 </button> -->
- 
+
 <div     
     isteven-multi-select
     input-model="campaignliststats"
@@ -147,6 +142,7 @@ Compare Campaign
     max-height="210px"
     translation="localLang"
 >
+
 </div>
 </div>
 
@@ -158,7 +154,7 @@ Weekly
 </button>
  
 <ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu">
-<li><a href="#">Last 15 Days</a></li>
+<li><a href="#">Last 15 Days</a></li> 
 <li><a href="#">Last 30 Days</a></li>
 </ul>
 </div> -->
@@ -167,7 +163,7 @@ Weekly
 <div class="btn-group mr5" style="display:none;">
 <button type="button" class="btn btn-default dropdown-toggle ng-binding" data-toggle="dropdown" aria-expanded="false">
 <i class="fa fa-angle-down pull-right tm4"></i>
-Active Campaign
+  Active Campaign
 </button>
  
 <ul class="dropdown-menu rq-dropdown-menu scrollme" role="menu">
@@ -175,7 +171,8 @@ Active Campaign
 <li><a href="#">Expire</a></li>
 </ul>
 </div>
-<div class="btn-group"><button type="button" class="btn button-blue-border no-radius " ng-click="reloadPage('campaigns.html')" >+New</button></div>
+<div class="btn-group"><button type="button" class="btn button-blue-border no-radius " ng-click="reloadPage('campaigns.html')" >+New</button>
+</div>
 
 </div>
 
@@ -213,9 +210,7 @@ Select Campaign
 
 <div class="panel-content">
 <div class="task-progress task-progress-noborder" style="display:none;">
-      
-      <h2>{{push.selected_campaign}} </h2>
-      
+      <h2>{{push.selected_campaign}}</h2>
   </div>
   <div id="CampaignTrends" class="graph-container ">
     <!-- <img src="images/img-gp10.jpg" class="full-image">  -->
@@ -296,7 +291,7 @@ Action
 
         
       </th> -->
-<th width="25%">campaign Name</th>
+<th width="25%">Campaign Name</th>
 <!-- <th>Start Date</th> -->
 <!-- <th>Status</th> -->
 <th>Publisher Name</th>
@@ -367,9 +362,9 @@ Action
 </table>
 </div>
 </div>
-
+<!-- Hide pagination
 <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" items-per-page="10" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
-
+-->
 
 
 </div>

@@ -6,25 +6,19 @@
         </div>
         <div class="media-body">
             <ul class="breadcrumb">
-               
                 <li>Trends</li>
             </ul>
             <h4>TRENDS</h4>
         </div>
     </div>
-    
     <div class="pull-right fourth-nav">
 		 	<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
-            <span class="glyphicon glyphicon-calendar calendar-icon"></span>
+      <span class="glyphicon glyphicon-calendar calendar-icon"></span>
 		</div>
-    
 </div>
 
-
-
 <div ng-controller="ToverviewCtrl">
-
-<div class="body-content">
+  <div class="body-content">
     <div class="state-overview row">
         <div class="col-lg-4 col-sm-6">
             <section class="panel panel-block p-yellow text-center">
@@ -38,8 +32,8 @@
                 </div>
             </section>
         </div>
-        
-        
+
+
         <div class="col-lg-4 col-sm-6">
             <section class="panel panel-block p-red text-center">
                 <div class="symbol ">
@@ -47,7 +41,7 @@
                 </div>
                 <div class="value">
                      <p>New Vs Returning Users</p>
-                    <h1 class="count"> 
+                    <h1 class="count">
                         <span class="first">{{ new_users}}</span> <span class="gray-text">/</span>
                         <span class="second"> {{ returning_users }}</span>
                     </h1>
@@ -55,8 +49,8 @@
                 </div>
             </section>
         </div>
-        
-        
+
+
         <div class="col-lg-4 col-sm-6">
             <section class="panel panel-block p-blue text-center">
                 <div class="symbol ">
@@ -69,9 +63,9 @@
                 </div>
             </section>
         </div>
-        
+
     </div>
-    
+
     <div class="row">
         <div class="col-lg-6">
             <div class="panel">
@@ -106,11 +100,11 @@
                         </button>
                         <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
                         </div>
-                        
-                        
-                        
+
+
+
                         <h2>Active Users Trend</h2>
-                        
+
                     </div>
                     <div id="activeusers" class="text-center panel-content">
                     </div>
@@ -132,9 +126,9 @@
                         </button>
                         <a href="#" class="fsize-block"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
                         </div>
-                        
+
                         <h2>Session Time</h2>
-                      
+
                     </div>
                     <div id="avgSessionLengthTrend" class="text-center panel-content">
                         <!-- <img src="images/img1.png" width="853" height="325">  -->
@@ -147,7 +141,7 @@
         <div class="col-lg-12" >
             <div class="panel">
                 <div class="panel-body progress-panel">
-            
+
                     <div class="task-progress task-progress-noborder">
 
                     <div class="btn-group pull-right fifth-nav">
@@ -177,38 +171,33 @@
                                     </tr>
                                 </thead>
                                  <tbody>
-
                                    <!--  <tr ng-hide="table1loaded">
-                                <td colspan="5" >
-                                  <p class="text-center"><img src="images/ajax-loader.gif"></p>
-                                </td>
-                              </tr> -->
+                                            <td colspan="5" >
+                                              <p class="text-center"><img src="images/ajax-loader.gif"></p>
+                                            </td>
+                                          </tr> -->
                                     <tr ng-repeat="elem in filteredcohortlist">
                                       <td class="active text-center ">
                                         <strong class="fs18">{{ elem.z }}</strong>
                                       </td>
                                       <td ng-repeat=" code in elem.a" ng-style="$index>0 && {'background-color': 'rgba(65,165,126,'+code.y/filteredcohortlist[0].a[1].y*.8+')'} || {'background-color': 'rgb(230,230,230)','border-bottom': '1px solid #fff'}">
-                                        <div ng-if = "$index == 0" class="wtxt"> 
+                                        <div ng-if = "$index == 0" class="wtxt">
                                             {{ code.y }}
                                         </div>
-                                        <div ng-if = "$index > 0" > 
+                                        <div ng-if = "$index > 0" >
                                             {{ code.y }}%
-                                        </div>  
+                                        </div>
                                       </td>
                                     </tr>
                                   </tbody>
                             </table>
-                           
-
                         </div>
-                        
                          <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
-                        
                     </div>
-                 
+
             </div>
         </div>
-    </div> 
+    </div>
 </div>
 </div>
 </div>

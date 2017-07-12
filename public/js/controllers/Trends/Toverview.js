@@ -1,13 +1,13 @@
-/*  Controller for Trends Overview Page 
-    Function Names matches the section headings of the dashboard which they effect 
+/*  Controller for Trends Overview Page
+    Function Names matches the section headings of the dashboard which they effect
 */
 
 var trends = angular.module('Controllers')
 trends.controller('ToverviewCtrl',['$scope','$rootScope','$q','JettyService','UtilitiesService','JSONService',function($scope, $rootScope, $q, JettyService, UtilitiesService, JSONService) {
-    
+
     /* global variables which we use inside functions */
     var today =  new Date();
-    var currentdate = new Date(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate()); 
+    var currentdate = new Date(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate());
     var app = $rootScope.app.app_secret;
     var timeZone = "IST";
      /*  if the user uses the date picker and changes the date, inner function gets called
@@ -35,7 +35,7 @@ trends.controller('ToverviewCtrl',['$scope','$rootScope','$q','JettyService','Ut
 
     var AvgSessionLength = function() {
         JettyService.cummulative('S',app,$scope.endGap,$scope.noDays,2,"string",timeZone).then(function(data) {
-                $scope.avg_session_length = UtilitiesService.convertToMinutes((parseFloat((data.x).split('__')[1])/1000).toFixed(0));
+                $scope.avg_session_length = Math.abs(parseInt(UtilitiesService.convertToMinutes((parseFloat((data.x).split('__')[1])/1000).toFixed(0))));
         });
     };
 
@@ -70,7 +70,7 @@ trends.controller('ToverviewCtrl',['$scope','$rootScope','$q','JettyService','Ut
             UtilitiesService.draw_chart(line(data,trends_overview_newusers_trend_line_style),'Line.swf','newusers','100%','353');
         });
     };
-    
+
     var ActiveUsersTrend = function() {
         JettyService.granwise('AU',app,$scope.endGap,$scope.noDays,2,2,"hll",timeZone).then(function(data) {
             UtilitiesService.draw_chart(line(data,trends_overview_activeusers_trend_multiline_style),'Line.swf','activeusers','100%','353');
@@ -94,11 +94,11 @@ trends.controller('ToverviewCtrl',['$scope','$rootScope','$q','JettyService','Ut
             $scope.maxSize_tab1 = 5;
             for(i=0; i<data.length; i++) {
                 var codeWise = []
-                for(j=0; j<=10; j++) 
+                for(j=0; j<=10; j++)
                     codeWise = codeWise.concat({"x":j,"y":0})
                 data[i].a = JSON.parse(data[i].a);
                 var map = {};
-                for(j=0; j<data[i].a.length; j++) 
+                for(j=0; j<data[i].a.length; j++)
                     map[data[i].a[j].x]=data[i].a[j].y
                 for(j=0; j<codeWise.length; j++) {
                     if(map[codeWise[j].x])
@@ -120,13 +120,12 @@ trends.controller('ToverviewCtrl',['$scope','$rootScope','$q','JettyService','Ut
                         var begin = (($scope.currentPage_tab1 - 1) * $scope.itemsPerPage),
                         end = begin + $scope.itemsPerPage;
                         $scope.filteredcohortlist =  data.slice(begin, end);
-                        
-
+                        console.log('[+] Cohort: ToverviewCtrlJs [+]');
                     });
            // $scope.cohort = data;
         });
     };
-    
+
     var run = function() {
         AvgSessionLength();
         NewAndReturningUsers();

@@ -1,0 +1,29 @@
+<!--
+Push msg html is for right side push msgs view
+-->
+<md-toast>
+    <div class="md-toast-content" ng-style="{'background-color':toastSkin.bgcolor,'height':toastSkin.height}">
+        
+        <div class="icon" ng-if="toastSkin.lefticon && !toastSkin.svg">
+            <i class="material-icons" ng-style="{'color':toastSkin.lefticoncolor}">{{toastSkin.lefticon}}</i>
+        </div>
+        
+        <div class="svgicon" ng-if="toastSkin.svg">
+            <md-icon ng-style="{color:toastSkin.lefticoncolor}" md-svg-src="{{toastSkin.svg}}"></md-icon>
+        </div>
+        
+        <div layout="column">
+            <span class="md-toast-text" ng-if="toastSkin.heading" ng-style="{'color':toastSkin.headingcolor}">
+                {{toastSkin.heading}}
+            </span>
+            <span class="md-toast-text" ng-if="toastSkin.subheading" ng-style="{'color':toastSkin.subheadingcolor,'font-size':10}">
+                {{toastSkin.subheading}}
+            </span>
+        </div>
+       <!-- <md-button ng-click="closeToast()"> </md-button>-->
+        
+        <div class="icon" ng-if="toastSkin.righticon" >
+            <i class="material-icons" ng-style="{'color':toastSkin.righticoncolor}">{{toastSkin.righticon}}</i>  
+        </div>
+    </div>
+</md-toast>

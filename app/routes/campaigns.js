@@ -38,7 +38,8 @@ module.exports = function(app) {
         var campaign = req.body;
         console.log(campaign)
          var request = require('request');
-             request.del({url: "http://pushapi.rocq.io/push", 
+             //request.del({url: "http://pushapi.rocq.io/push", 
+              request.del({url: "http://pushapi.rocq.io/push", 
              qs: {app_secret:campaign.app_secret ,
                             ref: campaign.ref}},
             function(error, response, body){

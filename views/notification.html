@@ -1,0 +1,13 @@
+<!--
+Push msg html is for right side push msgs view
+-->
+
+<script>
+alert("toast working");
+</script>
+<md-toast>   
+    My toast
+    <span class="md-toast-text" flex>{{user-email}}</span>
+    <md-button class="md-highlight" ng-click="openMoreInfo($event)">More info</md-button>
+    <md-button ng-click="closeToast()"> Close </md-button>
+</md-toast>

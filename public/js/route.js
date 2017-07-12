@@ -5,6 +5,7 @@
           enabled: true,
           requireBase: false
         });
+
         var loginRequired = ['$location','$q','$rootScope','localStorageService',function($location, $q, $rootScope,localStorageService) { 
             var deferred = $q.defer();
             if(Date.now()-localStorageService.get('age') >   21600000)
@@ -78,6 +79,10 @@
              .when('/verified',{
                 templateUrl : 'partials/activationsuccessful.html'
             })
+            .when('/notification',{
+               controller:'ToastCtrl',
+               templateUrl: 'partials/notification.html'
+            })
             .otherwise({
                 redirectTo: '/login'
             })
@@ -129,8 +134,6 @@
           if ($('body').hasClass('cbp-spmenu-push-toright')) {
             $('#cbp-spmenu-s1').addClass('cbp-spmenu-open')
           };
-          
-				 
 
           });
 
@@ -189,7 +192,7 @@
         });
 
 
-        angular.module('Directives',[]).directive('focusOnShow', function($timeout) {
+      angular.module('Directives',[]).directive('focusOnShow', function($timeout) {
       return {
           restrict: 'A',
           link: function($scope, $element, $attr) {
@@ -218,7 +221,7 @@
 
 
 // used in push configuration page
-        angular.module('Directives',[]).directive('file', function(){
+angular.module('Directives',[]).directive('file', function(){
               return {
                   scope: {
                       file: '='
@@ -238,11 +241,5 @@
   return function(arr, start, end) {
     return (arr || []).slice(start, end);
   };
-});
-
-
-
-      
+}); 
 })();
-
-

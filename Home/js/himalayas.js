@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
     stickyNav();
 
     jQuery(window).scroll(function() {
-        stickyNav();
++            stickyNav();  
     });
 
 

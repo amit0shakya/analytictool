@@ -1,0 +1,50 @@
+<!Doctype html>
+<html>
+    <script>
+    
+    </script>
+    
+    <style>
+        .testdiv{
+            width: 90px;
+            height: 60px;
+            border: 1px solid #000;
+            position: absolute;
+            text-align: center;
+            line-height: 60px;
+            left:0px;
+            box-sizing: border-box;
+        }
+        
+        #wrapper{
+            width:100%;
+            height: 700px;
+            position: relative;
+        }
+        
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    
+    <script>
+        function makeDivs(){
+            var xp=10;
+            for(var i=0;i<10;i++){
+                
+                var newDiv= document.createElement('div');
+                    newDiv.className='testdiv';
+                    newDiv.innerHTML = 'test data'+i;
+                    newDiv.style.left=xp+'px'
+                    document.getElementById('wrapper').appendChild(newDiv); 
+                    xp+=95;
+            }
+        }
+    </script>
+<body onload="makeDivs()">
+    <div id="wrapper">
+     
+    </div>
+</body>
+</html>

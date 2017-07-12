@@ -1,0 +1,109 @@
+.scrollpane { width: 250px; height: 260px; overflow: auto; background: #fff; font: 14px/1.231 serif; border: 1px solid #b7b7b7; padding: 5px; }
+.scrollpane p { margin: 20px 0; }
+.scrollpane p:first-child { margin-top: 0; }
+
+.scroll-up1, .scroll-down1 { width: 17px; height: 17px; _line-height: 17px; }
+
+.scroll-up1 { background: url(../images/xp-vert-btns.png) no-repeat; }
+
+.scroll-up1:hover { background-position: -17px 0; }
+
+.scroll-down1 { background: url(../images/xp-vert-btns.png) no-repeat 0 -17px; }
+
+.scroll-down1:hover { background-position: -17px -17px; }
+
+.track1 { width: 16px; background: #f7f7f3; border-left: 1px solid #f2f0ea; }
+
+.handle1 { width: 17px; margin-left: -1px; background: url(../images/xp-vert-handle.png) no-repeat 0 center; }
+
+.handle1:hover { background-position: -17px center; }
+
+.handle1 .top, .handle1 .bottom { position: absolute; left: 0; width: 17px; height: 10px; background: url(../images/xp-vert-handle.png) no-repeat; }
+
+.handle1 .top { top: 0; background-position: 0 0; }
+
+.handle1:hover .top { background-position: -17px 0; }
+
+.handle1 .bottom { bottom: 0; background-position: 0 bottom; }
+
+.handle1:hover .bottom { background-position: -17px bottom; }
+
+#scrollpane2 p { width: 900px; }
+
+.track2-vertical { width: 17px; background: #e4e6e3; border: 1px solid #dfdfdd; }
+
+.handle2-vertical { width: 17px; }
+
+.handle2-vertical .top { width: 17px; height: 17px; background: url(../images/green-vert-scrollbar.png) no-repeat; }
+
+.handle2-vertical .bottom { width: 17px; height: 100%; position: absolute; left: 0; bottom: 0; clip: rect(17px 17px 9999px 0); background: url(../images/green-vert-scrollbar.png) no-repeat 0 bottom; }
+
+.track2-horizontal { width: 100%; height: 17px; background: #e4e6e3; border: 1px solid #dfdfdd; }
+
+.handle2-horizontal { height: 17px; }
+
+.handle2-horizontal .left { width: 17px; height: 17px; background: url(../images/green-horiz-scrollbar.png) no-repeat; }
+
+.handle2-horizontal .right { position: absolute; right: 0; top: 0; width: 100%; height: 17px; clip: rect(0 9999px 17px 17px); background: url(../images/green-horiz-scrollbar.png) no-repeat right 0; }
+
+.corner2 { width: 17px; height: 17px; background: #e4e6e3; border: 1px solid #dfdfdd; }
+
+.track3 { width: 10px; background-color: transparent; margin-right: 2px; -webkit-border-radius: 10px; border-radius: 10px; }
+
+.track3:hover, .track3.dragging { background: #cccccc; background: rgba(0, 0, 0, 0.2); }
+
+.handle3 { width: 7px; background: #8c8c8c; background: rgba(255, 255, 255, 0.8); -webkit-border-radius: 7px; border-radius: 7px; right: 0; -webkit-transition: width 250ms; transition: width 250ms; z-index:9999 !important; }
+
+.track3:hover .handle3, .track3.dragging .handle3 { width: 10px; }
+
+#scrollpane4 { padding-right: 15px; }
+
+.track4 { width: 10px; background-clip: padding-box; background: transparent; border-style: solid; border-color: transparent; border-width: 0; border-left-width: 1px; overflow:hidden; }
+
+.track4.dragging, .track4:hover { background: #f2f2f2; background: rgba(0, 0, 0, 0.05); -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1); box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1); }
+
+.track4:active { background: #f2f2f2; background: rgba(0, 0, 0, 0.05); -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14), inset -1px -1px 0 rgba(0, 0, 0, 0.07); box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14), inset -1px -1px 0 rgba(0, 0, 0, 0.07); }
+
+.handle4 { width: 10px; background: #cccccc; background: rgba(0, 0, 0, 0.2); background-clip: padding-box; -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07); box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.07); }
+
+.handle4:hover { background: #999999; background: rgba(0, 0, 0, 0.4); -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25); box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25); }
+
+.dragging .handle4, .handle4:active { background: gray; background: rgba(0, 0, 0, 0.5); -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35); box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35); }
+
+#try-it-now-section iframe { position: relative; left: -31px; }
+
+footer { position: relative; background: #fff; border: 1px solid #b7b7b7; -webkit-border-radius: 10px; border-radius: 10px; margin: 109px 1px 40px; padding: 20px 10px; text-align: center; line-height: 1.75; }
+footer a { white-space: nowrap; }
+
+#scroll-to-top { display: none; position: absolute; right: 8px; bottom: 8px; }
+
+.overlay { display: none; width: 656px; height: 526px; background: url(../images/white.png) no-repeat; z-index: 1000; }
+.overlay iframe { position: relative; left: 25px; top: 35px; }
+.overlay .close { display: block; position: absolute; right: 3px; top: 3px; width: 36px; height: 36px; background: url(../images/close.png) no-repeat; cursor: pointer; }
+.fix-wdt-select{width: 150px;}
+
+/*hover effect*/
+<<<<<<< HEAD
+.hover_effect{cursor: pointer;}
+=======
+.hover_effect{cursor: pointer; white-space: normal; }
+
+.styled-select{
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 0px 10px ;  /*If you add too much padding here, the options won't show in IE */
+   width: 160px;
+   color: #fff;
+}
+
+.semi-square {
+	/*
+  -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;*/
+   background-color: #38608F;
+   color:#fff;
+}
+>>>>>>> 4fc44ac261ebc6412c7a18d14811c2a71492c1ce

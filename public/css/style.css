@@ -80,4 +80,27 @@ footer a { white-space: nowrap; }
 .overlay { display: none; width: 656px; height: 526px; background: url(../images/white.png) no-repeat; z-index: 1000; }
 .overlay iframe { position: relative; left: 25px; top: 35px; }
 .overlay .close { display: block; position: absolute; right: 3px; top: 3px; width: 36px; height: 36px; background: url(../images/close.png) no-repeat; cursor: pointer; }
+.fix-wdt-select{width: 150px;}
 
+/*hover effect*/
+.hover_effect{cursor: pointer;}
+.hover_effect{cursor: pointer; white-space: normal; }
+
+.styled-select{
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 30px;
+   padding: 0px 10px ;  /*If you add too much padding here, the options won't show in IE */
+   width: 160px;
+   color: #fff;
+}
+
+.semi-square {
+	/*
+  -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;*/
+   background-color: #38608F;
+   color:#fff;
+}

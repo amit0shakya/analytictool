@@ -1,0 +1,194 @@
+<html lang="en" ng-app="MyApp">
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css">
+    <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
+    <link rel="stylesheet" href="./css/style2.css" media="screen" title="no title" charset="utf-8">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+  	<link rel="stylesheet" type="text/css" href="css/default.css" />
+  	<link rel="stylesheet" type="text/css" href="css/sidecomponent.css" />
+  	<link rel="stylesheet" type="text/css" href="css/style.css" />
+  	<link rel="stylesheet" type="text/css" href="css/layout.css" />
+  	<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />
+  	<link rel="stylesheet" type="text/css" href="css/lib/daterangepicker-bs3.css" />
+  	<link rel="stylesheet" type="text/css" href="css/lib/jqcloud.min.css" />
+  	<link rel="stylesheet" type="text/css" href="css/lib/bootstrap-toggle.min.css" />
+  	<link rel="stylesheet" type="text/css" href="css/lib/ng-scrollbar.min.css" />
+  	<link rel="stylesheet" type="text/css" href="css/lib/isteven-multi-select.css"/>
+    <link rel="stylesheet" href="material-css.css" media="screen" title="no title">
+      
+    <!-- Pages Css -->
+    <link rel="stylesheet" href="views/components/filtersnav/filters.css" >
+    <link rel="stylesheet" href="views/components/header/header.css" >
+    <link rel="stylesheet" href="views/components/sidenav/sidenav.css">
+    <link rel="stylesheet" href="views/components/daysnav/daysnav.css">
+    <link rel="stylesheet" href="views/components/cards/cards.css">
+    <!--md datatable -->
+    
+    <link rel="stylesheet" href="css/md-data-table.min.css">
+      
+  </head>
+  <title>Dashboard</title>
+  <body>
+    <div ng-controller="AppCtrl as appCtrl" ng-cloak="" class="toolbardemoBasicUsage">
+      <md-content>
+          
+            <!-- Website Header -->
+            <section ng-include="'/views/components/header/header.html'" ></section>
+
+            <!-- Lightbox, When user Click on searchbar in header then lightbox hide entire body -->
+            <div class="lightbox"></div>
+
+            <!-- Side Navigation -->
+            <section layout="row" flex ng-include="'/views/components/sidenav/sidenav.html'"></section>
+
+            <!-- Filters Sidebar -->
+            <section layout="row" flex class="days-nav" ng-include="'/views/components/filtersnav/filtersnav.html'"></section>
+
+            <!-- Days Nav -->
+            <section layout="row"  layout-margin layout-align="end-center" ng-include="'/views/components/daysnav/daysnav.html'"> </section>
+
+            <!-- Dynamic pages section -->
+            <section flex ng-include="'/views/pages/landingpage.html'"> </section>
+          
+            <!-- Dynamic pages section -->
+            <section flex ng-include="'/views/components/help/help.html'"> </section>
+
+        </md-content>
+    </div>
+    <!-- Angular Material Dependencies -->
+    <script src="js/controllers/MaterialController/Toast.json" type="text/javascript"></script>
+    <script src="js/controllers/MaterialController/Filters.json" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="lib/angular-material/angular-material.js"></script>
+       <script type="text/javascript" src="js/lib/md-data-table.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+      
+    <script type="text/javascript" src="./js/controllers/MaterialController/app.js"></script>
+       <script src="views/components/daysnav/daysnavctrl.js"></script>
+    <script type="text/javascript" src="./js/controllers/MaterialController/notification.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  	<script async src="lib/fusioncharts/fusioncharts.js" type="text/javascript"></script>
+   
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+      
+      <script type="text/javascript">
+       // This is used in ng-csv file.
+  	   // This is required because we are overriding URL in config.js file which is a bad practice
+
+      window.myURL = window.URL || window.webkitURL;
+    </script>
+       <script>
+
+        function buttonClick(){
+            alert("button click alert")
+        }
+
+       $(document).ready(function(){
+           $(".search_box").focusin(function(){
+               $(".lightbox").css({"display":"block"});
+               $(".lightbox").stop().animate({"opacity":1},{"duration":200,function(){
+                    $(".lightbox").addClass('lightboxShow');
+               }});
+           })
+
+           $(".search_box").focusout(function(){
+
+               $(".lightbox").stop().animate({"opacity":0},{"duration":200,function(){
+                    $(".lightbox").removeClass('lightboxShow');
+               }});
+
+               setTimeout(function(){
+                   $(".lightbox").css({"display":"none"});
+               },500)
+           })
+       })
+
+
+       /*
+       var SelectedNav;
+
+       function showSublinks(who){
+
+           if(SelectedNav!=who){
+               $(".menu-toggle-list li ul").each(function(index,obj){
+                   $(obj).css({"display":"none"});
+               });
+           }
+
+           var _this=$(who).find("ul").toggle()//.animate({"height":"toggle"},200);
+           SelectedNav=who
+        }*/
+    </script>
+
+    <script src="js/route.js" type="text/javascript"></script>
+    <script src="js/controllers/Notification/NotificationController.js" type="text/javascript"></script>
+    <script src="js/controllers/Acquisition/Aoverview.js" type="text/javascript"></script>
+    <script src="js/controllers/Doverview.js" type="text/javascript"></script>
+  	<script src="js/controllers/Trends/Toverview.js" type="text/javascript"></script>
+  	<script src="js/controllers/Trends/newusers.js" type="text/javascript"></script>
+  	<script src="js/controllers/Trends/sessions.js" type="text/javascript"></script>
+  	<script src="js/controllers/Trends/cohort.js" type="text/javascript"></script>
+  	<script src="js/controllers/Acquisition/installs.js" type="text/javascript"></script>
+  	<script src="js/controllers/Acquisition/uninstalls.js" type="text/javascript"></script>
+  	<script src="js/controllers/OverallAnalysis/OAoverview.js" type="text/javascript"></script>
+  	<script src="js/controllers/OverallAnalysis/device.js" type="text/javascript"></script>
+  	<script src="js/controllers/OverallAnalysis/network.js" type="text/javascript"></script>
+  	<script src="js/controllers/OverallAnalysis/location.js" type="text/javascript"></script>
+  	<script src="js/controllers/PushNotification/pushsend.js" type="text/javascript"></script>
+  	<script src="js/controllers/PushNotification/push-segmentation.js" type="text/javascript"></script>
+  	<script src="js/controllers/PushNotification/push-report.js" type="text/javascript"></script>
+  	<script src="js/controllers/PushNotification/push-detail.js" type="text/javascript"></script>
+  	<script src="js/controllers/QualityOfUsers/revenue.js" type="text/javascript"></script>
+  	<script src="js/controllers/UserEngagement/events.js" type="text/javascript"></script>
+  	<script src="js/controllers/UserEngagement/screenflow.js" type="text/javascript"></script>
+  	<script src="js/controllers/CampaignTrack/campaign-tracker.js" type="text/javascript"></script>
+  	<script src="js/controllers/CampaignTrack/campaign-report.js" type="text/javascript"></script>
+  	<script src="js/controllers/password-forgot.js" type="text/javascript"></script>
+  	<script src="js/controllers/Conf/pushconf.js" type="text/javascript"></script>
+  	<script src="js/controllers/authentication.js" type="text/javascript"></script>
+    <script src="js/controllers/applications.js" type="text/javascript"></script>
+  	<script src="js/controllers/date.js" type="text/javascript"></script>
+  	<script src="js/services/authentication.js" type="text/javascript"></script>
+  	<script src="js/services/jetty.js" type="text/javascript"></script>
+  	<script src="js/services/utilities.js" type="text/javascript"></script>
+  	<script src="js/services/json.js" type="text/javascript"></script>
+  	<script src="js/globalvar/charts.js" type="text/javascript"></script>
+  	<script src="js/globalvar/config.js" type="text/javascript"></script>
+    <script src="js/extra/enscroll.min.js" type="text/javascript"></script>
+    <script src="js/extra/classie.js" type="text/javascript"></script>
+  	<script src="js/extra/aside.js" type="text/javascript"></script>
+    <script src="js/lib/1moment.min.js" type="text/javascript"></script>
+  	<script src="js/lib/bootstrap-daterangepicker.js" type="text/javascript"></script>
+  	<script src="js/lib/angular-daterangepicker.js" type="text/javascript"></script>
+  	<script src="js/lib/jqcloud.min.js" type="text/javascript"></script>
+  	<script src="js/lib/angular-jqcloud.js" type="text/javascript"></script>
+  	<script src="js/lib/ng-csv.js" type="text/javascript"></script>
+    <script src="js/lib/isteven-multi-select.js" type="text/javascript"></script>
+    <script src="js/lib/angular-qrcode.js"></script>
+    <script src="js/lib/qrcode.js"></script>
+    <script src="js/lib/angular-local-storage.min.js" type="text/javascript"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.min.js" type="text/javascript"></script>
+   	<script src="js/lib/underscore-min.js" type="text/javascript"></script>
+  	<script src="js/lib/validator.js"></script>
+  	<script src="js/lib/ng-scrollbar.min.js"></script>
+  	<script src="js/lib/dirPagination.js"></script>
+
+    <!-- Controllers -->
+      <script src="js/lib/dirPagination.js"></script>
+      
+
+
+  </body>
+</html>

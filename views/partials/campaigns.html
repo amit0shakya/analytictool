@@ -10,7 +10,7 @@
 </div>
 </div>
  <div class="pull-right fourth-nav">
-			<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
+<input date-range-picker class="form-control date-picker" type="text" ng-model="daterange.date" />
 			<span class="glyphicon glyphicon-calendar calendar-icon"></span>
 		</div>
 </div>
@@ -18,8 +18,10 @@
 <div class="body-content">
 
 <!-- <qrcode data="string"></qrcode> -->
+
 <div class="panel">
 <div class="panel-body no-padding">
+
 <!-- <a class="preview-black" id="showcminfo" href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> -->
 
 <div class="form form-cminfo" ng-show="appurl.showeditor">
@@ -102,12 +104,11 @@ $('.haveurlform').css("display", "none");
 <button ng-hide="listIsEmpty" type="button"  class="btn btn-active no-radius "  id="showcmform1" >+ New </button>
 </div>
 
-<h2 class="tp10">campaign</h2>
+<h2 class="tp10">Campaign</h2>
 
 </div>
 
 <div ng-show="listIsEmpty" class="default-message">
-	
 
 <p>Create a new campaign</p>
 <button type="button"  class="btn btn-active no-radius btn-lg"  id="showcmform2" >+ ADD </button>
@@ -120,8 +121,16 @@ $('.haveurlform').css("display", "none");
 <p class="text-center"><img src="images/ajax-loader.gif"></p>
 </li>
 
-<li  class="media border-top " ng-show="table2loaded" ng-repeat="campaign in filteredcampaignslist" id="{{ 'listitem' + $index }}">
-<div class="pull-right mr20"><span ng-hide="app.accesstype=='Viewer'" class="fs11 more">&nbsp; <a ng-click="deleteCampaign(campaign.o,campaign.ds,$index)" ><span class="glyphicon glyphicon-trash"></span></a></span></div>
+<li  class="media border-top " ng-show="table2loaded" ng-repeat="campaign in filteredcampaignslist" 
+id="{{ 'listitem' + $index }}">
+<div class="pull-right mr20">
+<span ng-hide="app.accesstype=='Viewer'" class="fs11 more"> &nbsp; 
+<a ng-click="deleteCampaign(campaign.o,campaign.ds,$index)" >
+<span class="glyphicon glyphicon-trash">
+  
+</span></a></span>
+
+</div>
 <div class="media-body">
 <h3 class="media-heading">{{campaign.do}}</h3>
 <p class="dvc fs12"><span  ng-hide="showqr"><a ng-href = "{{campaign.dv}}" target="_blank">{{campaign.dv}}</a></span> </p>
@@ -413,11 +422,12 @@ Success!
 <thead>
 <tr>
 <th width="6%">S.N.</th>
-<th width="25%">campaign Name</th>
-<th width="25%">Publisher Name</th>
+<th width="22%">Campaign Name</th>
+<th width="22%">Publisher Name</th>
 <th width="16%">Click</th>
-<th width="22%">Installs</th>
-<th width="22%">Click Rate</th>
+<th width="20%">Postback Failure</th>
+<th width="20%">Installs</th>
+<th width="20%">Click Rate</th>
 </tr>
 </thead>
 <tbody>
@@ -431,6 +441,7 @@ Success!
 <td>{{item.do}}</td>
 <td>{{item.dp}}</td>
 <td>{{item.dt}}</td>
+<td>{{item.dpbf}}</td>
 <td>{{item.du}}</td>
 <td>{{item.rate||'-'}}</td>
 </tr>
@@ -460,8 +471,9 @@ Success!
 </table>
 </div>
 </div>
-
+<!--
 <pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="totalItems_tab1" ng-model="currentPage_tab1" max-size="maxSize_tab1" class="pagination-sm pull-right" boundary-links="true"></pagination>
+-->
 </div>
 </div>
 </div>

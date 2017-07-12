@@ -1,0 +1,60 @@
+ <md-toolbar class="md-whiteframe-3dp site-content-toolbar" style="background-color:#fff;">
+          <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false">
+              <i ng-click="toggleLeft()"  class="material-icons" style="color:#000;">menu</i>
+            </md-button>
+            <h2>
+              <span><img style="margin-top:; width:auto; height:35px;" src="./images/logo-rocq.png" alt=""/></span>
+            </h2>
+            <div class="select_app">
+              <md-select ng-model="armor" placeholder="Select Your App" class="md-no-underline" required md-no-asterisk="false">
+                 <md-option value="cloth">Homeshop18 Android</md-option>
+                 <md-option value="leather">Homeshop18 iOs</md-option>
+                 <md-option value="chain">Homeshop18 Testing</md-option>
+                 <md-option value="plate">App to Test</md-option>
+               </md-select>
+            </div>
+            <div class="search_bar md-lightbox">
+                <i class="material-icons search_icon" style="">search</i>
+              <md-autocomplete class="search_box" md-selected-item="selectedItem" md-search-text="searchText" md-items="" md-item-text="">
+                <span md-highlight-text="searchText" class="srh"></span>
+              </md-autocomplete>
+            </div>
+            <span flex=""></span>
+              
+            <md-button class="md-icon-button" aria-label="Notifications">
+              <md-tooltip>Notifications</md-tooltip>
+              <i class="material-icons">notifications</i>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Feedback">
+              <md-tooltip>Feedback</md-tooltip>
+              <i class="material-icons">feedback</i>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Help">
+              <md-tooltip>Help</md-tooltip>
+              <i class="material-icons">help</i>
+            </md-button>
+              
+            <md-button class="md-icon-button" aria-label="Utilities and more">
+              <md-tooltip>Utilities and more</md-tooltip>
+              <i class="material-icons">more_vert</i>
+            </md-button>
+            
+            <div class="usericon">
+                <div style="float:left; width:50px;">
+
+                    <md-button class="md-icon-button" aria-label="Utilities and more">
+                         <i class="material-icons">account_circle</i>   
+                    </md-button>
+                </div>
+                <div class="userprofiledd md-whiteframe-1dp"> 
+                    <ul>
+                        <li><a href="">Edit Profile</a></li>
+                        <li><a href="">Settings</a></li>
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </div>
+            </div>   
+               
+          </div>
+        </md-toolbar> 

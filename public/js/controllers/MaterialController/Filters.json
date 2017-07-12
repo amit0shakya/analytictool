@@ -1,0 +1,25 @@
+var filtersTest=[{
+    "icon":"location_on",
+    "title":"Location"
+  },{
+    "icon":"wc",
+    "title":"Gender"
+  },{
+    "icon":"search",
+    "title":"Filter title"
+  },{
+    "icon":"search",
+    "title":"Filter title"
+  },{
+    "icon":"search",
+    "title":"Filter title"
+  },{
+    "icon":"search",
+    "title":"Filter title"
+  },{
+    "icon":"search",
+    "title":"Filter title"
+  },{
+    "icon":"search",
+    "title":"Filter title"
+  }];

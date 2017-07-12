@@ -1530,7 +1530,7 @@ Start to fill form below
         <th ng-show="app.ostype=='Android'">Success</th>
         <th ng-show="app.ostype=='iOS'">Failure</th>
         <th ng-if="showthis">Received</th>
-       <!-- <th >Opened</th>  -->
+        <th >Opened</th>  
         <th>Status</th>
         <th>Message Type</th>
         <th>Re-Send</th>
@@ -1550,13 +1550,10 @@ Start to fill form below
         <td ng-show="elem.PushReqTimestamp=='Multiple Dates'" ng-click="$root.push.selected_campaign=elem.src;getcampaigns()" style="cursor:pointer; font-weight:bold;"  class="btext  "> {{ elem.src}}</td>
         <td  class="fs11">{{ elem.date}}</td>
         <td ><strong>{{ elem.cpc}}</strong> <span class="graytext fs12 pl10">{{ elem.ic || ""}}</span></td>
-        <td ng-show="app.ostype=='Android'"><div class="text-center">{{elem.successdata}}</div></td>
+        <td ng-show="app.ostype=='Android'"><div class="text-center">{{elem.sc}}</div></td>
         <td  ng-show="app.ostype=='iOS'"><div class="text-center">{{ elem.fc}}</div></td>
-
-        <!--<td><div class="text-center">{{ elem.coc}}BB</div></td>  Open row data is hide  -->
         <td ng-if="showthis"><div class="text-center">{{ elem.csc}}</div></td>
-
-
+        <td><div class="text-center">{{ elem.coc}}BB</div></td><!--  Open row data is hide  -->
         <td><span class="label fs12" ng-class="{'completed':'label-success','running':'label-info','pending':'label-info','queued':'label-warning','scheduled':'label-primary','Deleted':'label-danger'}[elem.status]">{{elem.status}}</span> <span class="fs11 bltext" ng-show="elem.crt">{{ elem.csf}}</span></td>
         <td class="fs11">{{ elem.mt}} </td>
         <td><a  href="" ng-show="elem.status"  ng-click="reschedule(elem.ref)" class="fs12"><i class="fa fa-send"></i> Resend</a>&nbsp;&nbsp;&nbsp;&nbsp;<a ng-show="elem.csf=='scheduled'" href=""  ng-click="deleteScheduled(elem.ref,$index)" class="fs12"><span class="glyphicon glyphicon-trash"></span></a></td>

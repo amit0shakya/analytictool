@@ -1,0 +1,119 @@
+.md-sidenav-left{
+    max-width: 260px;
+    position: fixed;
+    overflow-y: hidden;
+    background-color:#fff;
+}
+
+.md-sidenav-left .md-toolbar-tools  {
+    min-height: 65px;
+}
+
+.sideNav{
+   overflow-y: auto;
+}
+
+.left-slidenav{
+    background-color:#fff; position:fixed;
+ }
+
+.height-auto{
+    height:auto;
+ }
+
+.height-0{
+    height:0px;
+}
+
+.margin-0{
+    margin:0px;
+ }
+
+.padding-0{
+    padding:0px;
+ }
+
+.anim{
+    -webkit-transition:.5s linear all;
+    -moz-transition:.5s linear all;
+    -ms-transition:.5s linear all;
+    -o-transition:.5s linear all;
+    transition:.5s all ease;
+    overflow: hidden;
+}
+
+.selectedNavbg{background-color:#f2f2f2;}
+.selectedTabbg{background-color:#bdc1cc;}
+.normalNavbg,normalTabbg {background-color: transparent;}
+
+.navbtn{height: 35px; text-align: left; margin:0px; padding: 0px;}
+
+/*SIDE NAV*/
+.sideNav ul li{
+    margin: 0px; color: #666;   
+    -webkit-transition:.1s linear all; 
+    -moz-transition:.1s linear all; 
+    -ms-transition:.1s linear all;
+    -o-transition:.1s linear all; 
+    transition:.5s linear all;
+}
+
+.arrup{
+    -webkit-transition:.5s linear all;
+    -moz-transition:.5s linear all;
+    -ms-transition:.5s linear all;
+    -o-transition:.5s linear all;
+    transition:.5s all ease;
+    
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+}
+
+.arrdn{
+    -webkit-transition:.5s linear all;
+    -moz-transition:.5s linear all;
+    -ms-transition:.5s linear all;
+    -o-transition:.5s linear all;
+    transition:.5s all ease;
+    
+
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+}
+
+.sideNav ul li:first-child{margin: 20px 0px 0px 0px; color: #666; }
+
+.sideNav .md-button{font-weight: normal;  text-transform:capitalize; font-weight: normal; padding:0px; height: 50px; padding-right: 15px;}
+
+.sideNav ul li:hover>.md-button{font-weight: normal;  text-transform:capitalize; font-weight: normal; padding:0px; height: 50px; padding-right: 15px; background-color: #bdc1cc; color:#fff}
+
+.sideNav .md-button i{ color:#666; font-weight: normal;}
+.sideNav ul li:hover>.md-button i{ color:#fff; font-weight: normal;}
+
+.subnavli ul li:first-child{margin-top: 0px;}
+.subnavli ul li{height: 40px; border: none;box-sizing: border-box; background-color: transparent;}
+.subnavli ul li:hover{height: 40px;  background-color: #eaeaea;}
+
+.subnavli ul li .md-button{font-size:12px;text-align: left; padding-left: 40px; text-transform:lowercase; color: #666; margin-top: 0px; border: none}
+
+.subnavli ul li .md-button:hover{font-size:12px;text-align: left; padding-left: 40px; text-transform:lowercase; color: #666; margin-top: 0px;  background-color: transparent;}
+
+.navArrow{
+    text-align: right;
+}
+
+.navsubchild{
+    opacity: 1;
+    height: auto;
+}
+
+.navsubchild.ng-hide{
+    height:0;
+    display: block !important;
+}

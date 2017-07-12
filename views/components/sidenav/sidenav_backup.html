@@ -1,0 +1,79 @@
+
+
+<div layout="row sideNav">
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2 sideNav" md-component-id="left" md-whiteframe="4">
+<!-- fix issue here -->
+<md-toolbar class="md-hue-2" class="left-slidenav" style="background-color:#fff; border-bottom:none;">
+  <h2 class="md-toolbar-tools">
+    <span><img src="./images/logo-rocq.png" alt="" /></span>
+  </h2>
+  <md-divider></md-divider>
+</md-toolbar>
+      <div  class="height-auto" class="height-auto">
+        <ul class="menu-toggle-list _md" flex layout="column" role="navigation">
+            
+        <li  ng-repeat="item in menu_item" section='child' class="margin-0 ng-scope md-ink-ripple md-button-toggle" 
+            ng-click='item.state=!item.state'>
+
+        
+            <div layout-align="row end" >
+                <a class="md-button" type="button" ng-href="#" layout="row" layout-padding class="margin-0" >
+                    <ng-md-icon flex="15"> <i class="material-icons">{{item.icon}}</i> </ng-md-icon>
+                    <div class="md-list-item-text padding-0 text-align-left" flex="85">{{item.title}}</div>
+                </a>
+            </div>
+            
+            
+            <div ng-if='item.state' class="navsubchild" >
+                 <div ng-if='item.state' ng-repeat='subitem in item.sublinks' layout="row"> 
+                     <div class="sideNavchildbtn" flex > {{subitem.title}} </div>
+                </div>
+<!--
+                <ul ng-if="item.sublinks" class="menu-toggle-list">
+                    <li ng-repeat="subitem in item.sublinks"  class="ng-scope md-ink-ripple margin-0">
+                        <menu-link section="page"  layout-align="column end" >
+                            <a class="md-button" ng-class="{'active' : isSelected()}" ng-href="#" ng-click="buttonClick()" layout="row" layout-padding class="margin-0">
+                                <div class="md-list-item-text text-align-left" flex="85" >{{subitem.title}}</div>
+                            </a>
+                        </menu-link>
+                    </li>
+                </ul>
+-->
+            </div>
+            
+            
+           
+            
+            <!--
+                <div ng-if='item.state' class="navsubchild" >
+                    
+                    <div ng-if="item.sublinks" ng-repeat="subitem in item.sublinks" class="sideNavchildbtn">sdfsdf</div>
+                    -->
+                
+                <!-- working sample
+                <li ng-repeat='navchild in navdata' ng-click="togglenav=!togglenav" style="cursor:pointer" style="sidenavli">
+                    {{navchild.title}}
+                    <div class="childcontainer childlist">
+                        <div ng-repeat="c in navchild.child" class="childnav" ng-if='togglenav'>
+                           <div layout-padding>{{navchild.title}}- Child - {{c}}</div>
+                        </div>
+                    </div>
+                </li>-->
+                
+                
+                <!--<div ng-if="item.sublinks" class="menu-toggle-list">
+                    <div ng-repeat="subitem in item.sublinks"  class="ng-scope md-ink-ripple margin-0">
+                        <menu-link section="page"  layout-align="column end" >
+                            <a class="sideNavchildbtn" ng-class="{'active' : isSelected()}" ng-href="#" ng-click="buttonClick()" layout="row" layout-padding class="margin-0">
+                                <div class="md-list-item-text text-align-left" flex="85" >{{subitem.title}}</div>
+                            </a>
+                        </menu-link>
+                    </div>
+                </div>-->
+            
+            
+            </li>
+        </ul>
+</div>
+</md-sidenav>
+</div>

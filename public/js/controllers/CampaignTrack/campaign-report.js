@@ -29,49 +29,117 @@ campaignreport.controller('CampaignReportCtrl',['$scope','$rootScope','$q','$htt
 
       $scope.listCampaignStats = function() {
           $http.post('/listTrackerStats', {o:$rootScope.app.app_secret,endGap:$scope.endGap,noDays:$scope.noDays}).success(function(response) {
-               $scope.table1loaded=true;
-              $scope.campaign_loading='false'
+            
+              $scope.table1loaded=true;
+              $scope.campaign_loading='false';
+
               for (var i = 0; i < response.length; i++) {
                 if (response[i].dt==0) {
                   response[i].rate='0 %';
-                }
-                else{
+                }else{
                   response[i].rate=(response[i].du/response[i].dt*100).toFixed(1)+' %'
-                }
+                };
               };
+
               $scope.campaignliststats=response.reverse();
+
               for (var i = 0; i < $scope.campaignliststats.length; i++) {
                 $scope.campaignliststats[i].x=$scope.campaignliststats[i].do
                 $scope.campaignliststats[i].events=JSON.parse($scope.campaignliststats[i].eventCmpgnDetails || '[]');
+                
                 if (i==0) {
                   $scope.campaignliststats[i].ticked=true;
                 };
+
+                if($scope.campaignliststats[i]=="Social Campaign") {
+                   $scope.campaignliststats[i]="SL Social Campaign";
+                 };
               };
 
               $scope.noOfCampaigns=$scope.campaignliststats.length;
               $scope.noOfActiveCampaigns=$scope.campaignliststats.filter(function(a){ return a.status=='active'}).length;
               $scope.publishers={};
+
               $scope.campaignliststats.forEach(function(a){ 
                 $scope.publishers[a.dp]=($scope.publishers[a.dp]||0)+a.du;
               })
+
               $scope.noOfPublishers=Object.keys($scope.publishers).length
               $scope.noOfInstalls=$scope.campaignliststats.map(function(a){ return a.du}).reduce(function(a,b){ return a+b},0)
-              $scope.topPublishers=Object.keys($scope.publishers)
-              .map(function(name){ return {x:name,y:$scope.publishers[name]}})
-              .sort(function(a,b){ return b.y-a.y})
 
-              $scope.itemsPerPage = 10
-          $scope.currentPage_tab1 = 1;
-          $scope.maxSize_tab1 = 5;
-          $scope.totalItems_tab1 = $scope.campaignliststats.length;
-          $scope.$watch('currentPage_tab1 + itemsPerPage', function() {
-              var begin = (($scope.currentPage_tab1 - 1) * $scope.itemsPerPage),
-              end = begin + $scope.itemsPerPage;
-              $scope.filteredcampaignsliststats =  $scope.campaignliststats.slice(begin, end);
-         
- 
+              $scope.topPublishers=Object.keys($scope.publishers).map(function(name){
+              
+              var nm;
 
-                            
+                if(name=="Social Campaign") {
+                   nm="SL Social Campaign";
+                 }else{
+                    nm=name;
+                 }
+
+              return {x:nm,y:$scope.publishers[name]}}).sort(function(a,b){ return b.y-a.y});
+
+              $scope.itemsPerPage = $scope.campaignliststats.length;//20
+              $scope.currentPage_tab1 = 1;
+              $scope.maxSize_tab1 = 5;
+              $scope.totalItems_tab1 = $scope.campaignliststats.length;
+              $scope.$watch('currentPage_tab1 + itemsPerPage', function() {
+
+              var begin = (($scope.currentPage_tab1 - 1) * $scope.itemsPerPage), end = begin + $scope.itemsPerPage;
+
+              if($rootScope.app.app_secret=="5ae8aebd7c" || $rootScope.app.app_secret=="784b8c2995"){
+
+              var campaignData=$scope.campaignliststats.slice(begin, end);   
+
+              var removeCampaign=["sm FB campaign","sm fb campaign","FHM India DishTv","Digidesk - registration campaign","Digidesk Installs","Digidesk installs 2","FHMIndia registration mXpresso","Campaign 1","Campaign 2"];
+              
+              var lgt=parseInt($scope.campaignliststats.length);
+
+              var campaignOutput=[];
+
+               for(var i=0;i<lgt; i++){
+
+                var campaignName=campaignData[i].do+"";
+
+                 if((campaignName=="Social Campaign") && (campaignData[i].dp=="Social Campaign")){
+                  campaignData[i].do = "SL Social Campaign";
+                  campaignData[i].dp = "SL";
+                 }//else{
+                  /*
+                   if(((campaignName=="sm fb campaign") || (campaignName=="sm FB campaign")) && (campaignData[i].dp == "fb")){
+                     campaignData[i].do = "Social Campaign";
+                     campaignData[i].dp = "Social Media";
+                   }else{*/
+                    var showdata=true;
+
+                    for(var j=0;j<removeCampaign.length;j++){
+                      var rc=removeCampaign[j]+"";
+                      if(campaignName==rc){
+                        //console.log("remove>>"+rc);
+                        //campaignData.splice(i,1);
+                        //lgt = parseInt(campaignData.length);
+                         //i--;
+                         showdata=false;
+                         break;
+                      }
+                     }
+
+                     if(showdata){
+                       campaignOutput.push(campaignData[i]);
+                     }
+
+                   //}
+                 }
+                //}
+    
+                console.log("IF// CAMPAIGN REPORT")
+                 $scope.filteredcampaignsliststats =  campaignOutput;//campaignData;
+                }else{
+
+                console.log("ELSE// CAMPAIGN REPORT")
+                  
+                   $scope.filteredcampaignsliststats =  $scope.campaignliststats.slice(begin, end);
+                }
       });
       
 
@@ -180,7 +248,7 @@ campaignreport.controller('CampaignReportCtrl',['$scope','$rootScope','$q','$htt
 
        var run = function(){
           $scope.listCampaignStats();
-           $scope.dateWiseCampgnReport();
+           //$scope.dateWiseCampgnReport();
        }
 
 

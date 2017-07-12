@@ -126,12 +126,16 @@ dashboard.controller('DoverviewCtrl',['$scope','$rootScope','$q','JettyService',
     var AvgSessionLength = function() {
         JettyService.cummulative('S',app,$scope.endGap,$scope.noDays,2,"string",timeZone).then(function(data) {
                 temp = (parseFloat((data.x).split('__')[1])/3600000) ;
+                /*
                 if (temp<0 && $rootScope.user.username!='hello@rocq.io') {
+
+                    */
+                if(temp<0){
                     temp=-temp;
                 };
-                $scope.avg_session_length_hours = (parseInt(temp));
-                $scope.avg_session_length_minutes = (parseInt((temp - $scope.avg_session_length_hours)*60));
-                $scope.avg_session_length_seconds = (parseInt(((temp - $scope.avg_session_length_hours)*60 - $scope.avg_session_length_minutes)*60));
+                $scope.avg_session_length_hours = parseInt(temp);
+                $scope.avg_session_length_minutes = parseInt((temp - $scope.avg_session_length_hours)*60);
+                $scope.avg_session_length_seconds = parseInt(((temp - $scope.avg_session_length_hours)*60 - $scope.avg_session_length_minutes)*60);
         });
     };
 

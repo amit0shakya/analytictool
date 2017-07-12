@@ -2,6 +2,8 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
+<meta name="keywords" content="app installs,app analytics,app analysis,Real time Analytical Tools,app statistics,app data, monitor,push notification,analytics applications,App Metrics,Uninstall Tracking,In app messaging,App Stats,Mobile App Analytics,Tracking  app Metrics,App monitoring tool,App usage monitoring,App data monitoring,Analytics Statistics,App Performance Tool,Analytics Tracking,Application Management tool,Monitoring App Usage,App Metrics mobile,In-app Analytics,Mobile app tracking,App engagement Metrics,App usage Metrics,Application Metrics,Application Management,Analytics Metrics,Mobile application analytics,mobile analytics,app insights,android app analytics,iOS app analytics,analytics for mobile app,app install tracking,app traffic analytics,app conversion tracking,app kpi,bigdata,bigdata mobile analytics,app management,track app installs">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <title>rocQ</title>
@@ -39,7 +41,6 @@
                     },900)
                     
                    $(".fixed-aside-nav").animate({"right":"-80px","opacity":"0"})
-                    
           }
            
            
@@ -68,29 +69,37 @@
           
           
 $(window).resize(function(e){
-          $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
-           $(".form-div").css({"top":(($(window).height()-500)/2)+"px"})
+    formposition();
 })
 </script>
+
+
           
 <script type="text/javascript">
+
+  function formposition(){
+      $(".form-lightbox,.lightboxbg").css({"height":$(window).height()+"px"});
+      $(".form-div").css({"top":(($(window).height()-($(".form-div").height()+100))/2)+"px"});
+    }
+
    $(document).ready(function() {
-             
+           
    $(".form-div input, .form-div textarea").focus(function(e){
           $(this).removeClass("showerror");  
    })
              
-             
-$('#form-button-submit').on('click', function(e){
+    formposition();
+
+   $('#form-button-submit').on('click', function(e){
    e.preventDefault();
-          
    
 
    var name = $('input#your-name').val(),
        email = $('input#your-email').val(),
-       subject = $('input#your-subject').val(),
-       message = $('textarea#your-message').val(),
-       formData = 'name=' + name + '&email=' + email + '&subject=' + subject + '&message=' + message;
+       mob=$('#your-tel').val(),
+       //subject = $('input#your-subject').val(),
+       message = $('#your-message').val(),
+       formData = 'name=' + name + '&email=' + email + '&message=' + message+'&mob='+mob;
 
        // Form Validation
         $('#response-messages').removeClass('wpcf7-display-none')
@@ -101,8 +110,7 @@ $('#form-button-submit').on('click', function(e){
          $('#response-messages').html('Please Enter your Name');      
          $("#your-name").addClass("showerror");
          return;
-       }
-       else if (!isEmail(email)) {
+       }else if (!isEmail(email)) {
           if(email.length==0){
            $('#response-messages').html('Please Enter your Email')
           }else{
@@ -111,12 +119,13 @@ $('#form-button-submit').on('click', function(e){
          
           $("#your-email").addClass("showerror");
          return false;
-       }
-       else if (!message) {
+       }else if (!message) {
          $('#response-messages').html('Please Enter your Message')
          return;
-       }
-       else{
+       }else if(mob.length<10){
+          $('#response-messages').html('Please Check your Mobile No');
+          return false;
+       }else{
          $('#response-messages').addClass('wpcf7-display-none')
          $('#response-messages').removeClass('wpcf7-display-block')
          $('#ajax-loader').show()
@@ -150,13 +159,12 @@ $('#form-button-submit').on('click', function(e){
 });
    </script>
           
-          
 </head>
 <body class="home page">
           <div class="form-container">
                     <div class="closebtn">x</div>
 <div class="form-div">
-<div class="form-head"><span>CONTACT</span><span>US</span> </div>
+<div class="form-head"><span class="main-title">CONTACT US</span> </div>
 <form action="/contactus" method="post" class="wpcf7-form" onsubmit="return false;">
 <div style="display: none;">
           <input type="hidden" name="_wpcf7" value="55">
@@ -167,17 +175,19 @@ $('#form-button-submit').on('click', function(e){
 </div>
 <!--<p>Your Name (required)<br>-->
           <span class="wpcf7-form-control-wrap your-name">
-          <input type="text" id="your-name" value="" placeholder="Your Name (required)" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false">
+          <input type="text" id="your-name" value="" placeholder="Your Name" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" 
+          onkeypress='return event.charCode >= 65 && event.charCode <= 122  && event.charCode != 91 && event.charCode != 92 && event.charCode != 93 && event.charCode != 94 && event.charCode != 95 || event.charCode == 32' >
+          </span> 
+</p>
+<!--<p>Your phone (required)<br>-->
+          <span class="wpcf7-form-control-wrap your-tel">
+          <input type="tel" id="your-tel" value="" placeholder="Contact No" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" required maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
           </span> 
 </p>
 <!--<p>Your Email (required)<br>-->
           <span class="wpcf7-form-control-wrap your-email">
-                    <input type="email" id="your-email" placeholder="Your Email (required)" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" required>
-          </span> </p>
-<!--<p>Subject<br>-->
-          <span class="wpcf7-form-control-wrap your-subject">
-                    <input type="text" id="your-subject" value=""  placeholder="Subject" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false">
-          </span> 
+                    <input type="email" id="your-email"  placeholder="Your Email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" required>
+          </span>
 </p>
 <!--<p>Your Message<br>-->
           <span class="wpcf7-form-control-wrap your-message">
@@ -210,18 +220,32 @@ $('#form-button-submit').on('click', function(e){
 
 					<nav id="site-navigation" class="main-navigation" role="navigation">
                     <h4 class="menu-toggle hide"></h4>
-						<div class="menu-primary-container"><ul id="menu-menu" class="menu"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-6"><a href="#home">Home</a></li>
+						<div class="menu-primary-container">
+<ul id="menu-menu" class="menu">
+<li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-6"><a href="#home">Home</a></li>
+
+
 <li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-19"><a href="#features">Features</a></li>
 <li id="menu-item-150" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-150"><a href="https://docs.rocq.io/">Documentation</a></li>
 <!-- <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-7"><a href="#about">About</a></li> -->
 <li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="pricing.html">Pricing</a></li>
 <li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-27"><a href="#blog">blog</a></li>
-<li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-26 contactbtn">
-          <a href="contact.html">contact</a></li>
-<li id="menu-item-219" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-219"><a href="/login">Sign In</a></li>
-</ul></div>					</nav><!-- nav-end --></div> <!-- Menu-search-wrapper end -->
-			</div><!-- tg-container -->
-		</div><!-- header-wrapepr end -->
+
+
+<li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-26 contactbtn"><a href="contact.html">contact</a></li>
+
+<li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-26 contactbtn"><a href="#section-demo">Demo</a></li>
+
+<li id="menu-item-219" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-219">
+<a href="/login">Sign In</a></li>
+
+</ul>
+
+</div>          
+  </nav><!-- nav-end -->
+    </div> <!-- Menu-search-wrapper end -->
+      </div><!-- tg-container -->
+        </div><!-- header-wrapepr end -->
 
 		
    <div id="home" class="slider-wrapper">
@@ -233,7 +257,8 @@ $('#form-button-submit').on('click', function(e){
 
                <figure><img width="1600" height="780" src="home/images/banner-uninstall.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="uninstall" srcset="home/images/banner-uninstall-300x146.jpg 300w,home/images/banner-uninstall-1024x499.jpg 1024w, home/images/banner-uninstall.jpg 1600w" sizes="(max-width: 1600px) 100vw, 1600px"></figure><div class="tg-container">
 
-                                             <h3 class="caption-title">
+
+                <h3 class="caption-title">
                            <span>Discover a clearer picture of uninstalls</span>
                         </h3>
                                              <div class="caption-sub">
@@ -393,7 +418,7 @@ $('#form-button-submit').on('click', function(e){
       </section>
      
      <section id="himalayas_call_to_action_widget-6" class="widget widget_call_to_action_block clearfix" style="margin-bottom:0; padding-bottom:0;">
-      <div class="no-bg-image cta-text-style-2 clearfix" style="background-color:#409ac9; ">
+      <div class="no-bg-image cta-text-style-2 clearfix" style="background-color:#3463a9; ">
          <div class="parallax-overlay"></div>
          <div class="section-wrapper cta-text-section-wrapper">
             <div class="tg-container">
@@ -429,18 +454,46 @@ $('#form-button-submit').on('click', function(e){
                            </div><!-- .tg-container -->
          </div>
       </div>
-   </section><section id="himalayas_our_team_widget-3" class="widget widget_our_team_block clearfix"><div id="about" class="no-bg-image clearfix" style="display: none">
+   
+   </section>
+<!--   SEE WHAT ROCQ STARTS -->
+
+<section id="section-demo" class="widget widget_call_to_action_block clearfix" style="margin-bottom:0; padding-bottom:0;">
+      <div class="no-bg-image cta-text-style-2 clearfix" style="background-color:#3463a9 ; ">
+
+         <div class="parallax-overlay"></div>
+         <div class="section-wrapper cta-text-section-wrapper">
+            <div class="tg-container">
+
+               <div class="cta-text-content">
+                                       <div class="cta-text-title">
+                        <h2>SEE WHAT ROCQ CAN DO FOR YOU</h2>
+                     </div>
+                                       <div class="cta-text-desc">
+                        <p>Let one of our experts take you through the demo so you can see how the product can help you increase your business.</p>
+                     </div>
+
+                     <a class="cta-text-btn" href="http://demo.rocq.io/" title="Schedule Demo" style="font-size: 18px">Schedule Demo Now!</a>
+                           </div>
+         </div>
+      </div>
+      </section>
+<!-- SEE WHAT ROCQ ENDS  -->
+
+   <section id="himalayas_our_team_widget-3" class="widget widget_our_team_block clearfix"><div id="about" class="no-bg-image clearfix" style="display: none">
 
          <div class="parallax-overlay"></div>
          <div class="section-wrapper">
             <div class="tg-container">
 
-               <div class="section-title-wrapper">
-                  <h2 class="main-title">About</h2>                     <h4 class="sub-title">rocQ helps you use data to manage user interaction with your app and build a relationship with your user base. This was you can make better business decisions based on existing data, leading to income production and cost reduction.
-</h4>
-                                 </div>
+                  </div>
 
-                              <div class="team-content-wrapper clearfix">
+                  <div class="section-title-wrapper">
+                  <h2 class="main-title">About</h2>                     
+                  <h4 class="sub-title">rocQ helps you use data to manage user interaction with your app and build a relationship with your user base. This was you can make better business decisions based on existing data, leading to income production and cost reduction.
+                  </h4>
+                  </div>
+                  <div class="team-content-wrapper clearfix">
                   <div class="tg-column-wrapper clearfix">
                      
                         <div class="tg-column-3 tg-column-bottom-margin">
@@ -608,7 +661,7 @@ $('#form-button-submit').on('click', function(e){
 
                   	<div class="tg-column-3">
 		         <aside id="text-2" class="widget widget_text clearfix"><div class="textwidget"><img src="home/images/logo-rocq.png" alt="rocq"><br>
-rocQ is an mobile app analytics and user engagement platform that provides real-time actionable insights to businesses. We help app owners use data to manage user interaction with their apps and build a relationship with their user base. </div>
+rocQ is a mobile app analytics and user engagement platform that provides real-time actionable insights to businesses. We help app owners use data to manage user interaction with their apps and build a relationship with their user base. </div>
 		</aside></div>
 		   
 		            	<div class="tg-column-3">
@@ -629,11 +682,9 @@ rocQ is an mobile app analytics and user engagement platform that provides real-
         </aside></div>
 		   
 		            	<div class="tg-column-3">
-		         <aside id="text-4" class="widget widget_text clearfix"><h4 class="widget-title"><span>Contact</span></h4>			<div class="textwidget">C-802,803 8th Floor,
-Nirvana Courtyard,
-Nirvana Country Sector-50,
-Gurgaon-122001.
-<br><br>
+		         <aside id="text-4" class="widget widget_text clearfix"><h4 class="widget-title"><span>Contact</span>
+             </h4>			
+            <div class="textwidget">B Block, 809, 8th Floor, <br>BPTP Park Centra, Jal Vayu Vihar,<br>Sector 30, Gurgaon, Haryana 122001
 
 <a href="mailto:contact@rocq.io">contact@rocq.io</a></div>
 		</aside></div>
@@ -685,9 +736,6 @@ var wpaft = {"items":"4","single_item":"","slide_speed":"500","pagination_speed"
 </script>
 <script type='text/javascript' src='home/js/client-carousel.js'></script>
 
-</body>
-</html>
-
 
 
 <!-- Google Code for Remarketing Tag -->
@@ -727,3 +775,5 @@ value=0&amp;guid=ON&amp;script=0"/>
   ga('send', 'pageview');
 
 </script>
+</body>
+</html>

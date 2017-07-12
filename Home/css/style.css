@@ -405,7 +405,8 @@ input[type="text"],
 input[type="email"],
 input[type="url"],
 input[type="password"],
-input[type="search"] {
+input[type="search"],
+input[type="tel"] {
     color: #666;
     border: 1px solid #ccc;
     height: 36px;
@@ -418,6 +419,7 @@ input[type="email"]:focus,
 input[type="url"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
+input[type="tel"]:focus,
 textarea:focus {
     border: 1px solid #AAA;
 }
@@ -430,7 +432,8 @@ input[type="text"],
 input[type="email"],
 input[type="url"],
 input[type="password"],
-input[type="search"] {
+input[type="search"],
+input[type="tel"]:focus,{
     padding: 3px 6px;
 }
 
@@ -4158,10 +4161,10 @@ div.wpcf7-response-output {
 
 .form-head{text-align: center;font-family: 'Roboto', sans-serif; font-size: 27px; font-weight: 800; margin-bottom: 20px;}
 .form-head span:first-of-type{width:50%;  padding-right: 8px;}
-.form-head span:last-of-type{width:50%;  color:#ff973e }
+.form-head span:last-of-type{width:50%;  color:#fff }
 
-.form-div input[type="text"],.form-div input[type="email"],.form-div textarea{
-          background-color:transparent; border: 1px solid #4e4d4d; color:#a8a2a2;
+.form-div input[type="text"],.form-div input[type="email"],.form-div input[type="tel"],.form-div textarea{
+          background-color:transparent; border: 1px solid #4e4d4d; color:#fff; padding-left:10px; 
 }
 
 .form-div input[type="submit"]{
@@ -4176,5 +4179,40 @@ div.wpcf7-response-output {
            background-color:transparent; border: 1px solid #a8a2a2; outline:none;
 }
 
+#your-name::-moz-placeholder, #your-tel::-moz-placeholder, #your-email::-moz-placeholder, #your-message::-moz-placeholder,
+#your-name:-moz-placeholder, #your-tel:-moz-placeholder, #your-email:-moz-placeholder, #your-message:-moz-placeholder,
+#your-name::-webkit-input-placeholder, #your-tel::-webkit-input-placeholder, #your-email::-webkit-input-placeholder, #your-message::-webkit-input-placeholder,
+#your-name::-ms-input-placeholder, #your-tel::-ms-input-placeholder, #your-email::-ms-input-placeholder, #your-message::-ms-input-placeholder
+{color:#000 !important;}
+
+
 .princing-contact{width:150px; font-style: 'roboto'; font-weight:600; text-align: center; margin: 0 auto; cursor: pointer; color:#000;}
-.princing-contact:hover{width:150px; font-style: 'roboto'; font-weight:600; text-align: center; margin: 0 auto; cursor: pointer; color:#FF7704;}
+.princing-contact a{width:150px; font-style: 'roboto'; font-weight:600; text-align: center; margin: 0 auto; cursor: pointer; color:#000;}
+
+.princing-contact a:hover{width:150px; font-style: 'roboto'; font-weight:600; text-align: center; margin: 0 auto; cursor: pointer; color:#FF7704;}
+
+.gray{color:#A9A9A9;}
+
+.services-list ul li{border:none; width: 50%; float: left; line-height: 20px; position: relative; padding: 10px 0px 0px 55px; height: 60px;}
+
+.services-list ul li:before{width: 39px; height: 39px; font-family: none; left: 0px; position: absolute; content: "";}
+.services-list ul li:first-child:before{background-image: url('../images/icon-ft-1.png');}
+.services-list ul li:nth-child(2):before{background-image: url('../images/icon-ft-2.png');}
+.services-list ul li:nth-child(3):before{background-image: url('../images/icon-ft-3.png');}
+.services-list ul li:nth-child(4):before{background-image: url('../images/icon-ft-4.png');}
+.services-list ul li:nth-child(5):before{background-image: url('../images/icon-ft-5.png');}
+.
+
+ .demolink{ margin-top: 30px; display: block; cursor: pointer; font-weight: 400; -webkit-transition: color .3s; transition: color .3s; }
+ .demolink:hover{margin-top: 30px; display: block; cursor: pointer; font-weight: 400;}
+
+/* GOOGLE CONVERSION IFRAME ISSUE FIX*/
+
+iframe[name='google_conversion_frame'] { 
+    height: 0 !important;
+    width: 0 !important; 
+    line-height: 0 !important; 
+    font-size: 0 !important;
+    margin-top: -13px;
+    float: left;
+}

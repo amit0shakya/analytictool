@@ -1,14 +1,18 @@
+/**
+ * Updated by Abhishek Kumar Gupta
+ *
+*/
 var jetty = angular.module('Services');
 jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScope,$q) {
-   
-    
-   
+
+    var URL="http://api.rocq.io:8085/";
+
     this.city_code = function(name,value,callback) {
         $http(
         {
             url: URL +'getcode',//'http://148.251.42.156:1729/getcode',
-            method: 'GET', 
-            params: 
+            method: 'GET',
+            params:
             {
                 city: name
             }
@@ -18,23 +22,130 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         });
     };
 
+
+
+
+
     this.state_code = function(name,value,callback) {
         var data = {"andaman and nicobar islands" : "001" , "andhra pradesh" : "002" , "arunachal pradesh" : "003" , "assam" : "004" , "bihar" : "005" , "chandigarh" : "006" , "chhattisgarh" : "007" , "dadra and nagar haveli" : "008" , "daman and diu" : "009" , "delhi" : "010" , "goa" : "011" , "gujarat" : "012" , "haryana" : "013" , "himachal pradesh" : "014" , "jammu and kashmir" : "015" , "jharkhand" : "016" , "karnataka" : "017" , "kerala" : "018" , "lakshadweep" : "019" , "madhya pradesh" : "020" , "maharashtra" : "021" , "manipur" : "022" , "meghalaya" : "023" , "mizoram" : "024" , "nagaland" : "025" , "orissa" : "026" , "pondicherry" : "027" , "punjab" : "028" , "rajasthan" : "029" , "sikkim" : "030" , "tamil nadu" : "031" , "telangana" : "036" , "tripura" : "032" , "uttar pradesh" : "033" , "uttaranchal" : "034" , "west bengal" : "035"};
         var data_point = {"x":{code:data[name], city:name},"y":value};
         callback(data_point)
     };
-   
+
+    // getSources Api Call
+    this.getSources = function(domain,app,endGap,key,noDays,noVar,timeZone,type){
+        var deffered = $q.defer();
+        console.log('[+] JettyService: Get Sources Api Call [+]');
+        $http(
+        {
+            url: URL+'keycummulative',
+            method: 'GET',
+            params:
+            {
+              domain: domain,
+              app: app,
+              endGap: endGap,
+              key:key,
+              noDays: noDays,
+              noVar: noVar,
+              timeZone: timeZone,
+              type: type,
+            }
+        }
+        ).success(function(data) {
+            deffered.resolve(data);
+            console.log(data);
+        }).error(function(){
+            deffered.reject('[-] GetSources:Failed to get the data [-]')
+        });
+
+        return deffered.promise;
+    }
+
+
+
+    this.cohortSourceWise = function(domain,app,endGap,gran,key,noDays,noVar,timeZone,type){
+      console.log('[+] JettyService: cohortSourceWise [+]');
+      console.log('Calling cohort source wise');
+      var deffered = $q.defer();
+      if (app == '3974ba7380') {
+          try {
+               var jsondata = cloneObject(eval(domain + '_granwise'));
+               var dataunit, array = [];
+               var curr_date = new Date();
+               var length =jsondata.length;
+               curr_date = new Date(Number(curr_date) - 86400000 * (endGap+range-1));
+               var date = curr_date.getDate();
+               if(typeof jsondata[0].z == 'string'){ // cohort data
+                        for (var i = date; i < range+date; i++) {
+                             dataunit = {z: "",a: []};
+                             dataunit.z = curr_date.toUTCString().split(" ")[2]+' '+curr_date.getUTCDate();
+                              dataunit.a=jsondata[i%length].a;
+
+                             array.push(dataunit);
+                             curr_date = new Date(Number(curr_date) + 86400000);
+                         }
+                  }else{
+                        for (var i = date; i < range+date; i++) {
+                             dataunit = {x: "",y: ""};
+                             dataunit.x = curr_date.toUTCString().split(" ")[2]+' '+curr_date.getUTCDate();
+                             if(jsondata[0].y.indexOf('__')>=0)
+                                 {
+                                     dataunit.y=modifyNumbers(jsondata[i % length].y.split('__')[0]*range/32)+'__'+modifyNumbers(jsondata[i % length].y.split('__')[1]);
+                                 }
+                             else   // its a number in string format
+                                 {
+                                     dataunit.y = String(modifyNumbers(jsondata[i % length].y));
+                                 }
+                             array.push(dataunit);
+                             curr_date = new Date(Number(curr_date) + 86400000);
+                            }
+                  }
+      //          console.log('var '+domain+'_granwise = '+JSON.stringify(array)+';');
+                 deffered.resolve(array);
+                 return deffered.promise;
+         } catch (err) {
+             console.log(err.message);
+         }
+      }
+      $http(
+      {
+          url: URL+'keygranwise',
+          method: 'GET',
+          params:
+          {
+              app: app,
+              domain: domain,
+              endGap: endGap,
+              gran: gran,
+              key:key,
+              noDays: noDays,
+              noVar: noVar,
+              timeZone: timeZone,
+              type: type
+          }
+      }
+      ).success(function(data) {
+          console.log('changing the data',data);
+          deffered.resolve(data);
+      }).error(function(error){
+          deffered.reject('[-] Cohort Source wise : Failed to get the data [-]');
+      });
+      return deffered.promise;
+    }
 
      this.granwise = function(domain,app,endGap,range,gran,noVar,type,timeZone) {
         var deffered = $q.defer();
+        // what is app == '3974ba7380'
+
           if (app == '3974ba7380') {
         try {
-           var jsondata = cloneObject(eval(domain + '_granwise'));
-           var dataunit, array = [];
-           var curr_date = new Date();
+             var jsondata = cloneObject(eval(domain + '_granwise'));
+             var dataunit, array = [];
+             var curr_date = new Date();
              var length =jsondata.length;
-           curr_date = new Date(Number(curr_date) - 86400000 * (endGap+range-1));
-            var date = curr_date.getDate();
+             curr_date = new Date(Number(curr_date) - 86400000 * (endGap+range-1));
+             var date = curr_date.getDate();
              if(typeof jsondata[0].z == 'string')  // cohort data
                    {
                       for (var i = date; i < range+date; i++) {
@@ -74,8 +185,8 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         $http(
         {
             url: URL+'granwise',
-            method: 'GET', 
-            params: 
+            method: 'GET',
+            params:
             {
                 domain: domain,
                 app: app,
@@ -97,29 +208,29 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
     if (obj === null || typeof obj !== 'object') {
         return obj;
     }
- 
+
     var temp = obj.constructor(); // give temp the original obj's constructor
     for (var key in obj) {
         temp[key] = cloneObject(obj[key]);
     }
- 
+
     return temp;
 }
-    
+
     function modifyNumbers(num) {
         var increasePercentage = 3 + Math.random()*12;
         increasePercentage=0;
         num*=(1+increasePercentage/100);
         return Math.round(num);
     }
-    
+
     this.cummulative = function(domain,app,endGap,range,noVar,type,timeZone) {
         var deffered = $q.defer();
-          
+
             if (app == '3974ba7380') {
         try {
            var jsondata = cloneObject(eval(domain + '_cummulative'));
-            
+
             if(typeof jsondata.x == 'number')
             {
                 jsondata.x=jsondata.x*range;
@@ -145,7 +256,7 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
             }
             else if(typeof jsondata[0].z == 'number')
             {
-             for (var i = 0; i < jsondata.length; i++) 
+             for (var i = 0; i < jsondata.length; i++)
              {
                 jsondata[i].z=jsondata[i].z*range;
                 jsondata[i].z=modifyNumbers((jsondata[i].z/(32+(i*11+endGap+domain.length+(domain.charCodeAt(0)/5))%17)).toFixed(0));
@@ -153,7 +264,7 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
             }
             else if(typeof jsondata[0].y == 'number')
             {
-             for (var i = 0; i < jsondata.length; i++) 
+             for (var i = 0; i < jsondata.length; i++)
              {
                 jsondata[i].y=jsondata[i].y*range;
                 jsondata[i].y=modifyNumbers((jsondata[i].y/(32+(i*11+endGap+domain.length+(domain.charCodeAt(0)/5))%17)).toFixed(0));
@@ -168,12 +279,12 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
             }
             else if(typeof jsondata[0].y == 'string')
             {
-             for (var i = 0; i < jsondata.length; i++) 
+             for (var i = 0; i < jsondata.length; i++)
              {
                  jsondata[i].y=modifyNumbers(jsondata[i].y.split('__')[0]*range/32)+'__'+modifyNumbers(jsondata[i].y.split('__')[1]);
              }
             }
-            
+
     //        console.log('var '+domain+'_cummulative = '+JSON.stringify(jsondata)+';');
            deffered.resolve(jsondata);
            return deffered.promise;
@@ -186,8 +297,8 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         $http(
         {
             url: URL+'cummulative',
-            method: 'GET', 
-            params: 
+            method: 'GET',
+            params:
             {
                 domain: domain,
                 app: app,
@@ -205,12 +316,35 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         return deffered.promise;
     };
 
+    this.cummulativeTest = function(domain,app,endGap,range,noVar,type,timeZone){
+      var deffered = $q.defer();
+      $http(
+      {
+          url: 'http://78.46.40.232:8082/'+'cummulative',
+          method: 'GET',
+          params:
+          {
+              domain: domain,
+              app: app,
+              endGap: endGap,
+              noDays: range,
+              noVar: noVar,
+              type: type,
+              timeZone: timeZone
+          }
+      }).success(function(data) {
+          deffered.resolve(data);
+      }).error(function(data) {
+          deffered.resolve();
+      });
+      return deffered.promise;
+    }
     this.overview = function(domain,app,callback) {
         $http(
         {
             url: URL+'overview',
-            method: 'GET', 
-            params: 
+            method: 'GET',
+            params:
             {
                 domain: domain,
                 app: app
@@ -223,12 +357,14 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         });
     };
 
+
+
     this.keygranwise = function(domain,app,key,endGap,range,gran,noVar,type,timeZone) {
         var deffered = $q.defer();
                   if (app == '3974ba7380') {
-                      
+
         try {
-            
+
             key =  key.replace(/-/g, "");
             key =  key.replace(/ /g, "");
             key =  key.replace(/\./g, "");
@@ -264,8 +400,8 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         $http(
         {
             url: URL+'keygranwise',
-            method: 'GET', 
-            params: 
+            method: 'GET',
+            params:
             {
                 domain: domain,
                 app: app,
@@ -301,7 +437,7 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
             }
            else if(typeof jsondata[0].y == 'number')
             {
-             for (var i = 0; i < jsondata.length; i++) 
+             for (var i = 0; i < jsondata.length; i++)
              {
                 jsondata[i].y=jsondata[i].y*range;
                 jsondata[i].y=modifyNumbers((jsondata[i].y/32).toFixed(0));
@@ -318,8 +454,8 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         $http(
         {
             url: URL+'keycummulative',
-            method: 'GET', 
-            params: 
+            method: 'GET',
+            params:
             {
                 domain: domain,
                 app: app,
@@ -358,8 +494,8 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         $http(
         {
             url: URL+'keycummulativestring',
-            method: 'GET', 
-            params: 
+            method: 'GET',
+            params:
             {
                 domain: domain,
                 app: app,
@@ -393,7 +529,7 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
                 segment: campaigndata.segment,
                 url: campaigndata.url,            // 500
                 ref: campaigndata.campaignkey,
-                src: campaigndata.campaignname,         // 50        
+                src: campaigndata.campaignname,         // 50
                 ciu:campaigndata.image || campaigndata.ImageUrl || undefined,  //500
                 rq_param:campaigndata.keyValuepairs,  //100 8
                 schedule:campaigndata.timestamp,
@@ -415,12 +551,11 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
                 notif_action_radio: campaigndata.landing,
                 button_action_radio: campaigndata.button_action_radio
             });
-        console.log(dt)
 
         $http(
         {
-            url: 'http://static.130.122.76.144.clients.your-server.de:5074/push',
-            //url: 'http://pushapi.rocq.io/push',
+            //url: 'http://static.130.122.76.144.clients.your-server.de:5074/push',
+            url: 'http://pushapi.rocq.io/push',
             method: 'POST',
             headers: { 'Content-Type': 'text/plain; charset=utf-8'},
             data: dt
@@ -468,7 +603,7 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
           if ($rootScope.app.app_secret == '3974ba7380') {
             var data=campaignstats_data;
             deffered.resolve(data);
-            return deffered.promise; 
+            return deffered.promise;
           }
           // if cs is there make sure not to send app_secret
             if (cs) {
@@ -541,14 +676,13 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
             }
             data={x:JSON.stringify(data)}
             deffered.resolve(data);
-            return deffered.promise; 
+            return deffered.promise;
           }
         $http(
         {
             url: URL+'get',
             method: 'GET',
-            params:
-            {
+            params:{
               domain    : domain,
               app       :  $rootScope.app.app_secret,
               index       :  campaignid,
@@ -561,5 +695,4 @@ jetty.service('JettyService',['$http','$rootScope','$q',function($http,$rootScop
         });
         return deffered.promise;
     };
-
 }]);

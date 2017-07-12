@@ -22,7 +22,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 					//Getting Current Installs for each app
 					// for (var i = 0; i < $scope.apps.length; i++) {
 					// 	var app=$scope.apps[i].app_secret;
-					// 	if (app=='3974ba7380') 
+					// 	if (app=='3974ba7380')
 					// 	{$scope.apps[i].CurrentUsers=UtilitiesService.numberFormat(84868);
 					// 	 continue;};
 
@@ -35,9 +35,9 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 					// };
 
 					// Getting Total Downloads for each app
-					
+
 					if ($rootScope.user.username=='hello@rocq.io') {
-					$http({url: URL+'getusers',method: 'GET', params: 
+					$http({url: URL+'getusers',method: 'GET', params:
 					            { domain: 'TotalUsersAdmin',app: "all",index: 0}
 					        }).success(function(data) {
 					        	data.push({"x":"Demo","y":"136735","z":"Android"})
@@ -58,7 +58,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 					    }
 					    else{
 								$scope.apps.forEach(function(item){
-								$http({url: URL+'getusers',method: 'GET', params: 
+								$http({url: URL+'getusers',method: 'GET', params:
 						            { domain: 'TotalUsersAdmin',app: item.app_secret,index: 0}
 						        }).success(function(data) {
 						        	if (item.app_secret == '3974ba7380') {
@@ -72,8 +72,8 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 
 					    }
 
-					
-					        
+
+
 
 					//Getting MAU for each app
 					if ($rootScope.user.username=='hello@rocq.io') {
@@ -103,9 +103,9 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 					};
 
 
-					
-					 
-					
+
+
+
 
 				}
 				deferred.resolve();
@@ -124,7 +124,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 
 		$scope.submitapp = function() {
 			$scope.credentials.username = $rootScope.user.username;
-			$scope.credentials.created_on = new Date(); 
+			$scope.credentials.created_on = new Date();
 			var promise = validate_appsecret();
 			promise.then(function(data){
 				$scope.credentials.app_secret = data;
@@ -165,7 +165,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 			}
 			return false;
 		};
-		
+
 
 	  $scope.download_sdk = function(appsecret,os){
 	  	if (os=='Windows') {
@@ -226,7 +226,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 				$scope.tuple.ostype = $scope.selectedapps[i].ostype;
 				apps.push($scope.tuple)
 				// console.log(apps)
-				
+
 				};
 
 				$http.post('/addapp', apps).success(function(data) {
@@ -255,7 +255,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 		   				$("#Error").hide();
 						$scope.list_grant_access();
 					})
-					
+
 				}).error(function(response) {
 					$("#error-msg").html("An error occured!");
 	   				$("#Error").show();
@@ -264,7 +264,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 					// $scope.error = response.message;
 				});
 	  };
-	  
+
 	  $scope.list_grant_access = function(){
 	  	var granted_accesses=[];
 	  	var promises=[];
@@ -275,7 +275,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 	  		promises.push(promise)
 	  	}
 	  	$q.all(promises).then(function(){
-	  		
+
 	  		for (var i = 0; i < granted_accesses.length; i++) {
 	  			if (granted_accesses[i].username==$rootScope.user.username) {
 	  				granted_accesses.splice(i,1);
@@ -332,7 +332,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 				$("#success-msg").html("Suceess! You have revoked permissions for "+item.username+" for "+item.application);
 				$("#Success").show();
 		   		$("#Error").hide();
-			});  
+			});
 	   	}
 	   	else {
 			$http.post('/deleteappentry', {'username' : item.username}).success(function(response) {
@@ -344,7 +344,7 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 			});
 	   	}
 
-			
+
 	  };
 
 	  $scope.init_for_invite_page=function(){
@@ -353,10 +353,6 @@ applications.controller('ApplicationController', ['$scope', '$rootScope', '$moda
 
 	  	$scope.init_for_app_page=function(){
 			getapps();
-	  	}
-
-
-	  	
-	  
+        }
 	}
 ]);

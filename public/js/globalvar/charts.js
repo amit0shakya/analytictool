@@ -1,8 +1,8 @@
-var chart_style = 
-        { 
-        			"palette" : "1",
-        			"anchorRadius" : "4",
-        			"anchorBorderThickness":"2" ,
+var chart_style =
+        {
+    			"palette" : "1",
+    			"anchorRadius" : "4",
+    			"anchorBorderThickness":"2" ,
 					"lineThickness":"1" ,
 					"bgcolor":"FFFFFF" ,
 					"canvasbgcolor":"#EFF0F8" ,
@@ -31,7 +31,7 @@ var chart_style =
 					"toolTipBorderColor":"#D9E5F1",
 					"labelStep":"1",
 					"divlinecolor": "#D6D8DA"
-					
+
         }
 
 var new_user_line_style=
@@ -51,8 +51,8 @@ var new_user_line_style=
                     "canvasBorderThickness":"1.5",
                     "showLegend":"1",
                     "divLineColor":"#bfbfbf",
-                   
-                   
+
+
                     "numVDivLines":"6",
                     //"adjustDiv":"1",
                     "anchorRadius":"4",
@@ -73,7 +73,7 @@ var new_user_line_style=
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                 
+
         }
 
   var new_user_device_multiline_style=
@@ -205,7 +205,7 @@ var new_user_line_style=
                     "bgcolor":"#FFFFFF",
                     "lineThickness":"1.5",
                     "showShadow":"0",
-                    "showValues":"0",     
+                    "showValues":"0",
                     "canvasBorderColor":"#EFEFEF",
                     "canvasBorderThickness":"1.5",
                     "showLegend":"1",
@@ -231,7 +231,7 @@ var new_user_line_style=
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                    
+
         }
 
     var dashboard_activeusers_line_style =
@@ -278,7 +278,7 @@ var new_user_line_style=
             "exportHandler":"http://export.api3.fusioncharts.com/",
             "exportAction":"download"
         }
-        
+
     var dashboard_network_type_pie_chart_style=
     {
        // "paletteColors": "#8bb873, #597a9b, #009ece, #ae8d6d, #92d2c9",
@@ -295,7 +295,7 @@ var new_user_line_style=
               "showBorder":"0",
                 "defaultCenterLabel":"Data Type",
                 "centerLabelBold": "0",
-               "centerLabel": "$label<br>$displayvalue",   
+               "centerLabel": "$label<br>$displayvalue",
                "centerLabelBold": "1",
                "showValues":"0",
                "showLabels":"0",
@@ -327,12 +327,12 @@ var new_user_line_style=
               "exportShowMenuItem": "0",
               "exportHandler":"http://export.api3.fusioncharts.com/",
               "exportAction":"download"
-        
+
           }
-           
+
 
     var dashboard_installs_uninstalls_pie_chart_style=
-    
+
         {
                 "showPercentValues": "0",
                 "bgColor": "#ffffff",
@@ -368,7 +368,7 @@ var new_user_line_style=
                  "legendItemFontSize": "10",
                  "legendItemFontColor":"#5A5555",
                 // "legendPosition":"right"
-    
+
         }
     var dashboard_overview_paidVsOrganic_multiline_style =
         {
@@ -446,7 +446,7 @@ var new_user_source_installs_multiline_style=
                     "bgcolor":"#FFFFFF",
                     "lineThickness":"1.5",
                     "showShadow":"0",
-                    "showValues":"0",     
+                    "showValues":"0",
                     "canvasBorderColor":"#EFEFEF",
                     "canvasBorderThickness":"1.5",
                     "showLegend": "1",
@@ -557,11 +557,11 @@ var organic_inorganic_pie_chart_style=
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
                     //"placeValuesInside":"1"
-                   
+
             }
 
     var oa_overview_network_type_pie_chart_style=
-    
+
     {
                 "showPercentValues": "0",
                 "bgColor": "#ffffff",
@@ -587,7 +587,7 @@ var organic_inorganic_pie_chart_style=
                  "toolTipBgAlpha":"0",
                 "showToolTipShadow":"0",
                 "toolTipBorderThickness": "0",
-                
+
                     "enableRotation":"0",
                     "slicingDistance": "0",
                     "labelFontItalic": "0",
@@ -603,10 +603,10 @@ var organic_inorganic_pie_chart_style=
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-    
+
     }
      var oa_network_network_type_pie_chart_style=
-    
+
     {
                 "showPercentValues": "0",
                 "bgColor": "#ffffff",
@@ -617,7 +617,7 @@ var organic_inorganic_pie_chart_style=
                     "use3DLighting": "0",
                     "showShadow": "0",
                     "enableSmartLabels": "1",
-                    
+
                     "paletteColors": "#597a9b , #3fbae4,#74d181,#a6825e,#1ad2d2",
                     "showlabels":"1",
                     "showvalues":"0",
@@ -634,7 +634,7 @@ var organic_inorganic_pie_chart_style=
                  "toolTipBgAlpha":"0",
                 "showToolTipShadow":"0",
                 "toolTipBorderThickness": "0",
-                
+
                     "enableRotation":"0",
                     "slicingDistance": "5",
                     "labelFontItalic": "0",
@@ -650,12 +650,12 @@ var organic_inorganic_pie_chart_style=
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                    
-    
+
+
     }
 var top_keywords_doughnut_style=
             {
-                
+
               "paletteColors": "#FF7553,#E74C39,#F06050,#01B0D1,#2CC185,#0ACDC7,#4A8DC0",
                   "bgColor": "#ffffff",
                   "showBorder": "0",
@@ -700,8 +700,8 @@ var top_keywords_doughnut_style=
                   "exportAtClient":"0",
                   "exportShowMenuItem":"0",
                   "exportHandler":"http://export.api3.fusioncharts.com/",
-                  "exportAction":"download",    
-            
+                  "exportAction":"download",
+
             }
             var acquisition_overview_organic_installs_doughnut_style =
 		{
@@ -803,7 +803,7 @@ var new_user_device_manu_share=
                   "exportAtClient":"0",
                   "exportShowMenuItem":"0",
                   "exportHandler":"http://export.api3.fusioncharts.com/",
-                  "exportAction":"download",   
+                  "exportAction":"download",
             }
 
 var bar_graph_style =
@@ -889,7 +889,7 @@ var dashboard_top_devices_bar_style=
             "exportAction":"download"
            // "canvasPadding":"200",
             //"chartRightMargin":"400"
-        
+
         }
 
  var new_user_location_bar_style =
@@ -922,7 +922,7 @@ var dashboard_top_devices_bar_style=
             "exportShowMenuItem": "0",
             "exportHandler":"http://export.api3.fusioncharts.com/",
             "exportAction":"download"
-        
+
         }
 
 
@@ -958,7 +958,7 @@ var pie_chart_style =
 
 
 
-var doughnut_2d_wifi_style = 
+var doughnut_2d_wifi_style =
 		{
 			      // "caption": "Split of Revenue by Product Categories",
 			      // "subCaption": "Last year",
@@ -973,9 +973,9 @@ var doughnut_2d_wifi_style =
 			      "showLabels": "0",
 			      "showPercentValues": "0",
 			      "showValues": "0",
-			      
+
                    "showlegend": "0",
-       
+
 			     // "defaultCenterLabel": "Wifi",
 			      // "centerLabel": "$label $value%",
 			      "centerLabelBold": "1",
@@ -991,7 +991,7 @@ var doughnut_2d_wifi_style =
 		}
 
 
-var doughnut_2d_cellular_style = 
+var doughnut_2d_cellular_style =
 		{
 			      // "caption": "Split of Revenue by Product Categories",
 			      // "subCaption": "Last year",
@@ -1007,7 +1007,7 @@ var doughnut_2d_cellular_style =
 			      "showPercentValues": "0",
 			      "showValues": "0",
 			      "showLegend": "0",
-			    
+
 			      "defaultCenterLabel": "Cellular",
 			      // "centerLabel": "$label $value%",
 			      "centerLabelBold": "0",
@@ -1022,7 +1022,7 @@ var doughnut_2d_cellular_style =
 			      "doughnutRadius": "60"
 		}
 
-var bar_graph_multi_Series = 
+var bar_graph_multi_Series =
 		{
 			      "showlabels": "1",
 			      "showvalues": "1",
@@ -1047,7 +1047,7 @@ var bar_graph_multi_Series =
                   "valueFontColor":"ffffff"
 		}
 
-var bar_graph_and_line = 
+var bar_graph_and_line =
 		{
 		          "bgcolor": "FFFFFF",
 		          "plotgradientcolor": "",
@@ -1065,7 +1065,7 @@ var bar_graph_and_line =
 		          "legendshadow": "0",
 		          "legendborderalpha": "0",
 		          "showborder": "0",
-                  
+
 		}
 
     var test_map_style =
@@ -1079,13 +1079,13 @@ var bar_graph_and_line =
                     "bgColor":"#ff0000",
                     "bgalpha":"0,0",
                     "showlabels":"0",
-                    "borderColor":"#ffffff", 
+                    "borderColor":"#ffffff",
                 //    "borderThickness":"1.5",
                     "entityToolText":"<div class='tooltipborder'><div class='toottipheader'>$lName</div><div class='tooltipvalue'>Users : $displayvalue</div></div>",
             "toolTipBgAlpha":"0",
             "showToolTipShadow":"0",
             "toolTipBorderThickness": "0",
-            
+
                     "exportEnabled":"1",
                     "exportAtClient":"0",
                     "exportShowMenuItem": "0",
@@ -1093,7 +1093,7 @@ var bar_graph_and_line =
                     "exportAction":"download",
                     "showCanvasBorder": "0",
                  //   "mapTopMargin":"60",
-                  
+
     		}
 
 
@@ -1108,13 +1108,13 @@ var bar_graph_and_line =
                     "bgColor":"#ff0000",
                     "bgalpha":"0,0",
                     "showlabels":"0",
-                    "borderColor":"#ffffff", 
+                    "borderColor":"#ffffff",
                 //    "borderThickness":"1.5",
                     "entityToolText":"<div class='tooltipborder'><div class='toottipheader'>$lName</div><div class='tooltipvalue'>Sessions : $displayvalue</div></div>",
             "toolTipBgAlpha":"0",
             "showToolTipShadow":"0",
             "toolTipBorderThickness": "0",
-            
+
                     "exportEnabled":"1",
                     "exportAtClient":"0",
                     "exportShowMenuItem": "0",
@@ -1122,10 +1122,10 @@ var bar_graph_and_line =
                     "exportAction":"download",
                     "showCanvasBorder": "0",
                  //   "mapTopMargin":"60",
-                  
+
             }
 
-var new_user_device_top_share_style = 
+var new_user_device_top_share_style =
 	{
 			    "showValues":"0",
                 "paletteColors": "#00C794,#F1F1F1",
@@ -1156,7 +1156,7 @@ var new_user_device_top_share_style =
                 "exportShowMenuItem": "0",
                 "exportHandler":"http://export.api3.fusioncharts.com/",
                 "exportAction":"download"
-                
+
     }
 
 var acquisition_installs_multiline_style =
@@ -1179,7 +1179,7 @@ var acquisition_installs_multiline_style =
                     "divLineThickness": "2",
                     "showPlotBorder": "0",
                     "adjustDiv": "1",
-                    
+
                     "showAnchor": "1",
                     "anchorRadius": "4",
                     "anchorBorderThickness": "2",
@@ -1194,12 +1194,12 @@ var acquisition_installs_multiline_style =
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                
+
                 }
 
 var acquisition_installs_device_doughnut_style =
             {
-               
+
                 "paletteColors": "#FF7553,#E74C39,#F06050,#01B0D1,#2CC185,#0ACDC7,#4A8DC0",
                 "bgColor": "#ffffff",
                 "showBorder": "0",
@@ -1355,9 +1355,9 @@ var acquisition_uninstalls_multiline_style =
                     "showAnchor": "1",
                     "anchorRadius": "4",
                     "anchorBorderThickness": "2",
-                   
+
                     "showAlternateHGridColor": "0"
-                
+
                 }
 
 var acquisition_uninstalls_device_doughnut_style =
@@ -1428,8 +1428,8 @@ var acquisition_uninstalls_Paid_device_multibar_style =
                 }
 
 var oa_network_operator_pie_chart_style =
-  {  
- 
+  {
+
       "paletteColors": "#FF7553,#E74C39,#F06050,#01B0D1,#2CC185,#0ACDC7,#4A8DC0",
       "bgColor": "#ffffff",
       "showBorder": "0",
@@ -1441,8 +1441,8 @@ var oa_network_operator_pie_chart_style =
       "showPercentValues": "1",
       "showValues": "1",
       "showLegend": "1",
-      "legendPosition": "bottom", 
-      "legendItemFontSize":"10",     
+      "legendPosition": "bottom",
+      "legendItemFontSize":"10",
       "legendScrollBgColor": "#cccccc",
       "legendScrollBarColor": "#999999",
       "legendShadow": "0",
@@ -1459,7 +1459,7 @@ var oa_network_operator_pie_chart_style =
       "baseFontSize": "12",
       //"baseFontColor": "#cbc9c9",
       "labelFontSize": "1",
-      
+
       "legendItemFontColor":"#5A5555",
       "useDataPlotColorForLabels": "0",
       "pieRadius": "80",
@@ -1554,7 +1554,7 @@ var active_user_line_style=
                     "alternateHGridColor":"#F8F8F8",
                     "paletteColors":"#1199D5",
                     "showBorder":"0",
-                    
+
                     "bgcolor":"#FFFFFF",
                     "lineThickness":"1.5",
                     "showShadow":"0",
@@ -1572,15 +1572,15 @@ var active_user_line_style=
                     "anchorBorderThickness":"2",
                     "anchorHoverRadius":"6",
                    // "plotFillHoverColor":"#1199D5"
-                 
+
         }
 
 var active_user_device_multiline_style=
         {
-                    
+
                     "paletteColors":"#1199D5, #e74c39,#2cc185",
                     "showBorder":"0",
-                    
+
                     "bgcolor":"#FFFFFF",
                     "lineThickness":"1.5",
                     "showShadow":"0",
@@ -1634,9 +1634,9 @@ var active_user_device_manu_share=
                   "slicingDistance":"5",
                   "manageLabelOverflow":"1",
                   "useEllipsesWhenOverflow":"1"
-                  
+
             }
-var active_user_device_top_share_style = 
+var active_user_device_top_share_style =
     {
                 "showValues":"0",
                 "paletteColors": "#00C794,#F1F1F1",
@@ -1656,7 +1656,7 @@ var active_user_device_top_share_style =
                 "doughnutRadius": "70",
                 "baseFontSize":"19",
                 "baseFontColor": "#4f4f4f"
-                
+
     }
 
 var active_user_source_multiline_style=
@@ -1667,7 +1667,7 @@ var active_user_source_multiline_style=
                     "bgcolor":"#FFFFFF",
                     "lineThickness":"1.5",
                     "showShadow":"0",
-                    "showValues":"0",     
+                    "showValues":"0",
                     "canvasBorderColor":"#EFEFEF",
                     "canvasBorderThickness":"1.5",
                     "showLegend": "1",
@@ -1680,7 +1680,7 @@ var active_user_source_multiline_style=
                     "vDivLineColor":"#F0F0F0",
                     "numVDivLines":"6",
                     "adjustDiv": "1",
-                    
+
                     "plotFillColor":"#edf7f9",
                     "showAnchor":"1",
                     "anchorRadius":"4",
@@ -1714,7 +1714,7 @@ var active_user_location_bar_style =
             "divLineColor": "#ffffff",
             "showHDivLines":"0",
             "showValues":"0"
-        
+
         }
 
  var session_duration_doughnut_style=
@@ -1761,9 +1761,9 @@ var active_user_location_bar_style =
                 "exportShowMenuItem": "0",
                 "exportHandler":"http://export.api3.fusioncharts.com/",
                 "exportAction":"download"
-             
-            
-            
+
+
+
             }
 
     var session_source_doughnut_style =
@@ -1815,9 +1815,9 @@ var active_user_location_bar_style =
         "exportShowMenuItem": "0",
         "exportHandler":"http://export.api3.fusioncharts.com/",
         "exportAction":"download"
-          
+
     }
-var session_line_style=           
+var session_line_style=
     {            "yaxisname":"SESSIONS",
                 "baseFontSize":"11",
                 "paletteColors":"#1199D5",
@@ -1826,7 +1826,7 @@ var session_line_style=
                 "bgcolor":"#FFFFFF",
                 "lineThickness":"1.5",
                 "showShadow":"0",
-                "showValues":"0",     
+                "showValues":"0",
                 "canvasBorderColor":"#EFEFEF",
                 "canvasBorderThickness":"1.5",
                 "showLegend":"1",
@@ -1853,7 +1853,7 @@ var session_line_style=
                 "exportShowMenuItem": "0",
                 "exportHandler":"http://export.api3.fusioncharts.com/",
                 "exportAction":"download"
-                
+
     }
 
 var session_source_bar_style =
@@ -1866,7 +1866,7 @@ var session_source_bar_style =
             "showvalues": "1",
             //"labeldisplay": "WRAP",
             "divlinecolor": "#bfbfbf",
-           
+
             //"divlinealpha": "50",
             "useroundedges": "0",
             "canvasbgcolor": "#FFFFFF",
@@ -1905,7 +1905,7 @@ var trends_overview_newusers_trend_line_style=
                     "bgcolor":"#FFFFFF",
                     "lineThickness":"1.5",
                     "showShadow":"0",
-                    "showValues":"0",     
+                    "showValues":"0",
                     "canvasBorderColor":"#EFEFEF",
                     "canvasBorderThickness":"1.5",
                     "showLegend":"1",
@@ -1934,7 +1934,7 @@ var trends_overview_newusers_trend_line_style=
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                    
+
         }
 
 var trends_overview_activeusers_trend_multiline_style =
@@ -2012,7 +2012,7 @@ var trends_overview_session_time_line_style =
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                
+
                 }
 
     var acquisition_source_uninstalls_bar_style=
@@ -2195,7 +2195,7 @@ var sessions_device_multibar_style =
                     "divLineThickness": "2",
                     "showPlotBorder": "0",
                     "adjustDiv": "1",
-                    
+
                     "showAnchor": "1",
                     "anchorRadius": "4",
                     "anchorBorderThickness": "2",
@@ -2210,7 +2210,7 @@ var sessions_device_multibar_style =
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                
+
                 }
 
                  var revenue_location_multiline_style =
@@ -2232,7 +2232,7 @@ var sessions_device_multibar_style =
                     "divLineThickness": "2",
                     "showPlotBorder": "0",
                     "adjustDiv": "1",
-                    
+
                     "showAnchor": "1",
                     "anchorRadius": "4",
                     "anchorBorderThickness": "2",
@@ -2247,7 +2247,7 @@ var sessions_device_multibar_style =
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                
+
                 }
 
                 var push_report_funnel_style =
@@ -2278,7 +2278,7 @@ var sessions_device_multibar_style =
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                
+
                 }
 
                 var event_line_style=
@@ -2298,8 +2298,8 @@ var sessions_device_multibar_style =
                     "canvasBorderThickness":"1.5",
                     "showLegend":"1",
                     "divLineColor":"#bfbfbf",
-                   
-                   
+
+
                     "numVDivLines":"6",
                     //"adjustDiv":"1",
                     "anchorRadius":"4",
@@ -2320,7 +2320,7 @@ var sessions_device_multibar_style =
                     "exportShowMenuItem": "0",
                     "exportHandler":"http://export.api3.fusioncharts.com/",
                     "exportAction":"download"
-                 
+
         }
 
 var campaign_report_comparison_multibar_style =
@@ -2398,21 +2398,21 @@ function multiLine(json,num,style)
 {
 	var limit = 10;
 	var gap = 1;
-	var chart = 
+	var chart =
 	{
 	    "chart": style
 	}
-	
+
 	var len = json.length;
-   
+
 
 	chart["categories"] = [];
-	
+
 	var category = [];
-	
+
 	for(i=0 ; i < len;i++)
     {
-    	category_label = { "label" : json[i].z};	
+    	category_label = { "label" : json[i].z};
     	category = category.concat(category_label);
     }
 
@@ -2426,13 +2426,13 @@ function multiLine(json,num,style)
 
 		data = [];
 	    for(j=0;j<len; j++)
-	    {	
+	    {
 	    	data_point = { "value" : json[j].a[i].y , "displayvalue":CommaSeparatedNumberFormat(json[j].a[i].y)};
 	    	data = data.concat(data_point);
 	    }
 	    series["data"] = data ;
 	    chart["dataset"] = chart["dataset"].concat(series);
-	}	
+	}
 
 	definition = [ {"name":"captionFont","type":"font","size":"15"}  ];
 	application = [ { "toobject": "caption" , "styles": "captionfont" } ];
@@ -2446,22 +2446,22 @@ function multiLine(json,num,style)
 */
 function multiLine2(json,style)
 {
-	var chart = 
+	var chart =
 	{
 		"chart" : style
 	}
-	
+
 	var len = json[0].a.length;
 	var num = json.length;
-   
+
 
 	chart["categories"] = [];
-	
+
 	var category = [];
-	
+
 	for(i=0 ; i < len;i++)
     {
-    	category_label = { "label" : json[0].a[i].x};	
+    	category_label = { "label" : json[0].a[i].x};
     	category = category.concat(category_label);
     }
 
@@ -2475,13 +2475,13 @@ function multiLine2(json,style)
 
 		data = [];
 	    for(j=0;j<len; j++)
-	    {	
+	    {
 	    	data_point = { "value" : parseInt(json[i].a[j].y) ,"displayvalue":CommaSeparatedNumberFormat(parseInt(json[i].a[j].y))};
 	    	data = data.concat(data_point);
 	    }
 	    series["data"] = data ;
 	    chart["dataset"] = chart["dataset"].concat(series);
-	}	
+	}
 
 	definition = [ {"name":"captionFont","type":"font","size":"15"}  ];
 	application = [ { "toobject": "caption" , "styles": "captionfont" } ];
@@ -2492,22 +2492,22 @@ function multiLine2(json,style)
 
 function multiLineCampaignReport(json,style)
 {
-    var chart = 
+    var chart =
     {
         "chart" : style
     }
-    
+
     var len = json[0].a.length;
     var num = json.length;
-   
+
 
     chart["categories"] = [];
-    
+
     var category = [];
-    
+
     for(i=0 ; i < len;i++)
     {
-        category_label = { "label" : json[0].a[i].x};   
+        category_label = { "label" : json[0].a[i].x};
         category = category.concat(category_label);
     }
 
@@ -2521,13 +2521,13 @@ function multiLineCampaignReport(json,style)
 
         data = [];
         for(j=0;j<len; j++)
-        {   
+        {
             data_point = { "value" : parseInt(json[i].a[j].y) ,"displayvalue":json[i].goalname};
             data = data.concat(data_point);
         }
         series["data"] = data ;
         chart["dataset"] = chart["dataset"].concat(series);
-    }   
+    }
 
     definition = [ {"name":"captionFont","type":"font","size":"15"}  ];
     application = [ { "toobject": "caption" , "styles": "captionfont" } ];
@@ -2536,18 +2536,18 @@ function multiLineCampaignReport(json,style)
     return chart;
 }
 
-function line(line_json,style) 
+function line(line_json,style)
 {
 	var limit = 10;
     var len = line_json.length;
     if(len > limit)
         chart_style["labelStep"] = Math.ceil(len/limit).toString();
 
-    var chart = 
+    var chart =
     {
         "chart" : style
     }
-	    
+
     chart["data"] = [];
     var data_point;
 
@@ -2559,18 +2559,18 @@ function line(line_json,style)
     return chart;
 }
 
-function line_session_length(line_json,style) 
+function line_session_length(line_json,style)
 {
     var limit = 10;
     var len = line_json.length;
     if(len > limit)
         chart_style["labelStep"] = Math.ceil(len/limit).toString();
 
-    var chart = 
+    var chart =
     {
         "chart" : style
     }
-        
+
     chart["data"] = [];
     var data_point;
     var dv;
@@ -2586,7 +2586,7 @@ function bargraph(bar_json,style) {
 
 	var len = bar_json.length;
 
-	var chart = 
+	var chart =
     {
         "chart": style
     }
@@ -2608,7 +2608,7 @@ function piechart(pie_json) {
 
 	var len = pie_json.length;
 
-	var chart = 
+	var chart =
     {
         "chart" : pie_chart_style
     }
@@ -2631,12 +2631,12 @@ function piechart_op(pie_json,style) {
 
 	var len = pie_json.length;
 
-	var chart = 
+	var chart =
     {
        "chart" :style
-         
 
-          
+
+
     }
 
 
@@ -2660,7 +2660,7 @@ function doughnut2d(pie_json, style, val) {
 
 	style.defaultCenterLabel = style.defaultCenterLabel + " \n" + val + "%";
 
-	var chart = 
+	var chart =
     {
         "chart" : style
     }
@@ -2681,18 +2681,18 @@ function doughnut2d(pie_json, style, val) {
 function bargraph_multi(json,num,style){
 	var len = json.length;
 
-	var chart = 
+	var chart =
     {
         "chart" : style
     }
 
     chart["categories"] = [];
-	
+
 	var category = [];
-	
+
 	for(i=0 ; i < len;i++)
     {
-    	category_label = { "label" : json[i].z};	
+    	category_label = { "label" : json[i].z};
     	category = category.concat(category_label);
     }
 
@@ -2707,7 +2707,7 @@ function bargraph_multi(json,num,style){
 
 		data = [];
 	    for(j=0;j<len; j++)
-	    {	
+	    {
 	    	if(json[j].a[i])
 	    	{
 	    		data_point = { "value" : json[j].a[i].y ,"displayvalue":CommaSeparatedNumberFormat(json[j].a[i].y)};
@@ -2720,8 +2720,8 @@ function bargraph_multi(json,num,style){
 	    }
 	    series["data"] = data ;
 	    chart["dataset"] = chart["dataset"].concat(series);
-	}	
-	
+	}
+
 	return chart;
 }
 
@@ -2729,18 +2729,18 @@ function bargraph_line(json){
 
 	var len = json.length;
 
-	var chart = 
+	var chart =
     {
         "chart" : bar_graph_and_line
     }
 
     chart["categories"] = [];
-	
+
 	var category = [];
-	
+
 	for(i=0 ; i < len;i++)
     {
-    	category_label = { "label" : json[i].x};	
+    	category_label = { "label" : json[i].x};
     	category = category.concat(category_label);
     }
 
@@ -2751,11 +2751,11 @@ function bargraph_line(json){
 	data = [];
 	series = { "seriesname" : "Number of sessions" };
 	for(i=0 ; i < len ;i++)
-	{	
+	{
 	    data = data.concat({ "value" : json[i].y ,"displayvalue":CommaSeparatedNumberFormat(json[i].y)});
 	}
 	series["data"] = data ;
-	chart["dataset"] = chart["dataset"].concat(series);	
+	chart["dataset"] = chart["dataset"].concat(series);
 
 	data = [];
 	series1 = { "seriesname" : "Average session length" };
@@ -2766,19 +2766,19 @@ function bargraph_line(json){
 	series1["data"] = data ;
 	series1["parentyaxis"] = "S";
 	series1["renderas"] = "Line";
-	chart["dataset"] = chart["dataset"].concat(series1);	
-	
+	chart["dataset"] = chart["dataset"].concat(series1);
+
 	return chart;
 }
 
 function map(data, avgValue, maxValue,style){
 
-	var chart = 
+	var chart =
 	{
 		"chart" : style
 	}
 
-	chart["colorrange"] = 
+	chart["colorrange"] =
 		{
 			"minvalue": "0",
 			"startlabel": "Low",
@@ -2811,7 +2811,7 @@ function map(data, avgValue, maxValue,style){
 function piechart_singlediv(json,style){
 	var len = json.length;
 
-	var chart = 
+	var chart =
     {
         "chart": style
     }

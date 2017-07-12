@@ -13,11 +13,9 @@ module.exports = function(app,express) {
          app.get('/pricing.html', function(req, res){
             res.render('../Home/pricing.html');
         });
-
           app.get('/features.html', function(req, res){
             res.render('../Home/features.html');
         });
-
            app.get('/customer-stories.html', function(req, res){
             res.render('../Home/customer-stories.html');
         });
@@ -78,15 +76,10 @@ module.exports = function(app,express) {
             // send mail with defined transport object
             transporter.sendMail(mailOptions, function(error, info){
                 if(error){
-                   
-                    return console.log(error);
+                   return console.log(error);
                 }
                 res.end('success');
                 console.log('Message sent: ' + info.response);
             });
-            
-    });
-
-    
-       
+    }); 
 };

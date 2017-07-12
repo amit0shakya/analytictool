@@ -1,0 +1,16 @@
+<section style="position:fixed; right:10px; bottom:10px; height:400px; background-color:red;  width:400px; box-shadow: -3px -3px 10px rgba(0,0,0,.2); z-index:1;" layout="column" id="helptab">
+    
+    <div layout-padding md-colors="{background: 'grey-400'}" style="height:auto; cursor:move" layout="column" ng-draggable>
+        <div layout="row" layout-align="space-between center" onmousedown="md(event)" ng-mousedown="drag($event)" ng-mousemove="mousemoove($event)" ng-mouseup="nodrag()" ng-mouseleave="nodrag()"> 
+            <h4 style="color:#fff" class="margin0 padding0">Help</h4>
+            <div class="margin0 padding0" style="cursor:pointer" ng-click="resetPos()"><h4 style="color:#fff">X</h4></div>
+        </div>
+            
+        <div class="searchbox margin0 padding0" style="background-color:#fff; float:left; height:60px">
+            <md-input-container flex style="width:100%">
+                <label  layout="row"> <i class="material-icons">search</i> &nbsp;Search </label>
+                <input type="text"/>
+            </md-input-container>
+        </div>
+    </div>
+</section>

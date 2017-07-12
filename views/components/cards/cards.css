@@ -1,0 +1,9 @@
+.datacardview-icon-container{justify-content: center; align-items: center;  display: flex;}
+.datacardview-icon{color:#fff; font-size:4em;}
+.datacardview-headline{justify-content: center; align-items: center;  display: flex; color:#fff;}
+.datacardview-percent{display: flex; align-items: flex-end;}
+
+
+/*Table card view css*/
+.custompagination .limit-select{display: none;}
+.custompagination .label{font-size: 12px; color:#000;}

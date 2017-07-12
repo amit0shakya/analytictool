@@ -2,10 +2,10 @@
 
 var newusers = angular.module('Controllers')
 newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','UtilitiesService','JSONService',function($scope, $rootScope, $q, JettyService, UtilitiesService, JSONService) {
-    
+
     /* global variables which we use inside functions */
     var today =  new Date();
-    var currentdate = new Date(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate()); 
+    var currentdate = new Date(today.getUTCFullYear(),today.getUTCMonth(),today.getUTCDate());
     var app = $rootScope.app.app_secret;
     var new_users_raw;
     var new_users_data,nu_data, new_user_organic_data,  new_user_inorganic_data;
@@ -55,7 +55,7 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
         $scope.noDays = Math.abs($scope.date.endDate.getTime() - $scope.date.startDate.getTime())/(1000*60*60*24) + 1;
     };
     /* Visitors Tab */
-        /* New Users and NewUsers Trend line graph 
+        /* New Users and NewUsers Trend line graph
            Should be executed before VisitorsDayWiseList and other functions where new_users_raw is used
         */
 
@@ -71,7 +71,7 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         }
@@ -83,6 +83,7 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
                 {
                     data = JSONService.fill(data,$scope.endGap,$scope.noDays);
                     new_users_data = data;
+                    
                     UtilitiesService.draw_chart(line(data,new_user_line_style),'Line.swf','TnewUsersTrend','100%','253');
                     deferred.resolve();
                 }
@@ -90,7 +91,7 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
@@ -115,7 +116,7 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
@@ -145,18 +146,18 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
             var domain2;
 
             JettyService.granwise('U',app,$scope.endGap,$scope.noDays,2,2,type,timeZone).then(function(data) {
-               
+
                     data = JSONService.fill(data,$scope.endGap,$scope.noDays);
                     uninstalls_data = data;
                     // UtilitiesService.draw_chart(line(data,new_user_line_style),'Line.swf','InstallsTrend','100%','253');
                     deferred.resolve();
-                
-                
+
+
             });
             return deferred.promise;
         };
 
-        /* Top Device Top Vendor and side Top 4 device models sections 
+        /* Top Device Top Vendor and side Top 4 device models sections
            This should be executed TopDevicesTrend, TopManuDevices as top_devices is used there
         */
         var TopDevice = function() {
@@ -182,12 +183,12 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
                         $scope.top_devices_percent[i] = $scope.top_devices_percent[i].toFixed(2);
                     }
                     deferred.resolve();
-                }   
+                }
                 catch(err)
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
@@ -208,7 +209,7 @@ newusers.controller('InstallsCtrl',['$scope','$rootScope','$q','JettyService','U
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
@@ -241,8 +242,8 @@ var UserWithGoalEvent = function() {
                 GoalUser = data;
                 deferred.resolve();
             })
-           
-          
+
+
             return deferred.promise;
         };
         /* Last Table in the visitors tab with pagination */
@@ -254,13 +255,13 @@ var UserWithGoalEvent = function() {
             {
                 for(i=data.length-1; i>=0; i--) {
                         daywiselist = daywiselist.concat({
-                        "x":data[i].x, 
+                        "x":data[i].x,
                         "y":UtilitiesService.CommaSeparatedNumberFormat(Number(new_user_organic_data[i].y)+Number(new_user_inorganic_data[i].y)),
                          "z":(i && ((data[i].y-data[i-1].y)/(data[i-1].y))*100).toFixed(1),
-                          "a":UtilitiesService.CommaSeparatedNumberFormat(new_user_organic_data[i].y), 
+                          "a":UtilitiesService.CommaSeparatedNumberFormat(new_user_organic_data[i].y),
                           "b":new_user_inorganic_data[i].y,
-                           "c":UtilitiesService.CommaSeparatedNumberFormat(nu_data[i].y), 
-                           "d":UtilitiesService.CommaSeparatedNumberFormat(data[i].y-nu_data[i].y), 
+                           "c":UtilitiesService.CommaSeparatedNumberFormat(nu_data[i].y),
+                           "d":UtilitiesService.CommaSeparatedNumberFormat(data[i].y-nu_data[i].y),
                            "e":UtilitiesService.CommaSeparatedNumberFormat(uninstalls_data[i].y),
                            "f":GoalUser[i].y});
                 }
@@ -292,7 +293,7 @@ var UserWithGoalEvent = function() {
             {
                 deferred.resolve();
             }
-            
+
             return deferred.promise;
         };
 
@@ -302,7 +303,7 @@ var UserWithGoalEvent = function() {
     /* Source Tab */
 
         /*  This Should run before all functions in the source tab where top_sources is used
-            Returns the Top 5 Sources based on newusers in the given range 
+            Returns the Top 5 Sources based on newusers in the given range
         */
         var TopSources = function() {
             var deferred = $q.defer();
@@ -327,12 +328,12 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
 
-        /* Top 3 Sources Percentage section on the top 
+        /* Top 3 Sources Percentage section on the top
             This should be executed before OrgInorgShare,TopKeyWords,SourceNewUsersList as  paid_installs_raw is used there
         */
         var TopSourcesPercentage = function(){
@@ -351,20 +352,20 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve();
                 }
-                
+
             })
             return deferred.promise;
         };
 
-        /*  Helper Function 
-            Given a Source it returns the day wise newusers in appropriate format 
+        /*  Helper Function
+            Given a Source it returns the day wise newusers in appropriate format
         */
         var SourceDayWiseNewUsers = function(source){
             var deferred = $q.defer();
             JettyService.keygranwise(src_type+'Source',app,source,$scope.endGap,$scope.noDays,2,2,type,timeZone).then(function(data){
                 try
                 {
-                    if(data[0].x) {   
+                    if(data[0].x) {
                         data = data.concat({'x': source});
                     }
                     else {
@@ -377,16 +378,16 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve(data);
                 }
-                
+
             });
             return deferred.promise;
         }
 
-        /*  Top 3 Sources Trend (Top Graph in Source Tab) 
+        /*  Top 3 Sources Trend (Top Graph in Source Tab)
             Uses Above helper function
         */
         var TopSourcesTrend = function() {
-            
+
             var deferred = $q.defer();
             var mod_data = [];
             var promises = [];
@@ -395,7 +396,7 @@ var UserWithGoalEvent = function() {
                 for(i=0;i<$scope.selectedtop_sources.length ;i++)
                 {
                     var source = $scope.selectedtop_sources[i].x;
-                   
+
                     promise = SourceDayWiseNewUsers(source);
                     promise.then(function(data){
                         var data_source = data[data.length-1].x;
@@ -416,21 +417,21 @@ var UserWithGoalEvent = function() {
             catch(err)
             {
                  deferred.resolve();
-            }  
+            }
             return deferred.promise;
         };
  $scope.$watch('selectedtop_sources',function(nv,ov) {
               if (nv.length!=ov.length) {
-               
+
                 // console.log($scope.selected_campaign)
                TopSourcesTrend();
                TopSourcesUninstalls();
       };
-            
+
         })
 
-        /*  Helper Function 
-            Given a Source it returns the day wise uninstalls in appropriate format 
+        /*  Helper Function
+            Given a Source it returns the day wise uninstalls in appropriate format
         */
         var DayWiseUninstallsForSource = function(source){
             var deferred = $q.defer();
@@ -438,7 +439,7 @@ var UserWithGoalEvent = function() {
                 try
                 {
                     if(data[0].x)
-                    {   
+                    {
                         data = data.concat({"x": source});
                     }
                     else
@@ -452,7 +453,7 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve(data);
                 }
-                
+
             });
             return deferred.promise;
         };
@@ -476,15 +477,15 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
 
 
 
-        /* Top Source Daywise Uninstalls Graph 
-           Uses above helper function 
+        /* Top Source Daywise Uninstalls Graph
+           Uses above helper function
         */
         var TopSourcesUninstalls = function() {
             var deferred = $q.defer();
@@ -517,11 +518,11 @@ var UserWithGoalEvent = function() {
             {
                 deferred.resolve();
             }
-            
+
             return deferred.promise;
         };
 
-        /* Inorganic Vs Organic Users Pie Chart 
+        /* Inorganic Vs Organic Users Pie Chart
             This should be executed before TopKeyWords as total_installs_raw is used there
         */
         var OrgInorgShare = function(){
@@ -540,7 +541,7 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         }
@@ -568,7 +569,7 @@ var UserWithGoalEvent = function() {
                     for(i=0;i<keywords.length && i< 30;i++)
                     {
                             words_temp = words_temp.concat({'text':keywords[i].x, 'weight':Math.log(keywords[i].y || 1)*8/count2});
-                            
+
 
                             if(i<5)
                             {
@@ -587,7 +588,7 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve();
                 }
-                
+
             })
             return deferred.promise;
         };
@@ -612,12 +613,12 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
 
-        /* Source NewUsers Table in the source tab with pagination 
+        /* Source NewUsers Table in the source tab with pagination
            Uses the above Helper function
         */
         var SourceNewUsersList = function(){
@@ -651,7 +652,7 @@ var UserWithGoalEvent = function() {
             {
                 deferred.resolve();
             }
-            
+
             return deferred.promise;
         };
 
@@ -659,15 +660,15 @@ var UserWithGoalEvent = function() {
 
     /* Device Tab */
 
-        /*  Helper Function 
-            Given a Device it returns the day wise newusers in appropriate format 
+        /*  Helper Function
+            Given a Device it returns the day wise newusers in appropriate format
         */
         var DeviceDayWiseNewUsers = function(device,manu){
             var deferred = $q.defer();
             JettyService.keygranwise(domain+'Model',app,device,$scope.endGap,$scope.noDays,2,2,type,timeZone).then(function(data){
                 try
                 {
-                    if(data[0].x) {   
+                    if(data[0].x) {
                         data = data.concat({'x': device, 'y': manu});
                     }
                     else {
@@ -679,12 +680,12 @@ var UserWithGoalEvent = function() {
                 catch(err)
                 {
                     deferred.resolve();
-                }           
+                }
             });
             return deferred.promise;
         };
 
-        /*  Top 3 Device Trends (Top Graph in Device Tab) 
+        /*  Top 3 Device Trends (Top Graph in Device Tab)
             Uses Above helper function
         */
         var TopDevicesTrend = function() {
@@ -718,7 +719,7 @@ var UserWithGoalEvent = function() {
             {
                 deferred.resolve();
             }
-            
+
             return deferred.promise;
         };
 
@@ -727,7 +728,7 @@ var UserWithGoalEvent = function() {
                 // console.log($scope.selected_campaign)
                TopDevicesTrend();
       };
-            
+
         })
         /* Top Manufacturers Pie Chart, Top 4 Manufacturers Count and Top Manufacturer vs Others Pie Chart
             This should be executed before TopManuDevices as top_manus is used there
@@ -743,14 +744,14 @@ var UserWithGoalEvent = function() {
                 try
                 {
                     $scope.top_manus = UtilitiesService.descending(data,2).slice(0,5);
-                   
+
                     var top_manus_percent = [];
                     var count = 0;
 
                     top_manu_raw = $scope.top_manus[0].y; // top manufacturer new users we will use in below function for calcuting top 3 model percentages for top manufacturer
                     for(i=0;i<$scope.top_manus.length;i++)
-                    {                      
-                         
+                    {
+
                         top_manus_percent = top_manus_percent.concat({'x': $scope.top_manus[i].x , 'y': $scope.top_manus[i].y });
                         count += $scope.top_manus[i].y;
                         $scope.top_manus[i].y = UtilitiesService.numberFormat($scope.top_manus[i].y);
@@ -771,7 +772,7 @@ var UserWithGoalEvent = function() {
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
@@ -811,20 +812,20 @@ var UserWithGoalEvent = function() {
             var UModelsAllobj={};
             var promises=[];
             var promise1 = JettyService.cummulative(domain+'ModelsAll',app,$scope.endGap,$scope.noDays,3,type,timeutiliZone).then(function(data) {
-                
+
                     devicenewuserslist = UtilitiesService.descending(data,3);
                     for (var i = 0; i < devicenewuserslist.length; i++) {
                     devicenewuserslist[i].z=UtilitiesService.CommaSeparatedNumberFormat(devicenewuserslist[i].z)
                 };
-                   
+
             });
             var promise2 = JettyService.cummulative('UModelsAll',app,$scope.endGap,$scope.noDays,3,type,timeZone).then(function(data) {
-               
+
                for (var i = 0; i < data.length; i++) {
                   UModelsAllobj[data.x+data.y]=data.z;
                };
-               
-                
+
+
             });
             promises.push(promise1);
             promises.push(promise2);
@@ -860,11 +861,11 @@ var UModelsData;
                 {
                     deferred.resolve();
                 }
-                
+
             });
             return deferred.promise;
         };
-        /* Source NewUsers Table in the source tab with pagination 
+        /* Source NewUsers Table in the source tab with pagination
            Uses the above Helper function
         */
         var DeviceNewUsersList = function(){
@@ -896,7 +897,7 @@ var UModelsData;
             {
                 deferred.resolve();
             }
-            
+
             return deferred.promise;
         };
 
@@ -954,8 +955,8 @@ var UModelsData;
         /* Left Table in the location tab with pagination (cities table) */
         var CityNewUsersList = function() {
             var deferred = $q.defer();
-            $scope.CityNewUsersListCSV = $scope.citiesCSV; 
-            $scope.city_items = $scope.citiesCSV.length;   
+            $scope.CityNewUsersListCSV = $scope.citiesCSV;
+            $scope.city_items = $scope.citiesCSV.length;
             $scope.items_per_page4 = 10;
             $scope.city_current_page = 1;
             $scope.max_pages = 5;
@@ -981,7 +982,7 @@ var UModelsData;
                     statesCSV[i].y=UtilitiesService.CommaSeparatedNumberFormat(statesCSV[i].y)
                 };
                 $scope.StateNewUsersListCSV = states;
-                $scope.state_items = states.length;   
+                $scope.state_items = states.length;
                 $scope.items_per_page5 = 10;
                 $scope.state_current_page = 1;
                 $scope.max_pages = 5;
@@ -989,7 +990,7 @@ var UModelsData;
                     var begin = (($scope.state_current_page - 1) * $scope.items_per_page5),
                     end = begin + $scope.items_per_page5;
                     $scope.page_state_list = statesCSV.slice(begin, end);
-                    
+
                 });
                 deferred.resolve();
             });
@@ -1024,7 +1025,7 @@ var UModelsData;
                 promises.push(promise);
             }
             $q.all(promises).then(function(){
-                UtilitiesService.draw_map(map(map_data,new_users_raw / states.length, states[0].y,test_map_style),"maps/india",'mapStates','100%','600');   
+                UtilitiesService.draw_map(map(map_data,new_users_raw / states.length, states[0].y,test_map_style),"maps/india",'mapStates','100%','600');
                 deferred.resolve();
             });
             return deferred.promise;
@@ -1042,7 +1043,7 @@ var UModelsData;
 
         $q.all(promises).then(function(){
             deferred.resolve();
-        });  
+        });
         return deferred.promise;
     }
 
@@ -1055,7 +1056,7 @@ var UModelsData;
 
         $q.all(promises).then(function(){
             deferred.resolve();
-        });  
+        });
         return deferred.promise;
     }
 
@@ -1070,7 +1071,7 @@ var UModelsData;
 
         $q.all(promises).then(function(){
             deferred.resolve();
-        });  
+        });
         return deferred.promise;
     }
 
@@ -1079,10 +1080,10 @@ var UModelsData;
         var promises = [];
 
         promises.push(TopSources().finally(block2));
-        
+
         $q.all(promises).then(function(){
             deferred.resolve();
-        });  
+        });
         return deferred.promise;
     }
 
@@ -1093,10 +1094,10 @@ var UModelsData;
         promises.push(TopDevicesTrend());
         promises.push(TopManufacturers().finally(TopManuDevices));
         promises.push(DeviceNewUsersList());
-        
+
         $q.all(promises).then(function(){
             deferred.resolve();
-        });  
+        });
         return deferred.promise;
     }
 
@@ -1107,10 +1108,10 @@ var UModelsData;
         promises.push(TopCities().finally(CityNewUsersList)
                                   .finally(StateNewUsersList)
                                   .finally(StateMap));
-        
+
         $q.all(promises).then(function(){
             deferred.resolve();
-        });  
+        });
         return deferred.promise;
     }
 

@@ -46,7 +46,7 @@
 			<div class="tab-pane fade in active" ng-show="tab===1">
 				<div class="panel">
 					<div class="panel-body progress-panel">
-						<div class="panel-content"> 
+						<div class="panel-content">
 							<div class="col-lg-9 no-padding col-sm-12">
 								<div class="graph-header">
 									<div class="btn-group pull-right fifth-nav">
@@ -59,7 +59,7 @@
                      				   <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
 									</div>
 									<div class="graph-line-info">
-									
+
 								</div>
 							</div>
 							<div id = "TnewUsersTrend" class="graph-container">
@@ -102,8 +102,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-sm-12"> 
-							<div class="graph-desc tp30"> 
+						<div class="col-lg-3 col-sm-12">
+							<div class="graph-desc tp30">
 								<div class="col-lg-12 col-sm-6">
                                 <span class="left arrow" ></span>
 								<p class="duration ">Installs in last 30 Days</p>
@@ -112,7 +112,7 @@
                                 <div class="col-lg-12 col-sm-6">
                                 <div class="progress-thinbar border-top tm30">
 									<div class="panel">
-										<div class="pname btext"> {{ top_devices[0].y}} {{ top_devices[0].x}} </div> 
+										<div class="pname btext"> {{ top_devices[0].y}} {{ top_devices[0].x}} </div>
 										<div class="status">
 											<div class="progress transparent progress-mid no-radius" style="width:100%">
 												<div ng-style="{ 'width' : top_devices_percent[0] + '%'}"  class="progress-bar progress-bar-blue animate-progress-bar" data-percentage="64.8%"></div>
@@ -121,7 +121,7 @@
 										</div>
 									</div>
 									<div class="panel">
-										<div class="pname rtext"> {{ top_devices[1].y}} {{ top_devices[1].x}}  </div> 
+										<div class="pname rtext"> {{ top_devices[1].y}} {{ top_devices[1].x}}  </div>
 										<div class="status">
 											<div class="progress transparent progress-mid no-radius" style="width:100%">
 												<div ng-style="{ 'width' : top_devices_percent[1] + '%'}" class="progress-bar progress-bar-red animate-progress-bar" data-percentage="20%"></div>
@@ -130,7 +130,7 @@
 										</div>
 									</div>
 									<div class="panel">
-										<div class="pname ytext">{{ top_devices[2].y}} {{ top_devices[2].x}}   </div> 
+										<div class="pname ytext">{{ top_devices[2].y}} {{ top_devices[2].x}}   </div>
 										<div class="status">
 											<div class="progress transparent progress-mid no-radius" style="width:100%">
 												<div ng-style="{ 'width' : top_devices_percent[2] + '%'}" class="progress-bar progress-bar-yellow animate-progress-bar" data-percentage="40%"></div>
@@ -139,7 +139,7 @@
 										</div>
 									</div>
 									<div class="panel">
-										<div class="pname gtext">{{ top_devices[3].y}} {{ top_devices[3].x}}   </div> 
+										<div class="pname gtext">{{ top_devices[3].y}} {{ top_devices[3].x}}   </div>
 										<div class="status">
 											<div class="progress transparent progress-mid no-radius" style="width:100%">
 												<div  ng-style="{ 'width' : top_devices_percent[3] + '%'}"class="progress-bar progress-bar-green animate-progress-bar" data-percentage="40%"></div>
@@ -153,22 +153,22 @@
 						</div>
 					</div>
 				</div>
-				
-				
-				
+
+
+
 				<div class="panel-body progress-panel border-top tp20">
 					<div class="task-progress task-progress-noborder">
 						<div class="btn-group pull-right fifth-nav">
                         <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
-                        
+
 						<button type="button" ng-csv="VisitorsDayWiseListCSV" csv-header="['Date', 'Installs','Change in %','Organic','Inorganic','Uninstalls',GoalUsers ]" filename="New_Users_Day_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
                       </div>
-                      
-                      
-                        
+
+
+
                         <h2>Day Wise List</h2>
-                        
-                        
+
+
 					</div>
 					<div class="text-center panel-content">
 						<div class="table-component">
@@ -184,7 +184,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<!-- <tr ng-hide="table1loaded"> 
+									<!-- <tr ng-hide="table1loaded">
                                 <td colspan="5" >
                                   <p class="text-center"><img src="images/ajax-loader.gif"></p>
                                 </td>
@@ -200,15 +200,15 @@
 									</tr>
 								</tbody>
 							</table>
-							
+
 						</div>
 					</div>
-					
-					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="visitor_items" ng-model="visitor_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination> 
-					
-					
-					
-					
+
+					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="visitor_items" ng-model="visitor_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
+
+
+
 				</div>
 			</div>
 		</div>
@@ -220,7 +220,7 @@
 						<div class="col-lg-9 no-padding ">
 							<div class="task-progress">
 									<div  class="  fifth-nav bm8 pull-right">
-										
+
 										<div class="btn-group ">
 											<button id='TopSourceTrends_exportpdf' type='Button' value='Export to PDF' class="btn-nobg pull-left">
 	                           					 <i class="fa-trends fa-pdf ">&nbsp;</i>
@@ -231,10 +231,10 @@
 	                     				   <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
 										</div>
 									</div>
-								
-     <div class="multiselect-md">                          
-     <div class="btn-group" 
-    isteven-multi-select    
+
+     <div class="multiselect-md">
+     <div class="btn-group"
+    isteven-multi-select
     input-model="top_sources"
     output-model="selectedtop_sources"
      button-label="x"
@@ -244,17 +244,17 @@
     max-height="210px"
 ></div>
  </div>
-                                
-                                
+
+
 								</div>
 							<div class="border">
-								
+
 								<div class="graph-container">
 								<span class="badge blockinfo ">Install</span>
 								<div id="TopSourceTrends" class="graph-container tm1">
 								</div>
 								</div>
-								
+
 								<div class="faded-bgcontainer">
 									<span class="badge blockinfo ">Uninstall</span>
 									<div id="TopSourceUninstalls" class="graph-container  tm1">
@@ -262,10 +262,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3"> 
-							<div class="graph-desc tp30 panel-transparent"> 
+						<div class="col-lg-3">
+							<div class="graph-desc tp30 panel-transparent">
 								<span class="left arrow"></span>
-								
+
 								<div class="task-progress no-padding">
 									<h2>Source Wise Data</h2>
 									<p class="progress-type">Top {{top_sources.length}} sources showing here</p>
@@ -277,39 +277,39 @@
 											<div class="pull-left heading fthin"> {{top_sources_percent[$index]}}% <span class="bg-green piller piller-70"></span></div>
 											<div class="media-body content"><p>{{top_source.x}}</p></div>
 										</li>
-										
+
 									</ul>
 								</div>
-								
+
 							</div>
 						</div>
 						<div class="col-lg-12 no-padding">
 							<div class="col-lg-4 col-sm-4">
-								
+
 								<div id = "OrgvsInorg_share" class="graph-container tm10">
 									<!-- <img src="images/img-gp9.jpg" > -->
 								</div>
 							</div>
 							<div class="col-lg-4 col-sm-4">
-								
+
 								<div id = "topKeywords_share" class="graph-container tm30">
 									<!-- <img src="images/img-gp14.jpg" > -->
 								</div>
 							</div>
 							<div class="col-lg-4 col-sm-4" ng-if="tab===2">
-								
+
 								<div class="tm30"><jqcloud fontSize="{'from': .08, 'to':.04}"center="{x: 0.5, y:0.5}" words="words" width="330" height="250" steps="8"></jqcloud></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				
+
+
 				<div class="panel-body progress-panel border-top tp20">
 					<div class="task-progress task-progress-noborder">
 						<div class="btn-group pull-right fifth-nav">
                         <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
-                        
+
 						<button type="button" ng-csv="SourceNewUsersListCSV" csv-header="['Source', 'Installs']" filename="Source_New_Users_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
                         </div>
 						<h2>Source Installs List</h2>
@@ -335,10 +335,10 @@
 									<tr  ng-repeat="elem in filteredsourcenewuserslist">
 										<td>{{ elem.x }}</td>
 										<td><strong>{{ elem.y }}</strong></td>
-										<td><span class=" ng-binding tb-change">{{ (elem.y/paid_installs_total_raw)*100 |  number:2 }}%</span>    
-                                         <span  ng-class="{true:'glyphicon glyphicon-upload gtext',false:'glyphicon glyphicon-download rtext'}[elem.y >= 0]" ></span>  
-                                        
-                                        
+										<td><span class=" ng-binding tb-change">{{ (elem.y/paid_installs_total_raw)*100 |  number:2 }}%</span>
+                                         <span  ng-class="{true:'glyphicon glyphicon-upload gtext',false:'glyphicon glyphicon-download rtext'}[elem.y >= 0]" ></span>
+
+
 											<div class="progress value-progress mmt5" style="display:none;" >
 												<div class="progress-bar bar-green " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : (elem.y/paid_installs_total_raw)*100 + '%'}">
 													<span class="sr-only">60% Complete</span>
@@ -351,16 +351,16 @@
 									</tr>
 								</tbody>
 							</table>
-							
+
 						</div>
 					</div>
-					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="source_items" ng-model="source_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination> 
-					
+					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="source_items" ng-model="source_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
 				</div>
 			</div>
-			
-			
-			
+
+
+
 		</div>
 		<div class="tab-pane fade in active" ng-show="tab===3">
 			<div class="panel">
@@ -369,7 +369,7 @@
 
 
 
-							 
+
 
 
 
@@ -388,8 +388,8 @@
 	                     				   <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
 										</div>
 									</div>
-                                    <div class="multiselect-md"> 
-     <div class="btn-group" 
+                                    <div class="multiselect-md">
+     <div class="btn-group"
     isteven-multi-select
     input-model="top_devices"
     output-model="selectedtop_manus"
@@ -407,7 +407,7 @@
 						</div>
 						<div class="col-lg-12 no-padding    ">
 							<div class="col-lg-6 no-padding">
-								
+
 								<div id = "manu_share" class="graph-container text-center mmb5 ">
 									<!-- <img src="images/img-gp11.jpg"  > -->
 								</div>
@@ -418,7 +418,7 @@
 								<div class="  dv-holder  ">
 									<div class="col-lg-6 col-md-6 col-sm-6  ">
 										<div class=" msg-block background-blue wtext bm10 bg-mobile">
-											<div class="pname tp35"><span>{{top_manus[0].x}}</span>  </div> 
+											<div class="pname tp35"><span>{{top_manus[0].x}}</span>  </div>
 											<div class="status">
 												<span class="msg-value">{{top_manus[0].y}}</span>
 											</div>
@@ -426,7 +426,7 @@
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6 pl0">
 										<div class=" msg-block background-lred wtext bm10 bg-mobile">
-											<div class="pname tp35"><span >{{top_manus[1].x}} </span> </div> 
+											<div class="pname tp35"><span >{{top_manus[1].x}} </span> </div>
 											<div class="status">
 												<span class="msg-value">{{top_manus[1].y}}</span>
 											</div>
@@ -434,17 +434,17 @@
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6  ">
 										<div class=" msg-block background-dblue wtext bg-mobile">
-											<div class="pname tp35"><span >{{top_manus[2].x}} </span> </div> 
+											<div class="pname tp35"><span >{{top_manus[2].x}} </span> </div>
 											<div class="status">
-												<span class="msg-value">{{top_manus[2].y}}</span> 
+												<span class="msg-value">{{top_manus[2].y}}</span>
 											</div>
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6 pl0">
 										<div class=" msg-block background-green wtext bg-mobile">
-											<div class="pname tp35"><span >{{top_manus[3].x}} </span> </div> 
+											<div class="pname tp35"><span >{{top_manus[3].x}} </span> </div>
 											<div class="status">
-												<span class="msg-value">{{top_manus[3].y}}</span> 
+												<span class="msg-value">{{top_manus[3].y}}</span>
 											</div>
 										</div>
 									</div>
@@ -453,7 +453,7 @@
 						</div>
 						<div class="col-lg-12 no-padding">
 							<div class="col-lg-6 col-sm-6">
-								
+
 								<div id="topmanu_share" class="graph-container text-center ">
 									<!-- <img src="images/img-gp15.png"> -->
 								</div>
@@ -474,12 +474,12 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="panel-body progress-panel border-top tm20">
 					<div class="task-progress task-progress-noborder">
 						<div class="btn-group pull-right fifth-nav">
                         <a href="#" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
-                        
+
 						<button type="button" ng-csv="DeviceNewUsersListCSV" csv-header="['Manufacturer','Model','Installs']" filename="Device_New_Users_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
                         </div>
 						<h2>Device Installs List</h2>
@@ -488,7 +488,7 @@
 						<div class="table-component">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<thead>
-									<tr>             
+									<tr>
 										<th width="30%">Device</th>
 										<th width="30%">Installs</th>
 										<th width="20%">Share</th>
@@ -507,8 +507,8 @@
 										<td>{{ dev.z }}</td>
 										<td>
 											<span class=" ng-binding tb-change">{{ (dev.z/total_new_users_raw)*100 |  number:2 }}%</span>
-                                             <span  ng-class="{true:'glyphicon glyphicon-upload gtext',false:'glyphicon glyphicon-download rtext'}[dev.z >= 0]" ></span>  
-                                             
+                                             <span  ng-class="{true:'glyphicon glyphicon-upload gtext',false:'glyphicon glyphicon-download rtext'}[dev.z >= 0]" ></span>
+
 											<div class="progress value-progress mmt5" style="display:none;">
 												<div class="progress-bar bar-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width' : (dev.z/total_new_users_raw)*100 + '%'}">
 													<span class="sr-only">60% Complete</span>
@@ -521,24 +521,24 @@
 									</tr>
 								</tbody>
 							</table>
-							
+
 						</div>
 					</div>
-					
+
 					<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="device_items" ng-model="device_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>
-					
-					
+
+
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 		<div class="tab-pane fade in active" ng-show="tab===4">
 			<div class="panel">
 				<div class="panel-body progress-panel no-padding">
 					<div class="panel-content">
-						<div class="col-lg-4 col-sm-12"> 
-							<div class="graph-desc tp30 no-border"> 
+						<div class="col-lg-4 col-sm-12">
+							<div class="graph-desc tp30 no-border">
 								<!-- <img src="images/img-gp12.jpg" width="261" height="158"> -->
 								<div class="panel panel-block p-blue text-center  col-sm-6 col-lg-12">
 									<div class="graph-header">
@@ -549,7 +549,7 @@
 								</div>
 								<div class="progress-thinbar  tm0 bm0  col-sm-6 col-lg-12">
 									<div class="panel bp10">
-										<div class="pname btext">{{cities[0].x}} </div> 
+										<div class="pname btext">{{cities[0].x}} </div>
 										<div class="status">
 											<div class="status-massage pull-right mmt20">{{top_cities_percent[0]}}%</div>
 											<div class="progress transparent progress-large no-radius" style="width:100%">
@@ -558,7 +558,7 @@
 										</div>
 									</div>
 									<div class="panel bp10">
-										<div class="pname rtext">{{cities[1].x}} </div> 
+										<div class="pname rtext">{{cities[1].x}} </div>
 										<div class="status">
 											<div class="status-massage pull-right mmt20">{{top_cities_percent[1]}}%</div>
 											<div class="progress transparent progress-large no-radius" style="width:100%">
@@ -567,7 +567,7 @@
 										</div>
 									</div>
 									<div class="panel bp10">
-										<div class="pname ytext">{{cities[2].x}} </div> 
+										<div class="pname ytext">{{cities[2].x}} </div>
 										<div class="status">
 											<div class="status-massage pull-right mmt20">{{top_cities_percent[2]}}%</div>
 											<div class="progress transparent progress-large no-radius" style="width:100%">
@@ -576,7 +576,7 @@
 										</div>
 									</div>
 									<div class="panel ">
-										<div class="pname gtext">{{cities[3].x}} </div> 
+										<div class="pname gtext">{{cities[3].x}} </div>
 										<div class="status">
 											<div class="status-massage pull-right mmt20">{{top_cities_percent[3]}}%</div>
 											<div class="progress transparent progress-large no-radius" style="width:100%">
@@ -596,7 +596,7 @@
 					</div>
 
 				</div>
-				
+
 				<div class="panel-body progress-panel border-top ">
 					<div class="row">
 						<div class="col-lg-6 pr0 col-sm-6">
@@ -605,7 +605,7 @@
 								<div class="task-progress task-progress-noborder">
 									<div class="btn-group pull-right fifth-nav">
 			                        <a href="" class="fsize-bl" ><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
-			                        
+
 									<button type="button" ng-csv="CityNewUsersListCSV" csv-header="['City', 'Installs']" filename="New_Users_City_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
 			                     	</div>
 									<h2>city wise list</h2>
@@ -633,16 +633,16 @@
 												</tr>
 											</tbody>
 										</table>
-										
+
 									</div>
 								</div>
-								<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="city_items" ng-model="city_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>  
-								
+								<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="city_items" ng-model="city_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
 							</div>
 							</div>
-							
-							
-							
+
+
+
 						</div>
 						<div class="col-lg-6 pl0 border-left col-sm-6">
 							<div class="panel">
@@ -650,7 +650,7 @@
 								<div class="task-progress task-progress-noborder">
 									<div class="btn-group pull-right fifth-nav">
 				                        <a href="" class="fsize-bl"><i class="fa-trends fa-fsize pull-right">&nbsp;</i>	</a>
-				                        
+
 										<button type="button" ng-csv="StateNewUsersListCSV" csv-header="['State', 'Installs']" filename="New_Users_State_Wise_List.csv" class="btn-nobg pull-left" ><i class="fa-trends fa-excel pull-right">&nbsp;</i></button>
 				                    </div>
 									<h2>state wise list</h2>
@@ -678,20 +678,20 @@
 												</tr>
 											</tbody>
 										</table>
-										
+
 									</div>
 								</div>
-								
+
 								<pagination previous-text="<" next-text=">" first-text="<<" last-text=">>" total-items="state_items" ng-model="state_current_page" max-size="max_pages" class="pagination-sm pull-right" boundary-links="true"></pagination>
-								
-								
+
+
 							</div>
 							</div>
-							
-							
-							
-							
-							
+
+
+
+
+
 						</div>
 					</div>
 				</div>

@@ -48,7 +48,9 @@ sessions.controller('SessionsCtrl',['$scope','$rootScope','$q','JettyService','U
                 try
                 {
                     total_sessions_raw = 0;
-                    $scope.avg_time = UtilitiesService.convertToMinutes((parseFloat((data.x).split('__')[1])/1000).toFixed(0));
+                   //$scope.avg_time = UtilitiesService.convertToMinutes((parseFloat((data.x).split('__')[1])/1000).toFixed(0));
+                    var tt=UtilitiesService.convertToMinutes((parseFloat((data.x).split('__')[1])/1000).toFixed(0));
+                    $scope.avg_time = Math.abs(parseInt(tt))
                     total_sessions_raw = (parseInt((data.x).split('__')[0])).toFixed(2)
                     $scope.total_sessions = UtilitiesService.numberFormat(total_sessions_raw);
                     deferred.resolve();
